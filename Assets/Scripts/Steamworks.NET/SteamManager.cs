@@ -122,7 +122,7 @@ public class SteamManager : MonoBehaviour {
 		m_bInitialized = SteamAPI.Init();
 		if (!m_bInitialized) {
 			Debug.LogError("[Steamworks.NET] SteamAPI_Init() failed. Refer to Valve's documentation or the comment above this line for more information.", this);
-
+			Debug.LogError("뜻 : 스팀 켜주세요");
 			return;
 		}
 
