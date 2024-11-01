@@ -12,9 +12,9 @@ using System;
 */
 public class PlayerObjectController : NetworkBehaviour
 {
-    public const int Null = -1;
-    public const int Blind = 0;
-    public const int Limp = 1;
+    public const int Null = 0;
+    public const int Blind = 1;
+    public const int Limp = 2;
 
     /*
         SyncVar 이론 지식 : 
@@ -41,47 +41,25 @@ public class PlayerObjectController : NetworkBehaviour
     private void HookPlayerRoleUpdate(int oldValue, int newValue)
     {
         // Role 값이 모종의 이유로 서버로부터 변경되었을 때 모든 클라이언트들에게서 호출됨.
+        if(isServer)
+        {
+             this.Role = newValue;
+             Debug.Log("HookPlayerRole : isServer : " + oldValue + "-> " + newValue);
+        }
+        if(isClient)
+        {
+            Debug.Log("HookPlayerRole : isClient : UpdatePlayerList()");
+            LobbyController.Instance.UpdatePlayerList();
+        }
     }
     public void ChangeRole(int roleCode)
     {
-        if(!isOwned) return;
-        if(roleCode == Blind)
-        {
-            Role = Blind;
-            if(Role == Null) // 현재 역할이 없었음.
-            {
-                // Blind 리스트에 내 이름을 추가한다.
-            }
-            else if(Role == Blind)
-            {
-                // 아무 일도 없어야 함.
-                return;
-            }
-            else if(Role == Limp)
-            {
-                // Limp 리스트에서 내 이름을 뺀 뒤, Blind 리스트에 내 이름을 넣는다.
-            }
-        }
-        else if(roleCode == Limp)
-        {
-            Role = Limp;
-            if(Role == Null) // 현재 역할이 없었음.
-            {
-                // Limp 리스트에 내 이름을 추가한다.
-            }
-            else if(Role == Blind)
-            {
-                // Blind 리스트에서 내 이름을 뺀 뒤, Limp 리스트에 내 이름을 넣는다.
-            }
-            else if(Role == Limp)
-            {
-                // 아무 일도 없어야 함.
-            }
-        }
+        if(isOwned) CmdSetPlayerRole(roleCode);        
     }
-    public void UpdateRoleList()
+    [Command]
+    private void CmdSetPlayerRole(int roleCode)
     {
-        
+        this.HookPlayerRoleUpdate(this.Role, roleCode);
     }
 
     public bool IsHost
