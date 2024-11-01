@@ -31,6 +31,7 @@ public class PlayerObjectController : NetworkBehaviour
             값을 동기화할 것인지에 대한 결정권을 유저에게 넘긴다!
             우린 그 인자를 oldValue, newValue로 받는다. 그 후 실제로 값에도 이를 적용해야 한다.
     */
+    [Header("플레이어의 통신 관련 정보를 담고 있는 클래스입니다")]
     [SyncVar] public int ConnectionID;  //  대체 이걸 왜 SyncVar 로 하는건지 전혀 모르겠다!!!!!!!!!
     [SyncVar] public int PlayerIdNumber;
     [SyncVar] public ulong PlayerSteamID;
@@ -75,6 +76,20 @@ public class PlayerObjectController : NetworkBehaviour
             if(manager != null) return manager;
             return manager = CustomNetworkManager.singleton as CustomNetworkManager;
         }
+    }
+
+    private void Start()
+    {
+        DontDestroyOnLoad(this.gameObject); // 이 객체를 게임 씬까지 끌고 갈 거다!
+
+    }
+    public void CanStartGame(string SceneName)
+    {
+        if(isOwned) CmdCanStartGame(SceneName);
+    }
+    [Command] public void CmdCanStartGame(string SceneName)
+    {
+        manager.StartGame(SceneName);
     }
 
 #region 레디 상태 변경 영역

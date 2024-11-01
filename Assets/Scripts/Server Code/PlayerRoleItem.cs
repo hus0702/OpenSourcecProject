@@ -7,12 +7,6 @@ public class PlayerRoleItem : MonoBehaviour
     public int ConnectionID;
     public Text playerNameText;
 
-    void Start()
-    {
-        gameObject.SetActive(false);
-        Debug.Log("아이템 초기화됨. 활성화 상태 : " + gameObject.activeSelf);
-    }
-
     public void ChangeRoleActive()
     {
         Debug.Log("옳은 역활. 활성화합니다.");

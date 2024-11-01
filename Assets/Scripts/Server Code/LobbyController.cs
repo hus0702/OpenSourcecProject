@@ -308,4 +308,9 @@ public class LobbyController : MonoBehaviour
 
         SceneManager.LoadScene("Mainmenu");
     }
+
+    public void StartGame(string SceneName)
+    {
+        LocalPlayerController.CanStartGame(SceneName);
+    }
 }
