@@ -1,10 +1,9 @@
 using UnityEngine;
 
-public class PlayerState
+public class LimbState
 {
-    protected Player player;
-    protected PlayerStateMachine stateMachine;
-    protected PlayerData playerData;
+    protected Limb Limb;
+    protected LimbStateMachine stateMachine;
 
     protected bool isAnimationFinished;
 
@@ -13,28 +12,22 @@ public class PlayerState
 
     private string animBoolName;
 
-    public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName)
+    public LimbState(Limb Limb, LimbStateMachine stateMachine)
     {
-        this.player = player;
+        this.Limb = Limb;
         this.stateMachine = stateMachine;
-        this.playerData = playerData;
-        this.animBoolName = animBoolName;
-
     }
 
     public virtual void Enter()
     {
         DoCheck();
-        player.Anim.SetBool(animBoolName, true);
         startTime = Time.time;
-        Debug.Log(animBoolName);
         isAnimationFinished = false;
-
     }
 
     public virtual void Exit()
     {
-        player.Anim.SetBool(animBoolName, false);
+
     }
 
     public virtual void LogicUpdate()

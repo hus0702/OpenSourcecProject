@@ -17,10 +17,6 @@ public class PlayerAbillityState : PlayerState
         base.DoCheck();
 
         isGrounded = player.CheckIfGrounded();
-        if (isGrounded)
-            Debug.Log("isGrounded");
-        else
-            Debug.Log("notGrounded");
     }
 
     public override void Enter()
@@ -41,13 +37,27 @@ public class PlayerAbillityState : PlayerState
 
         if ((isAbillityDone))
         {
-            if (isGrounded && player.CurrentVelocity.y < 0.01f)
+            if (playerData.iscarrying)
             {
-                stateMachine.ChangeState(player.IdleState);
+                if (isGrounded && player.CurrentVelocity.y < 0.01f)
+                {
+                    stateMachine.ChangeState(player.c_LandState);
+                }
+                else
+                {
+                    stateMachine.ChangeState(player.c_InAirState);
+                }
             }
             else
             {
-                stateMachine.ChangeState(player.InAirState);
+                if (isGrounded && player.CurrentVelocity.y < 0.01f)
+                {
+                    stateMachine.ChangeState(player.LandState);
+                }
+                else
+                {
+                    stateMachine.ChangeState(player.InAirState);
+                }
             }
         }
     }

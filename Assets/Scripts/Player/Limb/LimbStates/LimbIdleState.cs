@@ -1,7 +1,11 @@
 using UnityEngine;
 
-public class DoSu : MainCharactor
+public class LimbIdleState : LimbState
 {
+    public LimbIdleState(Limb Limb, LimbStateMachine stateMachine) : base(Limb, stateMachine)
+    {
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

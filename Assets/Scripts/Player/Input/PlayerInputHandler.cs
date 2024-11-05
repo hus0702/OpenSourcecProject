@@ -1,14 +1,16 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-
     public Vector2 RawMovementInput { get; private set; }
     public int NormInputX { get; private set; }
     public int NormInputY { get; private set; }
 
     public bool JumpInput { get; private set; }
+
+    public bool CarryUpInput { get; private set; }
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         RawMovementInput = context.ReadValue<Vector2>();
@@ -35,8 +37,21 @@ public class PlayerInputHandler : MonoBehaviour
     {
         
     }
+
+    public void OnCarryUpInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            CarryUpInput = true;
+        }
+        
+    }
+
     public void OnAttackInput(InputAction.CallbackContext context)
     {
         
     }
+
+
+
 }
