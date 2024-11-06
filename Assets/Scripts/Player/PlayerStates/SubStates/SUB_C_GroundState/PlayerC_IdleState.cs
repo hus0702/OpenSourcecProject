@@ -28,7 +28,7 @@ public class PlayerC_IdleState : PlayerC_GroundedState
 
         if (xinput != 0f)
         {
-            stateMachine.ChangeState(player.c_moveState);
+            stateMachine.playerChangeState(player.c_moveState);
         }
     }
 

@@ -19,5 +19,5 @@ public class PlayerData : ScriptableObject
     public LayerMask whatIsLimb;
 
     [Header("isCarrying")]
-    public bool iscarrying;
+    public bool iscarrying = false;
 }

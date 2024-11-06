@@ -1,8 +1,10 @@
 using UnityEngine;
 
-public class LimbIdleState : LimbGroundedState
+public class LimbGroundedState : LimbState
 {
-    public LimbIdleState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
+
+    private bool RideInput;
+    public LimbGroundedState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
     {
     }
 
@@ -34,10 +36,15 @@ public class LimbIdleState : LimbGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        if (Limb.CheckIftouchBlind())
+        {
+            stateMachine.LimbStateChangetoRide(Limb.RideState);
+        }
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
     }
+
 }

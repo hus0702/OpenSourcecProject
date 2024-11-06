@@ -38,13 +38,12 @@ public class PlayerGroundedState : PlayerState
         if (JumpInput)
         {
             player.InputHandler.UseJumpInput();
-            stateMachine.ChangeState(player.JumpState);
+            stateMachine.playerChangeState(player.JumpState);
         }
 
         if (CarryUpInput && player.CheckIftouchLimb())
         {
-            Debug.Log("Limb °¨Áö");
-            stateMachine.ChangeState(player.carryUpState);
+            stateMachine.playerChangeState(player.carryUpState);
         }
         else
         { 

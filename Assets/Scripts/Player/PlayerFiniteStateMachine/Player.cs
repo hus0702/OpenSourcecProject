@@ -1,3 +1,4 @@
+using Mirror;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -15,7 +16,7 @@ public class Player : MonoBehaviour
     public PlayerC_MoveState c_moveState { get; private set; }
     public PlayerC_IdleState c_idleState { get; private set; }
     public PlayerC_LandState c_LandState { get; private set; }
-    public Player_CinAireState c_InAirState { get; private set; }
+    public PlayerC_inAirState c_InAirState { get; private set; }
 
     [SerializeField]
     private PlayerData playerData;
@@ -26,7 +27,7 @@ public class Player : MonoBehaviour
     public Animator Anim { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
     public Rigidbody2D RB { get; private set; }
-
+    public Transform playerTransform { get; private set; }
 
     #endregion
 
@@ -45,7 +46,6 @@ public class Player : MonoBehaviour
 
     private Vector2 workspace;
 
-    public bool IsCarrying { get; private set; }
 
     #endregion
 
@@ -59,6 +59,11 @@ public class Player : MonoBehaviour
         JumpState = new PlayerJumpState(this, StateMachine, playerData, "inAir");
         InAirState = new PlayerinAirState(this, StateMachine, playerData, "inAir");
         LandState = new PlayerLandState(this, StateMachine, playerData, "land");
+        carryUpState = new PlayerCarryUpState(this, StateMachine, playerData, "carryUp");
+        c_moveState = new PlayerC_MoveState(this, StateMachine, playerData, "c_move");
+        c_idleState = new PlayerC_IdleState(this, StateMachine, playerData, "c_idle");
+        c_LandState = new PlayerC_LandState(this, StateMachine, playerData, "c_land");
+        c_InAirState = new PlayerC_inAirState(this, StateMachine, playerData, "c_inAir");
     }
 
     private void Start()
@@ -66,22 +71,21 @@ public class Player : MonoBehaviour
         Anim = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputHandler>();
         RB = GetComponent<Rigidbody2D>();
+        playerTransform = GetComponent<Transform>();
         FacingDirection = 1;
-        StateMachine.Initialize(IdleState);
-
-
+        StateMachine.PlayerInitialize(IdleState);
     }
 
     private void Update()
     {
         CurrentVelocity = RB.linearVelocity;
-        StateMachine.CurrentState.LogicUpdate();
+        StateMachine.playerCurrentState.LogicUpdate();
 
     }
 
     private void FixedUpdate()
     {
-        StateMachine.CurrentState.PhysicsUpdate();
+        StateMachine.playerCurrentState.PhysicsUpdate();
     }
 
     #endregion
@@ -125,9 +129,9 @@ public class Player : MonoBehaviour
 
     #region Other Functions
 
-    private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
+    private void AnimationTrigger() => StateMachine.playerCurrentState.AnimationTrigger();
 
-    private void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
+    private void AnimationFinishTrigger() => StateMachine.playerCurrentState.AnimationFinishTrigger();
     private void Flip()
     {
         FacingDirection *= -1;

@@ -41,22 +41,22 @@ public class PlayerAbillityState : PlayerState
             {
                 if (isGrounded && player.CurrentVelocity.y < 0.01f)
                 {
-                    stateMachine.ChangeState(player.c_LandState);
+                    stateMachine.playerChangeState(player.c_LandState);
                 }
                 else
                 {
-                    stateMachine.ChangeState(player.c_InAirState);
+                    stateMachine.playerChangeState(player.c_InAirState);
                 }
             }
             else
             {
                 if (isGrounded && player.CurrentVelocity.y < 0.01f)
                 {
-                    stateMachine.ChangeState(player.LandState);
+                    stateMachine.playerChangeState(player.LandState);
                 }
                 else
                 {
-                    stateMachine.ChangeState(player.InAirState);
+                    stateMachine.playerChangeState(player.InAirState);
                 }
             }
         }

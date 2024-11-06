@@ -34,7 +34,7 @@ public class PlayerinAirState : PlayerState
 
         if (isGrounded && player.CurrentVelocity.y < 0.01f)
         {
-            stateMachine.ChangeState(player.LandState);
+            stateMachine.playerChangeState(player.LandState);
         }
         else
         {

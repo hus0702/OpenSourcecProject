@@ -28,7 +28,7 @@ public class PlayerIdleState : PlayerGroundedState
 
         if (xinput != 0f)
         {
-            stateMachine.ChangeState(player.MoveState);
+            stateMachine.playerChangeState(player.MoveState);
         }
     }
 

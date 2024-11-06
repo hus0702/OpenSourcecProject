@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class Player_CinAireState : PlayerState
+public class PlayerC_inAirState : PlayerState
 {
 
     private bool isGrounded;
     private int xInput;
-    public Player_CinAireState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+    public PlayerC_inAirState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
 
@@ -33,7 +33,7 @@ public class Player_CinAireState : PlayerState
 
         if (isGrounded && player.CurrentVelocity.y < 0.01f)
         {
-            stateMachine.ChangeState(player.c_LandState);
+            stateMachine.playerChangeState(player.c_LandState);
         }
         else
         {

@@ -1,21 +1,56 @@
 using UnityEngine;
+using Mirror;
+using UnityEngine.InputSystem.LowLevel;
 
 public class PlayerStateMachine
 {
 
-    public PlayerState CurrentState { get; private set; }
+    public PlayerState playerCurrentState { get; private set; }
+    public LimbState LimbCurrentState { get; private set; }
 
-    public void Initialize(PlayerState startingstate)
+    public Limb limb;
+
+    public bool Carryinput;
+
+    public void PlayerInitialize(PlayerState startingstate)
     { 
-        CurrentState = startingstate;
-        CurrentState.Enter();
+        playerCurrentState = startingstate;
+        playerCurrentState.Enter();
     }
 
-    public void ChangeState(PlayerState newState)
-    { 
-        CurrentState.Exit();
-        CurrentState = newState;
-        CurrentState.Enter();
+    public void LimbInitialize(LimbState startingstate)
+    {
+        LimbCurrentState = startingstate;
+        LimbCurrentState.Enter();
     }
 
+    public void playerChangeState(PlayerState newState)
+    {
+        Debug.Log(newState);
+
+        if (newState is PlayerCarryUpState)
+        {
+            Carryinput = true;
+        }
+
+        playerCurrentState.Exit();
+        playerCurrentState = newState;
+        playerCurrentState.Enter();
+    }
+
+    public void LimbChangeState(LimbState newState)
+    {
+        Debug.Log("LimbState º¯°æ :" + newState);
+        LimbCurrentState.Exit();
+        LimbCurrentState = newState;
+        LimbCurrentState.Enter();
+    }
+    public void LimbStateChangetoRide(LimbState newState)
+    {
+        if (Carryinput)
+        {
+            LimbChangeState(newState);
+            Carryinput = false;
+        }
+    }
 }

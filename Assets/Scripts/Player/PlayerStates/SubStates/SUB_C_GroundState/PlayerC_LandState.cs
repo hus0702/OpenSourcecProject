@@ -12,11 +12,11 @@ public class PlayerC_LandState : PlayerC_GroundedState
 
         if (xinput != 0)
         {
-            stateMachine.ChangeState(player.c_moveState);
+            stateMachine.playerChangeState(player.c_moveState);
         }
         else if (isAnimationFinished)
         {
-            stateMachine.ChangeState(player.c_idleState);
+            stateMachine.playerChangeState(player.c_idleState);
         }
     }
 }

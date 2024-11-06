@@ -44,6 +44,10 @@ public class PlayerInputHandler : MonoBehaviour
         {
             CarryUpInput = true;
         }
+        else if (context.canceled)
+        {
+            CarryUpInput = false;
+        }
         
     }
 

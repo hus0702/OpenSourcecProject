@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class LimbIdleState : LimbGroundedState
+public class LimbRideState : LimbState
 {
-    public LimbIdleState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
+    public LimbRideState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata,animBoolName)
     {
     }
 
@@ -24,6 +24,7 @@ public class LimbIdleState : LimbGroundedState
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("Ridestate¿‘º∫");
     }
 
     public override void Exit()

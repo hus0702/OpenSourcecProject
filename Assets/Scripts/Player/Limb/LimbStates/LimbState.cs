@@ -3,31 +3,33 @@ using UnityEngine;
 public class LimbState
 {
     protected Limb Limb;
-    protected LimbStateMachine stateMachine;
+    protected PlayerStateMachine stateMachine;
+    protected LimbData limbdata;
 
     protected bool isAnimationFinished;
 
     protected float startTime;
-
-
     private string animBoolName;
 
-    public LimbState(Limb Limb, LimbStateMachine stateMachine)
+    public LimbState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName)
     {
         this.Limb = Limb;
         this.stateMachine = stateMachine;
+        this.limbdata = limbdata;
+        this.animBoolName = animBoolName;
     }
 
     public virtual void Enter()
     {
         DoCheck();
+        Limb.Anim.SetBool(animBoolName, true);
         startTime = Time.time;
         isAnimationFinished = false;
     }
 
     public virtual void Exit()
     {
-
+        Limb.Anim.SetBool(animBoolName, false);
     }
 
     public virtual void LogicUpdate()
