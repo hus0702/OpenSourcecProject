@@ -23,4 +23,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   iscarrying: 1
+  carryupcall: 1
+  throwcall: 0
+  putdowncall: 0
   blindtransform: {fileID: 0}

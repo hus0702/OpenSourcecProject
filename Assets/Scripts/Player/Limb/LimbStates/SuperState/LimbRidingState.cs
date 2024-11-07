@@ -2,9 +2,11 @@ using Mirror;
 using UnityEditor.VersionControl;
 using UnityEngine;
 
-public class LimbRideState : LimbState
+public class LimbRidingState : LimbState
 {
-    public LimbRideState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata,animBoolName)
+    public bool throwInput;
+    public bool PutDownInput;
+    public LimbRidingState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata,animBoolName)
     {
     }
 
@@ -36,7 +38,17 @@ public class LimbRideState : LimbState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        Limb.transform.position = (GameManager.instance.PlayerData.blindtransform.position + new Vector3(0, 0.6f, 0));
+
+        if (GameManager.instance.PlayerData.putdowncall)
+        {
+            stateMachine.LimbChangeState(Limb.ThrowState);
+        }
+
+        if(GameManager.instance.PlayerData.throwcall)
+        {
+            stateMachine.LimbChangeState(Limb.PutDownState);
+        }
+
     }
 
     public override void PhysicsUpdate()

@@ -1,10 +1,12 @@
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
-public class LimbIdleState : LimbGroundedState
+public class LimbThrowState : LimbAbillityState
 {
-    public LimbIdleState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
+    public float acceleration = 10f;
+    private bool isGrounded;
+    public LimbThrowState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
     {
-
     }
 
     public override void AnimationFinishTrigger()
@@ -25,6 +27,10 @@ public class LimbIdleState : LimbGroundedState
     public override void Enter()
     {
         base.Enter();
+        Vector2 force = Limb.transform.forward * acceleration;
+        Limb.RB.AddForce(force);
+        limbdata.isRiding = false;
+        isAbillityDone = true;
     }
 
     public override void Exit()
@@ -35,6 +41,7 @@ public class LimbIdleState : LimbGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        
     }
 
     public override void PhysicsUpdate()

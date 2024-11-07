@@ -4,13 +4,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
 {
+    public bool carryinputblock;
     public Vector2 RawMovementInput { get; private set; }
     public int NormInputX { get; private set; }
     public int NormInputY { get; private set; }
 
     public bool JumpInput { get; private set; }
 
-    public bool CarryUpInput { get; private set; }
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         RawMovementInput = context.ReadValue<Vector2>();
@@ -40,22 +40,42 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnCarryUpInput(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (!carryinputblock)
         {
-            CarryUpInput = true;
-        }
-        else if (context.canceled)
-        {
-            CarryUpInput = false;
+            if (GameManager.instance.PlayerData.iscarrying)
+            {
+                if (context.duration > 1)
+                {
+                    GameManager.instance.PlayerData.throwcall = true;
+                }
+                else if (context.canceled)
+                {
+                    GameManager.instance.PlayerData.putdowncall = true;
+                }
+            }
+            else
+            {
+                if (context.started)
+                {
+                    GameManager.instance.PlayerData.carryupcall = true;
+                }
+                else if (context.canceled)
+                {
+                    GameManager.instance.PlayerData.carryupcall = false;
+                }
+            }
         }
         
     }
-
     public void OnAttackInput(InputAction.CallbackContext context)
     {
-        
+
     }
+    public IEnumerator stopcarryinput(float duration)
+    {
+        carryinputblock = true;
+        yield return new WaitForSeconds(duration);
 
-
-
+        carryinputblock = false;
+    }
 }

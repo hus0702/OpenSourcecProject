@@ -18,6 +18,9 @@ public class Player : MonoBehaviour
     public PlayerC_LandState c_LandState { get; private set; }
     public PlayerC_inAirState c_InAirState { get; private set; }
 
+    public PlayerPutDownState PutDownState { get; private set; }
+    public PlayerThrowState ThrowState { get; private set; }
+
     [SerializeField]
     private PlayerData playerData;
 
@@ -52,6 +55,10 @@ public class Player : MonoBehaviour
     #region Unity Callback Functions
     private void Awake()
     {
+        playerData.iscarrying = false; // 초기 false 설정이 안됨. ㅠ
+        playerData.carryupcall = false;
+        playerData.putdowncall = false;
+
         StateMachine = new PlayerStateMachine();
 
         IdleState = new PlayerIdleState(this, StateMachine, playerData, "idle");
@@ -60,10 +67,12 @@ public class Player : MonoBehaviour
         InAirState = new PlayerinAirState(this, StateMachine, playerData, "inAir");
         LandState = new PlayerLandState(this, StateMachine, playerData, "land");
         carryUpState = new PlayerCarryUpState(this, StateMachine, playerData, "carryUp");
-        c_moveState = new PlayerC_MoveState(this, StateMachine, playerData, "c_move");
-        c_idleState = new PlayerC_IdleState(this, StateMachine, playerData, "c_idle");
-        c_LandState = new PlayerC_LandState(this, StateMachine, playerData, "c_land");
+        c_moveState = new PlayerC_MoveState(this, StateMachine, playerData, "C_move");
+        c_idleState = new PlayerC_IdleState(this, StateMachine, playerData, "C_Idle");
+        c_LandState = new PlayerC_LandState(this, StateMachine, playerData, "C_Land");
         c_InAirState = new PlayerC_inAirState(this, StateMachine, playerData, "c_inAir");
+        PutDownState = new PlayerPutDownState(this, StateMachine, playerData, "putdown");
+        ThrowState = new PlayerThrowState(this, StateMachine, playerData, "throw");
     }
 
     private void Start()

@@ -9,7 +9,11 @@ public class Limb : MonoBehaviour
     #region State Variables
     public PlayerStateMachine StateMachine { get; private set; }
     public LimbIdleState IdleState { get; private set; }
+    public LimbRidingState RidingState { get; private set; }
     public LimbRideState RideState { get; private set; }
+
+    public LimbPutDownState PutDownState { get; private set; }
+    public LimbThrowState ThrowState { get; private set; }
 
     [SerializeField]
     public LimbData limbData;
@@ -47,11 +51,13 @@ public class Limb : MonoBehaviour
     private void Awake()
     {
         StateMachine = new PlayerStateMachine();
-        IdleState = new LimbIdleState(this, StateMachine, limbData, "idle");
+        IdleState = new LimbIdleState(this, StateMachine, limbData, "Idle");
         RideState = new LimbRideState(this, StateMachine, limbData, "Ride");
+        RidingState = new LimbRidingState(this, StateMachine, limbData, "Riding");
+        PutDownState = new LimbPutDownState(this, StateMachine, limbData, "putdown");
+        ThrowState = new LimbThrowState(this, StateMachine, limbData, "throw");
 
-        Debug.Log("RideState ÃÊ±âÈ­µÊ: " + (RideState != null));
-
+        limbData.isRiding = false;
     }
 
     private void Start()
@@ -67,6 +73,11 @@ public class Limb : MonoBehaviour
     {
         CurrentVelocity = RB.linearVelocity;
         StateMachine.LimbCurrentState.LogicUpdate();
+
+        if (limbData.isRiding)
+        {
+            this.transform.position = (GameManager.instance.PlayerData.blindtransform.position + new Vector3(0, 0.6f, 0));
+        }
 
     }
 
@@ -122,9 +133,9 @@ public class Limb : MonoBehaviour
 
     #region Other Functions
 
-    private void AnimationTrigger() => StateMachine.playerCurrentState.AnimationTrigger();
+    private void AnimationTrigger() => StateMachine.LimbCurrentState.AnimationTrigger();
 
-    private void AnimationFinishTrigger() => StateMachine.playerCurrentState.AnimationFinishTrigger();
+    private void AnimationFinishTrigger() => StateMachine.LimbCurrentState.AnimationFinishTrigger();
     private void Flip()
     {
         FacingDirection *= -1;

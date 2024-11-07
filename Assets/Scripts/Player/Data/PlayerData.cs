@@ -19,8 +19,15 @@ public class PlayerData : ScriptableObject
     public LayerMask whatIsLimb;
 
     [Header("isCarrying")]
-    public bool iscarrying = false;
+    public bool iscarrying;
+
+    [Header("InputCall")]
+    public bool carryupcall;
+    public bool throwcall;
+    public bool putdowncall;
 
     [Header("BlindTransform")]
     public Transform blindtransform;
+
+
 }

@@ -33,7 +33,7 @@ public class PlayerGroundedState : PlayerState
 
         xinput = player.InputHandler.NormInputX;
         JumpInput = player.InputHandler.JumpInput;
-        CarryUpInput = player.InputHandler.CarryUpInput;
+        CarryUpInput = GameManager.instance.PlayerData.carryupcall;
 
         if (JumpInput)
         {
@@ -45,11 +45,6 @@ public class PlayerGroundedState : PlayerState
         {
             stateMachine.playerChangeState(player.carryUpState);
         }
-        else
-        { 
-            
-        }
-
     }
 
     public override void PhysicsUpdate()

@@ -8,6 +8,9 @@ public class PlayerC_GroundedState : PlayerState
 
     protected int xinput;
 
+    protected bool PutDownInput;
+    protected bool ThrowInput;
+
     public override void DoCheck()
     {
         base.DoCheck();
@@ -25,9 +28,20 @@ public class PlayerC_GroundedState : PlayerState
 
     public override void LogicUpdate()
     {
+        PutDownInput = playerData.putdowncall;
+        ThrowInput = playerData.throwcall;
         base.LogicUpdate();
-
         xinput = player.InputHandler.NormInputX;
+
+        if (PutDownInput)
+        {
+            stateMachine.playerChangeState(player.PutDownState);
+        }
+
+        if(ThrowInput) 
+        {
+            stateMachine.playerChangeState(player.ThrowState);
+        }
 
     }
 

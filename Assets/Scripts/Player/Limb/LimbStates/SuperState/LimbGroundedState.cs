@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class LimbGroundedState : LimbState
 {
-
-    private bool RideInput;
+    
     public LimbGroundedState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
     {
     }
@@ -35,10 +34,12 @@ public class LimbGroundedState : LimbState
 
     public override void LogicUpdate()
     {
+
         base.LogicUpdate();
-        if (Limb.CheckIftouchBlind())
+
+        if (GameManager.instance.PlayerData.carryupcall && Limb.CheckIftouchBlind())
         {
-            stateMachine.LimbStateChangetoRide(Limb.RideState);
+            stateMachine.LimbChangeState(Limb.RideState);
         }
     }
 

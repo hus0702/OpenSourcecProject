@@ -14,4 +14,5 @@ public class LimbData : ScriptableObject
 
     [Header("isRiding")]
     public bool isRiding;
+    
 }

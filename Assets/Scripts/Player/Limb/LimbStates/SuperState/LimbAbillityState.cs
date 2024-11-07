@@ -1,8 +1,11 @@
 using UnityEngine;
 
-public class LimbIdleState : LimbGroundedState
+public class LimbAbillityState : LimbState
 {
-    public LimbIdleState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
+    protected bool isAbillityDone;
+
+    private bool isGrounded;
+    public LimbAbillityState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
     {
 
     }
@@ -35,6 +38,18 @@ public class LimbIdleState : LimbGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
+        if ((isAbillityDone))
+        {
+            if (limbdata.isRiding)
+            {
+                stateMachine.LimbChangeState(Limb.RidingState);
+            }
+            else
+            {
+                stateMachine.LimbChangeState(Limb.IdleState);
+            }
+        }
     }
 
     public override void PhysicsUpdate()

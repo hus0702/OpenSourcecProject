@@ -1,10 +1,9 @@
 using UnityEngine;
 
-public class LimbIdleState : LimbGroundedState
+public class LimbPutDownState : LimbAbillityState
 {
-    public LimbIdleState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
+    public LimbPutDownState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
     {
-
     }
 
     public override void AnimationFinishTrigger()
@@ -25,6 +24,8 @@ public class LimbIdleState : LimbGroundedState
     public override void Enter()
     {
         base.Enter();
+        limbdata.isRiding = false;
+        isAbillityDone = true;
     }
 
     public override void Exit()

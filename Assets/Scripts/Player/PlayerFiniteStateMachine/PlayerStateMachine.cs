@@ -24,7 +24,7 @@ public class PlayerStateMachine
 
     public void playerChangeState(PlayerState newState)
     {
-        Debug.Log(newState);
+        Debug.Log("[Blind] :" + newState);
 
         playerCurrentState.Exit();
         playerCurrentState = newState;
@@ -36,14 +36,5 @@ public class PlayerStateMachine
         LimbCurrentState.Exit();
         LimbCurrentState = newState;
         LimbCurrentState.Enter();
-    }
-    public void LimbStateChangetoRide(LimbState newState)
-    {
-        if (GameManager.instance.PlayerData.iscarrying)
-        {
-            Debug.Log("여기까지 되면 성공!");
-            LimbChangeState(newState);
-        }
-            
     }
 }
