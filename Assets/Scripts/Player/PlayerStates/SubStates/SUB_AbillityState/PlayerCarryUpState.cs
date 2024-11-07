@@ -4,6 +4,7 @@ public class PlayerCarryUpState : PlayerAbillityState
 {
     public PlayerCarryUpState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
+
     }
     public override void Enter()
     {
@@ -11,5 +12,4 @@ public class PlayerCarryUpState : PlayerAbillityState
         playerData.iscarrying = true;
         isAbillityDone = true;
     }
-
 }

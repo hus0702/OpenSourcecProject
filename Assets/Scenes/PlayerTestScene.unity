@@ -329,11 +329,6 @@ BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 2833181340004099870, guid: c695209b832f97d4c94d0839ea413c05, type: 3}
   m_PrefabInstance: {fileID: 2780395702782806942}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1305165364 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1527302452741640446, guid: c695209b832f97d4c94d0839ea413c05, type: 3}
-  m_PrefabInstance: {fileID: 2780395702782806942}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1350855934
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,7 +358,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ab59454177a70142a5873584d0a7ede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blindtransform: {fileID: 1305165364}
+  PlayerData: {fileID: 11400000, guid: c48025bae44ad8e4bbdabf36fa70eed7, type: 2}
+  LimbData: {fileID: 11400000, guid: 906720070a0f94f4ab4b0da0e08c3a02, type: 2}
 --- !u!4 &1350855936
 Transform:
   m_ObjectHideFlags: 0

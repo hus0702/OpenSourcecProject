@@ -8,30 +8,23 @@ public class PlayerStateMachine
     public PlayerState playerCurrentState { get; private set; }
     public LimbState LimbCurrentState { get; private set; }
 
-    public Limb limb;
 
-    public bool Carryinput;
-
-    public void PlayerInitialize(PlayerState startingstate)
+    public void PlayerInitialize(PlayerState startingstate, PlayerData data)
     { 
         playerCurrentState = startingstate;
         playerCurrentState.Enter();
     }
 
-    public void LimbInitialize(LimbState startingstate)
+    public void LimbInitialize(LimbState startingstate, LimbData data)
     {
         LimbCurrentState = startingstate;
         LimbCurrentState.Enter();
+
     }
 
     public void playerChangeState(PlayerState newState)
     {
         Debug.Log(newState);
-
-        if (newState is PlayerCarryUpState)
-        {
-            Carryinput = true;
-        }
 
         playerCurrentState.Exit();
         playerCurrentState = newState;
@@ -40,17 +33,17 @@ public class PlayerStateMachine
 
     public void LimbChangeState(LimbState newState)
     {
-        Debug.Log("LimbState 변경 :" + newState);
         LimbCurrentState.Exit();
         LimbCurrentState = newState;
         LimbCurrentState.Enter();
     }
     public void LimbStateChangetoRide(LimbState newState)
     {
-        if (Carryinput)
+        if (GameManager.instance.PlayerData.iscarrying)
         {
+            Debug.Log("여기까지 되면 성공!");
             LimbChangeState(newState);
-            Carryinput = false;
         }
+            
     }
 }

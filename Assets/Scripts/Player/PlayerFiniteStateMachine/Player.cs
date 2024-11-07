@@ -73,13 +73,14 @@ public class Player : MonoBehaviour
         RB = GetComponent<Rigidbody2D>();
         playerTransform = GetComponent<Transform>();
         FacingDirection = 1;
-        StateMachine.PlayerInitialize(IdleState);
+        StateMachine.PlayerInitialize(IdleState, playerData);
     }
 
     private void Update()
     {
         CurrentVelocity = RB.linearVelocity;
         StateMachine.playerCurrentState.LogicUpdate();
+        playerData.blindtransform = this.transform;
 
     }
 

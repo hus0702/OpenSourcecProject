@@ -1,3 +1,5 @@
+using Mirror;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class LimbRideState : LimbState
@@ -24,7 +26,6 @@ public class LimbRideState : LimbState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Ridestate¿‘º∫");
     }
 
     public override void Exit()
@@ -35,6 +36,7 @@ public class LimbRideState : LimbState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        Limb.transform.position = (GameManager.instance.PlayerData.blindtransform.position + new Vector3(0, 0.6f, 0));
     }
 
     public override void PhysicsUpdate()

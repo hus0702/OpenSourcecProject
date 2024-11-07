@@ -1,3 +1,4 @@
+using Mirror.BouncyCastle.Asn1.TeleTrust;
 using Steamworks;
 using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
@@ -18,6 +19,8 @@ public class Limb : MonoBehaviour
     #region Components
     public Animator Anim { get; private set; }
     public Rigidbody2D RB { get; private set; }
+
+    public Transform transform { get; private set; }
     #endregion
 
     #region Check Variables
@@ -55,8 +58,9 @@ public class Limb : MonoBehaviour
     {
         Anim = GetComponent<Animator>();
         RB = GetComponent<Rigidbody2D>();
+        transform = GetComponent<Transform>();
         FacingDirection = 1;
-        StateMachine.LimbInitialize(IdleState);
+        StateMachine.LimbInitialize(IdleState,limbData);
     }
 
     private void Update()

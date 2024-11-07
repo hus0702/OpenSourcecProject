@@ -22,4 +22,5 @@ MonoBehaviour:
   whatIsLimb:
     serializedVersion: 2
     m_Bits: 1024
-  iscarrying: 0
+  iscarrying: 1
+  blindtransform: {fileID: 0}

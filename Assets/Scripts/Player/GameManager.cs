@@ -5,7 +5,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public Transform blindtransform;
+    public PlayerData PlayerData;
+
+    public LimbData LimbData;
 
     private void Awake()
     {

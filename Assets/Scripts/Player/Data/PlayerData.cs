@@ -20,4 +20,7 @@ public class PlayerData : ScriptableObject
 
     [Header("isCarrying")]
     public bool iscarrying = false;
+
+    [Header("BlindTransform")]
+    public Transform blindtransform;
 }
