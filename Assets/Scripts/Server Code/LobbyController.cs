@@ -104,7 +104,7 @@ public class LobbyController : MonoBehaviour
     {
         LocalPlayerObject = playerObjectController.gameObject;
         LocalPlayerController = LocalPlayerObject.GetComponent<PlayerObjectController>();
-    } 
+    }
 
     public void CreateHostPlayerItem()
     {

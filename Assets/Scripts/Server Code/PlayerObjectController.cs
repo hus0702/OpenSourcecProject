@@ -68,8 +68,7 @@ public class PlayerObjectController : NetworkBehaviour
         get { return PlayerIdNumber == 1; }
     }
 
-    private CustomNetworkManager manager;
-    private CustomNetworkManager Manager
+    private CustomNetworkManager manager;     private CustomNetworkManager Manager
     {
         get
         {
