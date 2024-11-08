@@ -19,14 +19,20 @@ using System.Data;
 */
 public class InteractableObject : NetworkBehaviour, IInteracted
 {
+    protected Collider2D myCollider;
+
+    void Awake(){
+        myCollider = GetComponent<Collider2D>();
+    }
+
     public virtual void Interact(GameObject requester) //TODO 이 부분은 나중에 바뀔 수 있음.
     {
         Debug.Log(gameObject.name + " 객체와 상호작용합니다.");
 
         bool isInteractable = CheckInteractable(requester); // 우선 상호작용이 가능한지부터 체크한다.
 
-        if(isInteractable) DoInteract(requester);
-        else FailHandle(requester);
+        if(isInteractable) ExecuteOnSuccess(requester);
+        else ExecuteOnFail(requester);
     }
 
     public virtual bool CheckInteractable(GameObject requester)
@@ -34,7 +40,23 @@ public class InteractableObject : NetworkBehaviour, IInteracted
         return true; // 디폴트는 언제나 가능한 상태.
     }
 
-    public virtual void DoInteract(GameObject requester){}
+    public virtual void ExecuteOnSuccess(GameObject requester){
+    
+    }
 
-    public virtual void FailHandle(GameObject requester){}
+    public virtual void ExecuteOnFail(GameObject requester){}
+
+    protected bool isColliderOverlap(Collider2D arg1, Collider2D arg2)
+    {
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(arg1.bounds.center, arg1.bounds.size, 0f);
+
+        foreach(var collider in colliders)
+        {
+            if(collider == arg2) return true;
+        }
+        return false;
+    }
+
+    public void ActiveInteract()=>myCollider.enabled = true;
+    public void InActiveInteract()=>myCollider.enabled = false;
 }

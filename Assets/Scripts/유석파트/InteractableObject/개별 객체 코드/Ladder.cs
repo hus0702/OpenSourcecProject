@@ -24,18 +24,10 @@ public class Ladder : InteractableObject
 
     public override bool CheckInteractable(GameObject requester)
     {
-        Collider2D requesterCollider = requester.GetComponent<Collider2D>();
-
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(colliderToPass.bounds.center, colliderToPass.bounds.size, 0f);
-
-        foreach(var collider in colliders)
-        {
-            if(collider == requesterCollider) return true;
-        }
-        return false;
+        return isColliderOverlap(requester.GetComponent<Collider2D>(), colliderToPass);
     }
 
-    public override void DoInteract(GameObject requester)
+    public override void ExecuteOnSuccess(GameObject requester)
     {
         // 플레이어의 State 를 LadderClimb State 등으로 변경할 것!
             // 혹은 그냥 requester . Interact 를 호출하거나. (물론 이 Ladder 객체를 인자로 보내야 함)
