@@ -47,7 +47,15 @@ public class LimbAbillityState : LimbState
             }
             else
             {
-                stateMachine.LimbChangeState(Limb.IdleState);
+                if (isGrounded)
+                {
+                    stateMachine.LimbChangeState(Limb.inAirState);
+                }
+                else
+                {
+                    stateMachine.LimbChangeState(Limb.IdleState);
+                }
+                
             }
         }
     }

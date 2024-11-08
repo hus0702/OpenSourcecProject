@@ -1,12 +1,11 @@
-using Mirror;
-using UnityEditor.VersionControl;
 using UnityEngine;
+using UnityEngine.Windows;
 
-public class LimbRidingState : LimbState
+public class LimbinAirState : LimbState
 {
-    public bool throwInput;
-    public bool PutDownInput;
-    public LimbRidingState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata,animBoolName)
+    private bool isGrounded;
+    private int xInput;
+    public LimbinAirState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
     {
     }
 
@@ -23,6 +22,7 @@ public class LimbRidingState : LimbState
     public override void DoCheck()
     {
         base.DoCheck();
+        isGrounded = Limb.CheckIfGrounded();
     }
 
     public override void Enter()
@@ -38,17 +38,10 @@ public class LimbRidingState : LimbState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
-        if (GameManager.instance.PlayerData.putdowncall)
+        if (isGrounded)
         {
-            stateMachine.LimbChangeState(Limb.PutDownState);
+            stateMachine.LimbChangeState(Limb.IdleState);
         }
-
-        if(GameManager.instance.PlayerData.throwcall)
-        {
-            stateMachine.LimbChangeState(Limb.ThrowState);
-        }
-
     }
 
     public override void PhysicsUpdate()

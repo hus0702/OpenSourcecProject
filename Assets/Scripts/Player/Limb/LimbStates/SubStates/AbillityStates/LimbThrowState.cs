@@ -1,12 +1,10 @@
-using Mirror;
-using UnityEditor.VersionControl;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
-public class LimbRidingState : LimbState
+public class LimbThrowState : LimbAbillityState
 {
-    public bool throwInput;
-    public bool PutDownInput;
-    public LimbRidingState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata,animBoolName)
+    private bool isGrounded;
+    public LimbThrowState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
     {
     }
 
@@ -28,6 +26,10 @@ public class LimbRidingState : LimbState
     public override void Enter()
     {
         base.Enter();
+        Limb.transform.position = Limb.transform.position;
+        limbdata.isRiding = false;
+        GameManager.instance.PlayerData.throwcall = false;
+        isAbillityDone = true;
     }
 
     public override void Exit()
@@ -37,18 +39,10 @@ public class LimbRidingState : LimbState
 
     public override void LogicUpdate()
     {
+        Limb.SetVelocityX(15 * GameManager.instance.PlayerData.facingdirection);
+        Limb.SetVelocityY(10);
         base.LogicUpdate();
-
-        if (GameManager.instance.PlayerData.putdowncall)
-        {
-            stateMachine.LimbChangeState(Limb.PutDownState);
-        }
-
-        if(GameManager.instance.PlayerData.throwcall)
-        {
-            stateMachine.LimbChangeState(Limb.ThrowState);
-        }
-
+        
     }
 
     public override void PhysicsUpdate()
