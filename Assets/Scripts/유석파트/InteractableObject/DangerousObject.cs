@@ -21,11 +21,11 @@ public class DangerousObject : NetworkBehaviour
     public virtual void OnKillPlayer()
     {
         // 플레이어를 죽일 고유 애니메이션을 재생한다던가 그런 로직을 추가하면 됨.
+        //Player.Die();
     }
 
     public virtual void OnKeyInserted()
     {
-        // 키가 삽입됐을 때 뭐 꺼져야 하면 그 애니메이션을 출력한다던가 하면 될 듯
         InActiveObject();
     }
 

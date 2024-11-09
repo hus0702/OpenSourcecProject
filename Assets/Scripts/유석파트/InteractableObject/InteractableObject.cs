@@ -21,7 +21,7 @@ public class InteractableObject : NetworkBehaviour, IInteracted
 {
     protected Collider2D myCollider;
 
-    void Awake(){
+    protected virtual void Awake(){
         myCollider = GetComponent<Collider2D>();
     }
 
