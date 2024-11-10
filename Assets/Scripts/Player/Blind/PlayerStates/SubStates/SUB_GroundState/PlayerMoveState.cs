@@ -28,8 +28,16 @@ public class PlayerMoveState : PlayerGroundedState
         player.CheckifShouldflip(xinput);
         player.SetVelocityX(playerData.movementVelocity * xinput);
 
-        if (xinput == 0f) {
-            stateMachine.playerChangeState(player.IdleState);
+        if (sinput)
+        {
+            stateMachine.playerChangeState(player.SitMoveState);
+        }
+        else
+        {
+            if (xinput == 0f)
+            {
+                stateMachine.playerChangeState(player.IdleState);
+            }
         }
     }
 

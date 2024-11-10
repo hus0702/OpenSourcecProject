@@ -39,7 +39,7 @@ public class PlayerAbillityState : PlayerState
         {
             if (playerData.iscarrying)
             {
-                if (isGrounded && player.CurrentVelocity.y < 0.01f)
+                if (isGrounded && player.CurrentVelocity.y < 0.1f)
                 {
                     stateMachine.playerChangeState(player.c_LandState);
                 }
@@ -50,7 +50,7 @@ public class PlayerAbillityState : PlayerState
             }
             else
             {
-                if (isGrounded && player.CurrentVelocity.y < 0.01f)
+                if (isGrounded && player.CurrentVelocity.y < 0.1f)
                 {
                     stateMachine.playerChangeState(player.LandState);
                 }

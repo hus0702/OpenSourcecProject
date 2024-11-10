@@ -1,5 +1,5 @@
 {
-    "name": "Player",
+    "name": "Limb",
     "maps": [
         {
             "name": "BlindGameplay",
@@ -13,15 +13,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "b840c884-5faf-48e1-b98b-e93c1108e327",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 },
                 {
                     "name": "Menu",
@@ -49,38 +40,9 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Carry",
-                    "type": "Button",
-                    "id": "daa40ce8-03e3-462b-a22b-94d9ed824d7f",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Sit",
-                    "type": "Button",
-                    "id": "fe27d0d3-a27a-4cab-b3fa-b5aa8759d6cf",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "a82862ea-5102-4f89-aa9d-13e9a7de7c6a",
-                    "path": "<Keyboard>/space",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": ";KeyBoard",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "2D Vector",
                     "id": "536dcf8f-e901-4fce-b06f-f570d9495a27",
@@ -144,28 +106,6 @@
                     "processors": "",
                     "groups": ";KeyBoard",
                     "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ab88cfd4-5755-41c5-9d03-c54e802de7d9",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Carry",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a014cb75-c5a1-4e00-bc56-466948fcd1fb",
-                    "path": "<Keyboard>/s",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": ";KeyBoard",
-                    "action": "Sit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

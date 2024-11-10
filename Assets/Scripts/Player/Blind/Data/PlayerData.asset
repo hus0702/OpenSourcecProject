@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   movementVelocity: 10
-  facingdirection: -1
+  sitmovementVelocity: 5
+  facingdirection: 1
   C_movementVelocity: 5
   jumpVelocity: 15
   groundCheckRadious: 0.5
@@ -25,6 +26,6 @@ MonoBehaviour:
     m_Bits: 1024
   iscarrying: 0
   carryupcall: 0
-  throwcall: 0
+  throwcall: 1
   putdowncall: 0
   blindtransform: {fileID: 0}

@@ -10,7 +10,6 @@ public class PlayerThrowState : PlayerAbillityState
     {
         base.Enter();
         playerData.iscarrying = false;
-        playerData.carryupcall = false;
         isAbillityDone = true;
     }
 

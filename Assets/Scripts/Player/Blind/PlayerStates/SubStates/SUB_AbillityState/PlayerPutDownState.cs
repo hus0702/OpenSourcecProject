@@ -11,7 +11,6 @@ public class PlayerPutDownState : PlayerAbillityState
         base.Enter();
 
         playerData.iscarrying = false;
-        playerData.carryupcall = false;
         isAbillityDone = true;
     }
 }

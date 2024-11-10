@@ -24,7 +24,8 @@ public class LimbPutDownState : LimbAbillityState
     public override void Enter()
     {
         base.Enter();
-        Limb.transform.position = Limb.transform.position;
+        Limb.SetVelocityY(4);
+        Limb.limbtransform.position = Limb.limbtransform.position;
         limbdata.isRiding = false;
         GameManager.instance.PlayerData.putdowncall = false;
         isAbillityDone = true;
@@ -37,6 +38,7 @@ public class LimbPutDownState : LimbAbillityState
 
     public override void LogicUpdate()
     {
+        Limb.SetVelocityY(4);
         base.LogicUpdate();
     }
 

@@ -12,6 +12,8 @@ public class PlayerInputHandler : MonoBehaviour
     float throwinputtime;
     public bool JumpInput { get; private set; }
 
+    public bool SitInput { get; private set; }
+
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         RawMovementInput = context.ReadValue<Vector2>();
@@ -20,7 +22,19 @@ public class PlayerInputHandler : MonoBehaviour
         NormInputY = (int)(RawMovementInput * Vector2.right).normalized.y;
     }
 
+    public void OnSitInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            SitInput = true;
+            Debug.Log("¾É¾Æ!");
+        }
 
+        if (context.canceled)
+        {
+            SitInput = false;
+        }
+    }
     public void OnJumpInput(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -49,16 +63,14 @@ public class PlayerInputHandler : MonoBehaviour
                 {
                     throwinputtime = Time.time;
                 }
-                else if (context.canceled)
+                if (context.canceled)
                 {
-                    if ((Time.time - throwinputtime) > 0.5f)
+                    if ((Time.time - throwinputtime) > 1f)
                     {
-                        Debug.Log("throwupcall");
                         GameManager.instance.PlayerData.throwcall = true;
                     }
                     else
                     {
-                        Debug.Log("putdowncall");
                         GameManager.instance.PlayerData.putdowncall = true;
                     }
                 }
@@ -69,7 +81,7 @@ public class PlayerInputHandler : MonoBehaviour
                 {
                     GameManager.instance.PlayerData.carryupcall = true;
                 }
-                else if (context.canceled)
+                if (context.canceled)
                 {
                     GameManager.instance.PlayerData.carryupcall = false;
                 }

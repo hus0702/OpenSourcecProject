@@ -6,6 +6,7 @@ public class PlayerData : ScriptableObject
 {
     [Header("Move state")]
     public float movementVelocity = 10f;
+    public float sitmovementVelocity = 5f;
     public float facingdirection = 1;
 
     [Header("C_Move state")]

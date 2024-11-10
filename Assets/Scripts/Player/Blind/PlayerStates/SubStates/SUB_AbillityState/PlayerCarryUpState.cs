@@ -9,7 +9,7 @@ public class PlayerCarryUpState : PlayerAbillityState
     public override void Enter()
     {
         base.Enter();
-        player.InputHandler.StartCoroutine(player.InputHandler.stopcarryinput(0.1f));
+        player.InputHandler.StartCoroutine(player.InputHandler.stopcarryinput(0.3f));
         playerData.iscarrying = true;
         isAbillityDone = true;
     }

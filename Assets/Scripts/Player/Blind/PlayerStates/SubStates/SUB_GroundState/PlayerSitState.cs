@@ -1,10 +1,8 @@
-using Steamworks;
 using UnityEngine;
 
-public class LimbGroundedState : LimbState
+public class PlayerSitState : PlayerGroundedState
 {
-    protected int xinput;
-    public LimbGroundedState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
+    public PlayerSitState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
 
@@ -26,6 +24,7 @@ public class LimbGroundedState : LimbState
     public override void Enter()
     {
         base.Enter();
+        player.SetVelocityX(0f);
     }
 
     public override void Exit()
@@ -36,14 +35,16 @@ public class LimbGroundedState : LimbState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        xinput = Limb.InputHandler.NormInputX;
-        if (GameManager.instance.PlayerData.iscarrying && Limb.CheckIftouchBlind())
+        if (!sinput)
         {
-            stateMachine.LimbChangeState(Limb.RideState);
+            stateMachine.playerChangeState(player.IdleState);
         }
-        if (!Limb.CheckIfGrounded())
+        else
         {
-            stateMachine.LimbChangeState(Limb.inAirState);
+            if (xinput != 0f)
+            {
+                stateMachine.playerChangeState(player.SitMoveState);
+            }
         }
     }
 
@@ -51,5 +52,4 @@ public class LimbGroundedState : LimbState
     {
         base.PhysicsUpdate();
     }
-
 }

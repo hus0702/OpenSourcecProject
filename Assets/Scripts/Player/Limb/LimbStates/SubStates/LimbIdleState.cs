@@ -35,6 +35,12 @@ public class LimbIdleState : LimbGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        Limb.SetVelocityX(limbdata.movementVelocity * xinput);
+        Limb.CheckifShouldflip(xinput);
+        if (xinput != 0f)
+        {
+            stateMachine.LimbChangeState(Limb.MoveState);
+        }
     }
 
     public override void PhysicsUpdate()

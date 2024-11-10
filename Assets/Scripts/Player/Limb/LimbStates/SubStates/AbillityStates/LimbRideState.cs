@@ -10,7 +10,6 @@ public class LimbRideState : LimbAbillityState
     {
 
         base.Enter();
-        Debug.Log("limbRide ½ÇÇà");
         limbdata.isRiding = true;
         GameManager.instance.PlayerData.carryupcall = false;
         isAbillityDone = true;

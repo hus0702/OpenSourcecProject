@@ -9,6 +9,8 @@ public class Limb : MonoBehaviour
     #region State Variables
     public PlayerStateMachine StateMachine { get; private set; }
     public LimbIdleState IdleState { get; private set; }
+
+    public LimbMoveState MoveState { get; private set; }
     public LimbRidingState RidingState { get; private set; }
     public LimbRideState RideState { get; private set; }
 
@@ -23,9 +25,12 @@ public class Limb : MonoBehaviour
     #endregion
 
     #region Components
+    public LimbInputHandler InputHandler { get; private set; }
     public Animator Anim { get; private set; }
     public Rigidbody2D RB { get; private set; }
-    public Transform transform { get; private set; }
+
+    public Collider2D Collider;
+    public Transform limbtransform { get; private set; }
     #endregion
 
     #region Check Variables
@@ -51,8 +56,10 @@ public class Limb : MonoBehaviour
     #region Unity Callback Functions
     private void Awake()
     {
+        Flip(); // 초기 오프셋 세팅
         StateMachine = new PlayerStateMachine();
         IdleState = new LimbIdleState(this, StateMachine, limbData, "Idle");
+        MoveState = new LimbMoveState(this, StateMachine, limbData, "move");
         RideState = new LimbRideState(this, StateMachine, limbData, "Ride");
         RidingState = new LimbRidingState(this, StateMachine, limbData, "Riding");
         PutDownState = new LimbPutDownState(this, StateMachine, limbData, "putdown");
@@ -66,9 +73,12 @@ public class Limb : MonoBehaviour
     {
         Anim = GetComponent<Animator>();
         RB = GetComponent<Rigidbody2D>();
-        transform = GetComponent<Transform>();
+        Collider = GetComponent<BoxCollider2D>();
+        InputHandler = GetComponent<LimbInputHandler>();
+        limbtransform = GetComponent<Transform>();
         FacingDirection = 1;
         StateMachine.LimbInitialize(IdleState,limbData);
+
     }
 
     private void Update()
@@ -78,7 +88,11 @@ public class Limb : MonoBehaviour
 
         if (limbData.isRiding)
         {
-            this.transform.position = (GameManager.instance.PlayerData.blindtransform.position + new Vector3(0, 1f, 0));
+            this.limbtransform.position = (GameManager.instance.PlayerData.blindtransform.position + new Vector3(0, 1f, 0));
+        }
+        else
+        {
+            this.limbtransform.position = this.limbtransform.position;
         }
 
     }
@@ -127,8 +141,19 @@ public class Limb : MonoBehaviour
 
     public bool CheckIftouchBlind()
     {
+        //Collider2D[] results = new Collider2D[10];
+        //ContactFilter2D contactFilter = new ContactFilter2D();
+        //contactFilter.SetLayerMask(limbData.whitIsBlind);
+        //contactFilter.useLayerMask = true;
         return Physics2D.OverlapCircle(groundcheck.position, limbData.groundCheckRadious, limbData.whitIsBlind);
-
+        //if (Physics2D.OverlapCollider(Collider, contactFilter, results) == 0)
+        //{
+        //    return false;
+        //}
+        //else
+        //{
+        //    return true;
+        //}
     }
 
     #endregion
@@ -138,7 +163,7 @@ public class Limb : MonoBehaviour
     private void AnimationTrigger() => StateMachine.LimbCurrentState.AnimationTrigger();
 
     private void AnimationFinishTrigger() => StateMachine.LimbCurrentState.AnimationFinishTrigger();
-    private void Flip()
+    public void Flip()
     {
         FacingDirection *= -1;
         base.transform.Rotate(0.0f, 180.0f, 0.0f);

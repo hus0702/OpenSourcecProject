@@ -1,4 +1,5 @@
 using Mirror;
+using NUnit.Framework.Constraints;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -8,6 +9,8 @@ public class Player : MonoBehaviour
     public PlayerStateMachine StateMachine { get; private set; }
     public PlayerIdleState IdleState { get; private set; }
     public PlayerMoveState MoveState { get; private set; }
+    public PlayerSitMoveState SitMoveState { get; private set; }
+    public PlayerSitState SitState { get; private set; }
     public PlayerJumpState JumpState { get; private set; }
     public PlayerinAirState InAirState { get; private set; }
     public PlayerLandState LandState { get; private set; }
@@ -63,6 +66,8 @@ public class Player : MonoBehaviour
 
         IdleState = new PlayerIdleState(this, StateMachine, playerData, "idle");
         MoveState = new PlayerMoveState(this, StateMachine, playerData, "move");
+        SitMoveState = new PlayerSitMoveState(this, StateMachine, playerData, "sitmove");
+        SitState = new PlayerSitState(this, StateMachine, playerData, "sit");
         JumpState = new PlayerJumpState(this, StateMachine, playerData, "inAir");
         InAirState = new PlayerinAirState(this, StateMachine, playerData, "inAir");
         LandState = new PlayerLandState(this, StateMachine, playerData, "land");
@@ -79,7 +84,7 @@ public class Player : MonoBehaviour
     {
         Anim = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputHandler>();
-        RB = GetComponent<Rigidbody2D>();
+        RB = GetComponent<Rigidbody2D>(); 
         playerTransform = GetComponent<Transform>();
         FacingDirection = 1;
         StateMachine.PlayerInitialize(IdleState, playerData);
@@ -90,7 +95,6 @@ public class Player : MonoBehaviour
         CurrentVelocity = RB.linearVelocity;
         StateMachine.playerCurrentState.LogicUpdate();
         playerData.blindtransform = this.transform;
-
     }
 
     private void FixedUpdate()

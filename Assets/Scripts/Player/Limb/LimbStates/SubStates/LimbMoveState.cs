@@ -1,10 +1,8 @@
-using Steamworks;
 using UnityEngine;
 
-public class LimbGroundedState : LimbState
+public class LimbMoveState : LimbGroundedState
 {
-    protected int xinput;
-    public LimbGroundedState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
+    public LimbMoveState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
     {
     }
 
@@ -36,14 +34,9 @@ public class LimbGroundedState : LimbState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        xinput = Limb.InputHandler.NormInputX;
-        if (GameManager.instance.PlayerData.iscarrying && Limb.CheckIftouchBlind())
+        if (xinput == 0f)
         {
-            stateMachine.LimbChangeState(Limb.RideState);
-        }
-        if (!Limb.CheckIfGrounded())
-        {
-            stateMachine.LimbChangeState(Limb.inAirState);
+            stateMachine.LimbChangeState(Limb.IdleState);
         }
     }
 
