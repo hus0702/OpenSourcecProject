@@ -1,3 +1,4 @@
+using Mirror.BouncyCastle.Asn1.BC;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,8 +12,10 @@ public class PlayerInputHandler : MonoBehaviour
 
     float throwinputtime;
     public bool JumpInput { get; private set; }
-
     public bool SitInput { get; private set; }
+
+    public bool ladderUp;
+    public bool ladderDown;
 
     public void OnMoveInput(InputAction.CallbackContext context)
     {
@@ -22,18 +25,45 @@ public class PlayerInputHandler : MonoBehaviour
         NormInputY = (int)(RawMovementInput * Vector2.right).normalized.y;
     }
 
-    public void OnSitInput(InputAction.CallbackContext context)
+    public void ladderUpInput(InputAction.CallbackContext context)
     {
+        
         if (context.performed)
         {
-            SitInput = true;
-            Debug.Log("¾É¾Æ!");
+            ladderUp = true;
         }
-
         if (context.canceled)
         {
-            SitInput = false;
+            ladderUp = false;
         }
+        
+    }
+
+    public void OnSitInput(InputAction.CallbackContext context)
+    {
+        if (GameManager.instance.PlayerData.isclimbing)
+        {
+            if (context.performed)
+            {
+                ladderDown = true;
+            }
+            if (context.canceled)
+            {
+                ladderDown = false;
+            }
+        }
+        else
+        {
+            if (context.performed)
+            {
+                SitInput = true;
+            }
+            if (context.canceled)
+            {
+                SitInput = false;
+            }
+        }
+
     }
     public void OnJumpInput(InputAction.CallbackContext context)
     {

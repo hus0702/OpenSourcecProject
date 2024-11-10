@@ -37,6 +37,7 @@ public class PlayerAbillityState : PlayerState
 
         if ((isAbillityDone))
         {
+
             if (playerData.iscarrying)
             {
                 if (isGrounded && player.CurrentVelocity.y < 0.1f)
@@ -47,6 +48,10 @@ public class PlayerAbillityState : PlayerState
                 {
                     stateMachine.playerChangeState(player.c_InAirState);
                 }
+            }
+            else if (playerData.isclimbing)
+            {
+                stateMachine.playerChangeState(player.climbingState);
             }
             else
             {

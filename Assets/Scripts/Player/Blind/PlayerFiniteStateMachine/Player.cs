@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     public PlayerC_LandState c_LandState { get; private set; }
     public PlayerC_inAirState c_InAirState { get; private set; }
 
+    public PlayerClimbingState climbingState { get; private set; }
+    public PlayerClimbState climbState { get; private set; }
     public PlayerPutDownState PutDownState { get; private set; }
     public PlayerThrowState ThrowState { get; private set; }
 
@@ -35,6 +37,7 @@ public class Player : MonoBehaviour
     public Rigidbody2D RB { get; private set; }
     public Transform playerTransform { get; private set; }
 
+    public GameObject detectedObject { get; private set; }
     #endregion
 
     #region Check Variables
@@ -78,6 +81,8 @@ public class Player : MonoBehaviour
         c_InAirState = new PlayerC_inAirState(this, StateMachine, playerData, "c_inAir");
         PutDownState = new PlayerPutDownState(this, StateMachine, playerData, "putdown");
         ThrowState = new PlayerThrowState(this, StateMachine, playerData, "throw");
+        climbingState = new PlayerClimbingState(this, StateMachine, playerData, "climbing");
+        climbState = new PlayerClimbState(this, StateMachine, playerData, "climb");
     }
 
     private void Start()
@@ -118,6 +123,14 @@ public class Player : MonoBehaviour
         RB.linearVelocity = workspace;
         CurrentVelocity = workspace;
     }
+    public void SetLaddderPosition(GameObject gameobj)
+    {       
+        Vector3 pos = gameobj.transform.position;
+        pos.y = this.transform.position.y;
+        pos.z = this.transform.position.z;
+        this.transform.position = pos;
+    }
+
     #endregion
 
     #region Check Functions
@@ -140,6 +153,10 @@ public class Player : MonoBehaviour
         return Physics2D.OverlapCircle(groundcheck.position, playerData.groundCheckRadious, playerData.whatIsLimb);
 
     }
+    public bool CheckIftouchLadder()
+    {
+        return Physics2D.OverlapCircle(groundcheck.position, playerData.groundCheckRadious, playerData.whatIsLadder);
+    }
     #endregion
 
     #region Other Functions
@@ -153,6 +170,12 @@ public class Player : MonoBehaviour
         transform.Rotate(0.0f, 180.0f, 0.0f);
     }
 
-
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.layer == playerData.whatIsLadder && playerData.isclimbing)
+        {
+            SetLaddderPosition(other.gameObject);
+        }
+    }
     #endregion
 }

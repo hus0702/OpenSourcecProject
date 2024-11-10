@@ -60,9 +60,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Sit",
+                    "name": "Sit and ladderdown",
                     "type": "Button",
                     "id": "fe27d0d3-a27a-4cab-b3fa-b5aa8759d6cf",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ladderUp",
+                    "type": "Button",
+                    "id": "e555713a-3db2-47f2-b08e-5a692ae7f5a6",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -165,7 +174,18 @@
                     "interactions": "Press",
                     "processors": "",
                     "groups": ";KeyBoard",
-                    "action": "Sit",
+                    "action": "Sit and ladderdown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "173422d1-505f-47c3-a0e1-eaf51b640a67",
+                    "path": "<Keyboard>/w",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": ";KeyBoard",
+                    "action": "ladderUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

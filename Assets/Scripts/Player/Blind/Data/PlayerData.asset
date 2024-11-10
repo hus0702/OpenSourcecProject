@@ -15,6 +15,7 @@ MonoBehaviour:
   movementVelocity: 10
   sitmovementVelocity: 5
   facingdirection: 1
+  climbVelocity: 3
   C_movementVelocity: 5
   jumpVelocity: 15
   groundCheckRadious: 0.5
@@ -24,8 +25,12 @@ MonoBehaviour:
   whatIsLimb:
     serializedVersion: 2
     m_Bits: 1024
+  whatIsLadder:
+    serializedVersion: 2
+    m_Bits: 2048
   iscarrying: 0
+  isclimbing: 1
   carryupcall: 0
-  throwcall: 1
+  throwcall: 0
   putdowncall: 0
   blindtransform: {fileID: 0}

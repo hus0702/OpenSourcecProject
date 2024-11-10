@@ -10,6 +10,8 @@ public class PlayerGroundedState : PlayerState
 
     private bool CarryUpInput;
 
+    private bool ladderInput;
+
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
@@ -36,6 +38,7 @@ public class PlayerGroundedState : PlayerState
         xinput = player.InputHandler.NormInputX;
         JumpInput = player.InputHandler.JumpInput;
         CarryUpInput = GameManager.instance.PlayerData.carryupcall;
+        ladderInput = player.InputHandler.ladderUp;
         sinput = player.InputHandler.SitInput;
 
         if (JumpInput)
@@ -44,8 +47,11 @@ public class PlayerGroundedState : PlayerState
         }
         if (CarryUpInput && player.CheckIftouchLimb())
         {
-            Debug.Log("carryUp »£√‚");
             stateMachine.playerChangeState(player.carryUpState);
+        }
+        if (ladderInput && player.CheckIftouchLadder())
+        {
+            stateMachine.playerChangeState(player.climbState);
         }
     }
 

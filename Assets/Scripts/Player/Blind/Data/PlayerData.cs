@@ -8,6 +8,7 @@ public class PlayerData : ScriptableObject
     public float movementVelocity = 10f;
     public float sitmovementVelocity = 5f;
     public float facingdirection = 1;
+    public float climbVelocity = 3;
 
     [Header("C_Move state")]
     public float C_movementVelocity = 5f;
@@ -19,9 +20,11 @@ public class PlayerData : ScriptableObject
     public float groundCheckRadious;
     public LayerMask whatIsGround;
     public LayerMask whatIsLimb;
+    public LayerMask whatIsLadder;
 
-    [Header("isCarrying")]
+    [Header("Statement")]
     public bool iscarrying;
+    public bool isclimbing;
 
     [Header("InputCall")]
     public bool carryupcall;
