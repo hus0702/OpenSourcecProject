@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carryinputblock: 0
+  mousePosition: {x: 0, y: 0, z: 0}
 --- !u!114 &54216070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,12 +188,24 @@ MonoBehaviour:
     m_ActionId: 500a1791-fbf3-4b65-90e9-a3ec5e7845ab
     m_ActionName: 'BlindGameplay/Interaction[/Keyboard/e]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 54216069}
+        m_TargetAssemblyTypeName: LimbInputHandler, Assembly-CSharp
+        m_MethodName: OnAttackInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: f9a3a233-8443-4b1a-94af-5eb1bd372d6c
     m_ActionName: 'BlindGameplay/Attack[/Mouse/leftButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: BlindGameplay
+  m_DefaultActionMap: LimbGameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &65805801
@@ -1623,6 +1636,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5551809893449769388, guid: e44b0645ccd5ef94dad18e7fea6ac104, type: 3}
+      propertyPath: bulletprefab
+      value: 
+      objectReference: {fileID: 644988525465764619, guid: 7f6a6beaf9281674db4e142d33c45f4b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

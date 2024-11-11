@@ -40,28 +40,38 @@ public class PlayerAbillityState : PlayerState
 
             if (playerData.iscarrying)
             {
-                if (isGrounded && player.CurrentVelocity.y < 0.1f)
+                if (playerData.isclimbing)
                 {
-                    stateMachine.playerChangeState(player.c_LandState);
+                    stateMachine.playerChangeState(player.c_ClimbingState);
                 }
                 else
                 {
-                    stateMachine.playerChangeState(player.c_InAirState);
+                    if (isGrounded && player.CurrentVelocity.y < 0.1f)
+                    {
+                        stateMachine.playerChangeState(player.c_LandState);
+                    }
+                    else
+                    {
+                        stateMachine.playerChangeState(player.c_InAirState);
+                    }
                 }
-            }
-            else if (playerData.isclimbing)
-            {
-                stateMachine.playerChangeState(player.climbingState);
             }
             else
             {
-                if (isGrounded && player.CurrentVelocity.y < 0.1f)
+                if (playerData.isclimbing)
                 {
-                    stateMachine.playerChangeState(player.LandState);
+                    stateMachine.playerChangeState(player.climbingState);
                 }
                 else
                 {
-                    stateMachine.playerChangeState(player.InAirState);
+                    if (isGrounded && player.CurrentVelocity.y < 0.1f)
+                    {
+                        stateMachine.playerChangeState(player.LandState);
+                    }
+                    else
+                    {
+                        stateMachine.playerChangeState(player.InAirState);
+                    }
                 }
             }
         }

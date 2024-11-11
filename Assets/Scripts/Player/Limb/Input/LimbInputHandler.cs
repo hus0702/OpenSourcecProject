@@ -12,9 +12,10 @@ public class LimbInputHandler : MonoBehaviour
 
     float throwinputtime;
     public bool JumpInput { get; private set; }
-
     public bool SitInput { get; private set; }
+    public bool attackInput { get; private set; }
 
+    public Vector3 mousePosition;
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         RawMovementInput = context.ReadValue<Vector2>();
@@ -34,7 +35,17 @@ public class LimbInputHandler : MonoBehaviour
 
     public void OnAttackInput(InputAction.CallbackContext context)
     {
+        if (context.started)
+        {
+            attackInput = true;
 
+            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition.z = 0;
+        }
+        if (context.canceled)
+        {
+            attackInput = false;
+        }
     }
     public IEnumerator stopcarryinput(float duration)
     {

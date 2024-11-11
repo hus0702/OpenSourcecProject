@@ -1,14 +1,13 @@
 using UnityEngine;
-using UnityEngine.InputSystem.XInput;
 using UnityEngine.Windows;
 
-public class PlayerClimbingState : PlayerState
+public class PlayerC_ClimbingState : PlayerState
 {
     private bool Up;
     private bool Down;
     private bool Jumpinput;
     private int xinput;
-    public PlayerClimbingState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+    public PlayerC_ClimbingState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
 
@@ -30,8 +29,6 @@ public class PlayerClimbingState : PlayerState
     public override void Enter()
     {
         base.Enter();
-
-
     }
 
     public override void Exit()
@@ -42,13 +39,12 @@ public class PlayerClimbingState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
         Up = player.InputHandler.ladderUp;
         Down = player.InputHandler.ladderDown;
         Jumpinput = player.InputHandler.JumpInput;
         xinput = player.InputHandler.NormInputX;
 
-        player.SetVelocityX(playerData.movementVelocity * xinput);
+        player.SetVelocityX(playerData.C_movementVelocity * xinput);
 
         if (Up)
         {
@@ -62,19 +58,16 @@ public class PlayerClimbingState : PlayerState
         {
             player.SetVelocityY(0);
         }
-
         if (Jumpinput || !player.CheckIftouchLadder())
         {
             playerData.isclimbing = false;
             player.RB.gravityScale = 5;
-            
-            stateMachine.playerChangeState(player.InAirState);
+            stateMachine.playerChangeState(player.c_InAirState);
         }
-            
     }
-
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
     }
+
 }

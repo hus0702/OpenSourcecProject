@@ -5,6 +5,7 @@ public class PlayerC_inAirState : PlayerState
 
     private bool isGrounded;
     private int xInput;
+    private bool ladderInput;
     public PlayerC_inAirState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
@@ -30,7 +31,11 @@ public class PlayerC_inAirState : PlayerState
         base.LogicUpdate();
 
         xInput = player.InputHandler.NormInputX;
-
+        ladderInput = player.InputHandler.ladderUp;
+        if (ladderInput && player.CheckIftouchLadder())
+        {
+            stateMachine.playerChangeState(player.climbState);
+        }
         if (isGrounded && player.CurrentVelocity.y < 0.01f)
         {
             stateMachine.playerChangeState(player.c_LandState);
@@ -39,7 +44,6 @@ public class PlayerC_inAirState : PlayerState
         {
             player.CheckifShouldflip(xInput);
             player.SetVelocityX(playerData.movementVelocity * xInput);
-
             player.Anim.SetFloat("yVelocity", player.CurrentVelocity.y);
             player.Anim.SetFloat("xVelocity", Mathf.Abs(player.CurrentVelocity.x));
         }

@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     public PlayerC_IdleState c_idleState { get; private set; }
     public PlayerC_LandState c_LandState { get; private set; }
     public PlayerC_inAirState c_InAirState { get; private set; }
-
+    public PlayerC_ClimbingState c_ClimbingState { get; private set; }
     public PlayerClimbingState climbingState { get; private set; }
     public PlayerClimbState climbState { get; private set; }
     public PlayerPutDownState PutDownState { get; private set; }
@@ -79,6 +79,7 @@ public class Player : MonoBehaviour
         c_idleState = new PlayerC_IdleState(this, StateMachine, playerData, "C_Idle");
         c_LandState = new PlayerC_LandState(this, StateMachine, playerData, "C_Land");
         c_InAirState = new PlayerC_inAirState(this, StateMachine, playerData, "c_inAir");
+        c_ClimbingState = new PlayerC_ClimbingState(this, StateMachine, playerData, "c_climbing");
         PutDownState = new PlayerPutDownState(this, StateMachine, playerData, "putdown");
         ThrowState = new PlayerThrowState(this, StateMachine, playerData, "throw");
         climbingState = new PlayerClimbingState(this, StateMachine, playerData, "climbing");

@@ -21,3 +21,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   isRiding: 0
+  ishavingGun: 0
+  HoldingGun: 0

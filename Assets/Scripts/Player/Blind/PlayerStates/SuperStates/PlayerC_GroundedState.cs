@@ -10,6 +10,7 @@ public class PlayerC_GroundedState : PlayerState
 
     protected bool PutDownInput;
     protected bool ThrowInput;
+    private bool ladderInput;
 
     public override void DoCheck()
     {
@@ -32,6 +33,11 @@ public class PlayerC_GroundedState : PlayerState
         ThrowInput = playerData.throwcall;
         base.LogicUpdate();
         xinput = player.InputHandler.NormInputX;
+        ladderInput = player.InputHandler.ladderUp;
+        if (ladderInput && player.CheckIftouchLadder())
+        {
+            stateMachine.playerChangeState(player.climbState);
+        }
 
         if (PutDownInput)
         {

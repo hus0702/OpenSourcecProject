@@ -10,6 +10,7 @@ public class LimbState
 
     protected float startTime;
     private string animBoolName;
+    private bool attackInput;
 
     public LimbState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName)
     {
@@ -34,7 +35,11 @@ public class LimbState
 
     public virtual void LogicUpdate()
     {
-
+        attackInput = Limb.InputHandler.attackInput;
+        if (attackInput)
+        {
+            stateMachine.LimbChangeState(Limb.ShotState);
+        }
     }
 
     public virtual void PhysicsUpdate()

@@ -24,7 +24,6 @@ public class PlayerStateMachine
 
     public void playerChangeState(PlayerState newState)
     {
-        Debug.Log("[Blind] :" + newState);
 
         playerCurrentState.Exit();
         playerCurrentState = newState;

@@ -2,7 +2,7 @@
     "name": "Limb",
     "maps": [
         {
-            "name": "BlindGameplay",
+            "name": "LimbGameplay",
             "id": "c49e9f48-49e0-4804-bbda-360ffc7b2ee4",
             "actions": [
                 {

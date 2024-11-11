@@ -9,7 +9,6 @@ public class PlayerPutDownState : PlayerAbillityState
     public override void Enter()
     {
         base.Enter();
-
         playerData.iscarrying = false;
         isAbillityDone = true;
     }

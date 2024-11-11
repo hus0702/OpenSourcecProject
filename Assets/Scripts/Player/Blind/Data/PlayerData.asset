@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementVelocity: 10
   sitmovementVelocity: 5
-  facingdirection: 1
+  facingdirection: -1
   climbVelocity: 3
   C_movementVelocity: 5
   jumpVelocity: 15
@@ -29,7 +29,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   iscarrying: 0
-  isclimbing: 1
+  isclimbing: 0
   carryupcall: 0
   throwcall: 0
   putdowncall: 0

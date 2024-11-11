@@ -7,6 +7,7 @@ TagManager:
   - floor
   - Blind
   - Limb
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Ground
   - Limb
   - Ladder
-  - 
+  - bullet
   - 
   - 
   - 

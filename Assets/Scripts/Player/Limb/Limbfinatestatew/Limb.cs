@@ -14,6 +14,7 @@ public class Limb : MonoBehaviour
     public LimbRidingState RidingState { get; private set; }
     public LimbRideState RideState { get; private set; }
 
+    public LimbShotState ShotState { get; private set; }
     public LimbinAirState inAirState { get; private set; }
 
     public LimbPutDownState PutDownState { get; private set; }
@@ -28,9 +29,12 @@ public class Limb : MonoBehaviour
     public LimbInputHandler InputHandler { get; private set; }
     public Animator Anim { get; private set; }
     public Rigidbody2D RB { get; private set; }
-
-    public Collider2D Collider;
     public Transform limbtransform { get; private set; }
+
+    [SerializeField] private GameObject bulletprefab;
+    public GameObject BulletPrefab { get; private set; }
+
+
     #endregion
 
     #region Check Variables
@@ -40,6 +44,7 @@ public class Limb : MonoBehaviour
 
     [SerializeField]
     private BoxCollider2D myBoxCollider;
+
 
     #endregion
 
@@ -62,6 +67,7 @@ public class Limb : MonoBehaviour
         MoveState = new LimbMoveState(this, StateMachine, limbData, "move");
         RideState = new LimbRideState(this, StateMachine, limbData, "Ride");
         RidingState = new LimbRidingState(this, StateMachine, limbData, "Riding");
+        ShotState = new LimbShotState(this, StateMachine, limbData, "shot");
         PutDownState = new LimbPutDownState(this, StateMachine, limbData, "putdown");
         ThrowState = new LimbThrowState(this, StateMachine, limbData, "throw");
         inAirState = new LimbinAirState(this, StateMachine, limbData, "inair");
@@ -73,12 +79,11 @@ public class Limb : MonoBehaviour
     {
         Anim = GetComponent<Animator>();
         RB = GetComponent<Rigidbody2D>();
-        Collider = GetComponent<BoxCollider2D>();
         InputHandler = GetComponent<LimbInputHandler>();
         limbtransform = GetComponent<Transform>();
         FacingDirection = 1;
         StateMachine.LimbInitialize(IdleState,limbData);
-
+        BulletPrefab = bulletprefab;
     }
 
     private void Update()
