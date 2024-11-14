@@ -30,6 +30,7 @@ public class PlayerData : ScriptableObject
     public bool carryupcall;
     public bool throwcall;
     public bool putdowncall;
+    public float throwinputtime;
 
     [Header("BlindTransform")]
     public Transform blindtransform;

@@ -10,7 +10,7 @@ public class PlayerInputHandler : MonoBehaviour
     public int NormInputX { get; private set; }
     public int NormInputY { get; private set; }
 
-    float throwinputtime;
+    public float throwinputtime;
     public bool JumpInput { get; private set; }
     public bool SitInput { get; private set; }
 
@@ -95,14 +95,9 @@ public class PlayerInputHandler : MonoBehaviour
                 }
                 if (context.canceled)
                 {
-                    if ((Time.time - throwinputtime) > 1f)
-                    {
-                        GameManager.instance.PlayerData.throwcall = true;
-                    }
-                    else
-                    {
-                        GameManager.instance.PlayerData.putdowncall = true;
-                    }
+                    GameManager.instance.PlayerData.throwinputtime = Time.time - throwinputtime;
+                    throwinputtime = 0;
+                    GameManager.instance.PlayerData.throwcall = true;
                 }
             }
             else

@@ -94,12 +94,12 @@ public class Limb : MonoBehaviour
         if (limbData.isRiding)
         {
             this.limbtransform.position = (GameManager.instance.PlayerData.blindtransform.position + new Vector3(0, 1f, 0));
+            this.RB.gravityScale = 0f;
         }
         else
         {
-            this.limbtransform.position = this.limbtransform.position;
+            this.RB.gravityScale = 5f;
         }
-
     }
 
     private void FixedUpdate()
@@ -150,7 +150,7 @@ public class Limb : MonoBehaviour
         //ContactFilter2D contactFilter = new ContactFilter2D();
         //contactFilter.SetLayerMask(limbData.whitIsBlind);
         //contactFilter.useLayerMask = true;
-        return Physics2D.OverlapCircle(groundcheck.position, limbData.groundCheckRadious, limbData.whitIsBlind);
+        return Physics2D.OverlapCircle(groundcheck.position, limbData.groundCheckRadious, limbData.whatIsBlind);
         //if (Physics2D.OverlapCollider(Collider, contactFilter, results) == 0)
         //{
         //    return false;
