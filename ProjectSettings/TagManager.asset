@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - floor
+  - Blind
+  - Limb
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -14,11 +17,11 @@ TagManager:
   - UI
   - 
   - player
-  - 
+  - Blind
   - Ground
-  - 
-  - 
-  - 
+  - Limb
+  - Ladder
+  - bullet
   - 
   - 
   - 

@@ -10,6 +10,7 @@ public class PlayeDummyManager : NetworkBehaviour
     {
         PlayerObjectController thisController = transform.GetComponent<PlayerObjectController>();
         this.HakJeom++; // 학점을 변경하는 함수.
+        
         Debug.Log(thisController.PlayerName + "님의 학점이 1.0 점 올랐습니다!");
     }
     // 주목할 건 이 값이 바뀌었을 때 양 쪽의 클라이언트에서 어떻게 보이는지에 대한 여부! 확인해볼 것.
