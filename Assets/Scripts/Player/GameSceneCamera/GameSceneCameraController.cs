@@ -9,8 +9,8 @@ public class GameSceneCameraController : MonoBehaviour
     void Start()
     {
         if (NetworkClient.localPlayer != null)
-        { 
-            target = NetworkClient.localPlayer.transform;
+        {
+            target = NetworkClient.localPlayer.transform.GetChild(0);
         }
     }
 
