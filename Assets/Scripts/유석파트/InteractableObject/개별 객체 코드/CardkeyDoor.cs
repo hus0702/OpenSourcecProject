@@ -12,8 +12,9 @@ public class CardkeyDoor : Door
         else InActiveInteract();
     }
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         // if ( 씬이 로드됐는데 열려있지 않아야 한다면 ) //
         InActiveInteract();
     }
