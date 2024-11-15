@@ -4,7 +4,7 @@ using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Limb : MonoBehaviour
+public class Limb : PlayerObjectController
 {
     #region State Variables
     public PlayerStateMachine StateMachine { get; private set; }
@@ -30,6 +30,8 @@ public class Limb : MonoBehaviour
     public Animator Anim { get; private set; }
     public Rigidbody2D RB { get; private set; }
     public Transform limbtransform { get; private set; }
+
+    public PlayerObjectController thisController { get; private set; }
 
     [SerializeField] private GameObject bulletprefab;
     public GameObject BulletPrefab { get; private set; }
@@ -77,6 +79,7 @@ public class Limb : MonoBehaviour
 
     private void Start()
     {
+        thisController = this.GetComponent<PlayerObjectController>();
         Anim = GetComponent<Animator>();
         RB = GetComponent<Rigidbody2D>();
         InputHandler = GetComponent<LimbInputHandler>();

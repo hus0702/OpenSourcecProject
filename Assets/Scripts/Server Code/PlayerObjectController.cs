@@ -15,7 +15,6 @@ public class PlayerObjectController : NetworkBehaviour
     public const int Null = 0;
     public const int Blind = 1;
     public const int Limp = 2;
-
     /*
         SyncVar 이론 지식 : 
             얘는 '서버' 의 변경을 감지함.

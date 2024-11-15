@@ -2,7 +2,7 @@ using Mirror;
 using NUnit.Framework.Constraints;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : NetworkBehaviour
 {
     #region State Variables
 
@@ -36,8 +36,9 @@ public class Player : MonoBehaviour
     public PlayerInputHandler InputHandler { get; private set; }
     public Rigidbody2D RB { get; private set; }
     public Transform playerTransform { get; private set; }
-
     public GameObject detectedObject { get; private set; }
+
+    public PlayerObjectController thisController { get; private set; }
     #endregion
 
     #region Check Variables
@@ -88,6 +89,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        thisController = this.GetComponent<PlayerObjectController>();
         Anim = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputHandler>();
         RB = GetComponent<Rigidbody2D>(); 

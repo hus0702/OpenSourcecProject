@@ -61,7 +61,6 @@ public class LobbyController : MonoBehaviour
     public void CheckAllReady()
     {
         bool AllReady = true;
-        
         int blindCount = 0;
         int LimpCount = 0;
 
