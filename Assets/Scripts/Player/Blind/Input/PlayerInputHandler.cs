@@ -1,21 +1,20 @@
+using Mirror;
 using Mirror.BouncyCastle.Asn1.BC;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputHandler : MonoBehaviour
+public class PlayerInputHandler : NetworkBehaviour
 {
-    public bool carryinputblock;
-    public Vector2 RawMovementInput { get; private set; }
-    public int NormInputX { get; private set; }
-    public int NormInputY { get; private set; }
-
-    float throwinputtime;
-    public bool JumpInput { get; private set; }
-    public bool SitInput { get; private set; }
-
-    public bool ladderUp;
-    public bool ladderDown;
+    [SyncVar] public bool carryinputblock;
+    [SyncVar] public Vector2 RawMovementInput;
+    [SyncVar] public int NormInputX;
+    [SyncVar] public int NormInputY;
+    [SyncVar] public float throwinputtime;
+    [SyncVar] public bool JumpInput;
+    [SyncVar] public bool SitInput;
+    [SyncVar] public bool ladderUp;
+    [SyncVar] public bool ladderDown;
 
     public void OnMoveInput(InputAction.CallbackContext context)
     {
@@ -95,14 +94,9 @@ public class PlayerInputHandler : MonoBehaviour
                 }
                 if (context.canceled)
                 {
-                    if ((Time.time - throwinputtime) > 1f)
-                    {
-                        GameManager.instance.PlayerData.throwcall = true;
-                    }
-                    else
-                    {
-                        GameManager.instance.PlayerData.putdowncall = true;
-                    }
+                    GameManager.instance.PlayerData.throwinputtime = Time.time - throwinputtime;
+                    throwinputtime = 0;
+                    GameManager.instance.PlayerData.throwcall = true;
                 }
             }
             else

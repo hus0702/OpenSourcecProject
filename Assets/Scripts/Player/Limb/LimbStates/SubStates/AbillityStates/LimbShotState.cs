@@ -16,6 +16,7 @@ public class LimbShotState : LimbAbillityState
         bulletrotation = mousePosition - Limb.transform.position;
         var bullet = Limb.Instantiate(Limb.BulletPrefab, Limb.transform.position + bulletrotation.normalized, Quaternion.Euler(bulletrotation));
         bullet.GetComponent<Rigidbody2D>().linearVelocity = (bulletrotation).normalized * limbdata.bulletspeed;
+        Limb.InputHandler.StartCoroutine(Limb.InputHandler.stopshotinput(GameManager.instance.LimbData.ShotDelay));
         isAbillityDone = true;
     }
 

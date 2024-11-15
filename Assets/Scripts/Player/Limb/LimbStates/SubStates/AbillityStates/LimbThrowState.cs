@@ -4,8 +4,7 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class LimbThrowState : LimbAbillityState
 {
     private bool isGrounded;
-    float throwtime;
-    Vector2 forcevector;
+    private float throwtime;
     public LimbThrowState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
     {
     }
@@ -28,14 +27,14 @@ public class LimbThrowState : LimbAbillityState
     public override void Enter()
     {
         base.Enter();
-        //forcevector = new Vector2(35,35);
-        //Limb.RB.AddForce(forcevector, ForceMode2D.Impulse);
-        Limb.SetVelocityX(12 * GameManager.instance.PlayerData.facingdirection);
-        Limb.SetVelocityY(5);
+        throwtime = GameManager.instance.PlayerData.throwinputtime;
+        if (throwtime > 1)
+            throwtime = 1;
+        Limb.SetVelocityX(12 * throwtime * GameManager.instance.PlayerData.facingdirection);
+        Limb.SetVelocityY(4 * 2*throwtime);
         limbdata.isRiding = false;
         GameManager.instance.PlayerData.throwcall = false;
-        
-
+        isAbillityDone = true;
     }
 
     public override void Exit()
@@ -47,7 +46,6 @@ public class LimbThrowState : LimbAbillityState
     {
 
         base.LogicUpdate();
-        isAbillityDone = true;
 
     }
 

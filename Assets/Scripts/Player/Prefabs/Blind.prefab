@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 2344406304438347376}
   - component: {fileID: 4111211025802692603}
   - component: {fileID: 4452632533519340573}
+  - component: {fileID: -7716836832935807719}
+  - component: {fileID: 2818716835107201432}
   m_Layer: 8
   m_Name: Blind
   m_TagString: Blind
@@ -65,7 +67,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &2833181340004099870
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -100,7 +102,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0026359856, y: -0.0086402}
+  m_Offset: {x: 0.0026359856, y: -0.010102391}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -110,7 +112,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.7696428, y: 0.966379}
+  m_Size: {x: 0.7696428, y: 0.96930337}
   m_EdgeRadius: 0
 --- !u!114 &8832166363159662661
 MonoBehaviour:
@@ -152,7 +154,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: bd43d245-48a7-4e67-a501-42f228d3759d
-    m_ActionName: 'Gameplay/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
+    m_ActionName: 'BlindGameplay/Movement[/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2344406304438347376}
@@ -168,55 +170,19 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: b840c884-5faf-48e1-b98b-e93c1108e327
-    m_ActionName: 'Gameplay/Jump[/Keyboard/space]'
+    m_ActionName: 'BlindGameplay/Jump[/Keyboard/space]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2344406304438347376}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: OnEscInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: ce9ec73c-4b38-4dff-9abd-552c176db882
-    m_ActionName: 'Gameplay/Menu[/Keyboard/escape]'
+    m_ActionName: 'BlindGameplay/Menu[/Keyboard/escape]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2344406304438347376}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: OnInteractInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 500a1791-fbf3-4b65-90e9-a3ec5e7845ab
-    m_ActionName: 'Gameplay/Interaction[/Keyboard/e]'
+    m_ActionName: 'BlindGameplay/Interaction[/Keyboard/e]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2344406304438347376}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: OnAttackInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: f9a3a233-8443-4b1a-94af-5eb1bd372d6c
-    m_ActionName: 'Gameplay/Attack[/Mouse/leftButton]'
+    m_ActionName: 'BlindGameplay/Attack[/Mouse/leftButton]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2344406304438347376}
@@ -232,10 +198,42 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: daa40ce8-03e3-462b-a22b-94d9ed824d7f
-    m_ActionName: 'Gameplay/Carry[/Mouse/rightButton]'
+    m_ActionName: 'BlindGameplay/Carry[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2344406304438347376}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnSitInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fe27d0d3-a27a-4cab-b3fa-b5aa8759d6cf
+    m_ActionName: 'BlindGameplay/Sit[/Keyboard/s]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2344406304438347376}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: ladderUpInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e555713a-3db2-47f2-b08e-5a692ae7f5a6
+    m_ActionName: 'BlindGameplay/ladderUp[/Keyboard/w]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Gameplay
+  m_DefaultActionMap: BlindGameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &2121115356825452233
@@ -250,6 +248,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b23d019a222174d98ce1f2329bcc15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   playerData: {fileID: 11400000, guid: c48025bae44ad8e4bbdabf36fa70eed7, type: 2}
   groundcheck: {fileID: 5666345602596337400}
   myBoxCollider: {fileID: 2833181340004099870}
@@ -266,6 +267,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carryinputblock: 0
+  throwinputtime: 0
+  ladderUp: 0
+  ladderDown: 0
 --- !u!212 &4111211025802692603
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -343,6 +347,44 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-7716836832935807719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5727899445206955385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 4003573389
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
+--- !u!114 &2818716835107201432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5727899445206955385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4ea8ea54405be743ab148a09909736c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  ConnectionID: 0
+  PlayerIdNumber: 0
+  PlayerSteamID: 0
+  PlayerName: 
+  Ready: 0
+  Role: 0
 --- !u!1 &7870875001181645087
 GameObject:
   m_ObjectHideFlags: 0

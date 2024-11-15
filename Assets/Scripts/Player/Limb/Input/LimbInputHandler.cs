@@ -1,25 +1,23 @@
+using Mirror;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class LimbInputHandler : MonoBehaviour
+public class LimbInputHandler : NetworkBehaviour
 {
 
-    public bool carryinputblock;
-    public Vector2 RawMovementInput { get; private set; }
-    public int NormInputX { get; private set; }
-    public int NormInputY { get; private set; }
-
-    float throwinputtime;
-    public bool JumpInput { get; private set; }
-    public bool SitInput { get; private set; }
-    public bool attackInput { get; private set; }
-
-    public Vector3 mousePosition;
+    [SyncVar] public bool carryinputblock;
+    [SyncVar] public Vector2 RawMovementInput;
+    [SyncVar] public int NormInputX;
+    [SyncVar] public int NormInputY;
+    [SyncVar] public bool JumpInput;
+    [SyncVar] public bool SitInput ;
+    [SyncVar] public bool attackInput;
+    [SyncVar] public Vector3 mousePosition;
+    [SyncVar] bool isshotblocked;
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         RawMovementInput = context.ReadValue<Vector2>();
-
         NormInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
         NormInputY = (int)(RawMovementInput * Vector2.right).normalized.y;
     }
@@ -35,12 +33,11 @@ public class LimbInputHandler : MonoBehaviour
 
     public void OnAttackInput(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !isshotblocked)
         {
-            attackInput = true;
-
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = 0;
+            attackInput = true;
         }
         if (context.canceled)
         {
@@ -53,5 +50,13 @@ public class LimbInputHandler : MonoBehaviour
         yield return new WaitForSeconds(duration);
 
         carryinputblock = false;
+    }
+
+    public IEnumerator stopshotinput(float duration)
+    {
+        isshotblocked = true;
+        yield return new WaitForSeconds(duration);
+
+        isshotblocked = false;
     }
 }
