@@ -4,6 +4,7 @@ using UnityEngine;
 using Mirror;
 using Steamworks;
 using System;
+using Unity.VisualScripting;
 
 /*
     이 클래스는 접속한 각각의 플레이어의 정보를 담고, 통신을 하게 될 객체임.
@@ -87,6 +88,7 @@ public class PlayerObjectController : NetworkBehaviour
     }
     [Command] public void CmdCanStartGame(string SceneName)
     {
+        
         manager.StartGame(SceneName);
     }
 
@@ -145,4 +147,5 @@ public class PlayerObjectController : NetworkBehaviour
             LobbyController.Instance.UpdatePlayerList();
         }
     }
+
 }

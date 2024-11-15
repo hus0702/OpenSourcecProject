@@ -7,8 +7,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public PlayerData PlayerData;
-
+    public PlayerDataContainer PlayerDataContainer;
     public LimbData LimbData;
+    public LimbDataContainer LimbDataContainer;
 
     private void Awake()
     {

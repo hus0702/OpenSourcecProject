@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class CustomNetworkManager : NetworkManager
 {
     [SerializeField] private PlayerObjectController GamePlayerPrefab;
-
+    PlayerObjectController GamePlayerInstance;
     public List<PlayerObjectController> GamePlayers { get; } = new List<PlayerObjectController>();
     public ulong CurrentLobbyID {get; private set;}
 
@@ -22,7 +22,8 @@ public class CustomNetworkManager : NetworkManager
         //base.OnServerAddPlayer(conn);
         if(SceneManager.GetActiveScene().name == "Lobby")
         {
-            PlayerObjectController GamePlayerInstance = Instantiate(GamePlayerPrefab);
+            Debug.Log("LobbyScene µπ¿‘");
+            GamePlayerInstance = Instantiate(GamePlayerPrefab);
             GamePlayerInstance.ConnectionID = conn.connectionId;
             GamePlayerInstance.PlayerIdNumber = GamePlayers.Count + 1;
             GamePlayerInstance.PlayerSteamID = (ulong)SteamMatchmaking.GetLobbyMemberByIndex((CSteamID)SteamLobby.Instance.CurrentLobbyID, GamePlayers.Count);

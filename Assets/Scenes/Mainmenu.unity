@@ -789,7 +789,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerData: {fileID: 11400000, guid: c48025bae44ad8e4bbdabf36fa70eed7, type: 2}
+  PlayerDataContainer: {fileID: 0}
   LimbData: {fileID: 11400000, guid: 906720070a0f94f4ab4b0da0e08c3a02, type: 2}
+  LimbDataContainer: {fileID: 0}
 --- !u!4 &1087161027
 Transform:
   m_ObjectHideFlags: 0
@@ -1423,7 +1425,7 @@ MonoBehaviour:
   evaluationMethod: 0
   evaluationInterval: 3
   timeInterpolationGui: 0
-  GamePlayerPrefab: {fileID: 2818716835107201432, guid: a06860807f6a5dc43943e8bfb67a6231, type: 3}
+  GamePlayerPrefab: {fileID: 5569994853462204378, guid: 0be356c24d6324e4da582ee6cad60ece, type: 3}
 --- !u!1001 &1514271415814086401
 PrefabInstance:
   m_ObjectHideFlags: 0
