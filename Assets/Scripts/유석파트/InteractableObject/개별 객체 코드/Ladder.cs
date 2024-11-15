@@ -17,8 +17,9 @@ public class Ladder : InteractableObject
     */
     [SerializeField]private Collider2D colliderToPass;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if(colliderToPass == null) Debug.LogError("WARNING! 사다리에 매달렸을 때 통과하게 할 플랫폼이 할당되지 않았습니다!");
     }
 
