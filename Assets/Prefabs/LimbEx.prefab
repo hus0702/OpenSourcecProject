@@ -298,7 +298,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b054ba70f3c1f6346a4fb90e3985ef98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   carryinputblock: 0
+  RawMovementInput: {x: 0, y: 0}
+  NormInputX: 0
+  NormInputY: 0
+  JumpInput: 0
+  SitInput: 0
   attackInput: 0
   mousePosition: {x: 0, y: 0, z: 0}
 --- !u!114 &5527760261026405409
@@ -314,7 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneId: 0
-  _assetId: 1888514464
+  _assetId: 2029731404
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
