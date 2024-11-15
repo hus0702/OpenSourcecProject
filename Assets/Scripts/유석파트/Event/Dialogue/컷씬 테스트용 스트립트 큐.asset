@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a7b6f128bc2b8d4bbf3f992bbbeb2f3, type: 3}
+  m_Name: "\uCEF7\uC52C \uD14C\uC2A4\uD2B8\uC6A9 \uC2A4\uD2B8\uB9BD\uD2B8 \uD050"
+  m_EditorClassIdentifier: 
+  scripts:
+  - script: "\uC5E5... <sleep(0.5)>\uC5EC\uAE30\uAC00 \uC5B4\uB514\uC9C0..."
+  - script: "\uC815\uC2E0\uC774 \uC880 \uB4E4\uC5B4?"
+  - script: "\uB108 \uB204\uAD6C\uC57C<sleep(1)>"
+  - script: "\uB098\uB3C4 \uBAB0\uB77C \u314B "
+  - script: "\uC5E5?\n\uADF8\uAC8C \uBB34\uC2A8 \uC18C\uB9AC\uB2C8 "
+  - script: "\uC65C<sleep(1)>\n\uC54C\uC544\uC11C \uBB50\uD558\uAC8C"
+  - script: "<size=200%>\uC790\uAE30 \uC774\uB984\uC744 \uC65C \uBAB0\uB77C!!!<sleep(1.5)>"
+  - script: "\uD5C9...<sleep(1)>"
