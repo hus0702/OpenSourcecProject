@@ -15,99 +15,125 @@ public class PlayerInputHandler : NetworkBehaviour
     [SyncVar] public bool SitInput;
     [SyncVar] public bool ladderUp;
     [SyncVar] public bool ladderDown;
+    NetworkIdentity parentIdentity;
 
+    private void Update()
+    {
+        if (parentIdentity == null)
+        {
+            parentIdentity = transform.parent.GetComponent<NetworkIdentity>();
+        }
+    }
     public void OnMoveInput(InputAction.CallbackContext context)
     {
-        RawMovementInput = context.ReadValue<Vector2>();
-
-        NormInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
-        NormInputY = (int)(RawMovementInput * Vector2.right).normalized.y;
+        if (parentIdentity != null && parentIdentity.isOwned)
+        {
+            RawMovementInput = context.ReadValue<Vector2>();
+            NormInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
+            NormInputY = (int)(RawMovementInput * Vector2.right).normalized.y;
+        }
     }
 
     public void ladderUpInput(InputAction.CallbackContext context)
     {
-        
-        if (context.performed)
+        if (parentIdentity != null && parentIdentity.isOwned)
         {
-            ladderUp = true;
+            if (context.performed)
+            {
+                ladderUp = true;
+            }
+            if (context.canceled)
+            {
+                ladderUp = false;
+            }
         }
-        if (context.canceled)
-        {
-            ladderUp = false;
-        }
-        
     }
 
     public void OnSitInput(InputAction.CallbackContext context)
     {
-        if (GameManager.instance.PlayerData.isclimbing)
+        if (parentIdentity != null && parentIdentity.isOwned)
         {
-            if (context.performed)
+            if (GameManager.instance.PlayerData.isclimbing)
             {
-                ladderDown = true;
+                if (context.performed)
+                {
+                    ladderDown = true;
+                }
+                if (context.canceled)
+                {
+                    ladderDown = false;
+                }
             }
-            if (context.canceled)
+            else
             {
-                ladderDown = false;
+                if (context.performed)
+                {
+                    SitInput = true;
+                }
+                if (context.canceled)
+                {
+                    SitInput = false;
+                }
             }
         }
-        else
-        {
-            if (context.performed)
-            {
-                SitInput = true;
-            }
-            if (context.canceled)
-            {
-                SitInput = false;
-            }
-        }
-
     }
     public void OnJumpInput(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (parentIdentity != null && parentIdentity.isOwned)
         {
-            JumpInput = true;
+            if (context.started)
+            {
+                JumpInput = true;
+            }
         }
+           
     }
 
     public void UseJumpInput() => JumpInput = false;
     public void OnEscInput(InputAction.CallbackContext context)
     {
+        if (parentIdentity != null && parentIdentity.isOwned)
+        { 
         
+        }
     }
     public void OnInteractInput(InputAction.CallbackContext context)
     {
-        
+        if (parentIdentity != null && parentIdentity.isOwned)
+        {
+
+        }
     }
 
     public void OnCarryUpInput(InputAction.CallbackContext context)
     {
-        if (!carryinputblock)
+        if (parentIdentity != null && parentIdentity.isOwned)
         {
-            if (GameManager.instance.PlayerData.iscarrying)
+            if (!carryinputblock)
             {
-                if (context.started)
+                if (GameManager.instance.PlayerData.iscarrying)
                 {
-                    throwinputtime = Time.time;
+                    if (context.started)
+                    {
+                        throwinputtime = Time.time;
+                    }
+                    if (context.canceled)
+                    {
+                        GameManager.instance.PlayerData.throwinputtime = Time.time - throwinputtime;
+                        throwinputtime = 0;
+                        GameManager.instance.PlayerData.throwcall = true;
+                    }
                 }
-                if (context.canceled)
+                else
                 {
-                    GameManager.instance.PlayerData.throwinputtime = Time.time - throwinputtime;
-                    throwinputtime = 0;
-                    GameManager.instance.PlayerData.throwcall = true;
-                }
-            }
-            else
-            {
-                if (context.started)
-                {
-                    GameManager.instance.PlayerData.carryupcall = true;
-                }
-                if (context.canceled)
-                {
-                    GameManager.instance.PlayerData.carryupcall = false;
+                    if (context.started)
+                    {
+                        GameManager.instance.PlayerData.carryupcall = true;
+                    }
+                    if (context.canceled)
+                    {
+                        GameManager.instance.PlayerData.carryupcall = false;
+                    }
                 }
             }
         }
@@ -115,7 +141,10 @@ public class PlayerInputHandler : NetworkBehaviour
     }
     public void OnAttackInput(InputAction.CallbackContext context)
     {
-
+        if (parentIdentity != null && parentIdentity.isOwned)
+        {
+           
+        }
     }
     public IEnumerator stopcarryinput(float duration)
     {

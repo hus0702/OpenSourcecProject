@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Data;
 using Mirror;
 using Steamworks;
 using Unity.VisualScripting;
@@ -22,7 +23,6 @@ public class CustomNetworkManager : NetworkManager
         //base.OnServerAddPlayer(conn);
         if(SceneManager.GetActiveScene().name == "Lobby")
         {
-            Debug.Log("LobbyScene µπ¿‘");
             GamePlayerInstance = Instantiate(GamePlayerPrefab);
             GamePlayerInstance.ConnectionID = conn.connectionId;
             GamePlayerInstance.PlayerIdNumber = GamePlayers.Count + 1;
@@ -32,6 +32,7 @@ public class CustomNetworkManager : NetworkManager
         }
     }
 
+    
     public void StartGame(string SceneName)
     {
         ServerChangeScene(SceneName);

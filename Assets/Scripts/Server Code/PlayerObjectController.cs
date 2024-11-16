@@ -5,6 +5,7 @@ using Mirror;
 using Steamworks;
 using System;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 /*
     이 클래스는 접속한 각각의 플레이어의 정보를 담고, 통신을 하게 될 객체임.
@@ -80,15 +81,21 @@ public class PlayerObjectController : NetworkBehaviour
     private void Start()
     {
         DontDestroyOnLoad(this.gameObject); // 이 객체를 게임 씬까지 끌고 갈 거다!
+    }
 
+    private void Update()
+    {
     }
     public void CanStartGame(string SceneName)
     {
-        if(isOwned) CmdCanStartGame(SceneName);
+        if (isOwned)
+        {
+            CmdCanStartGame(SceneName);
+        }
+        
     }
     [Command] public void CmdCanStartGame(string SceneName)
     {
-        
         manager.StartGame(SceneName);
     }
 
@@ -99,7 +106,7 @@ public class PlayerObjectController : NetworkBehaviour
         if(isClient) LobbyController.Instance.UpdatePlayerList();
     }
     [Command]
-    private void CmdSetPlayerReady()
+    private void CmdSetPlayerReady() 
     {
         this.PlayerReadyUpdate(this.Ready, !this.Ready);
     }
@@ -148,4 +155,48 @@ public class PlayerObjectController : NetworkBehaviour
         }
     }
 
+    [Command]
+    public void CreateGamePrefab(int Role)
+    {
+        CmdCreateGamePrefab(Role);
+    }
+
+    private void CmdCreateGamePrefab(int Role)
+    {
+        if (Role == 1)
+        {
+            GameObject prefab = GetRegisteredPrefab("Blind");
+            GameObject child = Instantiate(prefab);
+            child.transform.SetParent(this.transform);
+            child.transform.localPosition = Vector3.zero;
+            child.transform.localRotation = Quaternion.identity;
+        }
+        else if (Role == 2)
+        {
+            GameObject prefab = GetRegisteredPrefab("LimbEx");
+            GameObject child = Instantiate(prefab);
+            child.transform.SetParent(this.transform);
+            child.transform.localPosition = Vector3.zero;
+            child.transform.localRotation = Quaternion.identity;
+        }
+        else
+        {
+            Debug.Log("GameScene 돌입 시 Player Role : " + this.Role + "으로 설정됨");
+        }
+    }
+
+    public GameObject GetRegisteredPrefab(string prefabName)
+    {
+        // 등록된 Prefabs에서 이름으로 검색
+        foreach (GameObject prefab in CustomNetworkManager.singleton.spawnPrefabs)
+        {
+            if (prefab != null && prefab.name == prefabName)
+            {
+                return prefab;
+            }
+        }
+
+        Debug.LogWarning($"Prefab '{prefabName}' not found in Registered Spawnable Prefabs.");
+        return null;
+    }
 }

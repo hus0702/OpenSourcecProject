@@ -310,42 +310,9 @@ public class LobbyController : MonoBehaviour
 
     public void StartGame(string SceneName)
     {
-        if (LocalPlayerController.Role == 1) 
-        {
-            GameObject prefab = GetRegisteredPrefab("Blind");
-            GameObject child = Instantiate(prefab);
-            child.transform.SetParent(LocalPlayerObject.transform);
-            child.transform.localPosition = Vector3.zero;
-            child.transform.localRotation = Quaternion.identity;
-        }
-        else if (LocalPlayerController.Role == 2)
-        {
-            GameObject prefab = GetRegisteredPrefab("LimbEx");
-            GameObject child = Instantiate(prefab);
-            child.transform.SetParent(LocalPlayerObject.transform);
-            child.transform.localPosition = Vector3.zero;
-            child.transform.localRotation = Quaternion.identity;
-        }
-        else
-        {
-            Debug.Log("GameScene 돌입 시 Player Role : " + LocalPlayerController.Role + "으로 설정됨");
-        }
-
+        LocalPlayerController.CreateGamePrefab(LocalPlayerController.Role);
         LocalPlayerController.CanStartGame(SceneName);
     }
 
-    public GameObject GetRegisteredPrefab(string prefabName)
-    {
-        // 등록된 Prefabs에서 이름으로 검색
-        foreach (GameObject prefab in CustomNetworkManager.singleton.spawnPrefabs)
-        {
-            if (prefab != null && prefab.name == prefabName)
-            {
-                return prefab;
-            }
-        }
 
-        Debug.LogWarning($"Prefab '{prefabName}' not found in Registered Spawnable Prefabs.");
-        return null;
-    }
 }

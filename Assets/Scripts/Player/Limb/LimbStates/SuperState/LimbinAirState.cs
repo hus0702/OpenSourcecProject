@@ -38,6 +38,9 @@ public class LimbinAirState : LimbState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        xInput = Limb.InputHandler.NormInputX;
+        Limb.CheckifShouldflip(xInput);
+        Limb.SetVelocityX(limbdata.movementVelocity * xInput);
         if (isGrounded)
         {
             stateMachine.LimbChangeState(Limb.IdleState);
