@@ -16,18 +16,13 @@ public class LimbInputHandler : NetworkBehaviour
     [SyncVar] public bool attackInput;
     [SyncVar] public Vector3 mousePosition;
     [SyncVar] bool isshotblocked;
-    NetworkIdentity parentIdentity;
 
     private void Update()
     {
-        if (parentIdentity == null)
-        {
-            parentIdentity = transform.parent.GetComponent<NetworkIdentity>();
-        }
     }
     public void OnMoveInput(InputAction.CallbackContext context)
     {
-        if (parentIdentity != null && parentIdentity.isOwned)
+        if (isOwned)
         {
             RawMovementInput = context.ReadValue<Vector2>();
             NormInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
@@ -37,14 +32,14 @@ public class LimbInputHandler : NetworkBehaviour
 
     public void OnEscInput(InputAction.CallbackContext context)
     {
-        if (parentIdentity != null && parentIdentity.isOwned) 
+        if (isOwned) 
         { 
         
         }
     }
     public void OnInteractInput(InputAction.CallbackContext context)
     {
-        if (parentIdentity != null && parentIdentity.isOwned)
+        if (isOwned)
         {
 
         }
@@ -52,7 +47,7 @@ public class LimbInputHandler : NetworkBehaviour
 
     public void OnAttackInput(InputAction.CallbackContext context)
     {
-        if (parentIdentity != null && parentIdentity.isOwned)
+        if (isOwned)
         {
             if (context.started && !isshotblocked)
             {

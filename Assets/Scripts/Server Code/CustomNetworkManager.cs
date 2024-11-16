@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class CustomNetworkManager : NetworkManager
 {
     [SerializeField] private PlayerObjectController GamePlayerPrefab;
-    PlayerObjectController GamePlayerInstance;
+    public PlayerObjectController GamePlayerInstance;
     public List<PlayerObjectController> GamePlayers { get; } = new List<PlayerObjectController>();
     public ulong CurrentLobbyID {get; private set;}
 

@@ -2,14 +2,12 @@ using Mirror;
 using Mirror.BouncyCastle.Bcpg;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
     public static GameManager instance;
 
     public PlayerData PlayerData;
-    public PlayerDataContainer PlayerDataContainer;
     public LimbData LimbData;
-    public LimbDataContainer LimbDataContainer;
 
     private void Awake()
     {

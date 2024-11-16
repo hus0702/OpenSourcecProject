@@ -8,14 +8,14 @@ public class GameSceneCameraController : MonoBehaviour
     private Transform target;
     void Start()
     {
-        if (NetworkClient.localPlayer != null)
-        {
-            target = NetworkClient.localPlayer.transform.GetChild(0);
-        }
+        
     }
 
     void Update()
     {
+        
+        target = NetworkClient.localPlayer.transform;
+        
         if (target != null)
         {
             transform.position = target.position + new Vector3(0, 0, -10); // 예시 오프셋

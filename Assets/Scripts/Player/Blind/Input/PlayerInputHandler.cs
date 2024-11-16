@@ -15,18 +15,11 @@ public class PlayerInputHandler : NetworkBehaviour
     [SyncVar] public bool SitInput;
     [SyncVar] public bool ladderUp;
     [SyncVar] public bool ladderDown;
-    NetworkIdentity parentIdentity;
 
-    private void Update()
-    {
-        if (parentIdentity == null)
-        {
-            parentIdentity = transform.parent.GetComponent<NetworkIdentity>();
-        }
-    }
+
     public void OnMoveInput(InputAction.CallbackContext context)
     {
-        if (parentIdentity != null && parentIdentity.isOwned)
+        if (isOwned)
         {
             RawMovementInput = context.ReadValue<Vector2>();
             NormInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
@@ -36,7 +29,7 @@ public class PlayerInputHandler : NetworkBehaviour
 
     public void ladderUpInput(InputAction.CallbackContext context)
     {
-        if (parentIdentity != null && parentIdentity.isOwned)
+        if (isOwned)
         {
             if (context.performed)
             {
@@ -51,7 +44,7 @@ public class PlayerInputHandler : NetworkBehaviour
 
     public void OnSitInput(InputAction.CallbackContext context)
     {
-        if (parentIdentity != null && parentIdentity.isOwned)
+        if (isOwned)
         {
             if (GameManager.instance.PlayerData.isclimbing)
             {
@@ -79,7 +72,7 @@ public class PlayerInputHandler : NetworkBehaviour
     }
     public void OnJumpInput(InputAction.CallbackContext context)
     {
-        if (parentIdentity != null && parentIdentity.isOwned)
+        if (isOwned)
         {
             if (context.started)
             {
@@ -92,14 +85,14 @@ public class PlayerInputHandler : NetworkBehaviour
     public void UseJumpInput() => JumpInput = false;
     public void OnEscInput(InputAction.CallbackContext context)
     {
-        if (parentIdentity != null && parentIdentity.isOwned)
+        if (isOwned)
         { 
         
         }
     }
     public void OnInteractInput(InputAction.CallbackContext context)
     {
-        if (parentIdentity != null && parentIdentity.isOwned)
+        if (isOwned)
         {
 
         }
@@ -107,7 +100,7 @@ public class PlayerInputHandler : NetworkBehaviour
 
     public void OnCarryUpInput(InputAction.CallbackContext context)
     {
-        if (parentIdentity != null && parentIdentity.isOwned)
+        if (isOwned)
         {
             if (!carryinputblock)
             {
@@ -141,7 +134,7 @@ public class PlayerInputHandler : NetworkBehaviour
     }
     public void OnAttackInput(InputAction.CallbackContext context)
     {
-        if (parentIdentity != null && parentIdentity.isOwned)
+        if (isOwned)
         {
            
         }

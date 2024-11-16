@@ -21177,7 +21177,7 @@ GameObject:
   - component: {fileID: 344623235}
   - component: {fileID: 344623237}
   - component: {fileID: 344623236}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: "\uC0AC\uB2E4\uB9AC1"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21446,7 +21446,7 @@ GameObject:
   - component: {fileID: 393465736}
   - component: {fileID: 393465738}
   - component: {fileID: 393465737}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: "\uC0AC\uB2E4\uB9AC2"
   m_TagString: Untagged
   m_Icon: {fileID: 0}

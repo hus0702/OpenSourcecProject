@@ -1,7 +1,7 @@
 using Mirror;
 using UnityEngine;
 
-public class LimbDataContainer : NetworkBehaviour
+public class LimbDataContainer:NetworkBehaviour
 {
     public LimbData limbData;
 

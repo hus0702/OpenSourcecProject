@@ -34,6 +34,4 @@ public class PlayerData : ScriptableObject
 
     [Header("BlindTransform")]
     public Transform blindtransform;
-
-
 }

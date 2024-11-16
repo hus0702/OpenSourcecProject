@@ -310,7 +310,7 @@ public class LobbyController : MonoBehaviour
 
     public void StartGame(string SceneName)
     {
-        LocalPlayerController.CreateGamePrefab(LocalPlayerController.Role);
+        LocalPlayerController.CmdCreateGamePrefab(LocalPlayerController.Role);
         LocalPlayerController.CanStartGame(SceneName);
     }
 

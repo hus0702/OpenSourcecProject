@@ -6,6 +6,9 @@ using Steamworks;
 using System;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
+using UnityEditor;
+using UnityEngine.InputSystem;
+using Unity.Jobs;
 
 /*
     이 클래스는 접속한 각각의 플레이어의 정보를 담고, 통신을 하게 될 객체임.
@@ -40,6 +43,7 @@ public class PlayerObjectController : NetworkBehaviour
     [SyncVar(hook = nameof(PlayerReadyUpdate))] public bool Ready;
     //[SyncVar(hook = nameof(PlayerRoleUpdate))] public int Role;
     [SyncVar(hook = nameof(HookPlayerRoleUpdate))] public int Role;
+    public GameObject player;
     private void HookPlayerRoleUpdate(int oldValue, int newValue)
     {
         // Role 값이 모종의 이유로 서버로부터 변경되었을 때 모든 클라이언트들에게서 호출됨.
@@ -85,6 +89,10 @@ public class PlayerObjectController : NetworkBehaviour
 
     private void Update()
     {
+        if (player != null)
+        {
+            this.transform.position = player.transform.position;
+        }
     }
     public void CanStartGame(string SceneName)
     {
@@ -156,47 +164,23 @@ public class PlayerObjectController : NetworkBehaviour
     }
 
     [Command]
-    public void CreateGamePrefab(int Role)
+    public void CmdCreateGamePrefab(int Role)
     {
-        CmdCreateGamePrefab(Role);
+        CreateGamePrefab(Role);
     }
 
-    private void CmdCreateGamePrefab(int Role)
+    private void CreateGamePrefab(int Role)
     {
-        if (Role == 1)
+        if (this.Role == 1)
         {
-            GameObject prefab = GetRegisteredPrefab("Blind");
-            GameObject child = Instantiate(prefab);
-            child.transform.SetParent(this.transform);
-            child.transform.localPosition = Vector3.zero;
-            child.transform.localRotation = Quaternion.identity;
+            player = Instantiate(manager.spawnPrefabs[0],transform.position + new Vector3(0,2,0), transform.rotation);
+            NetworkServer.Spawn(player, gameObject);
+            
         }
-        else if (Role == 2)
+        else if (this.Role == 2)
         {
-            GameObject prefab = GetRegisteredPrefab("LimbEx");
-            GameObject child = Instantiate(prefab);
-            child.transform.SetParent(this.transform);
-            child.transform.localPosition = Vector3.zero;
-            child.transform.localRotation = Quaternion.identity;
+            player = Instantiate(manager.spawnPrefabs[1], transform.position + new Vector3(0, 2, 0), transform.rotation);
+            NetworkServer.Spawn(player, gameObject);
         }
-        else
-        {
-            Debug.Log("GameScene 돌입 시 Player Role : " + this.Role + "으로 설정됨");
-        }
-    }
-
-    public GameObject GetRegisteredPrefab(string prefabName)
-    {
-        // 등록된 Prefabs에서 이름으로 검색
-        foreach (GameObject prefab in CustomNetworkManager.singleton.spawnPrefabs)
-        {
-            if (prefab != null && prefab.name == prefabName)
-            {
-                return prefab;
-            }
-        }
-
-        Debug.LogWarning($"Prefab '{prefabName}' not found in Registered Spawnable Prefabs.");
-        return null;
     }
 }
