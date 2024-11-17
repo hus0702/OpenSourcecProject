@@ -46046,7 +46046,7 @@ GameObject:
   - component: {fileID: 1593708725}
   - component: {fileID: 1593708727}
   - component: {fileID: 1593708726}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blind Override Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}

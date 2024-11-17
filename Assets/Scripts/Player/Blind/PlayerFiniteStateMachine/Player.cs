@@ -1,4 +1,5 @@
 using Mirror;
+using Mirror.Examples.Common;
 using NUnit.Framework.Constraints;
 using UnityEngine;
 

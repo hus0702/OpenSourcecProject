@@ -162,25 +162,4 @@ public class PlayerObjectController : NetworkBehaviour
             LobbyController.Instance.UpdatePlayerList();
         }
     }
-
-    [Command]
-    public void CmdCreateGamePrefab(int Role)
-    {
-        CreateGamePrefab(Role);
-    }
-
-    private void CreateGamePrefab(int Role)
-    {
-        if (this.Role == 1)
-        {
-            player = Instantiate(manager.spawnPrefabs[0],transform.position + new Vector3(0,2,0), transform.rotation);
-            NetworkServer.Spawn(player, gameObject);
-            
-        }
-        else if (this.Role == 2)
-        {
-            player = Instantiate(manager.spawnPrefabs[1], transform.position + new Vector3(0, 2, 0), transform.rotation);
-            NetworkServer.Spawn(player, gameObject);
-        }
-    }
 }
