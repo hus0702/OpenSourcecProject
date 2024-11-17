@@ -23,4 +23,12 @@ public class LimbData : ScriptableObject
     public bool HoldingGun;
     public float ShotDelay = 0.1f;
 
+    [Header("Input")]
+    public int NormInputX;
+    public int NormInputY;
+    public bool JumpInput;
+    public bool SitInput;
+    public bool attackInput;
+    public Vector3 mousePosition;
+
 }

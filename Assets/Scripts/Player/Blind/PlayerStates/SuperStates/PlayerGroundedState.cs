@@ -35,11 +35,11 @@ public class PlayerGroundedState : PlayerState
     {
         base.LogicUpdate();
 
-        xinput = player.InputHandler.NormInputX;
-        JumpInput = player.InputHandler.JumpInput;
+        xinput = GameManager.instance.PlayerData.NormInputX;
+        JumpInput = GameManager.instance.PlayerData.JumpInput;
         CarryUpInput = GameManager.instance.PlayerData.carryupcall;
-        ladderInput = player.InputHandler.ladderUp;
-        sinput = player.InputHandler.SitInput;
+        ladderInput = GameManager.instance.PlayerData.ladderUp;
+        sinput = GameManager.instance.PlayerData.SitInput;
 
         if (JumpInput)
         {

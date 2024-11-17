@@ -1,7 +1,7 @@
 using Mirror;
 using UnityEngine;
 
-public class LimbDataContainer:NetworkBehaviour
+public class LimbDataContainer : NetworkBehaviour
 {
     public LimbData limbData;
 
@@ -14,7 +14,12 @@ public class LimbDataContainer:NetworkBehaviour
     [SyncVar(hook = nameof(SetishavingGun))] public bool ishavingGun;
     [SyncVar(hook = nameof(SetHoldingGun))] public bool HoldingGun;
     [SyncVar(hook = nameof(SetshotDelay))] public float ShotDelay;
-
+    [SyncVar(hook = nameof(SetNormInputX))] public int NormInputX;
+    [SyncVar(hook = nameof(SetNormInputY))] public int NormInputY;
+    [SyncVar(hook = nameof(SetJumpInput))] public bool JumpInput;
+    [SyncVar(hook = nameof(SetSitInput))] public bool SitInput;
+    [SyncVar(hook = nameof(SetattackInput))] public bool attackInput;
+    [SyncVar(hook = nameof(SetmousePosition))] public Vector3 mousePosition;
     private void Update()
     {
 
@@ -30,12 +35,12 @@ public class LimbDataContainer:NetworkBehaviour
         {
             groundCheckRadious = limbData.groundCheckRadious;
         }
-        if(whatIsGround != limbData.whatIsGround)
+        if (whatIsGround != limbData.whatIsGround)
         {
             whatIsGround = limbData.whatIsGround;
         }
         if (whatIsBlind != limbData.whatIsBlind)
-        { 
+        {
             whatIsBlind = limbData.whatIsBlind;
         }
         if (isRiding != limbData.isRiding)
@@ -51,8 +56,32 @@ public class LimbDataContainer:NetworkBehaviour
             HoldingGun = limbData.HoldingGun;
         }
         if (ShotDelay != limbData.ShotDelay)
-        { 
+        {
             ShotDelay = limbData.ShotDelay;
+        }
+        if (NormInputX != limbData.NormInputX)
+        {
+            NormInputX = limbData.NormInputX;
+        }
+        if (NormInputY != limbData.NormInputY)
+        {
+            NormInputY = limbData.NormInputY;
+        }
+        if (JumpInput != limbData.JumpInput)
+        {
+            JumpInput = limbData.JumpInput;
+        }
+        if (SitInput != limbData.SitInput)
+        {
+            SitInput = limbData.SitInput;
+        }
+        if (attackInput != limbData.attackInput)
+        {
+            attackInput = limbData.attackInput;
+        }
+        if (mousePosition != limbData.mousePosition)
+        {
+            mousePosition = limbData.mousePosition;
         }
     }
     void SetmovementVelocity(float oldvalue, float newvalue)
@@ -91,6 +120,36 @@ public class LimbDataContainer:NetworkBehaviour
     void SetshotDelay(float oldvalue, float newvalue)
     {
         limbData.ShotDelay = newvalue;
+    }
+
+    void SetNormInputX(int oldvalue, int newvalue)
+    {
+        limbData.NormInputX = newvalue;
+    }
+
+    void SetNormInputY(int oldvalue, int newvalue)
+    {
+        limbData.NormInputY = newvalue;
+    }
+
+    void SetJumpInput(bool oldvalue, bool newvalue)
+    {
+        limbData.JumpInput = newvalue;
+    }
+
+    void SetSitInput(bool oldvalue, bool newvalue)
+    {
+        limbData.SitInput = newvalue;
+    }
+
+    void SetattackInput(bool oldvalue, bool newvalue)
+    {
+        limbData.attackInput = newvalue;
+    }
+
+    void SetmousePosition(Vector3 oldvalue, Vector3 newvalue)
+    {
+        limbData.mousePosition = newvalue;
     }
 
 }

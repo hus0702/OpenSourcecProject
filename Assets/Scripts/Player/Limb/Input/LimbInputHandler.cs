@@ -25,8 +25,8 @@ public class LimbInputHandler : NetworkBehaviour
         if (isOwned)
         {
             RawMovementInput = context.ReadValue<Vector2>();
-            NormInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
-            NormInputY = (int)(RawMovementInput * Vector2.right).normalized.y;
+            GameManager.instance.LimbData.NormInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
+            GameManager.instance.LimbData.NormInputY = (int)(RawMovementInput * Vector2.right).normalized.y;
         }
     }
 
@@ -51,13 +51,13 @@ public class LimbInputHandler : NetworkBehaviour
         {
             if (context.started && !isshotblocked)
             {
-                mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                mousePosition.z = 0;
-                attackInput = true;
+                GameManager.instance.LimbData.mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                GameManager.instance.LimbData.mousePosition.z = 0;
+                GameManager.instance.LimbData.attackInput = true;
             }
             if (context.canceled)
             {
-                attackInput = false;
+                GameManager.instance.LimbData.attackInput = false;
             }
         }
         

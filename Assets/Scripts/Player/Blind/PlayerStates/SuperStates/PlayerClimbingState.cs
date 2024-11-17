@@ -43,10 +43,10 @@ public class PlayerClimbingState : PlayerState
     {
         base.LogicUpdate();
 
-        Up = player.InputHandler.ladderUp;
-        Down = player.InputHandler.ladderDown;
-        Jumpinput = player.InputHandler.JumpInput;
-        xinput = player.InputHandler.NormInputX;
+        Up = GameManager.instance.PlayerData.ladderUp;
+        Down = GameManager.instance.PlayerData.ladderDown;
+        Jumpinput = GameManager.instance.PlayerData.JumpInput;
+        xinput = GameManager.instance.PlayerData.NormInputX;
 
         player.SetVelocityX(playerData.movementVelocity * xinput);
 

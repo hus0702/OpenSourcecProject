@@ -1,3 +1,4 @@
+using Mirror;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "newPlayerData", menuName = "Data/Player Data/Base Data")]
@@ -26,11 +27,18 @@ public class PlayerData : ScriptableObject
     public bool iscarrying;
     public bool isclimbing;
 
-    [Header("InputCall")]
+    [Header("Input")]
     public bool carryupcall;
     public bool throwcall;
     public bool putdowncall;
     public float throwinputtime;
+
+    public int NormInputX;
+    public int NormInputY;
+    public bool JumpInput;
+    public bool SitInput;
+    public bool ladderUp;
+    public bool ladderDown;
 
     [Header("BlindTransform")]
     public Transform blindtransform;

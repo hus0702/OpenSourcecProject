@@ -22,8 +22,8 @@ public class PlayerInputHandler : NetworkBehaviour
         if (isOwned)
         {
             RawMovementInput = context.ReadValue<Vector2>();
-            NormInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
-            NormInputY = (int)(RawMovementInput * Vector2.right).normalized.y;
+            GameManager.instance.PlayerData.NormInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
+            GameManager.instance.PlayerData.NormInputY = (int)(RawMovementInput * Vector2.right).normalized.y;
         }
     }
 
@@ -33,11 +33,11 @@ public class PlayerInputHandler : NetworkBehaviour
         {
             if (context.performed)
             {
-                ladderUp = true;
+                GameManager.instance.PlayerData.ladderUp = true;
             }
             if (context.canceled)
             {
-                ladderUp = false;
+                GameManager.instance.PlayerData.ladderUp = false;
             }
         }
     }
@@ -50,22 +50,22 @@ public class PlayerInputHandler : NetworkBehaviour
             {
                 if (context.performed)
                 {
-                    ladderDown = true;
+                    GameManager.instance.PlayerData.ladderDown = true;
                 }
                 if (context.canceled)
                 {
-                    ladderDown = false;
+                    GameManager.instance.PlayerData.ladderDown = false;
                 }
             }
             else
             {
                 if (context.performed)
                 {
-                    SitInput = true;
+                    GameManager.instance.PlayerData.SitInput = true;
                 }
                 if (context.canceled)
                 {
-                    SitInput = false;
+                    GameManager.instance.PlayerData.SitInput = false;
                 }
             }
         }
@@ -76,7 +76,7 @@ public class PlayerInputHandler : NetworkBehaviour
         {
             if (context.started)
             {
-                JumpInput = true;
+                GameManager.instance.PlayerData.JumpInput = true;
             }
         }
            
@@ -130,7 +130,6 @@ public class PlayerInputHandler : NetworkBehaviour
                 }
             }
         }
-        
     }
     public void OnAttackInput(InputAction.CallbackContext context)
     {

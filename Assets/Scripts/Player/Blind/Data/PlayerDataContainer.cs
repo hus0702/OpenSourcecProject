@@ -23,6 +23,14 @@ public class PlayerDataContainer : NetworkBehaviour
     [SyncVar(hook = nameof(Setthrowcall))] public bool throwcall;
     [SyncVar(hook = nameof(Setputdowncall))] public bool putdowncall;
     [SyncVar(hook = nameof(Setthrowinputtime))] public float throwinputtime;
+
+    [SyncVar(hook = nameof(SetNormInputX))]public int NormInputX;
+    [SyncVar(hook = nameof(SetNormInputY))]public int NormInputY;
+    [SyncVar(hook = nameof(SetJumpInput))]public bool JumpInput;
+    [SyncVar(hook = nameof(SetSitInput))]public bool SitInput;
+    [SyncVar(hook = nameof(SetladderUp))]public bool ladderUp;
+    [SyncVar(hook = nameof(SetladderDown))]public bool ladderDown;
+
     [SyncVar(hook = nameof(Setblindtransform))] public Transform blindtransform;
 
     private void Update()
@@ -90,6 +98,30 @@ public class PlayerDataContainer : NetworkBehaviour
         if (throwinputtime != playerData.throwinputtime)
         {
             throwinputtime = playerData.throwinputtime;
+        }
+        if (NormInputX != playerData.NormInputX)
+        { 
+            NormInputX = playerData.NormInputX;
+        }
+        if (NormInputY != playerData.NormInputY)
+        { 
+            NormInputY = playerData.NormInputY;
+        }
+        if (JumpInput != playerData.JumpInput)
+        { 
+            JumpInput = playerData.JumpInput;
+        }
+        if (SitInput != playerData.SitInput)
+        { 
+            SitInput = playerData.SitInput;
+        }
+        if (ladderUp != playerData.ladderUp)
+        { 
+            ladderUp = playerData.ladderUp;
+        }
+        if (ladderDown != playerData.ladderDown)
+        { 
+            ladderDown = playerData.ladderDown;
         }
         if (blindtransform != playerData.blindtransform)
         { 
@@ -160,6 +192,30 @@ public class PlayerDataContainer : NetworkBehaviour
     void Setthrowinputtime(float oldvalue, float newvalue)
     {
         playerData.throwinputtime = newvalue;
+    }
+    void SetNormInputX(int oldvalue, int newvalue)
+    { 
+        playerData.NormInputX = newvalue;
+    }
+    void SetNormInputY(int oldvalue, int newvalue)
+    {
+        playerData.NormInputY = newvalue;
+    }
+    void SetJumpInput(bool oldvalue, bool newvalue)
+    {
+        playerData.JumpInput = newvalue;
+    }
+    void SetSitInput(bool oldvalue, bool newvalue)
+    { 
+        playerData.SitInput = newvalue;
+    }
+    void SetladderUp(bool oldvalue, bool newvalue)
+    { 
+        playerData.ladderUp = newvalue;
+    }
+    void SetladderDown(bool oldvalue, bool newvalue)
+    {
+        playerData.ladderDown = newvalue;
     }
     void Setblindtransform(Transform oldvalue, Transform newvalue)
     {

@@ -12,7 +12,7 @@ public class LimbShotState : LimbAbillityState
 
     public override void Enter()
     {
-        mousePosition = Limb.InputHandler.mousePosition;
+        mousePosition = limbdata.mousePosition;
         bulletrotation = mousePosition - Limb.transform.position;
         var bullet = Limb.Instantiate(Limb.BulletPrefab, Limb.transform.position + bulletrotation.normalized, Quaternion.Euler(bulletrotation));
         bullet.GetComponent<Rigidbody2D>().linearVelocity = (bulletrotation).normalized * limbdata.bulletspeed;

@@ -31,8 +31,8 @@ public class PlayerinAirState : PlayerState
     {
         base.LogicUpdate();
 
-        xInput = player.InputHandler.NormInputX;
-        ladderInput = player.InputHandler.ladderUp;
+        xInput = GameManager.instance.PlayerData.NormInputX;
+        ladderInput = GameManager.instance.PlayerData.ladderUp;
         if (ladderInput && player.CheckIftouchLadder())
         {
             stateMachine.playerChangeState(player.climbState);

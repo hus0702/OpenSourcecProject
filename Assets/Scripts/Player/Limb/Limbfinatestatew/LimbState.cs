@@ -35,7 +35,7 @@ public class LimbState
 
     public virtual void LogicUpdate()
     {
-        attackInput = Limb.InputHandler.attackInput;
+        attackInput = limbdata.attackInput;
         if (attackInput)
         {
             stateMachine.LimbChangeState(Limb.ShotState);

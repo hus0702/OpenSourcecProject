@@ -32,8 +32,8 @@ public class PlayerC_GroundedState : PlayerState
         PutDownInput = playerData.putdowncall;
         ThrowInput = playerData.throwcall;
         base.LogicUpdate();
-        xinput = player.InputHandler.NormInputX;
-        ladderInput = player.InputHandler.ladderUp;
+        xinput = GameManager.instance.PlayerData.NormInputX;
+        ladderInput = GameManager.instance.PlayerData.ladderUp;
         if (ladderInput && player.CheckIftouchLadder())
         {
             stateMachine.playerChangeState(player.climbState);

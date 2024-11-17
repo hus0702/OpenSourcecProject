@@ -36,7 +36,7 @@ public class LimbGroundedState : LimbState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        xinput = Limb.InputHandler.NormInputX;
+        xinput = limbdata.NormInputX;
         if (GameManager.instance.PlayerData.iscarrying && Limb.CheckIftouchBlind())
         {
             stateMachine.LimbChangeState(Limb.RideState);

@@ -55,10 +55,10 @@ public class CustomNetworkManager : NetworkManager
                 }
                 // 네트워크에 추가 프리팹을 생성
                 NetworkServer.Spawn(additionalInstance, conn);
-
             }
         }
     }
+
     public void StartGame(string SceneName)
     {
         ServerChangeScene(SceneName);

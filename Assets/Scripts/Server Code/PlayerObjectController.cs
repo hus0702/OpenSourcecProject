@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 using UnityEditor;
 using UnityEngine.InputSystem;
 using Unity.Jobs;
+using Mirror.Examples.Common;
 
 /*
     이 클래스는 접속한 각각의 플레이어의 정보를 담고, 통신을 하게 될 객체임.
@@ -43,7 +44,7 @@ public class PlayerObjectController : NetworkBehaviour
     [SyncVar(hook = nameof(PlayerReadyUpdate))] public bool Ready;
     //[SyncVar(hook = nameof(PlayerRoleUpdate))] public int Role;
     [SyncVar(hook = nameof(HookPlayerRoleUpdate))] public int Role;
-    public GameObject player;
+    public Camera playerCamera;
     private void HookPlayerRoleUpdate(int oldValue, int newValue)
     {
         // Role 값이 모종의 이유로 서버로부터 변경되었을 때 모든 클라이언트들에게서 호출됨.
@@ -85,13 +86,14 @@ public class PlayerObjectController : NetworkBehaviour
     private void Start()
     {
         DontDestroyOnLoad(this.gameObject); // 이 객체를 게임 씬까지 끌고 갈 거다!
+        
     }
 
     private void Update()
     {
-        if (player != null)
+        if (isOwned && (this.CompareTag("Blind") || this.CompareTag("Limb")))
         {
-            this.transform.position = player.transform.position;
+            Camera.main.transform.position = this.transform.position + new Vector3(0, 0, -10);
         }
     }
     public void CanStartGame(string SceneName)

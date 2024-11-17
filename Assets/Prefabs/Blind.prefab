@@ -428,7 +428,6 @@ MonoBehaviour:
   Ready: 0
   Role: 0
   player: {fileID: 0}
-  Gamemanager: {fileID: 0}
 --- !u!1 &7870875001181645087
 GameObject:
   m_ObjectHideFlags: 0
