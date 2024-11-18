@@ -84,7 +84,7 @@ public class Limb : PlayerObjectController
         RB = GetComponent<Rigidbody2D>();
         InputHandler = GetComponent<LimbInputHandler>();
         limbtransform = GetComponent<Transform>();
-        FacingDirection = 1;
+        FacingDirection = -1;
         StateMachine.LimbInitialize(IdleState,limbData);
         BulletPrefab = bulletprefab;
     }
@@ -136,7 +136,7 @@ public class Limb : PlayerObjectController
     #region Check Functions
     public void CheckifShouldflip(int xinput)
     {
-        if (xinput != 0 && xinput != FacingDirection)
+        if (xinput != 0 && xinput != -FacingDirection)
         {
             Flip();
         }

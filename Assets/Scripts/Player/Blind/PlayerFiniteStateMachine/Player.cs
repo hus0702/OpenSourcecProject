@@ -73,7 +73,7 @@ public class Player : NetworkBehaviour
         MoveState = new PlayerMoveState(this, StateMachine, playerData, "move");
         SitMoveState = new PlayerSitMoveState(this, StateMachine, playerData, "sitmove");
         SitState = new PlayerSitState(this, StateMachine, playerData, "sit");
-        JumpState = new PlayerJumpState(this, StateMachine, playerData, "inAir");
+        JumpState = new PlayerJumpState(this, StateMachine, playerData, "jump");
         InAirState = new PlayerinAirState(this, StateMachine, playerData, "inAir");
         LandState = new PlayerLandState(this, StateMachine, playerData, "land");
         carryUpState = new PlayerCarryUpState(this, StateMachine, playerData, "carryUp");

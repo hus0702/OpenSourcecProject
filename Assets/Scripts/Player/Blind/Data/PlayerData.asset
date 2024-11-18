@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementVelocity: 10
   sitmovementVelocity: 5
-  facingdirection: -1
+  facingdirection: 1
   climbVelocity: 3
   C_movementVelocity: 5
   jumpVelocity: 15
@@ -33,4 +33,11 @@ MonoBehaviour:
   carryupcall: 0
   throwcall: 0
   putdowncall: 0
+  throwinputtime: 0
+  NormInputX: 0
+  NormInputY: 0
+  JumpInput: 0
+  SitInput: 0
+  ladderUp: 0
+  ladderDown: 0
   blindtransform: {fileID: 0}

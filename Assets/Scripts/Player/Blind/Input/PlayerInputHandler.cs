@@ -81,8 +81,7 @@ public class PlayerInputHandler : NetworkBehaviour
         }
            
     }
-
-    public void UseJumpInput() => JumpInput = false;
+    public void UseJumpInput() => GameManager.instance.PlayerData.JumpInput = false;
     public void OnEscInput(InputAction.CallbackContext context)
     {
         if (isOwned)

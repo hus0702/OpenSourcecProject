@@ -22369,7 +22369,7 @@ GameObject:
   - component: {fileID: 477715907}
   - component: {fileID: 477715906}
   - component: {fileID: 477715905}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: UpperPassablePlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25015,7 +25015,7 @@ GameObject:
   - component: {fileID: 621928902}
   - component: {fileID: 621928901}
   - component: {fileID: 621928900}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Static Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}

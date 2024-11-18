@@ -11,6 +11,7 @@ public class PlayerLandState : PlayerGroundedState
     {
         base.Enter();
         player.InputHandler.UseJumpInput();
+
     }
 
     public override void LogicUpdate()

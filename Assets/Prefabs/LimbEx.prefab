@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 4691425361791858923}
   - component: {fileID: 527253401587517598}
   - component: {fileID: 7730803837242951724}
+  - component: {fileID: -5260081670319047274}
   m_Layer: 10
   m_Name: LimbEx
   m_TagString: Limb
@@ -86,7 +87,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8596640243658272642, guid: 5d4daff38e3d9174b873918abcf2c1d4, type: 3}
+  m_Sprite: {fileID: 140035959, guid: 778912edb58f4f741bb8e305057e7c87, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -131,17 +132,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0027780533, y: 0.005117655}
+  m_Offset: {x: -0.0024995208, y: 0.0007196963}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.875, y: 0.875}
+    oldSize: {x: 0.5, y: 0.26}
     newSize: {x: 0.57, y: 0.59}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.9055561, y: 0.881258}
+  m_Size: {x: 0.5114989, y: 0.27082115}
   m_EdgeRadius: 0
 --- !u!50 &2082679825743081914
 Rigidbody2D:
@@ -191,8 +192,7 @@ MonoBehaviour:
   PlayerName: 
   Ready: 0
   Role: 0
-  player: {fileID: 0}
-  Gamemanager: {fileID: 0}
+  playerCamera: {fileID: 0}
   limbData: {fileID: 11400000, guid: 906720070a0f94f4ab4b0da0e08c3a02, type: 2}
   bulletprefab: {fileID: 644988525465764619, guid: 7f6a6beaf9281674db4e142d33c45f4b, type: 3}
   groundcheck: {fileID: 7855060259586425084}
@@ -324,12 +324,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
+  syncDirection: 1
   syncMode: 0
   syncInterval: 0
   target: {fileID: 402397594313195349}
-  syncPosition: 1
-  syncRotation: 1
+  syncPosition: 0
+  syncRotation: 0
   syncScale: 0
   onlySyncOnChange: 1
   compressRotation: 1
@@ -383,8 +383,24 @@ MonoBehaviour:
   PlayerName: 
   Ready: 0
   Role: 0
-  player: {fileID: 0}
-  Gamemanager: {fileID: 0}
+  playerCamera: {fileID: 0}
+--- !u!114 &-5260081670319047274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2667718191209937384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  clientAuthority: 1
+  animator: {fileID: 5368857074632749019}
 --- !u!1 &5559569575567345883
 GameObject:
   m_ObjectHideFlags: 0
