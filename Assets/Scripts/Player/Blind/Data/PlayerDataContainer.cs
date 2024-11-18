@@ -35,100 +35,102 @@ public class PlayerDataContainer : NetworkBehaviour
 
     private void Update()
     {
+        if (!isLocalPlayer || !isOwned) return;
+
         if (movementVelocity != playerData.movementVelocity)
-        { 
-            movementVelocity = playerData.movementVelocity;
+        {
+            CmdSetmovementVelocity(playerData.movementVelocity);
         }
         if (sitmovementVelocity != playerData.sitmovementVelocity)
         {
-            sitmovementVelocity = playerData.sitmovementVelocity;
+            CmdSetSitMovementVelocity(playerData.sitmovementVelocity);
         }
         if (facingdirection != playerData.facingdirection)
         {
-            facingdirection = playerData.facingdirection;
+            CmdSetFacingDirection(playerData.facingdirection);
         }
         if (climbVelocity != playerData.climbVelocity)
         {
-            climbVelocity = playerData.climbVelocity;
+            CmdSetClimbVelocity(playerData.climbVelocity);
         }
         if (C_movementVelocity != playerData.C_movementVelocity)
         {
-            C_movementVelocity = playerData.C_movementVelocity;
+            CmdSetC_MovementVelocity(playerData.C_movementVelocity);
         }
         if (jumpVelocity != playerData.jumpVelocity)
         {
-            jumpVelocity = playerData.jumpVelocity;
+            CmdSetJumpVelocity(playerData.jumpVelocity);
         }
         if (groundCheckRadious != playerData.groundCheckRadious)
         {
-            groundCheckRadious = playerData.groundCheckRadious;
+            CmdSetGroundCheckRadious(playerData.groundCheckRadious);
         }
         if (whatIsGround != playerData.whatIsGround)
         {
-            whatIsGround = playerData.whatIsGround;
+            CmdSetWhatIsGround(playerData.whatIsGround);
         }
         if (whatIsLimb != playerData.whatIsLimb)
         {
-            whatIsLimb = playerData.whatIsLimb;
+            CmdSetWhatIsLimb(playerData.whatIsLimb);
         }
         if (whatIsLadder != playerData.whatIsLadder)
         {
-            whatIsLadder = playerData.whatIsLadder;
+            CmdSetWhatIsLadder(playerData.whatIsLadder);
         }
         if (iscarrying != playerData.iscarrying)
         {
-            iscarrying = playerData.iscarrying;
+            CmdSetIsCarrying(playerData.iscarrying);
         }
         if (isclimbing != playerData.isclimbing)
         {
-            isclimbing = playerData.isclimbing;
+            CmdSetIsClimbing(playerData.isclimbing);
         }
         if (carryupcall != playerData.carryupcall)
         {
-            carryupcall = playerData.carryupcall;
+            CmdSetCarryUpCall(playerData.carryupcall);
         }
         if (throwcall != playerData.throwcall)
         {
-            throwcall = playerData.throwcall;
+            CmdSetThrowCall(playerData.throwcall);
         }
         if (putdowncall != playerData.putdowncall)
         {
-            putdowncall = playerData.putdowncall;
+            CmdSetPutDownCall(playerData.putdowncall);
         }
         if (throwinputtime != playerData.throwinputtime)
         {
-            throwinputtime = playerData.throwinputtime;
+            CmdSetThrowInputTime(playerData.throwinputtime);
         }
         if (NormInputX != playerData.NormInputX)
-        { 
-            NormInputX = playerData.NormInputX;
+        {
+            CmdSetNormInputX(playerData.NormInputX);
         }
         if (NormInputY != playerData.NormInputY)
-        { 
-            NormInputY = playerData.NormInputY;
+        {
+            CmdSetNormInputY(playerData.NormInputY);
         }
         if (JumpInput != playerData.JumpInput)
-        { 
-            JumpInput = playerData.JumpInput;
+        {
+            CmdSetJumpInput(playerData.JumpInput);
         }
         if (SitInput != playerData.SitInput)
-        { 
-            SitInput = playerData.SitInput;
+        {
+            CmdSetSitInput(playerData.SitInput);
         }
         if (ladderUp != playerData.ladderUp)
-        { 
-            ladderUp = playerData.ladderUp;
+        {
+            CmdSetLadderUp(playerData.ladderUp);
         }
         if (ladderDown != playerData.ladderDown)
-        { 
-            ladderDown = playerData.ladderDown;
+        {
+            CmdSetLadderDown(playerData.ladderDown);
         }
         if (blindtransform != playerData.blindtransform)
-        { 
-            blindtransform = playerData.blindtransform;
+        {
+            CmdSetBlindTransform(playerData.blindtransform);
         }
     }
-
+    #region Setfunction
     void SetmovementVelocity(float oldvalue, float newvalue)
     { 
         playerData.movementVelocity = newvalue;
@@ -220,5 +222,143 @@ public class PlayerDataContainer : NetworkBehaviour
     void Setblindtransform(Transform oldvalue, Transform newvalue)
     {
         playerData.blindtransform = newvalue;
+    }
+    #endregion
+    [Command]
+    void CmdSetmovementVelocity(float newvalue)
+    {
+        movementVelocity = newvalue;
+    }
+
+    [Command]
+    void CmdSetSitMovementVelocity(float newvalue)
+    {
+        sitmovementVelocity = newvalue;
+    }
+
+    [Command]
+    void CmdSetFacingDirection(float newvalue)
+    {
+        facingdirection = newvalue;
+    }
+
+    [Command]
+    void CmdSetClimbVelocity(float newvalue)
+    {
+        climbVelocity = newvalue;
+    }
+
+    [Command]
+    void CmdSetC_MovementVelocity(float newvalue)
+    {
+        C_movementVelocity = newvalue;
+    }
+
+    [Command]
+    void CmdSetJumpVelocity(float newvalue)
+    {
+        jumpVelocity = newvalue;
+    }
+
+    [Command]
+    void CmdSetGroundCheckRadious(float newvalue)
+    {
+        groundCheckRadious = newvalue;
+    }
+
+    [Command]
+    void CmdSetWhatIsGround(LayerMask newvalue)
+    {
+        whatIsGround = newvalue;
+    }
+
+    [Command]
+    void CmdSetWhatIsLimb(LayerMask newvalue)
+    {
+        whatIsLimb = newvalue;
+    }
+
+    [Command]
+    void CmdSetWhatIsLadder(LayerMask newvalue)
+    {
+        whatIsLadder = newvalue;
+    }
+
+    [Command]
+    void CmdSetIsCarrying(bool newvalue)
+    {
+        iscarrying = newvalue;
+    }
+
+    [Command]
+    void CmdSetIsClimbing(bool newvalue)
+    {
+        isclimbing = newvalue;
+    }
+
+    [Command]
+    void CmdSetCarryUpCall(bool newvalue)
+    {
+        carryupcall = newvalue;
+    }
+
+    [Command]
+    void CmdSetThrowCall(bool newvalue)
+    {
+        throwcall = newvalue;
+    }
+
+    [Command]
+    void CmdSetPutDownCall(bool newvalue)
+    {
+        putdowncall = newvalue;
+    }
+
+    [Command]
+    void CmdSetThrowInputTime(float newvalue)
+    {
+        throwinputtime = newvalue;
+    }
+
+    [Command]
+    void CmdSetNormInputX(int newvalue)
+    {
+        NormInputX = newvalue;
+    }
+
+    [Command]
+    void CmdSetNormInputY(int newvalue)
+    {
+        NormInputY = newvalue;
+    }
+
+    [Command]
+    void CmdSetJumpInput(bool newvalue)
+    {
+        JumpInput = newvalue;
+    }
+
+    [Command]
+    void CmdSetSitInput(bool newvalue)
+    {
+        SitInput = newvalue;
+    }
+
+    [Command]
+    void CmdSetLadderUp(bool newvalue)
+    {
+        ladderUp = newvalue;
+    }
+
+    [Command]
+    void CmdSetLadderDown(bool newvalue)
+    {
+        ladderDown = newvalue;
+    }
+
+    [Command]
+    void CmdSetBlindTransform(Transform newvalue)
+    {
+        blindtransform = newvalue;
     }
 }

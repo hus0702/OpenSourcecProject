@@ -22,68 +22,76 @@ public class LimbDataContainer : NetworkBehaviour
     [SyncVar(hook = nameof(SetmousePosition))] public Vector3 mousePosition;
     private void Update()
     {
+        if (!isLocalPlayer || !isOwned) return;
 
         if (movementVelocity != limbData.movementVelocity)
         {
-            movementVelocity = limbData.movementVelocity;
+            CmdSetmovementVelocity(limbData.movementVelocity);
         }
         if (bulletspeed != limbData.bulletspeed)
         {
-            bulletspeed = limbData.bulletspeed;
+            CmdSetbulletspeed(limbData.bulletspeed);
         }
         if (groundCheckRadious != limbData.groundCheckRadious)
         {
-            groundCheckRadious = limbData.groundCheckRadious;
+            CmdSetgroundCheckRadious(limbData.groundCheckRadious);
         }
         if (whatIsGround != limbData.whatIsGround)
         {
-            whatIsGround = limbData.whatIsGround;
+            CmdSetwhatIsGround(limbData.whatIsGround);
         }
         if (whatIsBlind != limbData.whatIsBlind)
         {
-            whatIsBlind = limbData.whatIsBlind;
+            CmdSetwhatIsBlind(limbData.whatIsBlind);
         }
         if (isRiding != limbData.isRiding)
         {
-            isRiding = limbData.isRiding;
+            CmdSetisRiding(limbData.isRiding);
         }
         if (ishavingGun != limbData.ishavingGun)
         {
-            ishavingGun = limbData.ishavingGun;
+            CmdSetishavingGun(limbData.ishavingGun);
         }
         if (HoldingGun != limbData.HoldingGun)
         {
-            HoldingGun = limbData.HoldingGun;
+            CmdSetHoldingGun(limbData.HoldingGun);
         }
         if (ShotDelay != limbData.ShotDelay)
         {
-            ShotDelay = limbData.ShotDelay;
+            CmdSetshotDelay(limbData.ShotDelay);
         }
+
         if (NormInputX != limbData.NormInputX)
         {
-            NormInputX = limbData.NormInputX;
+            CmdSetNormInputX(limbData.NormInputX);
         }
+
         if (NormInputY != limbData.NormInputY)
         {
-            NormInputY = limbData.NormInputY;
+            CmdSetNormInputY(limbData.NormInputY);
         }
+
         if (JumpInput != limbData.JumpInput)
         {
-            JumpInput = limbData.JumpInput;
+            CmdSetJumpInput(limbData.JumpInput);
         }
+
         if (SitInput != limbData.SitInput)
         {
-            SitInput = limbData.SitInput;
+            CmdSetSitInput(limbData.SitInput);
         }
+
         if (attackInput != limbData.attackInput)
         {
-            attackInput = limbData.attackInput;
+            CmdSetattackInput(limbData.attackInput);
         }
+
         if (mousePosition != limbData.mousePosition)
         {
-            mousePosition = limbData.mousePosition;
+            CmdSetmousePosition(limbData.mousePosition);
         }
     }
+    #region Setfunction
     void SetmovementVelocity(float oldvalue, float newvalue)
     {
         limbData.movementVelocity = newvalue;
@@ -151,5 +159,97 @@ public class LimbDataContainer : NetworkBehaviour
     {
         limbData.mousePosition = newvalue;
     }
+    #endregion
+    #region CmdSetfunction
+    [Command]
+    void CmdSetmovementVelocity(float newvalue)
+    {
+        movementVelocity = newvalue;
+    }
 
+    [Command]
+    void CmdSetbulletspeed(float newvalue)
+    {
+        bulletspeed = newvalue;
+    }
+
+    [Command]
+    void CmdSetgroundCheckRadious(float newvalue)
+    {
+        groundCheckRadious = newvalue;
+    }
+
+    [Command]
+    void CmdSetwhatIsGround(LayerMask newvalue)
+    {
+        whatIsGround = newvalue;
+    }
+
+    [Command]
+    void CmdSetwhatIsBlind(LayerMask newvalue)
+    {
+        whatIsBlind = newvalue;
+    }
+
+
+    [Command]
+    void CmdSetisRiding(bool newvalue)
+    {
+        isRiding = newvalue;
+    }
+
+    [Command]
+    void CmdSetishavingGun(bool newvalue)
+    {
+        ishavingGun = newvalue;
+    }
+
+    [Command]
+    void CmdSetHoldingGun(bool newvalue)
+    {
+        HoldingGun = newvalue;
+    }
+
+    [Command]
+    void CmdSetshotDelay(float newvalue)
+    {
+        ShotDelay = newvalue;
+    }
+
+    [Command]
+    void CmdSetNormInputX(int newvalue)
+    {
+        NormInputX = newvalue;
+    }
+
+    [Command]
+    void CmdSetNormInputY(int newvalue)
+    {
+        NormInputY = newvalue;
+    }
+
+    [Command]
+    void CmdSetJumpInput(bool newvalue)
+    {
+        JumpInput = newvalue;
+    }
+
+    [Command]
+    void CmdSetSitInput(bool newvalue)
+    {
+        SitInput = newvalue;
+    }
+
+    [Command]
+    void CmdSetattackInput(bool newvalue)
+    {
+        attackInput = newvalue;
+    }
+
+    [Command]
+    void CmdSetmousePosition(Vector3 newvalue)
+    {
+        mousePosition = newvalue;
+    }
+    #endregion
 }

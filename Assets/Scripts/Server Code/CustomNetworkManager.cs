@@ -39,6 +39,7 @@ public class CustomNetworkManager : NetworkManager
         // 게임 씬에 진입했을 때 프리팹을 추가로 생성하도록 처리
         if (sceneName == "GameScene") // "GameScene"을 실제 게임 씬 이름으로 변경
         {
+            GameManager.instance.ActivateSingleton();
             Debug.Log("GameScene 입성");
             foreach (NetworkConnectionToClient conn in NetworkServer.connections.Values)
             {

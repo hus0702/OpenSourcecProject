@@ -14,6 +14,7 @@ public class GameManager : NetworkBehaviour
         if (instance == null)
         {
             instance = this;
+            instance.gameObject.SetActive(false);
         }
         else if (instance != this)
         {
@@ -22,5 +23,11 @@ public class GameManager : NetworkBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-
+    public void ActivateSingleton()
+    {
+        if (instance != null)
+        {
+            instance.gameObject.SetActive(true);
+        }
+    }
 }
