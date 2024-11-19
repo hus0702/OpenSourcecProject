@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using Mirror;
 using Mirror.BouncyCastle.Asn1.BC;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerDataContainer : NetworkBehaviour
@@ -35,7 +36,6 @@ public class PlayerDataContainer : NetworkBehaviour
 
     private void Update()
     {
-        if (!isLocalPlayer || !isOwned) return;
 
         if (movementVelocity != playerData.movementVelocity)
         {

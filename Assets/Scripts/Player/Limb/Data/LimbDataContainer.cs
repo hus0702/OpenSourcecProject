@@ -22,8 +22,6 @@ public class LimbDataContainer : NetworkBehaviour
     [SyncVar(hook = nameof(SetmousePosition))] public Vector3 mousePosition;
     private void Update()
     {
-        if (!isLocalPlayer || !isOwned) return;
-
         if (movementVelocity != limbData.movementVelocity)
         {
             CmdSetmovementVelocity(limbData.movementVelocity);
