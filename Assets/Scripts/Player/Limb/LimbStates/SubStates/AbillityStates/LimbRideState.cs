@@ -8,7 +8,6 @@ public class LimbRideState : LimbAbillityState
 
     public override void Enter()
     {
-
         base.Enter();
         limbdata.isRiding = true;
         GameManager.instance.PlayerData.carryupcall = false;

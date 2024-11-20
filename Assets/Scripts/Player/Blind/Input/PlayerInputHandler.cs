@@ -6,15 +6,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : NetworkBehaviour
 {
-    [SyncVar] public bool carryinputblock;
-    [SyncVar] public Vector2 RawMovementInput;
-    [SyncVar] public int NormInputX;
-    [SyncVar] public int NormInputY;
-    [SyncVar] public float throwinputtime;
-    [SyncVar] public bool JumpInput;
-    [SyncVar] public bool SitInput;
-    [SyncVar] public bool ladderUp;
-    [SyncVar] public bool ladderDown;
+    public bool carryinputblock;
+    public Vector2 RawMovementInput;
+    public int NormInputX;
+    public int NormInputY;
+    public float throwinputtime;
+    public bool JumpInput;
+    public bool SitInput;
+    public bool ladderUp;
+    public bool ladderDown;
 
 
     public void OnMoveInput(InputAction.CallbackContext context)

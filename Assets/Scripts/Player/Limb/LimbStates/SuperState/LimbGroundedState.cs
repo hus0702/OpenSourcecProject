@@ -45,6 +45,10 @@ public class LimbGroundedState : LimbState
         {
             stateMachine.LimbChangeState(Limb.inAirState);
         }
+        if (GameManager.instance.LimbData.attackInput)
+        {
+            stateMachine.LimbChangeState(Limb.ShotState);
+        }
     }
 
     public override void PhysicsUpdate()

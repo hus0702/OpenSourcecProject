@@ -35,11 +35,7 @@ public class LimbState
 
     public virtual void LogicUpdate()
     {
-        attackInput = limbdata.attackInput;
-        if (attackInput)
-        {
-            stateMachine.LimbChangeState(Limb.ShotState);
-        }
+        
     }
 
     public virtual void PhysicsUpdate()
@@ -57,5 +53,9 @@ public class LimbState
 
     }
 
-    public virtual void AnimationFinishTrigger() => isAnimationFinished = true;
+    public virtual void AnimationFinishTrigger()
+    {
+        isAnimationFinished = true;
+    }
+    
 }

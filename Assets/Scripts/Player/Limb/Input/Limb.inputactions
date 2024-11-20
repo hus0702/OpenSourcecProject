@@ -101,8 +101,8 @@
                 {
                     "name": "",
                     "id": "0c50fdcc-00b8-4127-a4a0-94519c9ecd19",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "Press",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
                     "processors": "",
                     "groups": ";KeyBoard",
                     "action": "Attack",

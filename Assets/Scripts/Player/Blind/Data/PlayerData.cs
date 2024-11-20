@@ -28,10 +28,10 @@ public class PlayerData : ScriptableObject
     public bool isclimbing;
 
     [Header("Input")]
-    public bool carryupcall;
-    public bool throwcall;
-    public bool putdowncall;
-    public float throwinputtime;
+    public bool carryupcall = false;
+    public bool throwcall = false;
+    public bool putdowncall = false;
+    public float throwinputtime = 0f;
 
     public int NormInputX;
     public int NormInputY;

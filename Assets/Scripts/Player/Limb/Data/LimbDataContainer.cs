@@ -6,6 +6,7 @@ public class LimbDataContainer : NetworkBehaviour
     public LimbData limbData;
 
     [SyncVar(hook = nameof(SetmovementVelocity))] public float movementVelocity;
+    [SyncVar(hook = nameof(SetFacingDirection))] public int FacingDirection;
     [SyncVar(hook = nameof(Setbulletspeed))] public float bulletspeed;
     [SyncVar(hook = nameof(SetgroundCheckRadious))] public float groundCheckRadious;
     [SyncVar(hook = nameof(SetwhatIsGround))] public LayerMask whatIsGround;
@@ -25,6 +26,10 @@ public class LimbDataContainer : NetworkBehaviour
         if (movementVelocity != limbData.movementVelocity)
         {
             CmdSetmovementVelocity(limbData.movementVelocity);
+        }
+        if (FacingDirection != limbData.FacingDirection)
+        { 
+            CmdSetFacingDirection(limbData.FacingDirection);
         }
         if (bulletspeed != limbData.bulletspeed)
         {
@@ -93,6 +98,10 @@ public class LimbDataContainer : NetworkBehaviour
     void SetmovementVelocity(float oldvalue, float newvalue)
     {
         limbData.movementVelocity = newvalue;
+    }
+    void SetFacingDirection(int oldvalue, int newvalue)
+    {
+        limbData.FacingDirection = newvalue;
     }
     void Setbulletspeed(float oldvalue, float newvalue)
     {
@@ -164,7 +173,11 @@ public class LimbDataContainer : NetworkBehaviour
     {
         movementVelocity = newvalue;
     }
-
+    [Command]
+    void CmdSetFacingDirection(int newvlaue)
+    { 
+        FacingDirection = newvlaue;
+    }
     [Command]
     void CmdSetbulletspeed(float newvalue)
     {

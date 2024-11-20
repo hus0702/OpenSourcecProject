@@ -10,15 +10,50 @@ public class LimbShotState : LimbAbillityState
 
     }
 
+    public override void AnimationFinishTrigger()
+    {
+        base.AnimationFinishTrigger();
+    }
+
+    public override void AnimationTrigger()
+    {
+        base.AnimationTrigger();
+    }
+
+    public override void DoCheck()
+    {
+        base.DoCheck();
+    }
+
     public override void Enter()
     {
+        Debug.Log("ShotState ¿‘º∫");
+        GameManager.instance.LimbData.attackInput = false;
+        Limb.InputHandler.StartCoroutine(Limb.InputHandler.stopshotinput(GameManager.instance.LimbData.ShotDelay));
         mousePosition = limbdata.mousePosition;
         bulletrotation = mousePosition - Limb.transform.position;
         var bullet = Limb.Instantiate(Limb.BulletPrefab, Limb.transform.position + bulletrotation.normalized, Quaternion.Euler(bulletrotation));
         bullet.GetComponent<Rigidbody2D>().linearVelocity = (bulletrotation).normalized * limbdata.bulletspeed;
-        Limb.InputHandler.StartCoroutine(Limb.InputHandler.stopshotinput(GameManager.instance.LimbData.ShotDelay));
         isAbillityDone = true;
     }
 
+    public override void Exit()
+    {
+        base.Exit();
+    }
 
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
+        //if (isAnimationFinished)
+        //{
+        //    Debug.Log("ShotState ≥°");
+        //    isAbillityDone = true;
+        //}
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+    }
 }

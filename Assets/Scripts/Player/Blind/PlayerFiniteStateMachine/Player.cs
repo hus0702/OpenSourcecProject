@@ -62,11 +62,6 @@ public class Player : NetworkBehaviour
     #region Unity Callback Functions
     private void Awake()
     {
-        playerData.iscarrying = false; // 초기 설정이 안됨. ㅠ
-        playerData.carryupcall = false;
-        playerData.putdowncall = false;
-        playerData.facingdirection = 1;
-
         StateMachine = new PlayerStateMachine();
 
         IdleState = new PlayerIdleState(this, StateMachine, playerData, "idle");

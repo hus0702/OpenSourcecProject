@@ -9,14 +9,11 @@ public class Limb : PlayerObjectController
     #region State Variables
     public PlayerStateMachine StateMachine { get; private set; }
     public LimbIdleState IdleState { get; private set; }
-
     public LimbMoveState MoveState { get; private set; }
     public LimbRidingState RidingState { get; private set; }
     public LimbRideState RideState { get; private set; }
-
     public LimbShotState ShotState { get; private set; }
     public LimbinAirState inAirState { get; private set; }
-
     public LimbPutDownState PutDownState { get; private set; }
     public LimbThrowState ThrowState { get; private set; }
 
@@ -30,7 +27,7 @@ public class Limb : PlayerObjectController
     public Animator Anim { get; private set; }
     public Rigidbody2D RB { get; private set; }
     public Transform limbtransform { get; private set; }
-
+    public SpriteRenderer spriteRenderer { get; private set; }
     public PlayerObjectController thisController { get; private set; }
 
     [SerializeField] private GameObject bulletprefab;
@@ -52,7 +49,6 @@ public class Limb : PlayerObjectController
 
     #region Other Variables
     public Vector2 CurrentVelocity { get; private set; }
-    public int FacingDirection { get; private set; }
 
     private Vector2 workspace;
 
@@ -63,7 +59,6 @@ public class Limb : PlayerObjectController
     #region Unity Callback Functions
     private void Awake()
     {
-        Flip(); // 초기 오프셋 세팅
         StateMachine = new PlayerStateMachine();
         IdleState = new LimbIdleState(this, StateMachine, limbData, "Idle");
         MoveState = new LimbMoveState(this, StateMachine, limbData, "move");
@@ -73,7 +68,6 @@ public class Limb : PlayerObjectController
         PutDownState = new LimbPutDownState(this, StateMachine, limbData, "putdown");
         ThrowState = new LimbThrowState(this, StateMachine, limbData, "throw");
         inAirState = new LimbinAirState(this, StateMachine, limbData, "inair");
-
         limbData.isRiding = false;
     }
 
@@ -82,9 +76,9 @@ public class Limb : PlayerObjectController
         thisController = this.GetComponent<PlayerObjectController>();
         Anim = GetComponent<Animator>();
         RB = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         InputHandler = GetComponent<LimbInputHandler>();
         limbtransform = GetComponent<Transform>();
-        FacingDirection = -1;
         StateMachine.LimbInitialize(IdleState,limbData);
         BulletPrefab = bulletprefab;
     }
@@ -97,11 +91,6 @@ public class Limb : PlayerObjectController
         if (limbData.isRiding)
         {
             this.limbtransform.position = (GameManager.instance.PlayerData.blindtransform.position + new Vector3(0, 1f, 0));
-            this.RB.gravityScale = 0f;
-        }
-        else
-        {
-            this.RB.gravityScale = 5f;
         }
     }
 
@@ -136,7 +125,7 @@ public class Limb : PlayerObjectController
     #region Check Functions
     public void CheckifShouldflip(int xinput)
     {
-        if (xinput != 0 && xinput != -FacingDirection)
+        if (xinput != 0 && xinput != limbData.FacingDirection)
         {
             Flip();
         }
@@ -173,7 +162,7 @@ public class Limb : PlayerObjectController
     private void AnimationFinishTrigger() => StateMachine.LimbCurrentState.AnimationFinishTrigger();
     public void Flip()
     {
-        FacingDirection *= -1;
+        limbData.FacingDirection *= -1;
         base.transform.Rotate(0.0f, 180.0f, 0.0f);
     }
     #endregion

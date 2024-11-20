@@ -7,15 +7,15 @@ using UnityEngine.InputSystem;
 public class LimbInputHandler : NetworkBehaviour
 {
 
-    [SyncVar] public bool carryinputblock;
-    [SyncVar] public Vector2 RawMovementInput;
-    [SyncVar] public int NormInputX;
-    [SyncVar] public int NormInputY;
-    [SyncVar] public bool JumpInput;
-    [SyncVar] public bool SitInput ;
-    [SyncVar] public bool attackInput;
-    [SyncVar] public Vector3 mousePosition;
-    [SyncVar] bool isshotblocked;
+    public bool carryinputblock;
+    public Vector2 RawMovementInput;
+    public int NormInputX;
+    public int NormInputY;
+    public bool JumpInput;
+    public bool SitInput;
+    public bool attackInput;
+    public Vector3 mousePosition;
+    public bool isshotblocked;
 
     private void Update()
     {
@@ -61,7 +61,7 @@ public class LimbInputHandler : NetworkBehaviour
             }
         }
         
-    }
+    } 
     public IEnumerator stopcarryinput(float duration)
     {
         

@@ -34,6 +34,7 @@ public class LimbThrowState : LimbAbillityState
         Limb.SetVelocityY(4 * 2*throwtime);
         limbdata.isRiding = false;
         GameManager.instance.PlayerData.throwcall = false;
+        Limb.spriteRenderer.enabled = true;
         isAbillityDone = true;
     }
 
