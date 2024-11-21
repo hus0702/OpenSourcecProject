@@ -5,7 +5,11 @@ using UnityEngine;
 public class CardSlot : InteractableObject
 {
     [SerializeField] private string keyName;
-    [SyncVar] public bool IsKeyInserted = false;
+    [SyncVar(hook = nameof(HookIsKeyInserted))] public bool IsKeyInserted = false;
+    private void HookIsKeyInserted(bool OldValue, bool NewValue)
+    {
+        Debug.Log("IsKeyInserted 가 " + NewValue + "로 변경됐습니다.");
+    }
 
     public override bool CheckInteractable(GameObject requester)
     {
@@ -25,8 +29,13 @@ public class CardSlot : InteractableObject
     [Command] private void CmdSetKeyInserted()=>IsKeyInserted = !IsKeyInserted;
 
     public void OnTriggerExit2D(Collider2D outer){ // 상호작용한다고 했는데 그 자리를 벗어나면 키 삽입 상태가 취소된다!
+        //if (!isServer) return;
+        Debug.Log("카드슬롯에 대해 OnTriggerExit 이 발동! isServer : " + isServer);
         //if(outer.CompareTag("Player"))
+        /*if(IsKeyInserted)*/
         CmdSetKeyInserted();
+        IsKeyInserted = !IsKeyInserted;
+        
     }
 
     public override void ExecuteOnFail(GameObject requester)
