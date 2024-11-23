@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 4691425361791858923}
   - component: {fileID: -5260081670319047274}
   - component: {fileID: 527253401587517598}
-  - component: {fileID: 2494346387533131551}
+  - component: {fileID: 6228767285299393452}
   - component: {fileID: 1173216616463554652}
   m_Layer: 10
   m_Name: LimbEx
@@ -188,13 +188,6 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  ConnectionID: 0
-  PlayerIdNumber: 0
-  PlayerSteamID: 0
-  PlayerName: 
-  Ready: 0
-  Role: 0
-  playerCamera: {fileID: 0}
   container: {fileID: 1173216616463554652}
   bulletprefab: {fileID: 644988525465764619, guid: 7f6a6beaf9281674db4e142d33c45f4b, type: 3}
   groundcheck: {fileID: 7855060259586425084}
@@ -445,7 +438,7 @@ MonoBehaviour:
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
---- !u!114 &2494346387533131551
+--- !u!114 &6228767285299393452
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -454,7 +447,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2667718191209937384}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ec4f7556ca1e4b55a3381fc6a02b1bc, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c7e12ad9b9ae443c9fdf37e9f5ecd36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 1
@@ -474,10 +467,10 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  onlySyncOnChangeCorrectionMultiplier: 2
+  bufferResetMultiplier: 3
+  positionSensitivity: 0.01
   rotationSensitivity: 0.01
-  positionPrecision: 0.01
-  scalePrecision: 0.01
+  scaleSensitivity: 0.01
 --- !u!114 &1173216616463554652
 MonoBehaviour:
   m_ObjectHideFlags: 0

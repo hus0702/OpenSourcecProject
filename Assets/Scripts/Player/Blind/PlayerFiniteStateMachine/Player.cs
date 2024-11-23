@@ -98,14 +98,14 @@ public class Player : NetworkBehaviour
     {
         CurrentVelocity = RB.linearVelocity;
         StateMachine.playerCurrentState.LogicUpdate();
-        if (isOwned) 
-        {
-            container.position = transform.position;
-        }
-        else
-        {
-            transform.position = container.position;
-        }
+        //if (isOwned) 
+        //{
+        //    container.position = transform.position;
+        //}
+        //else
+        //{
+        //    transform.position = container.position;
+        //}
     }
 
     private void FixedUpdate()

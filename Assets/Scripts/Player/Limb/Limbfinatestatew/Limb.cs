@@ -92,14 +92,14 @@ public class Limb : NetworkBehaviour
         StateMachine.LimbCurrentState.LogicUpdate();
         container.position = transform.position;
 
-        if (isOwned)
-        {
-            container.position = transform.position;
-        }
-        else
-        { 
-            transform.position = container.position;
-        }
+        //if (isOwned)
+        //{
+        //    container.position = transform.position;
+        //}
+        //else
+        //{ 
+        //    transform.position = container.position;
+        //}
 
         if (container.isRiding)
         {
