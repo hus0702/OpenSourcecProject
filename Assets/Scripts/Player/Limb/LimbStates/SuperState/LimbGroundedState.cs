@@ -39,10 +39,12 @@ public class LimbGroundedState : LimbState
         base.LogicUpdate();
 
         xinput = container.NormInputX;
-
-        if (playercontainer.iscarrying && Limb.CheckIftouchBlind())
+        if (playercontainer != null)
         {
-            stateMachine.LimbChangeState(Limb.RideState);
+            if (playercontainer.iscarrying && Limb.CheckIftouchBlind())
+            {
+                stateMachine.LimbChangeState(Limb.RideState);
+            }
         }
         if (!Limb.CheckIfGrounded())
         {

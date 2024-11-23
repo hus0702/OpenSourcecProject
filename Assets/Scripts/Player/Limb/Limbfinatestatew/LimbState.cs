@@ -44,7 +44,10 @@ public class LimbState
         if (targetObject == null)
         {
             targetObject = GameObject.FindWithTag("Blind");
-            playercontainer = targetObject.GetComponent<PlayerDataContainer>();
+            if (targetObject != null)
+            {
+                playercontainer = targetObject.GetComponent<PlayerDataContainer>();
+            }
         }
     }
 
