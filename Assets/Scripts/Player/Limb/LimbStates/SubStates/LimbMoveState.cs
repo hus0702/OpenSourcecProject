@@ -34,6 +34,7 @@ public class LimbMoveState : LimbGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+ 
         Limb.CheckifShouldflip(xinput);
         Limb.SetVelocityX(limbdata.movementVelocity * xinput);
         if (xinput == 0f)

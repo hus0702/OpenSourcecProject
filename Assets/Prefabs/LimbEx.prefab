@@ -13,14 +13,14 @@ GameObject:
   - component: {fileID: 1909995249917826653}
   - component: {fileID: 2082679825743081914}
   - component: {fileID: 5551809893449769388}
-  - component: {fileID: 5368857074632749019}
-  - component: {fileID: 5031285247568678835}
   - component: {fileID: 4611837306472148324}
-  - component: {fileID: 4691425361791858923}
-  - component: {fileID: 527253401587517598}
+  - component: {fileID: 5368857074632749019}
   - component: {fileID: 7730803837242951724}
-  - component: {fileID: -5260081670319047274}
   - component: {fileID: 8170154221302005328}
+  - component: {fileID: 7460037321345797722}
+  - component: {fileID: 4691425361791858923}
+  - component: {fileID: -5260081670319047274}
+  - component: {fileID: 527253401587517598}
   m_Layer: 10
   m_Name: LimbEx
   m_TagString: Limb
@@ -37,8 +37,8 @@ Transform:
   m_GameObject: {fileID: 2667718191209937384}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.03, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.008, y: -0.853, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7855060259586425084}
@@ -133,17 +133,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0024995208, y: 0.0007196963}
+  m_Offset: {x: -0.06185457, y: -0.5942448}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.26}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 0.57, y: 0.59}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.5114989, y: 0.27082115}
+  m_Size: {x: 1.5685854, y: 0.81632316}
   m_EdgeRadius: 0
 --- !u!50 &2082679825743081914
 Rigidbody2D:
@@ -160,7 +160,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 5
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -198,98 +198,6 @@ MonoBehaviour:
   bulletprefab: {fileID: 644988525465764619, guid: 7f6a6beaf9281674db4e142d33c45f4b, type: 3}
   groundcheck: {fileID: 7855060259586425084}
   myBoxCollider: {fileID: 1909995249917826653}
---- !u!95 &5368857074632749019
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2667718191209937384}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6385bc30578b94344b77ac57ef453cf6, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5031285247568678835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2667718191209937384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: bde9ad409838cc34f94e3439b7b97677, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4611837306472148324}
-        m_TargetAssemblyTypeName: LimbInputHandler, Assembly-CSharp
-        m_MethodName: OnMoveInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: bd43d245-48a7-4e67-a501-42f228d3759d
-    m_ActionName: 'BlindGameplay/Movement[/Keyboard/a,/Keyboard/d]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ce9ec73c-4b38-4dff-9abd-552c176db882
-    m_ActionName: 'BlindGameplay/Menu[/Keyboard/escape]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 500a1791-fbf3-4b65-90e9-a3ec5e7845ab
-    m_ActionName: 'BlindGameplay/Interaction[/Keyboard/e]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4611837306472148324}
-        m_TargetAssemblyTypeName: LimbInputHandler, Assembly-CSharp
-        m_MethodName: OnAttackInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: f9a3a233-8443-4b1a-94af-5eb1bd372d6c
-    m_ActionName: 'BlindGameplay/Attack[/Mouse/leftButton]'
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: LimbGameplay
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!114 &4611837306472148324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,56 +222,28 @@ MonoBehaviour:
   attackInput: 0
   mousePosition: {x: 0, y: 0, z: 0}
   isshotblocked: 0
---- !u!114 &4691425361791858923
-MonoBehaviour:
+--- !u!95 &5368857074632749019
+Animator:
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2667718191209937384}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 1
-  syncMode: 0
-  syncInterval: 0
-  target: {fileID: 402397594313195349}
-  syncPosition: 0
-  syncRotation: 0
-  syncScale: 0
-  onlySyncOnChange: 1
-  compressRotation: 1
-  interpolatePosition: 1
-  interpolateRotation: 1
-  interpolateScale: 1
-  coordinateSpace: 0
-  timelineOffset: 1
-  showGizmos: 0
-  showOverlay: 0
-  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  onlySyncOnChangeCorrectionMultiplier: 2
-  rotationSensitivity: 0.01
-  positionPrecision: 0.01
-  scalePrecision: 0.01
---- !u!114 &527253401587517598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2667718191209937384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  _assetId: 2029731404
-  serverOnly: 0
-  visibility: 0
-  hasSpawned: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6385bc30578b94344b77ac57ef453cf6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &7730803837242951724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,23 +266,6 @@ MonoBehaviour:
   Ready: 0
   Role: 0
   playerCamera: {fileID: 0}
---- !u!114 &-5260081670319047274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2667718191209937384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 1
-  syncMode: 0
-  syncInterval: 0
-  clientAuthority: 1
-  animator: {fileID: 5368857074632749019}
 --- !u!114 &8170154221302005328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,6 +302,183 @@ MonoBehaviour:
   SitInput: 0
   attackInput: 0
   mousePosition: {x: 0, y: 0, z: 0}
+--- !u!114 &7460037321345797722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2667718191209937384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: d75d78771172ca3499462f2773424da1, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4611837306472148324}
+        m_TargetAssemblyTypeName: LimbInputHandler, Assembly-CSharp
+        m_MethodName: OnMoveInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: bd43d245-48a7-4e67-a501-42f228d3759d
+    m_ActionName: 'BlindGameplay/Movement[/Keyboard/a,/Keyboard/d]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b840c884-5faf-48e1-b98b-e93c1108e327
+    m_ActionName: 'BlindGameplay/Jump[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ce9ec73c-4b38-4dff-9abd-552c176db882
+    m_ActionName: 'BlindGameplay/Menu[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4611837306472148324}
+        m_TargetAssemblyTypeName: LimbInputHandler, Assembly-CSharp
+        m_MethodName: OnInteractInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 500a1791-fbf3-4b65-90e9-a3ec5e7845ab
+    m_ActionName: 'BlindGameplay/Interaction[/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4611837306472148324}
+        m_TargetAssemblyTypeName: LimbInputHandler, Assembly-CSharp
+        m_MethodName: OnAttackInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f9a3a233-8443-4b1a-94af-5eb1bd372d6c
+    m_ActionName: 'BlindGameplay/Attack[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: daa40ce8-03e3-462b-a22b-94d9ed824d7f
+    m_ActionName: 'BlindGameplay/Carry[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fe27d0d3-a27a-4cab-b3fa-b5aa8759d6cf
+    m_ActionName: 'BlindGameplay/Sit and ladderdown[/Keyboard/s]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e555713a-3db2-47f2-b08e-5a692ae7f5a6
+    m_ActionName: 'BlindGameplay/ladderUp[/Keyboard/w]'
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: BlindGameplay
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &4691425361791858923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2667718191209937384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 402397594313195349}
+  syncPosition: 0
+  syncRotation: 0
+  syncScale: 0
+  onlySyncOnChange: 1
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 0
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  onlySyncOnChangeCorrectionMultiplier: 2
+  rotationSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
+--- !u!114 &-5260081670319047274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2667718191209937384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  clientAuthority: 1
+  animator: {fileID: 5368857074632749019}
+--- !u!114 &527253401587517598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2667718191209937384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 2029731404
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1 &5559569575567345883
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,7 +504,7 @@ Transform:
   m_GameObject: {fileID: 5559569575567345883}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.43, z: 0}
+  m_LocalPosition: {x: 0, y: -1.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -22,6 +22,7 @@ public class LimbAbillityState : LimbState
     public override void Enter()
     {
         base.Enter();
+        isAbillityDone = false;
     }
 
     public override void Exit()

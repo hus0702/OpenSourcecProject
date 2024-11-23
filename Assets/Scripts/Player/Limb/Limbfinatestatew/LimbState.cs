@@ -35,10 +35,7 @@ public class LimbState
 
     public virtual void LogicUpdate()
     {
-        if (GameManager.instance.LimbData.attackInput)
-        {
-            stateMachine.LimbChangeState(Limb.ShotState);
-        }
+        
     }
 
     public virtual void PhysicsUpdate()

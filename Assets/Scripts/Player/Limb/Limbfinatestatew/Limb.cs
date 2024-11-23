@@ -17,6 +17,8 @@ public class Limb : PlayerObjectController
     public LimbPutDownState PutDownState { get; private set; }
     public LimbThrowState ThrowState { get; private set; }
 
+    public LimbRidingShotState RidingShotState { get; private set; }
+
     [SerializeField]
     public LimbData limbData;
 
@@ -68,6 +70,7 @@ public class Limb : PlayerObjectController
         PutDownState = new LimbPutDownState(this, StateMachine, limbData, "putdown");
         ThrowState = new LimbThrowState(this, StateMachine, limbData, "throw");
         inAirState = new LimbinAirState(this, StateMachine, limbData, "inair");
+        RidingShotState = new LimbRidingShotState(this, StateMachine, limbData, "RidingShot");
         limbData.isRiding = false;
     }
 

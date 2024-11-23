@@ -43,7 +43,7 @@ public class LimbRidingState : LimbState
         }
         if (GameManager.instance.LimbData.attackInput)
         {
-            stateMachine.LimbChangeState(Limb.ShotState);
+            stateMachine.LimbChangeState(Limb.RidingShotState);
         }
     }
 
