@@ -5,6 +5,7 @@ public class LimbShotState : LimbAbillityState
 {
     public Vector3 mousePosition;
     public Vector3 bulletrotation;
+    float timecheck;
     public LimbShotState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
     {
 
@@ -34,22 +35,28 @@ public class LimbShotState : LimbAbillityState
         bulletrotation = mousePosition - Limb.transform.position;
         var bullet = Limb.Instantiate(Limb.BulletPrefab, Limb.transform.position + bulletrotation.normalized, Quaternion.Euler(bulletrotation));
         bullet.GetComponent<Rigidbody2D>().linearVelocity = (bulletrotation).normalized * limbdata.bulletspeed;
-        isAbillityDone = true;
+        timecheck = Time.time;
     }
 
     public override void Exit()
     {
         base.Exit();
     }
-
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        //if (isAnimationFinished)
-        //{
-        //    Debug.Log("ShotState 끝");
-        //    isAbillityDone = true;
-        //}
+        if (isAnimationFinished)
+        {
+            Debug.Log("ShotState 끝");
+            isAbillityDone = true;
+        }
+        else
+            Debug.Log("애니메이션이 안끝나");
+
+        if (Time.time - timecheck > 2)
+        {
+            AnimationFinishTrigger();
+        }
     }
 
     public override void PhysicsUpdate()

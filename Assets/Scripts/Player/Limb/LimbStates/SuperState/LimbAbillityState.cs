@@ -3,7 +3,6 @@ using UnityEngine;
 public class LimbAbillityState : LimbState
 {
     protected bool isAbillityDone;
-
     private bool isGrounded;
     public LimbAbillityState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
     {

@@ -393,7 +393,7 @@ MonoBehaviour:
   target: {fileID: 1527302452741640446}
   syncPosition: 0
   syncRotation: 0
-  syncScale: 0
+  syncScale: 1
   onlySyncOnChange: 1
   compressRotation: 1
   interpolatePosition: 1
@@ -459,7 +459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a13fe57a2fd47e4fb945c521d1ec82f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
+  syncDirection: 1
   syncMode: 0
   syncInterval: 0
   playerData: {fileID: 11400000, guid: c48025bae44ad8e4bbdabf36fa70eed7, type: 2}

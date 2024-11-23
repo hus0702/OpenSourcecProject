@@ -23,73 +23,67 @@ public class LimbDataContainer : NetworkBehaviour
     [SyncVar(hook = nameof(SetmousePosition))] public Vector3 mousePosition;
     private void Update()
     {
-        if (movementVelocity != limbData.movementVelocity)
+        if (movementVelocity != limbData.movementVelocity && isClient && isOwned)
         {
             CmdSetmovementVelocity(limbData.movementVelocity);
         }
-        if (FacingDirection != limbData.FacingDirection)
+        if (FacingDirection != limbData.FacingDirection && isClient && isOwned)
         { 
             CmdSetFacingDirection(limbData.FacingDirection);
         }
-        if (bulletspeed != limbData.bulletspeed)
+        if (bulletspeed != limbData.bulletspeed && isClient && isOwned)
         {
             CmdSetbulletspeed(limbData.bulletspeed);
         }
-        if (groundCheckRadious != limbData.groundCheckRadious)
+        if (groundCheckRadious != limbData.groundCheckRadious && isClient && isOwned)
         {
             CmdSetgroundCheckRadious(limbData.groundCheckRadious);
         }
-        if (whatIsGround != limbData.whatIsGround)
+        if (whatIsGround != limbData.whatIsGround && isClient && isOwned)
         {
             CmdSetwhatIsGround(limbData.whatIsGround);
         }
-        if (whatIsBlind != limbData.whatIsBlind)
+        if (whatIsBlind != limbData.whatIsBlind && isClient && isOwned)
         {
             CmdSetwhatIsBlind(limbData.whatIsBlind);
         }
-        if (isRiding != limbData.isRiding)
+        if (isRiding != limbData.isRiding && isClient && isOwned)
         {
             CmdSetisRiding(limbData.isRiding);
         }
-        if (ishavingGun != limbData.ishavingGun)
+        if (ishavingGun != limbData.ishavingGun && isClient && isOwned)
         {
             CmdSetishavingGun(limbData.ishavingGun);
         }
-        if (HoldingGun != limbData.HoldingGun)
+        if (HoldingGun != limbData.HoldingGun && isClient && isOwned)
         {
             CmdSetHoldingGun(limbData.HoldingGun);
         }
-        if (ShotDelay != limbData.ShotDelay)
+        if (ShotDelay != limbData.ShotDelay && isClient && isOwned)
         {
             CmdSetshotDelay(limbData.ShotDelay);
         }
-
-        if (NormInputX != limbData.NormInputX)
+        if (NormInputX != limbData.NormInputX && isClient && isOwned)
         {
             CmdSetNormInputX(limbData.NormInputX);
         }
-
-        if (NormInputY != limbData.NormInputY)
+        if (NormInputY != limbData.NormInputY && isClient && isOwned)
         {
             CmdSetNormInputY(limbData.NormInputY);
         }
-
-        if (JumpInput != limbData.JumpInput)
+        if (JumpInput != limbData.JumpInput && isClient && isOwned)
         {
             CmdSetJumpInput(limbData.JumpInput);
         }
-
-        if (SitInput != limbData.SitInput)
+        if (SitInput != limbData.SitInput && isClient && isOwned)
         {
             CmdSetSitInput(limbData.SitInput);
         }
-
-        if (attackInput != limbData.attackInput)
+        if (attackInput != limbData.attackInput && isClient && isOwned)
         {
             CmdSetattackInput(limbData.attackInput);
         }
-
-        if (mousePosition != limbData.mousePosition)
+        if (mousePosition != limbData.mousePosition && isClient && isOwned)
         {
             CmdSetmousePosition(limbData.mousePosition);
         }

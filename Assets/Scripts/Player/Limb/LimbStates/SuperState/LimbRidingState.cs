@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class LimbRidingState : LimbState
 {
-    public LimbRidingState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata,animBoolName)
+    public LimbRidingState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata ,animBoolName)
     {
     }
 

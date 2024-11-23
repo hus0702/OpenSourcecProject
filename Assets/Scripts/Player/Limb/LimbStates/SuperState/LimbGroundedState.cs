@@ -36,18 +36,16 @@ public class LimbGroundedState : LimbState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
         xinput = limbdata.NormInputX;
+
         if (GameManager.instance.PlayerData.iscarrying && Limb.CheckIftouchBlind())
         {
             stateMachine.LimbChangeState(Limb.RideState);
         }
-        if (!Limb.CheckIfGrounded())
+        else if (!Limb.CheckIfGrounded())
         {
             stateMachine.LimbChangeState(Limb.inAirState);
-        }
-        if (GameManager.instance.LimbData.attackInput)
-        {
-            stateMachine.LimbChangeState(Limb.ShotState);
         }
     }
 

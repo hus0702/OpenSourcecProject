@@ -55,10 +55,6 @@ public class LimbInputHandler : NetworkBehaviour
                 GameManager.instance.LimbData.mousePosition.z = 0;
                 GameManager.instance.LimbData.attackInput = true;
             }
-            if (context.canceled)
-            {
-                GameManager.instance.LimbData.attackInput = false;
-            }
         }
         
     } 

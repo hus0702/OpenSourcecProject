@@ -313,6 +313,7 @@ MonoBehaviour:
   SitInput: 0
   attackInput: 0
   mousePosition: {x: 0, y: 0, z: 0}
+  isshotblocked: 0
 --- !u!114 &4691425361791858923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,11 +415,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0bde163a8a6e094799b93dcd2feb751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
+  syncDirection: 1
   syncMode: 0
   syncInterval: 0
   limbData: {fileID: 11400000, guid: 906720070a0f94f4ab4b0da0e08c3a02, type: 2}
   movementVelocity: 0
+  FacingDirection: 0
   bulletspeed: 0
   groundCheckRadious: 0
   whatIsGround:

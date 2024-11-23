@@ -37,95 +37,95 @@ public class PlayerDataContainer : NetworkBehaviour
     private void Update()
     {
 
-        if (movementVelocity != playerData.movementVelocity)
+        if (movementVelocity != playerData.movementVelocity && isClient && isOwned)
         {
             CmdSetmovementVelocity(playerData.movementVelocity);
         }
-        if (sitmovementVelocity != playerData.sitmovementVelocity)
+        if (sitmovementVelocity != playerData.sitmovementVelocity && isClient && isOwned)
         {
             CmdSetSitMovementVelocity(playerData.sitmovementVelocity);
         }
-        if (facingdirection != playerData.facingdirection)
+        if (facingdirection != playerData.facingdirection && isClient && isOwned)
         {
             CmdSetFacingDirection(playerData.facingdirection);
         }
-        if (climbVelocity != playerData.climbVelocity)
+        if (climbVelocity != playerData.climbVelocity && isClient && isOwned)
         {
             CmdSetClimbVelocity(playerData.climbVelocity);
         }
-        if (C_movementVelocity != playerData.C_movementVelocity)
+        if (C_movementVelocity != playerData.C_movementVelocity && isClient && isOwned)
         {
             CmdSetC_MovementVelocity(playerData.C_movementVelocity);
         }
-        if (jumpVelocity != playerData.jumpVelocity)
+        if (jumpVelocity != playerData.jumpVelocity && isClient && isOwned)
         {
             CmdSetJumpVelocity(playerData.jumpVelocity);
         }
-        if (groundCheckRadious != playerData.groundCheckRadious)
+        if (groundCheckRadious != playerData.groundCheckRadious && isClient && isOwned)
         {
             CmdSetGroundCheckRadious(playerData.groundCheckRadious);
         }
-        if (whatIsGround != playerData.whatIsGround)
+        if (whatIsGround != playerData.whatIsGround && isClient && isOwned)
         {
             CmdSetWhatIsGround(playerData.whatIsGround);
         }
-        if (whatIsLimb != playerData.whatIsLimb)
+        if (whatIsLimb != playerData.whatIsLimb && isClient && isOwned)
         {
             CmdSetWhatIsLimb(playerData.whatIsLimb);
         }
-        if (whatIsLadder != playerData.whatIsLadder)
+        if (whatIsLadder != playerData.whatIsLadder && isClient && isOwned)
         {
             CmdSetWhatIsLadder(playerData.whatIsLadder);
         }
-        if (iscarrying != playerData.iscarrying)
+        if (iscarrying != playerData.iscarrying && isClient && isOwned)
         {
             CmdSetIsCarrying(playerData.iscarrying);
         }
-        if (isclimbing != playerData.isclimbing)
+        if (isclimbing != playerData.isclimbing && isClient && isOwned)
         {
             CmdSetIsClimbing(playerData.isclimbing);
         }
-        if (carryupcall != playerData.carryupcall)
+        if (carryupcall != playerData.carryupcall && isClient && isOwned)
         {
             CmdSetCarryUpCall(playerData.carryupcall);
         }
-        if (throwcall != playerData.throwcall)
+        if (throwcall != playerData.throwcall && isClient && isOwned)
         {
             CmdSetThrowCall(playerData.throwcall);
         }
-        if (putdowncall != playerData.putdowncall)
+        if (putdowncall != playerData.putdowncall && isClient && isOwned)
         {
             CmdSetPutDownCall(playerData.putdowncall);
         }
-        if (throwinputtime != playerData.throwinputtime)
+        if (throwinputtime != playerData.throwinputtime && isClient && isOwned)
         {
             CmdSetThrowInputTime(playerData.throwinputtime);
         }
-        if (NormInputX != playerData.NormInputX)
+        if (NormInputX != playerData.NormInputX && isClient && isOwned)
         {
             CmdSetNormInputX(playerData.NormInputX);
         }
-        if (NormInputY != playerData.NormInputY)
+        if (NormInputY != playerData.NormInputY && isClient && isOwned)
         {
             CmdSetNormInputY(playerData.NormInputY);
         }
-        if (JumpInput != playerData.JumpInput)
+        if (JumpInput != playerData.JumpInput && isClient && isOwned)
         {
             CmdSetJumpInput(playerData.JumpInput);
         }
-        if (SitInput != playerData.SitInput)
+        if (SitInput != playerData.SitInput && isClient && isOwned)
         {
             CmdSetSitInput(playerData.SitInput);
         }
-        if (ladderUp != playerData.ladderUp)
+        if (ladderUp != playerData.ladderUp && isClient && isOwned)
         {
             CmdSetLadderUp(playerData.ladderUp);
         }
-        if (ladderDown != playerData.ladderDown)
+        if (ladderDown != playerData.ladderDown && isClient && isOwned)
         {
             CmdSetLadderDown(playerData.ladderDown);
         }
-        if (blindtransform != playerData.blindtransform)
+        if (blindtransform != playerData.blindtransform && isClient && isOwned)
         {
             CmdSetBlindTransform(playerData.blindtransform);
         }
