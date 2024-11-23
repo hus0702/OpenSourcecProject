@@ -16,11 +16,12 @@ GameObject:
   - component: {fileID: 4611837306472148324}
   - component: {fileID: 5368857074632749019}
   - component: {fileID: 7730803837242951724}
-  - component: {fileID: 8170154221302005328}
   - component: {fileID: 7460037321345797722}
   - component: {fileID: 4691425361791858923}
   - component: {fileID: -5260081670319047274}
   - component: {fileID: 527253401587517598}
+  - component: {fileID: 2494346387533131551}
+  - component: {fileID: 1173216616463554652}
   m_Layer: 10
   m_Name: LimbEx
   m_TagString: Limb
@@ -194,7 +195,7 @@ MonoBehaviour:
   Ready: 0
   Role: 0
   playerCamera: {fileID: 0}
-  limbData: {fileID: 11400000, guid: 906720070a0f94f4ab4b0da0e08c3a02, type: 2}
+  container: {fileID: 1173216616463554652}
   bulletprefab: {fileID: 644988525465764619, guid: 7f6a6beaf9281674db4e142d33c45f4b, type: 3}
   groundcheck: {fileID: 7855060259586425084}
   myBoxCollider: {fileID: 1909995249917826653}
@@ -213,6 +214,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  container: {fileID: 0}
   carryinputblock: 0
   RawMovementInput: {x: 0, y: 0}
   NormInputX: 0
@@ -266,42 +268,6 @@ MonoBehaviour:
   Ready: 0
   Role: 0
   playerCamera: {fileID: 0}
---- !u!114 &8170154221302005328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2667718191209937384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0bde163a8a6e094799b93dcd2feb751, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 1
-  syncMode: 0
-  syncInterval: 0
-  limbData: {fileID: 11400000, guid: 906720070a0f94f4ab4b0da0e08c3a02, type: 2}
-  movementVelocity: 0
-  FacingDirection: 0
-  bulletspeed: 0
-  groundCheckRadious: 0
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
-  whatIsBlind:
-    serializedVersion: 2
-    m_Bits: 0
-  isRiding: 0
-  ishavingGun: 0
-  HoldingGun: 0
-  ShotDelay: 0
-  NormInputX: 0
-  NormInputY: 0
-  JumpInput: 0
-  SitInput: 0
-  attackInput: 0
-  mousePosition: {x: 0, y: 0, z: 0}
 --- !u!114 &7460037321345797722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -479,6 +445,76 @@ MonoBehaviour:
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
+--- !u!114 &2494346387533131551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2667718191209937384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ec4f7556ca1e4b55a3381fc6a02b1bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 402397594313195349}
+  syncPosition: 0
+  syncRotation: 0
+  syncScale: 1
+  onlySyncOnChange: 1
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 0
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  onlySyncOnChangeCorrectionMultiplier: 2
+  rotationSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
+--- !u!114 &1173216616463554652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2667718191209937384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0bde163a8a6e094799b93dcd2feb751, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  limbData: {fileID: 11400000, guid: 906720070a0f94f4ab4b0da0e08c3a02, type: 2}
+  movementVelocity: 0
+  bulletspeed: 0
+  groundCheckRadious: 0
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 512
+  whatIsBlind:
+    serializedVersion: 2
+    m_Bits: 256
+  FacingDirection: 0
+  position: {x: 0, y: 0, z: 0}
+  isRiding: 0
+  ishavingGun: 0
+  HoldingGun: 0
+  ShotDelay: 0
+  NormInputX: 0
+  NormInputY: 0
+  JumpInput: 0
+  SitInput: 0
+  attackInput: 0
+  mousePosition: {x: 0, y: 0, z: 0}
 --- !u!1 &5559569575567345883
 GameObject:
   m_ObjectHideFlags: 0

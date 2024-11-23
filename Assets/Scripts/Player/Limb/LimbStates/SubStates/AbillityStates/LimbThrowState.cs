@@ -5,7 +5,8 @@ public class LimbThrowState : LimbAbillityState
 {
     private bool isGrounded;
     private float throwtime;
-    public LimbThrowState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
+
+    public LimbThrowState(Limb Limb, PlayerStateMachine stateMachine, LimbDataContainer container, string animBoolName) : base(Limb, stateMachine, container, animBoolName)
     {
     }
 
@@ -27,13 +28,22 @@ public class LimbThrowState : LimbAbillityState
     public override void Enter()
     {
         base.Enter();
-        throwtime = GameManager.instance.PlayerData.throwinputtime;
+        throwtime = playercontainer.throwinputtime;
         if (throwtime > 1)
             throwtime = 1;
-        Limb.SetVelocityX(12 * throwtime * GameManager.instance.PlayerData.facingdirection);
+        Limb.SetVelocityX(12 * throwtime * container.FacingDirection);
         Limb.SetVelocityY(4 * 2*throwtime);
-        limbdata.isRiding = false;
-        GameManager.instance.PlayerData.throwcall = false;
+
+        if (Limb.isServer)
+        {
+            container.isRiding = false;
+            playercontainer.throwcall = false;
+        }
+        else
+        {
+            container.CmdSetisRiding(false);
+            playercontainer.CmdSetThrowCall(false);
+        }
         Limb.spriteRenderer.enabled = true;
         isAbillityDone = true;
     }

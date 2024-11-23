@@ -5,7 +5,8 @@ public class LimbinAirState : LimbState
 {
     private bool isGrounded;
     private int xInput;
-    public LimbinAirState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
+
+    public LimbinAirState(Limb Limb, PlayerStateMachine stateMachine, LimbDataContainer container, string animBoolName) : base(Limb, stateMachine, container, animBoolName)
     {
     }
 
@@ -38,9 +39,9 @@ public class LimbinAirState : LimbState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        xInput = limbdata.NormInputX;
+        xInput = container.NormInputX;
         Limb.CheckifShouldflip(xInput);
-        Limb.SetVelocityX(limbdata.movementVelocity * xInput);
+        Limb.SetVelocityX(container.movementVelocity * xInput);
         if (isGrounded)
         {
             stateMachine.LimbChangeState(Limb.IdleState);

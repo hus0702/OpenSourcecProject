@@ -4,7 +4,8 @@ using UnityEngine;
 public class LimbGroundedState : LimbState
 {
     protected int xinput;
-    public LimbGroundedState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
+
+    public LimbGroundedState(Limb Limb, PlayerStateMachine stateMachine, LimbDataContainer container, string animBoolName) : base(Limb, stateMachine, container, animBoolName)
     {
     }
 
@@ -37,9 +38,9 @@ public class LimbGroundedState : LimbState
     {
         base.LogicUpdate();
 
-        xinput = limbdata.NormInputX;
+        xinput = container.NormInputX;
 
-        if (GameManager.instance.PlayerData.iscarrying && Limb.CheckIftouchBlind())
+        if (playercontainer.iscarrying && Limb.CheckIftouchBlind())
         {
             stateMachine.LimbChangeState(Limb.RideState);
         }
@@ -47,7 +48,7 @@ public class LimbGroundedState : LimbState
         {
             stateMachine.LimbChangeState(Limb.inAirState);
         }
-        if (GameManager.instance.LimbData.attackInput)
+        if (container.attackInput)
         {
             stateMachine.LimbChangeState(Limb.ShotState);
         }

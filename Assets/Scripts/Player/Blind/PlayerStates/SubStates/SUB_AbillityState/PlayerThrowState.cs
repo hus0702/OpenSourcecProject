@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerThrowState : PlayerAbillityState
 {
-    public PlayerThrowState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+    public PlayerThrowState(Player player, PlayerStateMachine stateMachine, PlayerDataContainer container, string animBoolName) : base(player, stateMachine, container, animBoolName)
     {
     }
 
@@ -25,8 +25,17 @@ public class PlayerThrowState : PlayerAbillityState
     {
         base.Enter();
         player.InputHandler.StartCoroutine(player.InputHandler.stopcarryinput(0.3f));
-        playerData.iscarrying = false;
-        playerData.throwcall = false;
+        if (player.isServer)
+        {
+            container.iscarrying = false;
+            container.throwcall = false;
+        }
+        else
+        {
+            container.CmdSetIsCarrying(false);
+            container.CmdSetThrowCall(false);
+        }
+
     }
 
     public override void Exit()

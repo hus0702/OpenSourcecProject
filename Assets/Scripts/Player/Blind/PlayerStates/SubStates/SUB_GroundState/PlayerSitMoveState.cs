@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerSitMoveState : PlayerGroundedState
 {
-    public PlayerSitMoveState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+    public PlayerSitMoveState(Player player, PlayerStateMachine stateMachine, PlayerDataContainer container, string animBoolName) : base(player, stateMachine, container, animBoolName)
     {
     }
 
@@ -35,7 +35,7 @@ public class PlayerSitMoveState : PlayerGroundedState
     {
         base.LogicUpdate();
         player.CheckifShouldflip(xinput);
-        player.SetVelocityX(playerData.sitmovementVelocity * xinput);
+        player.SetVelocityX(container.sitmovementVelocity * xinput);
         if (!sinput)
         {
             stateMachine.playerChangeState(player.MoveState);

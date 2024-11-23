@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class PlayerC_GroundedState : PlayerState
 {
-    public PlayerC_GroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
-    {
-    }
+   
 
     protected int xinput;
 
     protected bool PutDownInput;
     protected bool ThrowInput;
     private bool ladderInput;
+
+    public PlayerC_GroundedState(Player player, PlayerStateMachine stateMachine, PlayerDataContainer container, string animBoolName) : base(player, stateMachine, container, animBoolName)
+    {
+    }
 
     public override void DoCheck()
     {
@@ -29,11 +31,11 @@ public class PlayerC_GroundedState : PlayerState
 
     public override void LogicUpdate()
     {
-        PutDownInput = playerData.putdowncall;
-        ThrowInput = playerData.throwcall;
+        PutDownInput = container.putdowncall;
+        ThrowInput = container.throwcall;
         base.LogicUpdate();
-        xinput = GameManager.instance.PlayerData.NormInputX;
-        ladderInput = GameManager.instance.PlayerData.ladderUp;
+        xinput = container.NormInputX;
+        ladderInput = container.ladderUp;
         if (ladderInput && player.CheckIftouchLadder())
         {
             stateMachine.playerChangeState(player.climbState);

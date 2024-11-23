@@ -12,7 +12,7 @@ public class PlayerGroundedState : PlayerState
 
     private bool ladderInput;
 
-    public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+    public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerDataContainer container, string animBoolName) : base(player, stateMachine, container, animBoolName)
     {
     }
 
@@ -35,11 +35,11 @@ public class PlayerGroundedState : PlayerState
     {
         base.LogicUpdate();
 
-        xinput = GameManager.instance.PlayerData.NormInputX;
-        JumpInput = GameManager.instance.PlayerData.JumpInput;
-        CarryUpInput = GameManager.instance.PlayerData.carryupcall;
-        ladderInput = GameManager.instance.PlayerData.ladderUp;
-        sinput = GameManager.instance.PlayerData.SitInput;
+        xinput = container.NormInputX;
+        JumpInput = container.JumpInput;
+        CarryUpInput = container.carryupcall;
+        ladderInput = container.ladderUp;
+        sinput = container.SitInput;
 
         if (JumpInput)
         {

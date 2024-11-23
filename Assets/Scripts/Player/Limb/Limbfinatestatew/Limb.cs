@@ -1,10 +1,11 @@
+using Mirror;
 using Mirror.BouncyCastle.Asn1.TeleTrust;
 using Steamworks;
 using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Limb : PlayerObjectController
+public class Limb : NetworkBehaviour
 {
     #region State Variables
     public PlayerStateMachine StateMachine { get; private set; }
@@ -20,7 +21,7 @@ public class Limb : PlayerObjectController
     public LimbRidingShotState RidingShotState { get; private set; }
 
     [SerializeField]
-    public LimbData limbData;
+    public LimbDataContainer container;
 
     #endregion
 
@@ -62,16 +63,15 @@ public class Limb : PlayerObjectController
     private void Awake()
     {
         StateMachine = new PlayerStateMachine();
-        IdleState = new LimbIdleState(this, StateMachine, limbData, "Idle");
-        MoveState = new LimbMoveState(this, StateMachine, limbData, "move");
-        RideState = new LimbRideState(this, StateMachine, limbData, "Ride");
-        RidingState = new LimbRidingState(this, StateMachine, limbData, "Riding");
-        ShotState = new LimbShotState(this, StateMachine, limbData, "shot");
-        PutDownState = new LimbPutDownState(this, StateMachine, limbData, "putdown");
-        ThrowState = new LimbThrowState(this, StateMachine, limbData, "throw");
-        inAirState = new LimbinAirState(this, StateMachine, limbData, "inair");
-        RidingShotState = new LimbRidingShotState(this, StateMachine, limbData, "RidingShot");
-        limbData.isRiding = false;
+        IdleState = new LimbIdleState(this, StateMachine, container, "Idle");
+        MoveState = new LimbMoveState(this, StateMachine, container, "move");
+        RideState = new LimbRideState(this, StateMachine, container, "Ride");
+        RidingState = new LimbRidingState(this, StateMachine, container, "Riding");
+        ShotState = new LimbShotState(this, StateMachine, container, "shot");
+        PutDownState = new LimbPutDownState(this, StateMachine, container, "putdown");
+        ThrowState = new LimbThrowState(this, StateMachine, container, "throw");
+        inAirState = new LimbinAirState(this, StateMachine, container, "inair");
+        RidingShotState = new LimbRidingShotState(this, StateMachine, container, "RidingShot");
     }
 
     private void Start()
@@ -82,7 +82,7 @@ public class Limb : PlayerObjectController
         spriteRenderer = GetComponent<SpriteRenderer>();
         InputHandler = GetComponent<LimbInputHandler>();
         limbtransform = GetComponent<Transform>();
-        StateMachine.LimbInitialize(IdleState,limbData);
+        StateMachine.LimbInitialize(IdleState, container);
         BulletPrefab = bulletprefab;
     }
 
@@ -90,11 +90,20 @@ public class Limb : PlayerObjectController
     {
         CurrentVelocity = RB.linearVelocity;
         StateMachine.LimbCurrentState.LogicUpdate();
-        limbData.position = transform.position;
+        container.position = transform.position;
 
-        if (limbData.isRiding)
+        if (isOwned)
         {
-            this.limbtransform.position = (GameManager.instance.PlayerData.position + new Vector3(0, 1f, 0));
+            container.position = transform.position;
+        }
+        else
+        { 
+            transform.position = container.position;
+        }
+
+        if (container.isRiding)
+        {
+            this.limbtransform.position = (container.position + new Vector3(0, 1f, 0));
         }
     }
 
@@ -129,7 +138,7 @@ public class Limb : PlayerObjectController
     #region Check Functions
     public void CheckifShouldflip(int xinput)
     {
-        if (xinput != 0 && xinput != limbData.FacingDirection)
+        if (xinput != 0 && xinput != container.FacingDirection)
         {
             Flip();
         }
@@ -137,7 +146,7 @@ public class Limb : PlayerObjectController
 
     public bool CheckIfGrounded()
     {
-        return Physics2D.OverlapCircle(groundcheck.position, limbData.groundCheckRadious, limbData.whatIsGround);
+        return Physics2D.OverlapCircle(groundcheck.position, container.groundCheckRadious, container.whatIsGround);
     }
 
     public bool CheckIftouchBlind()
@@ -146,7 +155,7 @@ public class Limb : PlayerObjectController
         //ContactFilter2D contactFilter = new ContactFilter2D();
         //contactFilter.SetLayerMask(limbData.whitIsBlind);
         //contactFilter.useLayerMask = true;
-        return Physics2D.OverlapCircle(groundcheck.position, limbData.groundCheckRadious, limbData.whatIsBlind);
+        return Physics2D.OverlapCircle(groundcheck.position, container.groundCheckRadious, container.whatIsBlind);
         //if (Physics2D.OverlapCollider(Collider, contactFilter, results) == 0)
         //{
         //    return false;
@@ -166,7 +175,7 @@ public class Limb : PlayerObjectController
     private void AnimationFinishTrigger() => StateMachine.LimbCurrentState.AnimationFinishTrigger();
     public void Flip()
     {
-        limbData.FacingDirection *= -1;
+        container.FacingDirection *= -1;
         base.transform.Rotate(0.0f, 180.0f, 0.0f);
     }
     #endregion

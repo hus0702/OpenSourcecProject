@@ -7,7 +7,7 @@ public class PlayerinAirState : PlayerState
     private int xInput;
     private bool ladderInput;
 
-    public PlayerinAirState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+    public PlayerinAirState(Player player, PlayerStateMachine stateMachine, PlayerDataContainer container, string animBoolName) : base(player, stateMachine, container, animBoolName)
     {
     }
 
@@ -31,8 +31,8 @@ public class PlayerinAirState : PlayerState
     {
         base.LogicUpdate();
 
-        xInput = GameManager.instance.PlayerData.NormInputX;
-        ladderInput = GameManager.instance.PlayerData.ladderUp;
+        xInput = container.NormInputX;
+        ladderInput = container.ladderUp;
         if (ladderInput && player.CheckIftouchLadder())
         {
             stateMachine.playerChangeState(player.climbState);
@@ -45,8 +45,7 @@ public class PlayerinAirState : PlayerState
         else
         {
             player.CheckifShouldflip(xInput);
-            player.SetVelocityX(playerData.movementVelocity * xInput);
-
+            player.SetVelocityX(container.movementVelocity * xInput);
             player.Anim.SetFloat("yVelocity", player.CurrentVelocity.y);
             player.Anim.SetFloat("xVelocity", Mathf.Abs(player.CurrentVelocity.x));
         }

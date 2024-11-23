@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerSitState : PlayerGroundedState
 {
-    public PlayerSitState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+    public PlayerSitState(Player player, PlayerStateMachine stateMachine, PlayerDataContainer container, string animBoolName) : base(player, stateMachine, container, animBoolName)
     {
     }
 

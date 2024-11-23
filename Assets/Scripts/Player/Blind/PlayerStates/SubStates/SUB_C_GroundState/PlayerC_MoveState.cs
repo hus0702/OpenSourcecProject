@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class PlayerC_MoveState : PlayerC_GroundedState
 {
-    public PlayerC_MoveState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+    public PlayerC_MoveState(Player player, PlayerStateMachine stateMachine, PlayerDataContainer container, string animBoolName) : base(player, stateMachine, container, animBoolName)
     {
     }
+
     public override void DoCheck()
     {
         base.DoCheck();
@@ -25,7 +26,7 @@ public class PlayerC_MoveState : PlayerC_GroundedState
         base.LogicUpdate();
 
         player.CheckifShouldflip(xinput);
-        player.SetVelocityX(playerData.C_movementVelocity * xinput);
+        player.SetVelocityX(container.C_movementVelocity * xinput);
 
         if (xinput == 0f)
         {

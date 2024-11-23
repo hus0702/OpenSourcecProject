@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LimbPutDownState : LimbAbillityState
 {
-    public LimbPutDownState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
+    public LimbPutDownState(Limb Limb, PlayerStateMachine stateMachine, LimbDataContainer container, string animBoolName) : base(Limb, stateMachine, container, animBoolName)
     {
     }
 
@@ -26,8 +26,17 @@ public class LimbPutDownState : LimbAbillityState
         base.Enter();
         Limb.SetVelocityY(4);
         Limb.limbtransform.position = Limb.limbtransform.position;
-        limbdata.isRiding = false;
-        GameManager.instance.PlayerData.putdowncall = false;
+        if (Limb.isServer)
+        {
+            container.isRiding = false;
+            playercontainer.putdowncall = false;
+        }
+        else
+        {
+            container.CmdSetisRiding(false);
+            playercontainer.CmdSetPutDownCall(false);
+        }
+        
         isAbillityDone = true;
     }
 

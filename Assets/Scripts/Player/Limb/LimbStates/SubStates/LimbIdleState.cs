@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class LimbIdleState : LimbGroundedState
 {
-    public LimbIdleState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
+    public LimbIdleState(Limb Limb, PlayerStateMachine stateMachine, LimbDataContainer container, string animBoolName) : base(Limb, stateMachine, container, animBoolName)
     {
-
     }
 
     public override void AnimationFinishTrigger()

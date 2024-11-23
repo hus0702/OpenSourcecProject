@@ -4,7 +4,8 @@ public class LimbRidingShotState : LimbAbillityState
 {
     public Vector3 mousePosition;
     public Vector3 bulletrotation;
-    public LimbRidingShotState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
+
+    public LimbRidingShotState(Limb Limb, PlayerStateMachine stateMachine, LimbDataContainer container, string animBoolName) : base(Limb, stateMachine, container, animBoolName)
     {
     }
 
@@ -26,12 +27,20 @@ public class LimbRidingShotState : LimbAbillityState
     public override void Enter()
     {
         base.Enter();
-        GameManager.instance.LimbData.attackInput = false;
-        Limb.InputHandler.StartCoroutine(Limb.InputHandler.stopshotinput(GameManager.instance.LimbData.ShotDelay));
-        mousePosition = limbdata.mousePosition;
+        if (Limb.isServer)
+        {
+            container.attackInput = false;
+        }
+        else
+        {
+            container.CmdSetattackInput(false);
+        }
+        
+        Limb.InputHandler.StartCoroutine(Limb.InputHandler.stopshotinput(container.ShotDelay));
+        mousePosition = container.mousePosition;
         bulletrotation = mousePosition - Limb.transform.position;
         var bullet = Limb.Instantiate(Limb.BulletPrefab, Limb.transform.position + bulletrotation.normalized, Quaternion.Euler(bulletrotation));
-        bullet.GetComponent<Rigidbody2D>().linearVelocity = (bulletrotation).normalized * limbdata.bulletspeed;
+        bullet.GetComponent<Rigidbody2D>().linearVelocity = (bulletrotation).normalized * container.bulletspeed;
 
     }
 

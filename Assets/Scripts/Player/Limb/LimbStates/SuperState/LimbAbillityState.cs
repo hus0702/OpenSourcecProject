@@ -4,9 +4,9 @@ public class LimbAbillityState : LimbState
 {
     protected bool isAbillityDone;
     private bool isGrounded;
-    public LimbAbillityState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
-    {
 
+    public LimbAbillityState(Limb Limb, PlayerStateMachine stateMachine, LimbDataContainer container, string animBoolName) : base(Limb, stateMachine, container, animBoolName)
+    {
     }
 
     public override void AnimationTrigger()
@@ -36,7 +36,7 @@ public class LimbAbillityState : LimbState
 
         if ((isAbillityDone))
         {
-            if (limbdata.isRiding)
+            if (container.isRiding)
             {
                 stateMachine.LimbChangeState(Limb.RidingState);
             }

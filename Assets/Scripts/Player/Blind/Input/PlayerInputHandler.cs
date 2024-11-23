@@ -16,14 +16,19 @@ public class PlayerInputHandler : NetworkBehaviour
     public bool ladderUp;
     public bool ladderDown;
 
+    public PlayerDataContainer container;
 
+    private void Awake()
+    {
+        container = this.gameObject.GetComponent<PlayerDataContainer>();
+    }
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         if (isOwned)
         {
             RawMovementInput = context.ReadValue<Vector2>();
-            GameManager.instance.PlayerData.NormInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
-            GameManager.instance.PlayerData.NormInputY = (int)(RawMovementInput * Vector2.right).normalized.y;
+            container.NormInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
+            container.NormInputY = (int)(RawMovementInput * Vector2.right).normalized.y;
         }
     }
 
@@ -33,11 +38,11 @@ public class PlayerInputHandler : NetworkBehaviour
         {
             if (context.performed)
             {
-                GameManager.instance.PlayerData.ladderUp = true;
+                container.ladderUp = true;
             }
             if (context.canceled)
             {
-                GameManager.instance.PlayerData.ladderUp = false;
+                container.ladderUp = false;
             }
         }
     }
@@ -46,26 +51,26 @@ public class PlayerInputHandler : NetworkBehaviour
     {
         if (isOwned)
         {
-            if (GameManager.instance.PlayerData.isclimbing)
+            if (container.isclimbing)
             {
                 if (context.performed)
                 {
-                    GameManager.instance.PlayerData.ladderDown = true;
+                    container.ladderDown = true;
                 }
                 if (context.canceled)
                 {
-                    GameManager.instance.PlayerData.ladderDown = false;
+                    container.ladderDown = false;
                 }
             }
             else
             {
                 if (context.performed)
                 {
-                    GameManager.instance.PlayerData.SitInput = true;
+                    container.SitInput = true;
                 }
                 if (context.canceled)
                 {
-                    GameManager.instance.PlayerData.SitInput = false;
+                    container.SitInput = false;
                 }
             }
         }
@@ -76,12 +81,12 @@ public class PlayerInputHandler : NetworkBehaviour
         {
             if (context.started)
             {
-                GameManager.instance.PlayerData.JumpInput = true;
+                container.JumpInput = true;
             }
         }
            
     }
-    public void UseJumpInput() => GameManager.instance.PlayerData.JumpInput = false;
+    public void UseJumpInput() => container.JumpInput = false;
     public void OnEscInput(InputAction.CallbackContext context)
     {
         if (isOwned)
@@ -103,7 +108,7 @@ public class PlayerInputHandler : NetworkBehaviour
         {
             if (!carryinputblock)
             {
-                if (GameManager.instance.PlayerData.iscarrying)
+                if (container.iscarrying)
                 {
                     if (context.started)
                     {
@@ -111,20 +116,20 @@ public class PlayerInputHandler : NetworkBehaviour
                     }
                     if (context.canceled)
                     {
-                        GameManager.instance.PlayerData.throwinputtime = Time.time - throwinputtime;
+                        container.throwinputtime = Time.time - throwinputtime;
                         throwinputtime = 0;
-                        GameManager.instance.PlayerData.throwcall = true;
+                        container.throwcall = true;
                     }
                 }
                 else
                 {
                     if (context.started)
                     {
-                        GameManager.instance.PlayerData.carryupcall = true;
+                        container.carryupcall = true;
                     }
                     if (context.canceled)
                     {
-                        GameManager.instance.PlayerData.carryupcall = false;
+                        container.carryupcall = false;
                     }
                 }
             }

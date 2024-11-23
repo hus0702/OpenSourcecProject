@@ -9,13 +9,13 @@ public class PlayerStateMachine
     public LimbState LimbCurrentState { get; private set; }
 
 
-    public void PlayerInitialize(PlayerState startingstate, PlayerData data)
+    public void PlayerInitialize(PlayerState startingstate, PlayerDataContainer data)
     { 
         playerCurrentState = startingstate;
         playerCurrentState.Enter();
     }
 
-    public void LimbInitialize(LimbState startingstate, LimbData data)
+    public void LimbInitialize(LimbState startingstate, LimbDataContainer data)
     {
         LimbCurrentState = startingstate;
         LimbCurrentState.Enter();
