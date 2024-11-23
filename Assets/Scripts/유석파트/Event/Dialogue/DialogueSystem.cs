@@ -14,14 +14,18 @@ public class DialogueSystem : MonoBehaviour
     [Header("스크립트가 들어갈 텍스트 박스")]
     [SerializeField]
     private TextMeshProUGUI textBox;
+    [Header("대사가 미리 채워질 박스")]
+    [SerializeField]
+    private TextMeshProUGUI textBoxToPreprocess;
     [Header("활성화/비활성화할 말풍선의 GameObject")]
     [SerializeField]
     private GameObject TalkBubbleGameObject;
 
+/*
     [Header("이 씬에서 플레이어들이 읽을 대본")]
     [SerializeField]
     private DialogueScript scriptList;
-
+*/
     /* 건너뛰기, 연출 장치를 위한 맴버 */
     bool isSkip = false;
     bool isEndDialogue = false;
@@ -38,9 +42,15 @@ public class DialogueSystem : MonoBehaviour
 
     public void Begin()
     {
+        Debug.Log("DialogueSystem:Begin");
         textBox.text = ""; // 일단 다 비운다.
+
+        string script = DialogueScriptManager.Instance.PopScrpit();
+        textBoxToPreprocess.text = TruncCommands(script); // 미리 대화박스를 채워준다.
+        LayoutRebuilder.ForceRebuildLayoutImmediate(this.GetComponent<RectTransform>());
+
         TalkBubbleGameObject.SetActive(true);
-        StartCoroutine(Talk(DialogueScriptManager.Instance.PopScrpit()));
+        StartCoroutine(Talk(script));
     }
 
     IEnumerator Talk(string script)
@@ -76,10 +86,51 @@ public class DialogueSystem : MonoBehaviour
             }
         }
         isEndDialogue = true;
-        yield return new WaitForSeconds(1.5f);
-        Debug.Log(script + " 비활성화됨.");
-        textBox.text = ""; // 일단 다 비운다.
-        TalkBubbleGameObject.SetActive(false);
+        //yield return new WaitForSeconds(1.5f);
+        //Debug.Log(script + " 비활성화됨.");
+        //TalkBubbleGameObject.SetActive(false);
+    }
+
+    private void OnEnable() {
+        textBox.text = "   ";
+        textBoxToPreprocess.text = "   ";
+    }
+    private void OnDisable() {
+        textBox.text = "   ";
+        textBoxToPreprocess.text = "   ";
+    }
+
+    private string TruncCommands(string script)
+    {
+        string scriptWithoutCommand = "";
+        string truncCommand = "";
+        bool truncIsHandling = false;
+        foreach(var letter in script)
+        {
+            if (letter == '<' && !truncIsHandling)
+            {
+                truncIsHandling = true;
+                truncCommand = "<";
+            }
+            else if (truncIsHandling)
+            {
+                truncCommand += letter;
+                if (letter == '>')
+                {
+                    truncIsHandling = false;
+                    if(truncCommand.Contains("sleep"))
+                    {
+                        // 걍 아무것도 하지 않고 없애버린다.
+                    }
+                    else
+                    {
+                        scriptWithoutCommand += truncCommand;
+                    }
+                }
+            }
+            else scriptWithoutCommand += letter;
+        }
+        return scriptWithoutCommand;
     }
 
     IEnumerator CommandHandler(string command)
