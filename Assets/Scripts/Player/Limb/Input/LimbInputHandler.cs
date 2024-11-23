@@ -9,7 +9,8 @@ public class LimbInputHandler : NetworkBehaviour
 
     public bool carryinputblock;
     public Vector2 RawMovementInput;
-    public int NormInputX;
+    public int 
+        InputX;
     public int NormInputY;
     public bool JumpInput;
     public bool SitInput;

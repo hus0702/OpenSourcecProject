@@ -13,13 +13,23 @@ MonoBehaviour:
   m_Name: LimbData
   m_EditorClassIdentifier: 
   movementVelocity: 3
+  bulletspeed: 20
   groundCheckRadious: 0.5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 512
-  whitIsBlind:
+  whatIsBlind:
     serializedVersion: 2
     m_Bits: 256
+  FacingDirection: 1
+  position: {x: 14.202853, y: -14.684251, z: 0.75371164}
   isRiding: 0
   ishavingGun: 0
   HoldingGun: 0
+  ShotDelay: 0.5
+  NormInputX: 0
+  NormInputY: 0
+  JumpInput: 0
+  SitInput: 0
+  attackInput: 0
+  mousePosition: {x: 3.5560985, y: -1.7380322, z: 0}

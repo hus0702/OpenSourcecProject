@@ -90,10 +90,11 @@ public class Limb : PlayerObjectController
     {
         CurrentVelocity = RB.linearVelocity;
         StateMachine.LimbCurrentState.LogicUpdate();
+        limbData.position = transform.position;
 
         if (limbData.isRiding)
         {
-            this.limbtransform.position = (GameManager.instance.PlayerData.blindtransform.position + new Vector3(0, 1f, 0));
+            this.limbtransform.position = (GameManager.instance.PlayerData.position + new Vector3(0, 1f, 0));
         }
     }
 

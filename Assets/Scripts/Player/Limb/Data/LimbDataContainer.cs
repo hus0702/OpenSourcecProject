@@ -6,11 +6,12 @@ public class LimbDataContainer : NetworkBehaviour
     public LimbData limbData;
 
     [SyncVar(hook = nameof(SetmovementVelocity))] public float movementVelocity;
-    [SyncVar(hook = nameof(SetFacingDirection))] public int FacingDirection;
     [SyncVar(hook = nameof(Setbulletspeed))] public float bulletspeed;
     [SyncVar(hook = nameof(SetgroundCheckRadious))] public float groundCheckRadious;
     [SyncVar(hook = nameof(SetwhatIsGround))] public LayerMask whatIsGround;
     [SyncVar(hook = nameof(SetwhatIsBlind))] public LayerMask whatIsBlind;
+    [SyncVar(hook = nameof(SetFacingDirection))] public int FacingDirection;
+    [SyncVar(hook = nameof(Setposition))] public Vector3 position;
     [SyncVar(hook = nameof(SetisRiding))] public bool isRiding;
     [SyncVar(hook = nameof(SetishavingGun))] public bool ishavingGun;
     [SyncVar(hook = nameof(SetHoldingGun))] public bool HoldingGun;
@@ -27,10 +28,6 @@ public class LimbDataContainer : NetworkBehaviour
         {
             CmdSetmovementVelocity(limbData.movementVelocity);
         }
-        if (FacingDirection != limbData.FacingDirection && isClient && isOwned)
-        { 
-            CmdSetFacingDirection(limbData.FacingDirection);
-        }
         if (bulletspeed != limbData.bulletspeed && isClient && isOwned)
         {
             CmdSetbulletspeed(limbData.bulletspeed);
@@ -46,6 +43,14 @@ public class LimbDataContainer : NetworkBehaviour
         if (whatIsBlind != limbData.whatIsBlind && isClient && isOwned)
         {
             CmdSetwhatIsBlind(limbData.whatIsBlind);
+        }
+        if (FacingDirection != limbData.FacingDirection && isClient && isOwned)
+        {
+            CmdSetFacingDirection(limbData.FacingDirection);
+        }
+        if (position != limbData.position)
+        {
+            CmdSetposition(limbData.position);
         }
         if (isRiding != limbData.isRiding && isClient && isOwned)
         {
@@ -93,10 +98,6 @@ public class LimbDataContainer : NetworkBehaviour
     {
         limbData.movementVelocity = newvalue;
     }
-    void SetFacingDirection(int oldvalue, int newvalue)
-    {
-        limbData.FacingDirection = newvalue;
-    }
     void Setbulletspeed(float oldvalue, float newvalue)
     {
         limbData.bulletspeed = newvalue;
@@ -113,7 +114,14 @@ public class LimbDataContainer : NetworkBehaviour
     {
         limbData.whatIsBlind = newvalue;
     }
-
+    void SetFacingDirection(int oldvalue, int newvalue)
+    {
+        limbData.FacingDirection = newvalue;
+    }
+    void Setposition(Vector3 oldvalue, Vector3 newvalue)
+    {
+        limbData.position = newvalue;
+    }
     void SetisRiding(bool oldvalue, bool newvalue)
     {
         limbData.isRiding = newvalue;
@@ -167,11 +175,7 @@ public class LimbDataContainer : NetworkBehaviour
     {
         movementVelocity = newvalue;
     }
-    [Command]
-    void CmdSetFacingDirection(int newvlaue)
-    { 
-        FacingDirection = newvlaue;
-    }
+
     [Command]
     void CmdSetbulletspeed(float newvalue)
     {
@@ -195,8 +199,16 @@ public class LimbDataContainer : NetworkBehaviour
     {
         whatIsBlind = newvalue;
     }
-
-
+    [Command]
+    void CmdSetFacingDirection(int newvlaue)
+    {
+        FacingDirection = newvlaue;
+    }
+    [Command]
+    void CmdSetposition(Vector3 newvalue)
+    {
+        position = newvalue;
+    }
     [Command]
     void CmdSetisRiding(bool newvalue)
     {

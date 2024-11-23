@@ -24,6 +24,7 @@ public class PlayerDataContainer : NetworkBehaviour
     [SyncVar(hook = nameof(Setthrowcall))] public bool throwcall;
     [SyncVar(hook = nameof(Setputdowncall))] public bool putdowncall;
     [SyncVar(hook = nameof(Setthrowinputtime))] public float throwinputtime;
+    [SyncVar(hook = nameof(Setposition))] public Vector3 position;
 
     [SyncVar(hook = nameof(SetNormInputX))]public int NormInputX;
     [SyncVar(hook = nameof(SetNormInputY))]public int NormInputY;
@@ -32,7 +33,6 @@ public class PlayerDataContainer : NetworkBehaviour
     [SyncVar(hook = nameof(SetladderUp))]public bool ladderUp;
     [SyncVar(hook = nameof(SetladderDown))]public bool ladderDown;
 
-    [SyncVar(hook = nameof(Setblindtransform))] public Transform blindtransform;
 
     private void Update()
     {
@@ -101,6 +101,10 @@ public class PlayerDataContainer : NetworkBehaviour
         {
             CmdSetThrowInputTime(playerData.throwinputtime);
         }
+        if (position != playerData.position)
+        {
+            CmdSetposition(playerData.position);
+        }
         if (NormInputX != playerData.NormInputX && isClient && isOwned)
         {
             CmdSetNormInputX(playerData.NormInputX);
@@ -124,10 +128,6 @@ public class PlayerDataContainer : NetworkBehaviour
         if (ladderDown != playerData.ladderDown && isClient && isOwned)
         {
             CmdSetLadderDown(playerData.ladderDown);
-        }
-        if (blindtransform != playerData.blindtransform && isClient && isOwned)
-        {
-            CmdSetBlindTransform(playerData.blindtransform);
         }
     }
     #region Setfunction
@@ -195,6 +195,10 @@ public class PlayerDataContainer : NetworkBehaviour
     {
         playerData.throwinputtime = newvalue;
     }
+    void Setposition(Vector3 oldvalue, Vector3 newvalue)
+    { 
+        playerData.position = newvalue;
+    }
     void SetNormInputX(int oldvalue, int newvalue)
     { 
         playerData.NormInputX = newvalue;
@@ -218,10 +222,6 @@ public class PlayerDataContainer : NetworkBehaviour
     void SetladderDown(bool oldvalue, bool newvalue)
     {
         playerData.ladderDown = newvalue;
-    }
-    void Setblindtransform(Transform oldvalue, Transform newvalue)
-    {
-        playerData.blindtransform = newvalue;
     }
     #endregion
     [Command]
@@ -319,7 +319,11 @@ public class PlayerDataContainer : NetworkBehaviour
     {
         throwinputtime = newvalue;
     }
-
+    [Command]
+    void CmdSetposition(Vector3 newvalue)
+    {
+        position = newvalue;
+    }
     [Command]
     void CmdSetNormInputX(int newvalue)
     {
@@ -356,9 +360,4 @@ public class PlayerDataContainer : NetworkBehaviour
         ladderDown = newvalue;
     }
 
-    [Command]
-    void CmdSetBlindTransform(Transform newvalue)
-    {
-        blindtransform = newvalue;
-    }
 }

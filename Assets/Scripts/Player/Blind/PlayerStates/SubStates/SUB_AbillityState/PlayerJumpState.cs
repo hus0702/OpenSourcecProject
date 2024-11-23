@@ -12,7 +12,7 @@ public class PlayerJumpState : PlayerAbillityState
         base.Enter();
 
         player.SetVelocityY(playerData.jumpVelocity);
-        
+        playerData.JumpInput = false;
         isAbillityDone = true;
     }
 }

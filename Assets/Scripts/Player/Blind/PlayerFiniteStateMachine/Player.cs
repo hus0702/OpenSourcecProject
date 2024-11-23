@@ -98,7 +98,7 @@ public class Player : NetworkBehaviour
     {
         CurrentVelocity = RB.linearVelocity;
         StateMachine.playerCurrentState.LogicUpdate();
-        playerData.blindtransform = this.transform;
+        playerData.position = transform.position;
     }
 
     private void FixedUpdate()
