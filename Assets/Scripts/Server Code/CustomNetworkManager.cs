@@ -59,7 +59,7 @@ public class CustomNetworkManager : NetworkManager
             {
                 // 추가 프리팹 생성 위치 지정 (여기서는 간단히 랜덤 위치 사용)
                 PlayerObjectController playerObjectController = conn.identity.gameObject.GetComponent<PlayerObjectController>();
-                
+                GameManager.instance.AssignAuthority(conn); // 클라이언트에 GameManager 접근권한 부여
                 if (playerObjectController.Role == 1)
                 {
                     additionalInstance = Instantiate(spawnPrefabs[0], conn.identity.transform.position + new Vector3(0,2,0), Quaternion.identity);
