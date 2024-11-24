@@ -8,27 +8,29 @@ public class PlayerInputHandler : NetworkBehaviour
 {
     public bool carryinputblock;
     public Vector2 RawMovementInput;
-    public int NormInputX;
-    public int NormInputY;
     public float throwinputtime;
-    public bool JumpInput;
-    public bool SitInput;
-    public bool ladderUp;
-    public bool ladderDown;
 
     public PlayerDataContainer container;
 
     private void Awake()
     {
-        container = this.gameObject.GetComponent<PlayerDataContainer>();
+        container = GameManager.instance.Pdcontainer;
     }
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         if (isOwned)
         {
             RawMovementInput = context.ReadValue<Vector2>();
-            container.NormInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
-            container.NormInputY = (int)(RawMovementInput * Vector2.right).normalized.y;
+            if (isServer)
+            {
+                container.NormInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
+                container.NormInputY = (int)(RawMovementInput * Vector2.right).normalized.y;
+            }
+            else 
+            {
+                container.CmdSetNormInputX((int)(RawMovementInput * Vector2.right).normalized.x);
+                container.CmdSetNormInputY((int)(RawMovementInput * Vector2.right).normalized.y);
+            }
         }
     }
 
@@ -38,11 +40,26 @@ public class PlayerInputHandler : NetworkBehaviour
         {
             if (context.performed)
             {
-                container.ladderUp = true;
+                if (isServer)
+                {
+                    container.ladderUp = true;
+                }
+                else
+                {
+                    container.CmdSetLadderUp(true);
+                }
             }
             if (context.canceled)
             {
-                container.ladderUp = false;
+                if (isServer)
+                {
+                    container.ladderUp = false;
+                }
+                else
+                {
+                    container.CmdSetLadderUp(false);
+                }
+                
             }
         }
     }
@@ -55,22 +72,50 @@ public class PlayerInputHandler : NetworkBehaviour
             {
                 if (context.performed)
                 {
-                    container.ladderDown = true;
+                    if (isServer)
+                    {
+                        container.ladderDown = true;
+                    }
+                    else
+                    {
+                        container.CmdSetLadderDown(true);
+                    }
                 }
                 if (context.canceled)
                 {
-                    container.ladderDown = false;
+                    if (isServer)
+                    {
+                        container.ladderDown = false;
+                    }
+                    else
+                    {
+                        container.CmdSetLadderDown(false);
+                    }
                 }
             }
             else
             {
                 if (context.performed)
                 {
-                    container.SitInput = true;
+                    if (isServer)
+                    {
+                        container.SitInput = true;
+                    }
+                    else
+                    {
+                        container.CmdSetSitInput(true);
+                    }
                 }
                 if (context.canceled)
                 {
-                    container.SitInput = false;
+                    if (isServer)
+                    {
+                        container.SitInput = false;
+                    }
+                    else
+                    {
+                        container.CmdSetSitInput(false);
+                    }
                 }
             }
         }
@@ -81,7 +126,14 @@ public class PlayerInputHandler : NetworkBehaviour
         {
             if (context.started)
             {
-                container.JumpInput = true;
+                if (isServer)
+                {
+                    container.JumpInput = true;
+                }
+                else
+                { 
+                    container.CmdSetJumpInput(true);
+                }
             }
         }
            
@@ -118,18 +170,39 @@ public class PlayerInputHandler : NetworkBehaviour
                     {
                         container.throwinputtime = Time.time - throwinputtime;
                         throwinputtime = 0;
-                        container.throwcall = true;
+                        if (isServer)
+                        {
+                            container.throwcall = true;
+                        }
+                        else
+                        {
+                            container.CmdSetThrowCall(true);
+                        }
                     }
                 }
                 else
                 {
                     if (context.started)
                     {
-                        container.carryupcall = true;
+                        if (isServer)
+                        {
+                            container.carryupcall = true;
+                        }
+                        else
+                        { 
+                            container.CmdSetCarryUpCall(true);
+                        }
                     }
                     if (context.canceled)
                     {
-                        container.carryupcall = false;
+                        if (isServer)
+                        {
+                            container.carryupcall = false;
+                        }
+                        else
+                        {
+                            container.CmdSetCarryUpCall(false);
+                        }
                     }
                 }
             }

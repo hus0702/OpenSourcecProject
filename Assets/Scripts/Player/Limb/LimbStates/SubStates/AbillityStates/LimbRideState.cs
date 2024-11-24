@@ -12,12 +12,12 @@ public class LimbRideState : LimbAbillityState
         if (Limb.isServer)
         {
             container.isRiding = true;
-            playercontainer.carryupcall = false;
+            GameManager.instance.Pdcontainer.carryupcall = false;
         }
         else
         {
             container.CmdSetisRiding(true);
-            playercontainer.CmdSetCarryUpCall(false);
+            GameManager.instance.Pdcontainer.CmdSetCarryUpCall(false);
         }
         
         isAbillityDone = true;

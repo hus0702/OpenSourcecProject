@@ -37,7 +37,7 @@ public class LimbRidingState : LimbState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (!playercontainer.iscarrying)
+        if (!GameManager.instance.Pdcontainer.iscarrying)
         {
             stateMachine.LimbChangeState(Limb.ThrowState);
         }

@@ -1,33 +1,36 @@
 using Mirror;
-using Mirror.BouncyCastle.Bcpg;
 using UnityEngine;
 
 public class GameManager : NetworkBehaviour
 {
     public static GameManager instance;
 
-    public PlayerData PlayerData;
-    public LimbData LimbData;
+    public PlayerDataContainer Pdcontainer;
+    public LimbDataContainer Ldcontainer;
 
     private void Awake()
     {
+        // 일반적인 싱글톤 패턴 적용
         if (instance == null)
         {
             instance = this;
-            instance.gameObject.SetActive(false);
+            DontDestroyOnLoad(gameObject);
         }
         else if (instance != this)
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(gameObject);
     }
 
-    public void ActivateSingleton()
+    public override void OnStartServer()
     {
-        if (instance != null)
-        {
-            instance.gameObject.SetActive(true);
-        }
+        base.OnStartServer();
+        Debug.Log("나는 서버야");
+    }
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        Debug.Log("클라이언트인데유");
     }
 }

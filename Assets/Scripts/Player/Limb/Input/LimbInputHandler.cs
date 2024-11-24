@@ -19,7 +19,7 @@ public class LimbInputHandler : NetworkBehaviour
 
     private void Awake()
     {
-        container = this.gameObject.GetComponent<LimbDataContainer>();
+        container = GameManager.instance.Ldcontainer;
     }
     public void OnMoveInput(InputAction.CallbackContext context)
     {

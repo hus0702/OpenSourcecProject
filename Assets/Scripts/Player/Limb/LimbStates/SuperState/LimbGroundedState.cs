@@ -37,11 +37,10 @@ public class LimbGroundedState : LimbState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
         xinput = container.NormInputX;
-        if (playercontainer != null)
+        if (GameManager.instance.Pdcontainer != null)
         {
-            if (playercontainer.iscarrying && Limb.CheckIftouchBlind())
+            if (GameManager.instance.Pdcontainer.iscarrying && Limb.CheckIftouchBlind())
             {
                 stateMachine.LimbChangeState(Limb.RideState);
             }
@@ -55,10 +54,8 @@ public class LimbGroundedState : LimbState
             stateMachine.LimbChangeState(Limb.ShotState);
         }
     }
-    
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
     }
-
 }

@@ -26,9 +26,7 @@ public class Player : NetworkBehaviour
     public PlayerClimbState climbState { get; private set; }
     public PlayerPutDownState PutDownState { get; private set; }
     public PlayerThrowState ThrowState { get; private set; }
-
-    [SerializeField]
-    private PlayerDataContainer container;
+    public PlayerDataContainer container { get; private set; }
 
     #endregion
 
@@ -62,6 +60,8 @@ public class Player : NetworkBehaviour
     #region Unity Callback Functions
     private void Awake()
     {
+        container = GameManager.instance.Pdcontainer;
+
         StateMachine = new PlayerStateMachine();
 
         IdleState = new PlayerIdleState(this, StateMachine, container, "idle");

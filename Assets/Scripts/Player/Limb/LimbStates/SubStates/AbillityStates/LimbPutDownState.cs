@@ -29,12 +29,12 @@ public class LimbPutDownState : LimbAbillityState
         if (Limb.isServer)
         {
             container.isRiding = false;
-            playercontainer.putdowncall = false;
+            GameManager.instance.Pdcontainer.putdowncall = false;
         }
         else
         {
             container.CmdSetisRiding(false);
-            playercontainer.CmdSetPutDownCall(false);
+            GameManager.instance.Pdcontainer.CmdSetPutDownCall(false);
         }
         
         isAbillityDone = true;

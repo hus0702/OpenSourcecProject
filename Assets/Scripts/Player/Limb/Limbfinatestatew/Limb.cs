@@ -20,7 +20,6 @@ public class Limb : NetworkBehaviour
 
     public LimbRidingShotState RidingShotState { get; private set; }
 
-    [SerializeField]
     public LimbDataContainer container;
 
     #endregion
@@ -62,7 +61,10 @@ public class Limb : NetworkBehaviour
     #region Unity Callback Functions
     private void Awake()
     {
+        container = GameManager.instance.Ldcontainer;
+
         StateMachine = new PlayerStateMachine();
+
         IdleState = new LimbIdleState(this, StateMachine, container, "Idle");
         MoveState = new LimbMoveState(this, StateMachine, container, "move");
         RideState = new LimbRideState(this, StateMachine, container, "Ride");
@@ -90,16 +92,6 @@ public class Limb : NetworkBehaviour
     {
         CurrentVelocity = RB.linearVelocity;
         StateMachine.LimbCurrentState.LogicUpdate();
-        container.position = transform.position;
-
-        //if (isOwned)
-        //{
-        //    container.position = transform.position;
-        //}
-        //else
-        //{ 
-        //    transform.position = container.position;
-        //}
 
         if (container.isRiding)
         {

@@ -7,7 +7,6 @@ public class LimbState
     protected Limb Limb;
     protected PlayerStateMachine stateMachine;
     protected LimbDataContainer container;
-    protected PlayerDataContainer playercontainer;
     protected bool isAnimationFinished;
     GameObject targetObject;
 
@@ -19,7 +18,7 @@ public class LimbState
     {
         this.Limb = Limb;
         this.stateMachine = stateMachine;
-        this.container = Limb.GetComponent<LimbDataContainer>();
+        this.container = container;
         this.animBoolName = animBoolName;
     }
 
@@ -41,14 +40,6 @@ public class LimbState
 
     public virtual void LogicUpdate()
     {
-        if (targetObject == null)
-        {
-            targetObject = GameObject.FindWithTag("Blind");
-            if (targetObject != null)
-            {
-                playercontainer = targetObject.GetComponent<PlayerDataContainer>();
-            }
-        }
     }
 
     public virtual void PhysicsUpdate()
