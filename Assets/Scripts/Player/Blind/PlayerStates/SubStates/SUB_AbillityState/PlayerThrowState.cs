@@ -32,8 +32,8 @@ public class PlayerThrowState : PlayerAbillityState
         }
         else
         {
-            container.CmdSetIsCarrying(false);
-            container.CmdSetThrowCall(false);
+            player.CmdSetIsCarrying(false);
+            player.CmdSetThrowCall(false);
         }
 
     }

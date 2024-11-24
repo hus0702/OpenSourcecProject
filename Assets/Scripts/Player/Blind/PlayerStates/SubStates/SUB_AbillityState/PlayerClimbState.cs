@@ -30,7 +30,7 @@ public class PlayerClimbState : PlayerAbillityState
         }
         else
         {
-            container.CmdSetIsClimbing(true);
+            player.CmdSetIsClimbing(true);
         }
         player.RB.gravityScale = 0;
         player.SetVelocityX(0);

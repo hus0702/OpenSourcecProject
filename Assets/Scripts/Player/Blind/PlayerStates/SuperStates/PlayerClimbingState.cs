@@ -68,7 +68,6 @@ public class PlayerClimbingState : PlayerState
         {
             container.isclimbing = false;
             player.RB.gravityScale = 5;
-            
             stateMachine.playerChangeState(player.InAirState);
         }
             

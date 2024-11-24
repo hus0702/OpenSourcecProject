@@ -9,12 +9,13 @@ public class PlayerInputHandler : NetworkBehaviour
     public bool carryinputblock;
     public Vector2 RawMovementInput;
     public float throwinputtime;
-
     public PlayerDataContainer container;
+    public Player player;
 
     private void Awake()
     {
         container = GameManager.instance.Pdcontainer;
+        player = GetComponent<Player>();
     }
     public void OnMoveInput(InputAction.CallbackContext context)
     {
@@ -28,8 +29,8 @@ public class PlayerInputHandler : NetworkBehaviour
             }
             else 
             {
-                container.CmdSetNormInputX((int)(RawMovementInput * Vector2.right).normalized.x);
-                container.CmdSetNormInputY((int)(RawMovementInput * Vector2.right).normalized.y);
+                player.CmdSetNormInputX((int)(RawMovementInput * Vector2.right).normalized.x);
+                player.CmdSetNormInputY((int)(RawMovementInput * Vector2.right).normalized.y);
             }
         }
     }
@@ -46,7 +47,7 @@ public class PlayerInputHandler : NetworkBehaviour
                 }
                 else
                 {
-                    container.CmdSetLadderUp(true);
+                    player.CmdSetLadderUp(true);
                 }
             }
             if (context.canceled)
@@ -57,7 +58,7 @@ public class PlayerInputHandler : NetworkBehaviour
                 }
                 else
                 {
-                    container.CmdSetLadderUp(false);
+                    player.CmdSetLadderUp(false);
                 }
                 
             }
@@ -78,7 +79,7 @@ public class PlayerInputHandler : NetworkBehaviour
                     }
                     else
                     {
-                        container.CmdSetLadderDown(true);
+                        player.CmdSetLadderDown(true);
                     }
                 }
                 if (context.canceled)
@@ -89,7 +90,7 @@ public class PlayerInputHandler : NetworkBehaviour
                     }
                     else
                     {
-                        container.CmdSetLadderDown(false);
+                        player.CmdSetLadderDown(false);
                     }
                 }
             }
@@ -103,7 +104,7 @@ public class PlayerInputHandler : NetworkBehaviour
                     }
                     else
                     {
-                        container.CmdSetSitInput(true);
+                        player.CmdSetSitInput(true);
                     }
                 }
                 if (context.canceled)
@@ -114,7 +115,7 @@ public class PlayerInputHandler : NetworkBehaviour
                     }
                     else
                     {
-                        container.CmdSetSitInput(false);
+                        player.CmdSetSitInput(false);
                     }
                 }
             }
@@ -131,8 +132,8 @@ public class PlayerInputHandler : NetworkBehaviour
                     container.JumpInput = true;
                 }
                 else
-                { 
-                    container.CmdSetJumpInput(true);
+                {
+                    player.CmdSetJumpInput(true);
                 }
             }
         }
@@ -168,15 +169,17 @@ public class PlayerInputHandler : NetworkBehaviour
                     }
                     if (context.canceled)
                     {
-                        container.throwinputtime = Time.time - throwinputtime;
-                        throwinputtime = 0;
                         if (isServer)
                         {
+                            container.throwinputtime = Time.time - throwinputtime;
+                            throwinputtime = 0;
                             container.throwcall = true;
                         }
                         else
                         {
-                            container.CmdSetThrowCall(true);
+                            player.CmdSetThrowInputTime(Time.time - throwinputtime);
+                            throwinputtime = 0;
+                            player.CmdSetThrowCall(true);
                         }
                     }
                 }
@@ -189,8 +192,8 @@ public class PlayerInputHandler : NetworkBehaviour
                             container.carryupcall = true;
                         }
                         else
-                        { 
-                            container.CmdSetCarryUpCall(true);
+                        {
+                            player.CmdSetCarryUpCall(true);
                         }
                     }
                     if (context.canceled)
@@ -201,7 +204,7 @@ public class PlayerInputHandler : NetworkBehaviour
                         }
                         else
                         {
-                            container.CmdSetCarryUpCall(false);
+                            player.CmdSetCarryUpCall(false);
                         }
                     }
                 }

@@ -16,8 +16,8 @@ public class PlayerCarryUpState : PlayerAbillityState
         }
         else
         { 
-            container.CmdSetIsCarrying(true);
-            container.CmdSetCarryUpCall(false);
+            player.CmdSetIsCarrying(true);
+            player.CmdSetCarryUpCall(false);
         }
         container.iscarrying = true;
         container.carryupcall = false;

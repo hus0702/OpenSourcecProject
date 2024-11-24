@@ -16,8 +16,8 @@ public class LimbRideState : LimbAbillityState
         }
         else
         {
-            container.CmdSetisRiding(true);
-            GameManager.instance.Pdcontainer.CmdSetCarryUpCall(false);
+            Limb.CmdSetisRiding(true);
+            Limb.CmdSetCarryUpCall(false);
         }
         
         isAbillityDone = true;

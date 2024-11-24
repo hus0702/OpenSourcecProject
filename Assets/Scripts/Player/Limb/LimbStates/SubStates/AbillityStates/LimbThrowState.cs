@@ -41,8 +41,8 @@ public class LimbThrowState : LimbAbillityState
         }
         else
         {
-            container.CmdSetisRiding(false);
-            GameManager.instance.Pdcontainer.CmdSetThrowCall(false);
+            Limb.CmdSetisRiding(false);
+            Limb.CmdSetThrowCall(false);
         }
         Limb.spriteRenderer.enabled = true;
         isAbillityDone = true;

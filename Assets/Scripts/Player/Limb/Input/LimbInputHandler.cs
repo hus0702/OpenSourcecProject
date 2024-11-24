@@ -9,17 +9,13 @@ public class LimbInputHandler : NetworkBehaviour
     public LimbDataContainer container;
     public bool carryinputblock;
     public Vector2 RawMovementInput;
-    public int NormInputX;
-    public int NormInputY;
-    public bool JumpInput;
-    public bool SitInput;
-    public bool attackInput;
-    public Vector3 mousePosition;
     public bool isshotblocked;
+    public Limb limb;
 
     private void Awake()
     {
         container = GameManager.instance.Ldcontainer;
+        limb = GetComponent<Limb>();
     }
     public void OnMoveInput(InputAction.CallbackContext context)
     {
@@ -33,8 +29,8 @@ public class LimbInputHandler : NetworkBehaviour
             }
             else
             {
-                container.CmdSetNormInputX((int)(RawMovementInput * Vector2.right).normalized.x);
-                container.CmdSetNormInputY((int)(RawMovementInput * Vector2.right).normalized.y);
+                limb.CmdSetNormInputX((int)(RawMovementInput * Vector2.right).normalized.x);
+                limb.CmdSetNormInputY((int)(RawMovementInput * Vector2.right).normalized.y);
             }
         }
     }
@@ -68,7 +64,7 @@ public class LimbInputHandler : NetworkBehaviour
                 }
                 else
                 {
-                    container.CmdSetattackInput(true);
+                    limb.CmdSetattackInput(true);
                 }
             }
         }

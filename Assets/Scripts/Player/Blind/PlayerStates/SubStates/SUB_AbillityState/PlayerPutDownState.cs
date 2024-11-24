@@ -15,7 +15,7 @@ public class PlayerPutDownState : PlayerAbillityState
         }
         else
         {
-            container.CmdSetIsCarrying(false);
+            player.CmdSetIsCarrying(false);
         }
         isAbillityDone = true;
 

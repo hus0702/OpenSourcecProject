@@ -2,6 +2,7 @@ using Mirror;
 using Mirror.Examples.Common;
 using NUnit.Framework.Constraints;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player : NetworkBehaviour
 {
@@ -142,9 +143,8 @@ public class Player : NetworkBehaviour
     #region Check Functions
     public void CheckifShouldflip(int xinput)
     { 
-        if(xinput != 0 && xinput != FacingDirection) 
+        if(xinput != 0 && xinput != container.facingdirection) 
         {
-            container.facingdirection *= -1;
             Flip();
         }
     }
@@ -172,7 +172,14 @@ public class Player : NetworkBehaviour
     private void AnimationFinishTrigger() => StateMachine.playerCurrentState.AnimationFinishTrigger();
     private void Flip()
     {
-        FacingDirection *= -1;
+        if (isServer)
+        {
+            container.facingdirection *= -1;
+        }
+        else
+        {
+            CmdSetFacingDirection(container.facingdirection *= -1);
+        }
         transform.Rotate(0.0f, 180.0f, 0.0f);
     }
 
@@ -184,4 +191,89 @@ public class Player : NetworkBehaviour
         }
     }
     #endregion
+
+    #region ContainerCommandfunction
+    [Command]
+    public void CmdSetFacingDirection(float newvalue)
+    {
+        container.facingdirection = newvalue;
+    }
+
+    [Command]
+    public void CmdSetIsCarrying(bool newvalue)
+    {
+        container.iscarrying = newvalue;
+    }
+
+    [Command]
+    public void CmdSetIsClimbing(bool newvalue)
+    {
+        container.isclimbing = newvalue;
+    }
+
+    [Command]
+    public void CmdSetCarryUpCall(bool newvalue)
+    {
+        container.carryupcall = newvalue;
+    }
+
+    [Command]
+    public void CmdSetThrowCall(bool newvalue)
+    {
+        container.throwcall = newvalue;
+    }
+
+    [Command]
+    public void CmdSetPutDownCall(bool newvalue)
+    {
+        container.putdowncall = newvalue;
+    }
+
+    [Command]
+    public void CmdSetThrowInputTime(float newvalue)
+    {
+        container.throwinputtime = newvalue;
+    }
+    [Command]
+    public void CmdSetposition(Vector3 newvalue)
+    {
+        container.position = newvalue;
+    }
+    [Command]
+    public void CmdSetNormInputX(int newvalue)
+    {
+        container.NormInputX = newvalue;
+    }
+
+    [Command]
+    public void CmdSetNormInputY(int newvalue)
+    {
+        container.NormInputY = newvalue;
+    }
+
+    [Command]
+    public void CmdSetJumpInput(bool newvalue)
+    {
+        container.JumpInput = newvalue;
+    }
+
+    [Command]
+    public void CmdSetSitInput(bool newvalue)
+    {
+        container.SitInput = newvalue;
+    }
+
+    [Command]
+    public void CmdSetLadderUp(bool newvalue)
+    {
+        container.ladderUp = newvalue;
+    }
+
+    [Command]
+    public void CmdSetLadderDown(bool newvalue)
+    {
+        container.ladderDown = newvalue;
+    }
+    #endregion
+
 }

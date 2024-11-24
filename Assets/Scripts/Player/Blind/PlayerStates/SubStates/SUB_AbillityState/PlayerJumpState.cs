@@ -18,7 +18,7 @@ public class PlayerJumpState : PlayerAbillityState
         }
         else
         {
-            container.CmdSetJumpInput(false);
+            player.CmdSetJumpInput(false);
         }
         
         isAbillityDone = true;

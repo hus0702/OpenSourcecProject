@@ -33,8 +33,8 @@ public class LimbPutDownState : LimbAbillityState
         }
         else
         {
-            container.CmdSetisRiding(false);
-            GameManager.instance.Pdcontainer.CmdSetPutDownCall(false);
+            Limb.CmdSetisRiding(false);
+            Limb.CmdSetPutDownCall(false);
         }
         
         isAbillityDone = true;

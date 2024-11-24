@@ -36,7 +36,7 @@ public class LimbShotState : LimbAbillityState
         }
         else
         {
-            container.CmdSetattackInput(false);
+            Limb.CmdSetattackInput(false);
         }
 
         Limb.InputHandler.StartCoroutine(Limb.InputHandler.stopshotinput(container.ShotDelay));

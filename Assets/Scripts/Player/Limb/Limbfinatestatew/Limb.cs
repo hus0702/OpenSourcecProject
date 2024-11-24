@@ -4,6 +4,7 @@ using Steamworks;
 using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Limb : NetworkBehaviour
 {
@@ -167,8 +168,105 @@ public class Limb : NetworkBehaviour
     private void AnimationFinishTrigger() => StateMachine.LimbCurrentState.AnimationFinishTrigger();
     public void Flip()
     {
-        container.FacingDirection *= -1;
+        if (isServer)
+        {
+            container.FacingDirection *= -1;
+        }
+        else
+        {
+            CmdSetFacingDirection(container.FacingDirection *= -1);
+        }
         base.transform.Rotate(0.0f, 180.0f, 0.0f);
+    }
+    #endregion
+
+    #region ContainerSetFunction
+    [Command]
+    public void CmdSetFacingDirection(int newvlaue)
+    {
+        container.FacingDirection = newvlaue;
+    }
+    [Command]
+    public void CmdSetposition(Vector3 newvalue)
+    {
+        container.position = newvalue;
+    }
+    [Command]
+    public void CmdSetisRiding(bool newvalue)
+    {
+        container.isRiding = newvalue;
+    }
+
+    [Command]
+    public void CmdSetishavingGun(bool newvalue)
+    {
+        container.ishavingGun = newvalue;
+    }
+
+    [Command]
+    public void CmdSetHoldingGun(bool newvalue)
+    {
+        container.HoldingGun = newvalue;
+    }
+
+    [Command]
+    public void CmdSetshotDelay(float newvalue)
+    {
+        container.ShotDelay = newvalue;
+    }
+
+    [Command]
+    public void CmdSetNormInputX(int newvalue)
+    {
+        container.NormInputX = newvalue;
+    }
+
+    [Command]
+    public void CmdSetNormInputY(int newvalue)
+    {
+        container.NormInputY = newvalue;
+    }
+
+    [Command]
+    public void CmdSetJumpInput(bool newvalue)
+    {
+        container.JumpInput = newvalue;
+    }
+
+    [Command]
+    public void CmdSetSitInput(bool newvalue)
+    {
+        container.SitInput = newvalue;
+    }
+
+    [Command]
+    public void CmdSetattackInput(bool newvalue)
+    {
+        container.attackInput = newvalue;
+    }
+
+    [Command]
+    public void CmdSetmousePosition(Vector3 newvalue)
+    {
+        container.mousePosition = newvalue;
+    }
+
+    [Command]
+    public void CmdSetThrowCall(bool newvalue)
+    { 
+        GameManager.instance.Pdcontainer.throwcall = newvalue;
+    }
+
+    [Command]
+    public void CmdSetCarryUpCall(bool newvalue)
+    {
+        GameManager.instance.Pdcontainer.carryupcall = newvalue;
+    }
+
+    [Command]
+    public void CmdSetPutDownCall(bool newvalue)
+    {
+        GameManager.instance.Pdcontainer.carryupcall = newvalue;
     }
     #endregion
 }
