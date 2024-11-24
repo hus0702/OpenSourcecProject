@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: -5260081670319047274}
   - component: {fileID: 527253401587517598}
   - component: {fileID: 1173216616463554652}
+  - component: {fileID: 7523811757716706293}
   m_Layer: 10
   m_Name: LimbEx
   m_TagString: Limb
@@ -209,13 +210,8 @@ MonoBehaviour:
   container: {fileID: 0}
   carryinputblock: 0
   RawMovementInput: {x: 0, y: 0}
-  NormInputX: 0
-  NormInputY: 0
-  JumpInput: 0
-  SitInput: 0
-  attackInput: 0
-  mousePosition: {x: 0, y: 0, z: 0}
   isshotblocked: 0
+  limb: {fileID: 0}
 --- !u!95 &5368857074632749019
 Animator:
   serializedVersion: 7
@@ -382,19 +378,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 1
+  syncDirection: 0
   syncMode: 0
   syncInterval: 0
   target: {fileID: 402397594313195349}
   syncPosition: 0
   syncRotation: 0
   syncScale: 0
-  onlySyncOnChange: 1
+  onlySyncOnChange: 0
   compressRotation: 1
   interpolatePosition: 1
   interpolateRotation: 1
   interpolateScale: 1
-  coordinateSpace: 0
+  coordinateSpace: 1
   timelineOffset: 1
   showGizmos: 0
   showOverlay: 0
@@ -474,6 +470,39 @@ MonoBehaviour:
   SitInput: 0
   attackInput: 0
   mousePosition: {x: 0, y: 0, z: 0}
+--- !u!114 &7523811757716706293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2667718191209937384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c7e12ad9b9ae443c9fdf37e9f5ecd36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 402397594313195349}
+  syncPosition: 0
+  syncRotation: 0
+  syncScale: 0
+  onlySyncOnChange: 0
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 1
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  bufferResetMultiplier: 3
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
 --- !u!1 &5559569575567345883
 GameObject:
   m_ObjectHideFlags: 0
