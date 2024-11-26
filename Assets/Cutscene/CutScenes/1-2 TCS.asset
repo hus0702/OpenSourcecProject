@@ -34,6 +34,11 @@ MonoBehaviour:
       \uD1B5\uD55C \uB1CC \uAC00\uC18C\uC131 \uC790\uADF9</color>"
   - script: "<color=#008099>\uC774 \uACF3... \uBB54\uAC00 \uC798 \uBABB \uB410\uC5B4\uC694.\n\uD2B9\uD788
       \uCC9C\uC7A5\uC5D0 \uBB4D\uC5B4 \uC788\uB294 \uC5BC\uB8E9\uC774\uC694.<sleep(0.2)>\n\uC544\uBB34\uB9AC
-      \uBD10\uB3C4 \uC800\uAC74<sleep(0.2)>.<sleep(0.2)>.<sleep(0.2)>.?!?"
-  - script: "<size=120%><color=\"white\">\uC2E4\uD5D8 \uC2DC\uC791 3... <sleep(0.8)>
-      2... <sleep(0.8)> 1... <sleep(0.8)>\n\uC2E4\uD5D8 \uAC1C\uC2DC</color>"
+      \uBD10\uB3C4 \uC800\uAC74<sleep(0.5)>.<sleep(0.5)>.<sleep(0.5)>.?!?"
+  - script: "<size=120%><color=\"white\">\uC2E4\uD5D8 \uC2DC\uC791 3... <sleep(0.5)>
+      2... <sleep(0.5)> 1... <sleep(0.5)>\n\uC2E4\uD5D8 \uAC1C\uC2DC</color>"
+  - script: "<color=#008099>\uC5B4... <size=120%>\uC5B4\uC5B4\uC5B4!!!"
+  - script: "\uC65C, \uC65C!! \uBB34\uC2A8 \uC77C\uC778\uB370\uC694!!!"
+  - script: "<color=#008099><size=120%>\uCC9C\uC7A5\uC774 \uB0B4\uB824\uC624\uACE0
+      \uC788\uC5B4\uC694!!!"
+  - script: "... \uC774\uB7F0 \uC820\uC7A5!!!"
