@@ -6,27 +6,32 @@ using UnityEngine.InputSystem;
 
 public class LimbInputHandler : NetworkBehaviour
 {
-
+    public LimbDataContainer container;
     public bool carryinputblock;
     public Vector2 RawMovementInput;
-    public int NormInputX;
-    public int NormInputY;
-    public bool JumpInput;
-    public bool SitInput;
-    public bool attackInput;
-    public Vector3 mousePosition;
     public bool isshotblocked;
+    public Limb limb;
 
-    private void Update()
+    private void Awake()
     {
+        container = GameManager.instance.Ldcontainer;
+        limb = GetComponent<Limb>();
     }
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         if (isOwned)
         {
             RawMovementInput = context.ReadValue<Vector2>();
-            GameManager.instance.LimbData.NormInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
-            GameManager.instance.LimbData.NormInputY = (int)(RawMovementInput * Vector2.right).normalized.y;
+            if (isServer)
+            {
+                container.NormInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
+                container.NormInputY = (int)(RawMovementInput * Vector2.right).normalized.y;
+            }
+            else
+            {
+                limb.CmdSetNormInputX((int)(RawMovementInput * Vector2.right).normalized.x);
+                limb.CmdSetNormInputY((int)(RawMovementInput * Vector2.right).normalized.y);
+            }
         }
     }
 
@@ -51,9 +56,16 @@ public class LimbInputHandler : NetworkBehaviour
         {
             if (context.started && !isshotblocked)
             {
-                GameManager.instance.LimbData.mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                GameManager.instance.LimbData.mousePosition.z = 0;
-                GameManager.instance.LimbData.attackInput = true;
+                container.mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                container.mousePosition.z = 0;
+                if (isServer)
+                {
+                    container.attackInput = true;
+                }
+                else
+                {
+                    limb.CmdSetattackInput(true);
+                }
             }
         }
         

@@ -12,15 +12,15 @@ GameObject:
   - component: {fileID: 238795017537007523}
   - component: {fileID: 2833181340004099870}
   - component: {fileID: 8832166363159662661}
-  - component: {fileID: 2121115356825452233}
   - component: {fileID: 2344406304438347376}
+  - component: {fileID: 2121115356825452233}
   - component: {fileID: 4111211025802692603}
   - component: {fileID: 4452632533519340573}
-  - component: {fileID: -8937141886338597206}
-  - component: {fileID: 3199729425735368045}
-  - component: {fileID: -2805146195357258285}
   - component: {fileID: -4218232194777718764}
-  - component: {fileID: 5407135345252990022}
+  - component: {fileID: 3199729425735368045}
+  - component: {fileID: -8937141886338597206}
+  - component: {fileID: 8683506297638720753}
+  - component: {fileID: 2343852343929795231}
   m_Layer: 8
   m_Name: Blind
   m_TagString: Blind
@@ -37,8 +37,8 @@ Transform:
   m_GameObject: {fileID: 5727899445206955385}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.136, y: -1.048, z: -0.2684746}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 1.167, y: -1.038, z: -0.2684746}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5666345602596337400}
@@ -105,17 +105,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.032131463, y: -0.0016739368}
+  m_Offset: {x: 0.024491102, y: -0.07545495}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.28, y: 0.59}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 0.28, y: 0.59}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.24075633, y: 0.61530757}
+  m_Size: {x: 0.63539857, y: 1.8472779}
   m_EdgeRadius: 0
 --- !u!114 &8832166363159662661
 MonoBehaviour:
@@ -234,29 +234,11 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e555713a-3db2-47f2-b08e-5a692ae7f5a6
     m_ActionName: 'BlindGameplay/ladderUp[/Keyboard/w]'
-  m_NeverAutoSwitchControlSchemes: 0
+  m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: BlindGameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &2121115356825452233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5727899445206955385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33b23d019a222174d98ce1f2329bcc15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  playerData: {fileID: 11400000, guid: c48025bae44ad8e4bbdabf36fa70eed7, type: 2}
-  groundcheck: {fileID: 5666345602596337400}
-  myBoxCollider: {fileID: 2833181340004099870}
 --- !u!114 &2344406304438347376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,13 +256,26 @@ MonoBehaviour:
   syncInterval: 0
   carryinputblock: 0
   RawMovementInput: {x: 0, y: 0}
-  NormInputX: 0
-  NormInputY: 0
   throwinputtime: 0
-  JumpInput: 0
-  SitInput: 0
-  ladderUp: 0
-  ladderDown: 0
+  container: {fileID: 0}
+  player: {fileID: 0}
+--- !u!114 &2121115356825452233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5727899445206955385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33b23d019a222174d98ce1f2329bcc15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  groundcheck: {fileID: 5666345602596337400}
+  myBoxCollider: {fileID: 2833181340004099870}
 --- !u!212 &4111211025802692603
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -358,6 +353,56 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-4218232194777718764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5727899445206955385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  clientAuthority: 1
+  animator: {fileID: 4452632533519340573}
+--- !u!114 &3199729425735368045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5727899445206955385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a553cb17010b2403e8523b558bffbc14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 1527302452741640446}
+  syncPosition: 0
+  syncRotation: 0
+  syncScale: 0
+  onlySyncOnChange: 0
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 1
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  bufferResetMultiplier: 3
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
 --- !u!114 &-8937141886338597206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,40 +420,7 @@ MonoBehaviour:
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
---- !u!114 &3199729425735368045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5727899445206955385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a553cb17010b2403e8523b558bffbc14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 1
-  syncMode: 0
-  syncInterval: 0
-  target: {fileID: 1527302452741640446}
-  syncPosition: 0
-  syncRotation: 0
-  syncScale: 1
-  onlySyncOnChange: 1
-  compressRotation: 1
-  interpolatePosition: 1
-  interpolateRotation: 1
-  interpolateScale: 1
-  coordinateSpace: 0
-  timelineOffset: 1
-  showGizmos: 0
-  showOverlay: 0
-  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  bufferResetMultiplier: 3
-  positionSensitivity: 0.01
-  rotationSensitivity: 0.01
-  scaleSensitivity: 0.01
---- !u!114 &-2805146195357258285
+--- !u!114 &8683506297638720753
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -430,7 +442,7 @@ MonoBehaviour:
   Ready: 0
   Role: 0
   playerCamera: {fileID: 0}
---- !u!114 &-4218232194777718764
+--- !u!114 &2343852343929795231
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -439,59 +451,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 5727899445206955385}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c7e12ad9b9ae443c9fdf37e9f5ecd36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 1
+  syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  clientAuthority: 1
-  animator: {fileID: 4452632533519340573}
---- !u!114 &5407135345252990022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5727899445206955385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a13fe57a2fd47e4fb945c521d1ec82f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 1
-  syncMode: 0
-  syncInterval: 0
-  playerData: {fileID: 11400000, guid: c48025bae44ad8e4bbdabf36fa70eed7, type: 2}
-  movementVelocity: 0
-  sitmovementVelocity: 0
-  facingdirection: 0
-  climbVelocity: 0
-  C_movementVelocity: 0
-  jumpVelocity: 0
-  groundCheckRadious: 0
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
-  whatIsLimb:
-    serializedVersion: 2
-    m_Bits: 0
-  whatIsLadder:
-    serializedVersion: 2
-    m_Bits: 0
-  iscarrying: 0
-  isclimbing: 0
-  carryupcall: 0
-  throwcall: 0
-  putdowncall: 0
-  throwinputtime: 0
-  NormInputX: 0
-  NormInputY: 0
-  JumpInput: 0
-  SitInput: 0
-  ladderUp: 0
-  ladderDown: 0
-  blindtransform: {fileID: 0}
+  target: {fileID: 1527302452741640446}
+  syncPosition: 0
+  syncRotation: 0
+  syncScale: 0
+  onlySyncOnChange: 0
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 1
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  bufferResetMultiplier: 3
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
 --- !u!1 &7870875001181645087
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,7 +500,7 @@ Transform:
   m_GameObject: {fileID: 7870875001181645087}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.502, z: 0}
+  m_LocalPosition: {x: 0, y: -0.95, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

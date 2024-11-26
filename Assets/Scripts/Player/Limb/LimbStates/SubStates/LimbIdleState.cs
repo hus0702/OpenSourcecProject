@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class LimbIdleState : LimbGroundedState
 {
-    public LimbIdleState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
+    public LimbIdleState(Limb Limb, PlayerStateMachine stateMachine, LimbDataContainer container, string animBoolName) : base(Limb, stateMachine, container, animBoolName)
     {
-
     }
 
     public override void AnimationFinishTrigger()
@@ -35,8 +34,6 @@ public class LimbIdleState : LimbGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        Limb.SetVelocityX(limbdata.movementVelocity * xinput);
-        Limb.CheckifShouldflip(xinput);
         if (xinput != 0f)
         {
             stateMachine.LimbChangeState(Limb.MoveState);

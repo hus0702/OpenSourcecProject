@@ -1,22 +1,24 @@
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class LimbState
 {
     protected Limb Limb;
     protected PlayerStateMachine stateMachine;
-    protected LimbData limbdata;
-
+    protected LimbDataContainer container;
     protected bool isAnimationFinished;
+    GameObject targetObject;
 
     protected float startTime;
     private string animBoolName;
     private bool attackInput;
 
-    public LimbState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName)
+    public LimbState(Limb Limb, PlayerStateMachine stateMachine, LimbDataContainer container, string animBoolName)
     {
         this.Limb = Limb;
         this.stateMachine = stateMachine;
-        this.limbdata = limbdata;
+        this.container = container;
         this.animBoolName = animBoolName;
     }
 
@@ -26,6 +28,9 @@ public class LimbState
         Limb.Anim.SetBool(animBoolName, true);
         startTime = Time.time;
         isAnimationFinished = false;
+        
+
+        
     }
 
     public virtual void Exit()
@@ -35,10 +40,6 @@ public class LimbState
 
     public virtual void LogicUpdate()
     {
-        if (GameManager.instance.LimbData.attackInput)
-        {
-            stateMachine.LimbChangeState(Limb.ShotState);
-        }
     }
 
     public virtual void PhysicsUpdate()

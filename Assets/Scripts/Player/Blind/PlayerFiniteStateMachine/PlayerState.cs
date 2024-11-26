@@ -4,7 +4,7 @@ public class PlayerState
 {
     protected Player player;
     protected PlayerStateMachine stateMachine;
-    protected PlayerData playerData;
+    protected PlayerDataContainer container;
 
     protected bool isAnimationFinished;
 
@@ -13,11 +13,11 @@ public class PlayerState
 
     private string animBoolName;
 
-    public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName)
+    public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerDataContainer container, string animBoolName)
     {
         this.player = player;
         this.stateMachine = stateMachine;
-        this.playerData = playerData;
+        this.container = container;
         this.animBoolName = animBoolName;
 
     }
@@ -27,7 +27,6 @@ public class PlayerState
         DoCheck();
         player.Anim.SetBool(animBoolName, true);
         startTime = Time.time;
-        //Debug.Log(animBoolName);
         isAnimationFinished = false;
 
     }

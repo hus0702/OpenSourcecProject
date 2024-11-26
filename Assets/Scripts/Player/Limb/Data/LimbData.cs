@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class LimbData : ScriptableObject
 {
+    [Header("Constants")]
     [Header("Move state")]
     public float movementVelocity = 3f;
-    public int FacingDirection = 1;
-
     [Header("bullet speed")]
     public float bulletspeed = 20f;
 
@@ -15,6 +14,11 @@ public class LimbData : ScriptableObject
     public float groundCheckRadious;
     public LayerMask whatIsGround;
     public LayerMask whatIsBlind;
+
+    [Header("SyncVar From Now")]
+    [Header("transform")]
+    public int FacingDirection = 1;
+    public Vector3 position;
 
     [Header("isRiding")]
     public bool isRiding;

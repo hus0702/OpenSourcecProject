@@ -2,15 +2,24 @@ using UnityEngine;
 
 public class LimbRideState : LimbAbillityState
 {
-    public LimbRideState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
+    public LimbRideState(Limb Limb, PlayerStateMachine stateMachine, LimbDataContainer container, string animBoolName) : base(Limb, stateMachine, container, animBoolName)
     {
     }
 
     public override void Enter()
     {
         base.Enter();
-        limbdata.isRiding = true;
-        GameManager.instance.PlayerData.carryupcall = false;
+        if (Limb.isServer)
+        {
+            container.isRiding = true;
+            GameManager.instance.Pdcontainer.carryupcall = false;
+        }
+        else
+        {
+            Limb.CmdSetisRiding(true);
+            Limb.CmdSetCarryUpCall(false);
+        }
+        
         isAbillityDone = true;
     }
 }

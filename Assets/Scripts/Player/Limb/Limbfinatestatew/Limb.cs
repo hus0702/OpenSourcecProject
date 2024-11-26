@@ -1,10 +1,12 @@
+using Mirror;
 using Mirror.BouncyCastle.Asn1.TeleTrust;
 using Steamworks;
 using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public class Limb : PlayerObjectController
+public class Limb : NetworkBehaviour
 {
     #region State Variables
     public PlayerStateMachine StateMachine { get; private set; }
@@ -17,8 +19,9 @@ public class Limb : PlayerObjectController
     public LimbPutDownState PutDownState { get; private set; }
     public LimbThrowState ThrowState { get; private set; }
 
-    [SerializeField]
-    public LimbData limbData;
+    public LimbRidingShotState RidingShotState { get; private set; }
+
+    public LimbDataContainer container;
 
     #endregion
 
@@ -59,16 +62,19 @@ public class Limb : PlayerObjectController
     #region Unity Callback Functions
     private void Awake()
     {
+        container = GameManager.instance.Ldcontainer;
+
         StateMachine = new PlayerStateMachine();
-        IdleState = new LimbIdleState(this, StateMachine, limbData, "Idle");
-        MoveState = new LimbMoveState(this, StateMachine, limbData, "move");
-        RideState = new LimbRideState(this, StateMachine, limbData, "Ride");
-        RidingState = new LimbRidingState(this, StateMachine, limbData, "Riding");
-        ShotState = new LimbShotState(this, StateMachine, limbData, "shot");
-        PutDownState = new LimbPutDownState(this, StateMachine, limbData, "putdown");
-        ThrowState = new LimbThrowState(this, StateMachine, limbData, "throw");
-        inAirState = new LimbinAirState(this, StateMachine, limbData, "inair");
-        limbData.isRiding = false;
+
+        IdleState = new LimbIdleState(this, StateMachine, container, "Idle");
+        MoveState = new LimbMoveState(this, StateMachine, container, "move");
+        RideState = new LimbRideState(this, StateMachine, container, "Ride");
+        RidingState = new LimbRidingState(this, StateMachine, container, "Riding");
+        ShotState = new LimbShotState(this, StateMachine, container, "shot");
+        PutDownState = new LimbPutDownState(this, StateMachine, container, "putdown");
+        ThrowState = new LimbThrowState(this, StateMachine, container, "throw");
+        inAirState = new LimbinAirState(this, StateMachine, container, "inair");
+        RidingShotState = new LimbRidingShotState(this, StateMachine, container, "RidingShot");
     }
 
     private void Start()
@@ -79,7 +85,7 @@ public class Limb : PlayerObjectController
         spriteRenderer = GetComponent<SpriteRenderer>();
         InputHandler = GetComponent<LimbInputHandler>();
         limbtransform = GetComponent<Transform>();
-        StateMachine.LimbInitialize(IdleState,limbData);
+        StateMachine.LimbInitialize(IdleState, container);
         BulletPrefab = bulletprefab;
     }
 
@@ -88,9 +94,9 @@ public class Limb : PlayerObjectController
         CurrentVelocity = RB.linearVelocity;
         StateMachine.LimbCurrentState.LogicUpdate();
 
-        if (limbData.isRiding)
+        if (container.isRiding)
         {
-            this.limbtransform.position = (GameManager.instance.PlayerData.blindtransform.position + new Vector3(0, 1f, 0));
+            this.limbtransform.position = (container.position + new Vector3(0, 1f, 0));
         }
     }
 
@@ -125,7 +131,7 @@ public class Limb : PlayerObjectController
     #region Check Functions
     public void CheckifShouldflip(int xinput)
     {
-        if (xinput != 0 && xinput != limbData.FacingDirection)
+        if (xinput != 0 && xinput != container.FacingDirection)
         {
             Flip();
         }
@@ -133,7 +139,7 @@ public class Limb : PlayerObjectController
 
     public bool CheckIfGrounded()
     {
-        return Physics2D.OverlapCircle(groundcheck.position, limbData.groundCheckRadious, limbData.whatIsGround);
+        return Physics2D.OverlapCircle(groundcheck.position, container.groundCheckRadious, container.whatIsGround);
     }
 
     public bool CheckIftouchBlind()
@@ -142,7 +148,7 @@ public class Limb : PlayerObjectController
         //ContactFilter2D contactFilter = new ContactFilter2D();
         //contactFilter.SetLayerMask(limbData.whitIsBlind);
         //contactFilter.useLayerMask = true;
-        return Physics2D.OverlapCircle(groundcheck.position, limbData.groundCheckRadious, limbData.whatIsBlind);
+        return Physics2D.OverlapCircle(groundcheck.position, container.groundCheckRadious, container.whatIsBlind);
         //if (Physics2D.OverlapCollider(Collider, contactFilter, results) == 0)
         //{
         //    return false;
@@ -162,8 +168,105 @@ public class Limb : PlayerObjectController
     private void AnimationFinishTrigger() => StateMachine.LimbCurrentState.AnimationFinishTrigger();
     public void Flip()
     {
-        limbData.FacingDirection *= -1;
+        if (isServer)
+        {
+            container.FacingDirection *= -1;
+        }
+        else
+        {
+            CmdSetFacingDirection(container.FacingDirection *= -1);
+        }
         base.transform.Rotate(0.0f, 180.0f, 0.0f);
+    }
+    #endregion
+
+    #region ContainerSetFunction
+    [Command]
+    public void CmdSetFacingDirection(int newvlaue)
+    {
+        container.FacingDirection = newvlaue;
+    }
+    [Command]
+    public void CmdSetposition(Vector3 newvalue)
+    {
+        container.position = newvalue;
+    }
+    [Command]
+    public void CmdSetisRiding(bool newvalue)
+    {
+        container.isRiding = newvalue;
+    }
+
+    [Command]
+    public void CmdSetishavingGun(bool newvalue)
+    {
+        container.ishavingGun = newvalue;
+    }
+
+    [Command]
+    public void CmdSetHoldingGun(bool newvalue)
+    {
+        container.HoldingGun = newvalue;
+    }
+
+    [Command]
+    public void CmdSetshotDelay(float newvalue)
+    {
+        container.ShotDelay = newvalue;
+    }
+
+    [Command]
+    public void CmdSetNormInputX(int newvalue)
+    {
+        container.NormInputX = newvalue;
+    }
+
+    [Command]
+    public void CmdSetNormInputY(int newvalue)
+    {
+        container.NormInputY = newvalue;
+    }
+
+    [Command]
+    public void CmdSetJumpInput(bool newvalue)
+    {
+        container.JumpInput = newvalue;
+    }
+
+    [Command]
+    public void CmdSetSitInput(bool newvalue)
+    {
+        container.SitInput = newvalue;
+    }
+
+    [Command]
+    public void CmdSetattackInput(bool newvalue)
+    {
+        container.attackInput = newvalue;
+    }
+
+    [Command]
+    public void CmdSetmousePosition(Vector3 newvalue)
+    {
+        container.mousePosition = newvalue;
+    }
+
+    [Command]
+    public void CmdSetThrowCall(bool newvalue)
+    { 
+        GameManager.instance.Pdcontainer.throwcall = newvalue;
+    }
+
+    [Command]
+    public void CmdSetCarryUpCall(bool newvalue)
+    {
+        GameManager.instance.Pdcontainer.carryupcall = newvalue;
+    }
+
+    [Command]
+    public void CmdSetPutDownCall(bool newvalue)
+    {
+        GameManager.instance.Pdcontainer.carryupcall = newvalue;
     }
     #endregion
 }

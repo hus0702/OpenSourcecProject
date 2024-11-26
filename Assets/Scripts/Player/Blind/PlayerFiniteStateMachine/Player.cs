@@ -2,6 +2,7 @@ using Mirror;
 using Mirror.Examples.Common;
 using NUnit.Framework.Constraints;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player : NetworkBehaviour
 {
@@ -26,9 +27,7 @@ public class Player : NetworkBehaviour
     public PlayerClimbState climbState { get; private set; }
     public PlayerPutDownState PutDownState { get; private set; }
     public PlayerThrowState ThrowState { get; private set; }
-
-    [SerializeField]
-    private PlayerData playerData;
+    public PlayerDataContainer container { get; private set; }
 
     #endregion
 
@@ -62,25 +61,27 @@ public class Player : NetworkBehaviour
     #region Unity Callback Functions
     private void Awake()
     {
+        container = GameManager.instance.Pdcontainer;
+
         StateMachine = new PlayerStateMachine();
 
-        IdleState = new PlayerIdleState(this, StateMachine, playerData, "idle");
-        MoveState = new PlayerMoveState(this, StateMachine, playerData, "move");
-        SitMoveState = new PlayerSitMoveState(this, StateMachine, playerData, "sitmove");
-        SitState = new PlayerSitState(this, StateMachine, playerData, "sit");
-        JumpState = new PlayerJumpState(this, StateMachine, playerData, "jump");
-        InAirState = new PlayerinAirState(this, StateMachine, playerData, "inAir");
-        LandState = new PlayerLandState(this, StateMachine, playerData, "land");
-        carryUpState = new PlayerCarryUpState(this, StateMachine, playerData, "carryUp");
-        c_moveState = new PlayerC_MoveState(this, StateMachine, playerData, "C_move");
-        c_idleState = new PlayerC_IdleState(this, StateMachine, playerData, "C_Idle");
-        c_LandState = new PlayerC_LandState(this, StateMachine, playerData, "C_Land");
-        c_InAirState = new PlayerC_inAirState(this, StateMachine, playerData, "c_inAir");
-        c_ClimbingState = new PlayerC_ClimbingState(this, StateMachine, playerData, "c_climbing");
-        PutDownState = new PlayerPutDownState(this, StateMachine, playerData, "putdown");
-        ThrowState = new PlayerThrowState(this, StateMachine, playerData, "throw");
-        climbingState = new PlayerClimbingState(this, StateMachine, playerData, "climbing");
-        climbState = new PlayerClimbState(this, StateMachine, playerData, "climb");
+        IdleState = new PlayerIdleState(this, StateMachine, container, "idle");
+        MoveState = new PlayerMoveState(this, StateMachine, container, "move");
+        SitMoveState = new PlayerSitMoveState(this, StateMachine, container, "sitmove");
+        SitState = new PlayerSitState(this, StateMachine, container, "sit");
+        JumpState = new PlayerJumpState(this, StateMachine, container, "jump");
+        InAirState = new PlayerinAirState(this, StateMachine, container, "inAir");
+        LandState = new PlayerLandState(this, StateMachine, container, "land");
+        carryUpState = new PlayerCarryUpState(this, StateMachine, container, "carryUp");
+        c_moveState = new PlayerC_MoveState(this, StateMachine, container, "C_move");
+        c_idleState = new PlayerC_IdleState(this, StateMachine, container, "C_Idle");
+        c_LandState = new PlayerC_LandState(this, StateMachine, container, "C_Land");
+        c_InAirState = new PlayerC_inAirState(this, StateMachine, container, "c_inAir");
+        c_ClimbingState = new PlayerC_ClimbingState(this, StateMachine, container, "c_climbing");
+        PutDownState = new PlayerPutDownState(this, StateMachine, container, "putdown");
+        ThrowState = new PlayerThrowState(this, StateMachine, container, "throw");
+        climbingState = new PlayerClimbingState(this, StateMachine, container, "climbing");
+        climbState = new PlayerClimbState(this, StateMachine, container, "climb");
     }
 
     private void Start()
@@ -91,14 +92,21 @@ public class Player : NetworkBehaviour
         RB = GetComponent<Rigidbody2D>(); 
         playerTransform = GetComponent<Transform>();
         FacingDirection = 1;
-        StateMachine.PlayerInitialize(IdleState, playerData);
+        StateMachine.PlayerInitialize(IdleState, container);
     }
 
     private void Update()
     {
         CurrentVelocity = RB.linearVelocity;
         StateMachine.playerCurrentState.LogicUpdate();
-        playerData.blindtransform = this.transform;
+        //if (isOwned) 
+        //{
+        //    container.position = transform.position;
+        //}
+        //else
+        //{
+        //    transform.position = container.position;
+        //}
     }
 
     private void FixedUpdate()
@@ -135,26 +143,25 @@ public class Player : NetworkBehaviour
     #region Check Functions
     public void CheckifShouldflip(int xinput)
     { 
-        if(xinput != 0 && xinput != FacingDirection) 
+        if(xinput != 0 && xinput != container.facingdirection) 
         {
-            playerData.facingdirection *= -1;
             Flip();
         }
     }
 
     public bool CheckIfGrounded()
     {
-        return Physics2D.OverlapCircle(groundcheck.position, playerData.groundCheckRadious, playerData.whatIsGround);
+        return Physics2D.OverlapCircle(groundcheck.position, container.groundCheckRadious, container.whatIsGround);
     }
 
     public bool CheckIftouchLimb()
     {
-        return Physics2D.OverlapCircle(groundcheck.position, playerData.groundCheckRadious, playerData.whatIsLimb);
+        return Physics2D.OverlapCircle(groundcheck.position, container.groundCheckRadious, container.whatIsLimb);
 
     }
     public bool CheckIftouchLadder()
     {
-        return Physics2D.OverlapCircle(groundcheck.position, playerData.groundCheckRadious, playerData.whatIsLadder);
+        return Physics2D.OverlapCircle(groundcheck.position, container.groundCheckRadious, container.whatIsLadder);
     }
     #endregion
 
@@ -165,16 +172,108 @@ public class Player : NetworkBehaviour
     private void AnimationFinishTrigger() => StateMachine.playerCurrentState.AnimationFinishTrigger();
     private void Flip()
     {
-        FacingDirection *= -1;
+        if (isServer)
+        {
+            container.facingdirection *= -1;
+        }
+        else
+        {
+            CmdSetFacingDirection(container.facingdirection *= -1);
+        }
         transform.Rotate(0.0f, 180.0f, 0.0f);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.layer == playerData.whatIsLadder && playerData.isclimbing)
+        if (other.gameObject.layer == container.whatIsLadder && container.isclimbing)
         {
             SetLaddderPosition(other.gameObject);
         }
     }
     #endregion
+
+    #region ContainerCommandfunction
+    [Command]
+    public void CmdSetFacingDirection(float newvalue)
+    {
+        container.facingdirection = newvalue;
+    }
+
+    [Command]
+    public void CmdSetIsCarrying(bool newvalue)
+    {
+        container.iscarrying = newvalue;
+    }
+
+    [Command]
+    public void CmdSetIsClimbing(bool newvalue)
+    {
+        container.isclimbing = newvalue;
+    }
+
+    [Command]
+    public void CmdSetCarryUpCall(bool newvalue)
+    {
+        container.carryupcall = newvalue;
+    }
+
+    [Command]
+    public void CmdSetThrowCall(bool newvalue)
+    {
+        container.throwcall = newvalue;
+    }
+
+    [Command]
+    public void CmdSetPutDownCall(bool newvalue)
+    {
+        container.putdowncall = newvalue;
+    }
+
+    [Command]
+    public void CmdSetThrowInputTime(float newvalue)
+    {
+        container.throwinputtime = newvalue;
+    }
+    [Command]
+    public void CmdSetposition(Vector3 newvalue)
+    {
+        container.position = newvalue;
+    }
+    [Command]
+    public void CmdSetNormInputX(int newvalue)
+    {
+        container.NormInputX = newvalue;
+    }
+
+    [Command]
+    public void CmdSetNormInputY(int newvalue)
+    {
+        container.NormInputY = newvalue;
+    }
+
+    [Command]
+    public void CmdSetJumpInput(bool newvalue)
+    {
+        container.JumpInput = newvalue;
+    }
+
+    [Command]
+    public void CmdSetSitInput(bool newvalue)
+    {
+        container.SitInput = newvalue;
+    }
+
+    [Command]
+    public void CmdSetLadderUp(bool newvalue)
+    {
+        container.ladderUp = newvalue;
+    }
+
+    [Command]
+    public void CmdSetLadderDown(bool newvalue)
+    {
+        container.ladderDown = newvalue;
+    }
+    #endregion
+
 }

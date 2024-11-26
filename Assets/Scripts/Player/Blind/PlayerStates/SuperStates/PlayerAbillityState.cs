@@ -7,9 +7,8 @@ public class PlayerAbillityState : PlayerState
 
     private bool isGrounded;
 
-    public PlayerAbillityState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+    public PlayerAbillityState(Player player, PlayerStateMachine stateMachine, PlayerDataContainer container, string animBoolName) : base(player, stateMachine, container, animBoolName)
     {
-
     }
 
     public override void DoCheck()
@@ -38,9 +37,9 @@ public class PlayerAbillityState : PlayerState
         if ((isAbillityDone))
         {
 
-            if (playerData.iscarrying)
+            if (container.iscarrying)
             {
-                if (playerData.isclimbing)
+                if (container.isclimbing)
                 {
                     stateMachine.playerChangeState(player.c_ClimbingState);
                 }
@@ -58,7 +57,7 @@ public class PlayerAbillityState : PlayerState
             }
             else
             {
-                if (playerData.isclimbing)
+                if (container.isclimbing)
                 {
                     stateMachine.playerChangeState(player.climbingState);
                 }

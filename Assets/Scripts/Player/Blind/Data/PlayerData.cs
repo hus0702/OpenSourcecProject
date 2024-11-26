@@ -26,6 +26,7 @@ public class PlayerData : ScriptableObject
     [Header("Statement")]
     public bool iscarrying;
     public bool isclimbing;
+    public Vector3 position;
 
     [Header("Input")]
     public bool carryupcall = false;
@@ -40,6 +41,4 @@ public class PlayerData : ScriptableObject
     public bool ladderUp;
     public bool ladderDown;
 
-    [Header("BlindTransform")]
-    public Transform blindtransform;
 }

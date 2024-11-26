@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class LimbRidingState : LimbState
 {
-    public LimbRidingState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata ,animBoolName)
+    public LimbRidingState(Limb Limb, PlayerStateMachine stateMachine, LimbDataContainer container, string animBoolName) : base(Limb, stateMachine, container, animBoolName)
     {
     }
 
@@ -37,13 +37,13 @@ public class LimbRidingState : LimbState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (!GameManager.instance.PlayerData.iscarrying)
+        if (!GameManager.instance.Pdcontainer.iscarrying)
         {
             stateMachine.LimbChangeState(Limb.ThrowState);
         }
-        if (GameManager.instance.LimbData.attackInput)
+        if (container.attackInput)
         {
-            stateMachine.LimbChangeState(Limb.ShotState);
+            stateMachine.LimbChangeState(Limb.RidingShotState);
         }
     }
 

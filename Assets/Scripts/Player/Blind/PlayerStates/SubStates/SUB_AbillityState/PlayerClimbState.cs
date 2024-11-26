@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class PlayerClimbState : PlayerAbillityState
 {
-    public PlayerClimbState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+    public PlayerClimbState(Player player, PlayerStateMachine stateMachine, PlayerDataContainer container, string animBoolName) : base(player, stateMachine, container, animBoolName)
     {
-
     }
 
     public override void AnimationFinishTrigger()
@@ -25,7 +24,14 @@ public class PlayerClimbState : PlayerAbillityState
     public override void Enter()
     {
         base.Enter();
-        playerData.isclimbing = true;
+        if (player.isServer)
+        {
+            container.isclimbing = true;
+        }
+        else
+        {
+            player.CmdSetIsClimbing(true);
+        }
         player.RB.gravityScale = 0;
         player.SetVelocityX(0);
         player.SetVelocityY(0);

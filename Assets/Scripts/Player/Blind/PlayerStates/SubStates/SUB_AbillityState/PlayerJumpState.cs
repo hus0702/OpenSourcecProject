@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerAbillityState
 {
-    public PlayerJumpState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+    public PlayerJumpState(Player player, PlayerStateMachine stateMachine, PlayerDataContainer container, string animBoolName) : base(player, stateMachine, container, animBoolName)
     {
     }
 
@@ -11,7 +11,15 @@ public class PlayerJumpState : PlayerAbillityState
     {
         base.Enter();
 
-        player.SetVelocityY(playerData.jumpVelocity);
+        player.SetVelocityY(container.jumpVelocity);
+        if (player.isServer)
+        {
+            container.JumpInput = false;
+        }
+        else
+        {
+            player.CmdSetJumpInput(false);
+        }
         
         isAbillityDone = true;
     }

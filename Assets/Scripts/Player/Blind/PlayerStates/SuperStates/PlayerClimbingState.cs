@@ -8,7 +8,8 @@ public class PlayerClimbingState : PlayerState
     private bool Down;
     private bool Jumpinput;
     private int xinput;
-    public PlayerClimbingState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+
+    public PlayerClimbingState(Player player, PlayerStateMachine stateMachine, PlayerDataContainer container, string animBoolName) : base(player, stateMachine, container, animBoolName)
     {
     }
 
@@ -43,31 +44,30 @@ public class PlayerClimbingState : PlayerState
     {
         base.LogicUpdate();
 
-        Up = GameManager.instance.PlayerData.ladderUp;
-        Down = GameManager.instance.PlayerData.ladderDown;
-        Jumpinput = GameManager.instance.PlayerData.JumpInput;
-        xinput = GameManager.instance.PlayerData.NormInputX;
+        Up = container.ladderUp;
+        Down = container.ladderDown;
+        Jumpinput = container.JumpInput;
+        xinput = container.NormInputX;
 
-        player.SetVelocityX(playerData.movementVelocity * xinput);
+        player.SetVelocityX(container.movementVelocity * xinput);
 
         if (Up)
         {
-            player.SetVelocityY(playerData.climbVelocity);
+            player.SetVelocityY(container.climbVelocity);
         }
         else if (Down)
         {
-            player.SetVelocityY(playerData.climbVelocity * -1);
+            player.SetVelocityY(container.climbVelocity * -1);
         }
         else
         {
             player.SetVelocityY(0);
         }
 
-        if (Jumpinput || !player.CheckIftouchLadder())
+        if (!player.CheckIftouchLadder())
         {
-            playerData.isclimbing = false;
+            container.isclimbing = false;
             player.RB.gravityScale = 5;
-            
             stateMachine.playerChangeState(player.InAirState);
         }
             

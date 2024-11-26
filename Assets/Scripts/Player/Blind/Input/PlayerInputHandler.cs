@@ -8,22 +8,30 @@ public class PlayerInputHandler : NetworkBehaviour
 {
     public bool carryinputblock;
     public Vector2 RawMovementInput;
-    public int NormInputX;
-    public int NormInputY;
     public float throwinputtime;
-    public bool JumpInput;
-    public bool SitInput;
-    public bool ladderUp;
-    public bool ladderDown;
+    public PlayerDataContainer container;
+    public Player player;
 
-
+    private void Awake()
+    {
+        container = GameManager.instance.Pdcontainer;
+        player = GetComponent<Player>();
+    }
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         if (isOwned)
         {
             RawMovementInput = context.ReadValue<Vector2>();
-            GameManager.instance.PlayerData.NormInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
-            GameManager.instance.PlayerData.NormInputY = (int)(RawMovementInput * Vector2.right).normalized.y;
+            if (isServer)
+            {
+                container.NormInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
+                container.NormInputY = (int)(RawMovementInput * Vector2.right).normalized.y;
+            }
+            else 
+            {
+                player.CmdSetNormInputX((int)(RawMovementInput * Vector2.right).normalized.x);
+                player.CmdSetNormInputY((int)(RawMovementInput * Vector2.right).normalized.y);
+            }
         }
     }
 
@@ -33,11 +41,26 @@ public class PlayerInputHandler : NetworkBehaviour
         {
             if (context.performed)
             {
-                GameManager.instance.PlayerData.ladderUp = true;
+                if (isServer)
+                {
+                    container.ladderUp = true;
+                }
+                else
+                {
+                    player.CmdSetLadderUp(true);
+                }
             }
             if (context.canceled)
             {
-                GameManager.instance.PlayerData.ladderUp = false;
+                if (isServer)
+                {
+                    container.ladderUp = false;
+                }
+                else
+                {
+                    player.CmdSetLadderUp(false);
+                }
+                
             }
         }
     }
@@ -46,26 +69,54 @@ public class PlayerInputHandler : NetworkBehaviour
     {
         if (isOwned)
         {
-            if (GameManager.instance.PlayerData.isclimbing)
+            if (container.isclimbing)
             {
                 if (context.performed)
                 {
-                    GameManager.instance.PlayerData.ladderDown = true;
+                    if (isServer)
+                    {
+                        container.ladderDown = true;
+                    }
+                    else
+                    {
+                        player.CmdSetLadderDown(true);
+                    }
                 }
                 if (context.canceled)
                 {
-                    GameManager.instance.PlayerData.ladderDown = false;
+                    if (isServer)
+                    {
+                        container.ladderDown = false;
+                    }
+                    else
+                    {
+                        player.CmdSetLadderDown(false);
+                    }
                 }
             }
             else
             {
                 if (context.performed)
                 {
-                    GameManager.instance.PlayerData.SitInput = true;
+                    if (isServer)
+                    {
+                        container.SitInput = true;
+                    }
+                    else
+                    {
+                        player.CmdSetSitInput(true);
+                    }
                 }
                 if (context.canceled)
                 {
-                    GameManager.instance.PlayerData.SitInput = false;
+                    if (isServer)
+                    {
+                        container.SitInput = false;
+                    }
+                    else
+                    {
+                        player.CmdSetSitInput(false);
+                    }
                 }
             }
         }
@@ -76,12 +127,19 @@ public class PlayerInputHandler : NetworkBehaviour
         {
             if (context.started)
             {
-                GameManager.instance.PlayerData.JumpInput = true;
+                if (isServer)
+                {
+                    container.JumpInput = true;
+                }
+                else
+                {
+                    player.CmdSetJumpInput(true);
+                }
             }
         }
            
     }
-    public void UseJumpInput() => GameManager.instance.PlayerData.JumpInput = false;
+    public void UseJumpInput() => container.JumpInput = false;
     public void OnEscInput(InputAction.CallbackContext context)
     {
         if (isOwned)
@@ -103,7 +161,7 @@ public class PlayerInputHandler : NetworkBehaviour
         {
             if (!carryinputblock)
             {
-                if (GameManager.instance.PlayerData.iscarrying)
+                if (container.iscarrying)
                 {
                     if (context.started)
                     {
@@ -111,20 +169,43 @@ public class PlayerInputHandler : NetworkBehaviour
                     }
                     if (context.canceled)
                     {
-                        GameManager.instance.PlayerData.throwinputtime = Time.time - throwinputtime;
-                        throwinputtime = 0;
-                        GameManager.instance.PlayerData.throwcall = true;
+                        if (isServer)
+                        {
+                            container.throwinputtime = Time.time - throwinputtime;
+                            throwinputtime = 0;
+                            container.throwcall = true;
+                        }
+                        else
+                        {
+                            player.CmdSetThrowInputTime(Time.time - throwinputtime);
+                            throwinputtime = 0;
+                            player.CmdSetThrowCall(true);
+                        }
                     }
                 }
                 else
                 {
                     if (context.started)
                     {
-                        GameManager.instance.PlayerData.carryupcall = true;
+                        if (isServer)
+                        {
+                            container.carryupcall = true;
+                        }
+                        else
+                        {
+                            player.CmdSetCarryUpCall(true);
+                        }
                     }
                     if (context.canceled)
                     {
-                        GameManager.instance.PlayerData.carryupcall = false;
+                        if (isServer)
+                        {
+                            container.carryupcall = false;
+                        }
+                        else
+                        {
+                            player.CmdSetCarryUpCall(false);
+                        }
                     }
                 }
             }

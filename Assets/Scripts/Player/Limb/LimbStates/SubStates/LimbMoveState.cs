@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LimbMoveState : LimbGroundedState
 {
-    public LimbMoveState(Limb Limb, PlayerStateMachine stateMachine, LimbData limbdata, string animBoolName) : base(Limb, stateMachine, limbdata, animBoolName)
+    public LimbMoveState(Limb Limb, PlayerStateMachine stateMachine, LimbDataContainer container, string animBoolName) : base(Limb, stateMachine, container, animBoolName)
     {
     }
 
@@ -34,8 +34,9 @@ public class LimbMoveState : LimbGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+ 
         Limb.CheckifShouldflip(xinput);
-        Limb.SetVelocityX(limbdata.movementVelocity * xinput);
+        Limb.SetVelocityX(container.movementVelocity * xinput);
         if (xinput == 0f)
         {
             stateMachine.LimbChangeState(Limb.IdleState);
