@@ -9,11 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8431966807741254429}
+  - component: {fileID: 8705757679890154417}
   - component: {fileID: 6040044042571185708}
   - component: {fileID: 8507812547434609171}
   - component: {fileID: 8289881615568194662}
   m_Layer: 5
-  m_Name: "\uC7A5\uB2D8 \uB9D0\uD48D\uC120 \uB808\uC774\uC544\uC6C3"
+  m_Name: "\uB9D0\uD48D\uC120 \uB808\uC774\uC544\uC6C3"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,6 +40,22 @@ RectTransform:
   m_AnchoredPosition: {x: 66.8, y: 92.30002}
   m_SizeDelta: {x: 1000, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8705757679890154417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664541732294507451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bdb78db1216c4044b9f9c8dd3e3f2a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerToFollow: {fileID: 0}
+  isFollow: 0
+  xOffset: 0
+  yOffset: 0
 --- !u!222 &6040044042571185708
 CanvasRenderer:
   m_ObjectHideFlags: 0

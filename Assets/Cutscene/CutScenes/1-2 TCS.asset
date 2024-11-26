@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a7b6f128bc2b8d4bbf3f992bbbeb2f3, type: 3}
+  m_Name: 1-2 TCS
+  m_EditorClassIdentifier: 
+  scripts:
+  - script: "\uC774\uC81C \uBA48\uCDB0."
+  - script: "\uB108\uD76C \uB458\uC740 \uC774 \uACF3\uC5D0\uC11C \uC2E4\uD5D8\uC744
+      \uC9C4\uD589\uD55C\uB2E4.<sleep(0.2)>\n\uC790\uCE6B\uD558\uBA74 \uC8FD\uC744
+      \uD14C\uB2C8\n\uC54C\uC544\uC11C \uC798 \uD574\uBCF4\uB77C\uACE0."
+  - script: "\uC7A0\uAE50, \uC6B0\uB9B4 \uADF8\uB0E5 \uC774\uB300\uB85C \uB450\uACE0
+      \uAC04\uB2E4\uACE0?<sleep(0.2)>\n\uC2E4\uD5D8 \uC774\uC57C\uAE34 \uB610 \uBB50\uACE0!!
+      \uC774\uBD10!!!"
+  - script: "<size=120%><color=\"white\">\uAE30\uB85D \uC2DC\uC791</color>"
+  - script: "\uC774\uAC74 \uBB54 \uC18C\uB9AC\uC57C!?"
+  - script: "<size=120%><color=\"white\">\uC2E4\uD5D8\uC77C XX\uB144 XX\uC6D4 XX\uC77C</color>"
+  - script: "<color=#008099>\uC800\uAE30, \uC720\uB9AC\uCC3D \uB108\uBA38\uC5D0 \uB204\uAD70\uAC00
+      \uC788\uC5B4\uC694.<sleep(0.3)>\n\uC6B0\uB9B4 \uC9C0\uCF1C\uBCF4\uACE0 \uC788\uB294
+      \uAC83 \uAC19\uC544\uC694.\n\uADF8\uBCF4\uB2E4....</color>"
+  - script: "<size=120%><color=\"white\">\uC2E4\uD5D8 \uAE30\uB85D \uB2F4\uB2F9\uC790
+      OOO</color>"
+  - script: "<size=120%><color=\"white\">\uC2E4\uD5D8\uCCB4 BE-11\uACFC BL-8</color>"
+  - script: "\uADF8\uBCF4\uB2E4 \uBB54\uB370\uC694?"
+  - script: "<size=120%><color=\"white\">\uC2E4\uD5D8 \uB0B4\uC6A9 \uC555\uCD95\uC744
+      \uD1B5\uD55C \uB1CC \uAC00\uC18C\uC131 \uC790\uADF9</color>"
+  - script: "<color=#008099>\uC774 \uACF3... \uBB54\uAC00 \uC798 \uBABB \uB410\uC5B4\uC694.\n\uD2B9\uD788
+      \uCC9C\uC7A5\uC5D0 \uBB4D\uC5B4 \uC788\uB294 \uC5BC\uB8E9\uC774\uC694.<sleep(0.2)>\n\uC544\uBB34\uB9AC
+      \uBD10\uB3C4 \uC800\uAC74<sleep(0.2)>.<sleep(0.2)>.<sleep(0.2)>.?!?"
+  - script: "<size=120%><color=\"white\">\uC2E4\uD5D8 \uC2DC\uC791 3... <sleep(0.8)>
+      2... <sleep(0.8)> 1... <sleep(0.8)>\n\uC2E4\uD5D8 \uAC1C\uC2DC</color>"
