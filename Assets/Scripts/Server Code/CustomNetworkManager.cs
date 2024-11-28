@@ -61,11 +61,11 @@ public class CustomNetworkManager : NetworkManager
                 PlayerObjectController playerObjectController = conn.identity.gameObject.GetComponent<PlayerObjectController>();
                 if (playerObjectController.Role == 1)
                 {
-                    additionalInstance = Instantiate(spawnPrefabs[0], conn.identity.transform.position + new Vector3(0,2,0), Quaternion.identity);
+                    additionalInstance = Instantiate(spawnPrefabs[0], conn.identity.transform.position + new Vector3(0,-0.5f,0), Quaternion.identity);
                 }
                 else if (playerObjectController.Role == 2)
                 {
-                    additionalInstance = Instantiate(spawnPrefabs[1], conn.identity.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+                    additionalInstance = Instantiate(spawnPrefabs[1], conn.identity.transform.position + new Vector3(0,-0.5f, 0), Quaternion.identity);
                 }
                 // 네트워크에 추가 프리팹을 생성
                 NetworkServer.Spawn(additionalInstance, conn);

@@ -22,7 +22,7 @@ public class PlayerDataContainer : NetworkBehaviour
     [SyncVar] public bool throwcall = false;
     [SyncVar] public bool putdowncall = false;
     [SyncVar] public float throwinputtime = 0;
-    [SyncVar] public Vector3 position;
+    //[SyncVar] public Vector3 position;
 
     [SyncVar]public int NormInputX = 0;
     [SyncVar]public int NormInputY = 0;

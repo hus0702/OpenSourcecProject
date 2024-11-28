@@ -23237,7 +23237,6 @@ GameObject:
   - component: {fileID: 568422253}
   - component: {fileID: 568422252}
   - component: {fileID: 568422255}
-  - component: {fileID: 568422256}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -23364,18 +23363,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!114 &568422256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 568422251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 320c4431c3c86a549a3160d30634e84a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &598892060
 GameObject:
   m_ObjectHideFlags: 0
@@ -46046,7 +46033,7 @@ GameObject:
   - component: {fileID: 1593708725}
   - component: {fileID: 1593708727}
   - component: {fileID: 1593708726}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Blind Override Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}

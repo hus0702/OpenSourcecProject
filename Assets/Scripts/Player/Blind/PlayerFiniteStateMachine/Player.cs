@@ -37,7 +37,6 @@ public class Player : NetworkBehaviour
     public Rigidbody2D RB { get; private set; }
     public Transform playerTransform { get; private set; }
     public GameObject detectedObject { get; private set; }
-
     public PlayerObjectController thisController { get; private set; }
     #endregion
 
@@ -62,7 +61,6 @@ public class Player : NetworkBehaviour
     private void Awake()
     {
         container = GameManager.instance.Pdcontainer;
-
         StateMachine = new PlayerStateMachine();
 
         IdleState = new PlayerIdleState(this, StateMachine, container, "idle");
@@ -99,6 +97,7 @@ public class Player : NetworkBehaviour
     {
         CurrentVelocity = RB.linearVelocity;
         StateMachine.playerCurrentState.LogicUpdate();
+        
         //if (isOwned) 
         //{
         //    container.position = transform.position;
@@ -131,7 +130,7 @@ public class Player : NetworkBehaviour
         CurrentVelocity = workspace;
     }
     public void SetLaddderPosition(GameObject gameobj)
-    {       
+    {
         Vector3 pos = gameobj.transform.position;
         pos.y = this.transform.position.y;
         pos.z = this.transform.position.z;
@@ -183,13 +182,13 @@ public class Player : NetworkBehaviour
         transform.Rotate(0.0f, 180.0f, 0.0f);
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.layer == container.whatIsLadder && container.isclimbing)
-        {
-            SetLaddderPosition(other.gameObject);
-        }
-    }
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.gameObject.layer == container.whatIsLadder && container.isclimbing)
+    //    {
+    //        SetLaddderPosition(other.gameObject);
+    //    }
+    //}
     #endregion
 
     #region ContainerCommandfunction
@@ -234,11 +233,11 @@ public class Player : NetworkBehaviour
     {
         container.throwinputtime = newvalue;
     }
-    [Command]
-    public void CmdSetposition(Vector3 newvalue)
-    {
-        container.position = newvalue;
-    }
+    //[Command]
+    //public void CmdSetposition(Vector3 newvalue)
+    //{
+    //    container.position = newvalue;
+    //}
     [Command]
     public void CmdSetNormInputX(int newvalue)
     {
