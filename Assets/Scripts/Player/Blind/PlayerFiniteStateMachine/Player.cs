@@ -142,7 +142,7 @@ public class Player : NetworkBehaviour
     #region Check Functions
     public void CheckifShouldflip(int xinput)
     { 
-        if(xinput != 0 && xinput != container.facingdirection && isServer) 
+        if(xinput != 0 && xinput != container.facingdirection && isOwned) 
         {
             Flip();
         }
@@ -174,30 +174,27 @@ public class Player : NetworkBehaviour
         {
             container.facingdirection *= -1;
         }
-        //else
-        //{
-        //    if (isOwned)
-        //    {
-        //        CmdSetFacingDirection(container.facingdirection *= -1);
-        //    }
-        //}
+        else
+        {
+            CmdSetFacingDirection();
+        }
         transform.Rotate(0.0f, 180.0f, 0.0f);
     }
 
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (other.gameObject.layer == container.whatIsLadder && container.isclimbing)
-    //    {
-    //        SetLaddderPosition(other.gameObject);
-    //    }
-    //}
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.layer == container.whatIsLadder && container.isclimbing)
+        {
+            SetLaddderPosition(other.gameObject);
+        }
+    }
     #endregion
 
     #region ContainerCommandfunction
     [Command]
-    public void CmdSetFacingDirection(float newvalue)
+    public void CmdSetFacingDirection()
     {
-        container.facingdirection = newvalue;
+        container.facingdirection *= -1;
     }
 
     [Command]
