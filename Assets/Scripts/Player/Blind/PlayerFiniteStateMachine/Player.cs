@@ -142,7 +142,7 @@ public class Player : NetworkBehaviour
     #region Check Functions
     public void CheckifShouldflip(int xinput)
     { 
-        if(xinput != 0 && xinput != container.facingdirection) 
+        if(xinput != 0 && xinput != container.facingdirection && isServer) 
         {
             Flip();
         }
@@ -174,13 +174,13 @@ public class Player : NetworkBehaviour
         {
             container.facingdirection *= -1;
         }
-        else
-        {
-            if (isOwned)
-            {
-                CmdSetFacingDirection(container.facingdirection *= -1);
-            }
-        }
+        //else
+        //{
+        //    if (isOwned)
+        //    {
+        //        CmdSetFacingDirection(container.facingdirection *= -1);
+        //    }
+        //}
         transform.Rotate(0.0f, 180.0f, 0.0f);
     }
 
