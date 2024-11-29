@@ -30,15 +30,17 @@ public class LimbShotState : LimbAbillityState
         base.Enter();
         Debug.Log("ShotState ¿‘º∫");
 
-        if (Limb.isServer)
+        if (Limb.isOwned)
         {
-            container.attackInput = false;
+            if (Limb.isServer)
+            {
+                container.attackInput = false;
+            }
+            else
+            {
+                Limb.CmdSetattackInput(false);
+            }
         }
-        else
-        {
-            Limb.CmdSetattackInput(false);
-        }
-
         Limb.InputHandler.StartCoroutine(Limb.InputHandler.stopshotinput(container.ShotDelay));
         mousePosition = container.mousePosition;
         bulletrotation = mousePosition - Limb.transform.position;

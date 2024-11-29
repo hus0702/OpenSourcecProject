@@ -25,18 +25,19 @@ public class LimbPutDownState : LimbAbillityState
     {
         base.Enter();
         Limb.SetVelocityY(4);
-        Limb.limbtransform.position = Limb.limbtransform.position;
-        if (Limb.isServer)
+        if (Limb.isOwned)
         {
-            container.isRiding = false;
-            GameManager.instance.Pdcontainer.putdowncall = false;
+            if (Limb.isServer)
+            {
+                container.isRiding = false;
+                GameManager.instance.Pdcontainer.putdowncall = false;
+            }
+            else
+            {
+                Limb.CmdSetisRiding(false);
+                Limb.CmdSetPutDownCall(false);
+            }
         }
-        else
-        {
-            Limb.CmdSetisRiding(false);
-            Limb.CmdSetPutDownCall(false);
-        }
-        
         isAbillityDone = true;
     }
 

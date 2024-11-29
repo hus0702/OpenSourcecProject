@@ -25,17 +25,19 @@ public class PlayerThrowState : PlayerAbillityState
     {
         base.Enter();
         player.InputHandler.StartCoroutine(player.InputHandler.stopcarryinput(0.3f));
-        if (player.isServer)
+        if (player.isOwned)
         {
-            container.iscarrying = false;
-            container.throwcall = false;
+            if (player.isServer)
+            {
+                container.iscarrying = false;
+                container.throwcall = false;
+            }
+            else
+            {
+                player.CmdSetIsCarrying(false);
+                player.CmdSetThrowCall(false);
+            }
         }
-        else
-        {
-            player.CmdSetIsCarrying(false);
-            player.CmdSetThrowCall(false);
-        }
-
     }
 
     public override void Exit()

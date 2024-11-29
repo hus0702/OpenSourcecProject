@@ -9,15 +9,18 @@ public class PlayerCarryUpState : PlayerAbillityState
     public override void Enter()
     {
         base.Enter();
-        if (player.isServer)
+        if (player.isOwned)
         {
-            container.iscarrying = true;
-            container.carryupcall = false;
-        }
-        else
-        { 
-            player.CmdSetIsCarrying(true);
-            player.CmdSetCarryUpCall(false);
+            if (player.isServer)
+            {
+                container.iscarrying = true;
+                container.carryupcall = false;
+            }
+            else
+            {
+                player.CmdSetIsCarrying(true);
+                player.CmdSetCarryUpCall(false);
+            }
         }
         container.iscarrying = true;
         container.carryupcall = false;

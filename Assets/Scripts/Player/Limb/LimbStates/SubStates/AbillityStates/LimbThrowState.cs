@@ -34,15 +34,18 @@ public class LimbThrowState : LimbAbillityState
         Limb.SetVelocityX(12 * throwtime * container.FacingDirection);
         Limb.SetVelocityY(4 * 2*throwtime);
 
-        if (Limb.isServer)
+        if (Limb.isOwned)
         {
-            container.isRiding = false;
-            GameManager.instance.Pdcontainer.throwcall = false;
-        }
-        else
-        {
-            Limb.CmdSetisRiding(false);
-            Limb.CmdSetThrowCall(false);
+            if (Limb.isServer)
+            {
+                container.isRiding = false;
+                GameManager.instance.Pdcontainer.throwcall = false;
+            }
+            else
+            {
+                Limb.CmdSetisRiding(false);
+                Limb.CmdSetThrowCall(false);
+            }
         }
         Limb.spriteRenderer.enabled = true;
         isAbillityDone = true;

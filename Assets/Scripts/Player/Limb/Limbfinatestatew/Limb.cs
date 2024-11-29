@@ -131,7 +131,7 @@ public class Limb : NetworkBehaviour
     #region Check Functions
     public void CheckifShouldflip(int xinput)
     {
-        if (xinput != 0 && xinput != container.FacingDirection)
+        if (xinput != 0 && xinput != container.FacingDirection && isOwned)
         {
             Flip();
         }
@@ -168,6 +168,7 @@ public class Limb : NetworkBehaviour
     private void AnimationFinishTrigger() => StateMachine.LimbCurrentState.AnimationFinishTrigger();
     public void Flip()
     {
+        
         if (isServer)
         {
             container.FacingDirection *= -1;

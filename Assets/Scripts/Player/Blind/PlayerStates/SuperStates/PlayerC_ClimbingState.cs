@@ -59,7 +59,7 @@ public class PlayerC_ClimbingState : PlayerState
         {
             player.SetVelocityY(0);
         }
-        if (!player.CheckIftouchLadder())
+        if (!player.CheckIftouchLadder() && player.isOwned)
         {
             if (player.isServer)
             {

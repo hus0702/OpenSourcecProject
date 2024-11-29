@@ -9,14 +9,18 @@ public class PlayerPutDownState : PlayerAbillityState
     public override void Enter()
     {
         base.Enter();
-        if (player.isServer)
+        if (player.isOwned)
         {
-            container.iscarrying = false;
+            if (player.isServer)
+            {
+                container.iscarrying = false;
+            }
+            else
+            {
+                player.CmdSetIsCarrying(false);
+            }
         }
-        else
-        {
-            player.CmdSetIsCarrying(false);
-        }
+
         isAbillityDone = true;
 
     }

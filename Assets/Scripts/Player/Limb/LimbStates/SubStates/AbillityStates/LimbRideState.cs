@@ -9,17 +9,20 @@ public class LimbRideState : LimbAbillityState
     public override void Enter()
     {
         base.Enter();
-        if (Limb.isServer)
+        if (Limb.isOwned)
         {
-            container.isRiding = true;
-            GameManager.instance.Pdcontainer.carryupcall = false;
+            if (Limb.isServer)
+            {
+                container.isRiding = true;
+                GameManager.instance.Pdcontainer.carryupcall = false;
+            }
+            else
+            {
+                Limb.CmdSetisRiding(true);
+                Limb.CmdSetCarryUpCall(false);
+            }
         }
-        else
-        {
-            Limb.CmdSetisRiding(true);
-            Limb.CmdSetCarryUpCall(false);
-        }
-        
+
         isAbillityDone = true;
     }
 }
