@@ -21,13 +21,7 @@ public class PlayerInputHandler : NetworkBehaviour
 
     }
 
-    private void Start()
-    {
-        if (!isServer)
-        {
-            Destroy(this);
-        }
-    }
+
     private void Update()
     {
 

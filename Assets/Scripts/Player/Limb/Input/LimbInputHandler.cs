@@ -19,13 +19,7 @@ public class LimbInputHandler : NetworkBehaviour
 
 
     }
-    private void Start()
-    {
-        if (!isServer)
-        {
-            Destroy(this);
-        }
-    }
+
     private void Update()
     {
         if (!isOwned)

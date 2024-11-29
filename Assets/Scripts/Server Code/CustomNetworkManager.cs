@@ -61,6 +61,14 @@ public class CustomNetworkManager : NetworkManager
             {
                 Debug.LogError("GameManager 프리팹을 찾을 수 없습니다. Resources 폴더에 프리팹을 추가하세요.");
             }
+
+            gameManagerPrefab = spawnPrefabs[3];
+            if (gameManagerPrefab != null)
+            {
+                GameObject egameManagerInstance = Instantiate(gameManagerPrefab);
+                Debug.Log("나무 생성");
+                NetworkServer.Spawn(egameManagerInstance);
+            }
         }
         Debug.Log("GameScene 입성");
 
@@ -80,7 +88,6 @@ public class CustomNetworkManager : NetworkManager
                 NetworkServer.Spawn(GameScenePrefab, conn);
             }
         }
-
-            ServerChangeScene(SceneName);
+        ServerChangeScene(SceneName);
     }
 }

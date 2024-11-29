@@ -1363,7 +1363,7 @@ MonoBehaviour:
   - {fileID: 5727899445206955385, guid: a06860807f6a5dc43943e8bfb67a6231, type: 3}
   - {fileID: 2667718191209937384, guid: 08fed017e4af68547be9debb8fe38fa3, type: 3}
   - {fileID: 8206075932828855856, guid: b77b88d1a59c46d458c2551cde03f634, type: 3}
-  - {fileID: 0}
+  - {fileID: 7641557393916288432, guid: caf286107462dfc45b9961e93f26fc82, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
     bufferTimeMultiplier: 2
@@ -1381,7 +1381,7 @@ MonoBehaviour:
   timeInterpolationGui: 0
   GamePlayerPrefab: {fileID: 5569994853462204378, guid: 0be356c24d6324e4da582ee6cad60ece, type: 3}
   GamePlayerInstance: {fileID: 5569994853462204378, guid: 0be356c24d6324e4da582ee6cad60ece, type: 3}
-  GameScenePrefab: {fileID: 0}
+  GameScenePrefab: {fileID: 1342057657722613294, guid: 0be356c24d6324e4da582ee6cad60ece, type: 3}
 --- !u!1001 &1514271415814086401
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -94,10 +94,6 @@ public class Player : NetworkBehaviour
         groundcheck = transform.GetChild(0);
         myBoxCollider = GetComponent<BoxCollider2D>();
 
-        if (!isServer)
-        {
-            Destroy(this);
-        }
 
     }
 
