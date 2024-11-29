@@ -5,7 +5,7 @@ using Mirror;
 public class CardkeyDoor : Door
 {
     [SerializeField] private List<DoorCardSlot> cardSlots;
-    //[SyncVar(hook = nameof(HookIsOpened))] public bool isOpened = false;
+    [SyncVar(hook = nameof(HookIsOpened))] public bool isOpened = false;
     private void HookIsOpened(bool oldVaule, bool newValue)
     {
         if(newValue == true) ActiveInteract();
