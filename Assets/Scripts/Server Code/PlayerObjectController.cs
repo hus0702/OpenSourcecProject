@@ -86,6 +86,7 @@ public class PlayerObjectController : NetworkBehaviour
     private void Start()
     {
         DontDestroyOnLoad(this.gameObject); // 이 객체를 게임 씬까지 끌고 갈 거다!
+        Debug.Log("권한 부여 상태 : " + isOwned);
         
     }
 

@@ -60,31 +60,28 @@ public class CustomNetworkManager : NetworkManager
             {
                 // 추가 프리팹 생성 위치 지정 (여기서는 간단히 랜덤 위치 사용)
                 PlayerObjectController playerObjectController = conn.identity.gameObject.GetComponent<PlayerObjectController>();
-
-                Debug.Log("게임씬에서 생성된 connection : " + conn);
+                NetworkServer.Destroy(conn.identity.gameObject);
                 if (playerObjectController.Role == 1)
                 {
                     GamePlayerInstance = Instantiate(spawnPrefabs[0].GetComponent<PlayerObjectController>(), spawnPrefabs[0].transform.position + new Vector3(0, 1, 0), spawnPrefabs[0].transform.rotation);
-                    //GamePlayerInstance.ConnectionID = playerObjectController.ConnectionID;
-                    //GamePlayerInstance.PlayerIdNumber = playerObjectController.PlayerIdNumber;
-                    //GamePlayerInstance.PlayerSteamID = playerObjectController.PlayerSteamID;
-                    //GamePlayerInstance.PlayerName = playerObjectController.PlayerName;
-                    //GamePlayerInstance.Ready = true;
-                    //GamePlayerInstance.Role = 1;
-                    Debug.Log("장님 생성");
+                    GamePlayerInstance.ConnectionID = playerObjectController.ConnectionID;
+                    GamePlayerInstance.PlayerIdNumber = playerObjectController.PlayerIdNumber;
+                    GamePlayerInstance.PlayerSteamID = playerObjectController.PlayerSteamID;
+                    GamePlayerInstance.PlayerName = playerObjectController.PlayerName;
+                    GamePlayerInstance.Ready = true;
+                    GamePlayerInstance.Role = 1;
                 }
                 else if (playerObjectController.Role == 2)
                 {
                     GamePlayerInstance = Instantiate(spawnPrefabs[1].GetComponent<PlayerObjectController>(), spawnPrefabs[1].transform.position + new Vector3(0, 1, 0), spawnPrefabs[1].transform.rotation);
-                    //GamePlayerInstance.ConnectionID = playerObjectController.ConnectionID;
-                    //GamePlayerInstance.PlayerIdNumber = playerObjectController.PlayerIdNumber;
-                    //GamePlayerInstance.PlayerSteamID = playerObjectController.PlayerSteamID;
-                    //GamePlayerInstance.PlayerName = playerObjectController.PlayerName;
-                    //GamePlayerInstance.Ready = true;
-                    //GamePlayerInstance.Role = 2;
+                    GamePlayerInstance.ConnectionID = playerObjectController.ConnectionID;
+                    GamePlayerInstance.PlayerIdNumber = playerObjectController.PlayerIdNumber;
+                    GamePlayerInstance.PlayerSteamID = playerObjectController.PlayerSteamID;
+                    GamePlayerInstance.PlayerName = playerObjectController.PlayerName;
+                    GamePlayerInstance.Ready = true;
+                    GamePlayerInstance.Role = 2;
                 }
-
-                NetworkServer.Spawn(GamePlayerInstance.gameObject, conn);
+                NetworkServer.Spawn(GamePlayerInstance.gameObject,conn);
             }
         }
     }

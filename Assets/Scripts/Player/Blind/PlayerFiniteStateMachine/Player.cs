@@ -92,7 +92,6 @@ public class Player : NetworkBehaviour
         FacingDirection = 1;
         StateMachine.PlayerInitialize(IdleState, container);
 
-        Debug.Log("blind ป๓ลย:" + isOwned);
     }
 
     private void Update()
