@@ -156,7 +156,6 @@ public class Player : NetworkBehaviour
     public bool CheckIftouchLimb()
     {
         return Physics2D.OverlapCircle(groundcheck.position, container.groundCheckRadious, container.whatIsLimb);
-
     }
     public bool CheckIftouchLadder()
     {
@@ -177,7 +176,10 @@ public class Player : NetworkBehaviour
         }
         else
         {
-            CmdSetFacingDirection(container.facingdirection *= -1);
+            if (isOwned)
+            {
+                CmdSetFacingDirection(container.facingdirection *= -1);
+            }
         }
         transform.Rotate(0.0f, 180.0f, 0.0f);
     }

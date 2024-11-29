@@ -45,6 +45,10 @@ public class PlayerGroundedState : PlayerState
         {
             stateMachine.playerChangeState(player.JumpState);
         }
+        if (!player.CheckIfGrounded())
+        {
+            stateMachine.playerChangeState(player.InAirState);
+        }
         if (CarryUpInput && player.CheckIftouchLimb())
         {
             stateMachine.playerChangeState(player.carryUpState);
