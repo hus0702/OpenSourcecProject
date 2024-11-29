@@ -60,7 +60,7 @@ public class CustomNetworkManager : NetworkManager
             {
                 // 추가 프리팹 생성 위치 지정 (여기서는 간단히 랜덤 위치 사용)
                 PlayerObjectController playerObjectController = conn.identity.gameObject.GetComponent<PlayerObjectController>();
-                NetworkServer.Destroy(conn.identity.gameObject);
+                //NetworkServer.Destroy(conn.identity.gameObject);
                 if (playerObjectController.Role == 1)
                 {
                     GamePlayerInstance = Instantiate(spawnPrefabs[0].GetComponent<PlayerObjectController>(), spawnPrefabs[0].transform.position + new Vector3(0, 1, 0), spawnPrefabs[0].transform.rotation);
@@ -81,7 +81,8 @@ public class CustomNetworkManager : NetworkManager
                     GamePlayerInstance.Ready = true;
                     GamePlayerInstance.Role = 2;
                 }
-                NetworkServer.Spawn(GamePlayerInstance.gameObject,conn);
+                //NetworkServer.Spawn(GamePlayerInstance.gameObject,conn);
+                NetworkServer.ReplacePlayerForConnection(conn, GamePlayerInstance.gameObject, ReplacePlayerOptions.Destroy);
             }
         }
     }
