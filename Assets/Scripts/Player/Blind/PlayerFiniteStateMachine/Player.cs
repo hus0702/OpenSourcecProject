@@ -91,6 +91,13 @@ public class Player : NetworkBehaviour
         playerTransform = GetComponent<Transform>();
         FacingDirection = 1;
         StateMachine.PlayerInitialize(IdleState, container);
+        groundcheck = transform.GetChild(0);
+        myBoxCollider = GetComponent<BoxCollider2D>();
+
+        if (!isServer)
+        {
+            Destroy(this);
+        }
 
     }
 

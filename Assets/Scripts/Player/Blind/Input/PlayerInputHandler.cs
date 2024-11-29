@@ -18,10 +18,19 @@ public class PlayerInputHandler : NetworkBehaviour
     {
         container = GameManager.instance.Pdcontainer;
         player = GetComponent<Player>();
+
     }
 
+    private void Start()
+    {
+        if (!isServer)
+        {
+            Destroy(this);
+        }
+    }
     private void Update()
     {
+
         if (!isOwned)
             return;
         #region move

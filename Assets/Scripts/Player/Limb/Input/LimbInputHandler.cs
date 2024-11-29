@@ -16,6 +16,15 @@ public class LimbInputHandler : NetworkBehaviour
     {
         container = GameManager.instance.Ldcontainer;
         limb = GetComponent<Limb>();
+
+
+    }
+    private void Start()
+    {
+        if (!isServer)
+        {
+            Destroy(this);
+        }
     }
     private void Update()
     {

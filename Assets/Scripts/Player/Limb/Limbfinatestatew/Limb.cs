@@ -87,6 +87,13 @@ public class Limb : NetworkBehaviour
         limbtransform = GetComponent<Transform>();
         StateMachine.LimbInitialize(IdleState, container);
         BulletPrefab = bulletprefab;
+        groundcheck = transform.GetChild(0);
+        myBoxCollider = GetComponent<BoxCollider2D>();
+
+        if (!isServer)
+        {
+            Destroy(this);
+        }
     }
 
     private void Update()
@@ -168,7 +175,6 @@ public class Limb : NetworkBehaviour
     private void AnimationFinishTrigger() => StateMachine.LimbCurrentState.AnimationFinishTrigger();
     public void Flip()
     {
-        
         if (isServer)
         {
             container.FacingDirection *= -1;

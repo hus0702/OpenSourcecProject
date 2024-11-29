@@ -10,6 +10,7 @@ public class CustomNetworkManager : NetworkManager
 {
     [SerializeField] private PlayerObjectController GamePlayerPrefab;
     public PlayerObjectController GamePlayerInstance;
+    public GameObject GameScenePrefab;
     public List<PlayerObjectController> GamePlayers { get; } = new List<PlayerObjectController>();
     public ulong CurrentLobbyID {get; private set;}
 
@@ -40,55 +41,46 @@ public class CustomNetworkManager : NetworkManager
         // 게임 씬에 진입했을 때 프리팹을 추가로 생성하도록 처리
         if (sceneName == "GameScene") // "GameScene"을 실제 게임 씬 이름으로 변경
         {
-            if (GameManager.instance == null) // GameManager 싱글톤이 이미 있는지 확인
-            {
-                // GameManager 프리팹을 추가 (여기서는 Resources 폴더에서 불러오는 방식 사용)
-                GameObject gameManagerPrefab = spawnPrefabs[2];
-                if (gameManagerPrefab != null)
-                {
-                    GameObject gameManagerInstance = Instantiate(gameManagerPrefab);
-                    NetworkServer.Spawn(gameManagerInstance); // 네트워크 상에서 GameManager 소환
-                    Debug.Log("GameManager가 생성되었습니다.");
-                }
-                else
-                {
-                    Debug.LogError("GameManager 프리팹을 찾을 수 없습니다. Resources 폴더에 프리팹을 추가하세요.");
-                }
-            }
-            Debug.Log("GameScene 입성");
-            foreach (var conn in NetworkServer.connections.Values)
-            {
-                // 추가 프리팹 생성 위치 지정 (여기서는 간단히 랜덤 위치 사용)
-                PlayerObjectController playerObjectController = conn.identity.gameObject.GetComponent<PlayerObjectController>();
-                //NetworkServer.Destroy(conn.identity.gameObject);
-                if (playerObjectController.Role == 1)
-                {
-                    GamePlayerInstance = Instantiate(spawnPrefabs[0].GetComponent<PlayerObjectController>(), spawnPrefabs[0].transform.position + new Vector3(0, 1, 0), spawnPrefabs[0].transform.rotation);
-                    GamePlayerInstance.ConnectionID = playerObjectController.ConnectionID;
-                    GamePlayerInstance.PlayerIdNumber = playerObjectController.PlayerIdNumber;
-                    GamePlayerInstance.PlayerSteamID = playerObjectController.PlayerSteamID;
-                    GamePlayerInstance.PlayerName = playerObjectController.PlayerName;
-                    GamePlayerInstance.Ready = true;
-                    GamePlayerInstance.Role = 1;
-                }
-                else if (playerObjectController.Role == 2)
-                {
-                    GamePlayerInstance = Instantiate(spawnPrefabs[1].GetComponent<PlayerObjectController>(), spawnPrefabs[1].transform.position + new Vector3(0, 1, 0), spawnPrefabs[1].transform.rotation);
-                    GamePlayerInstance.ConnectionID = playerObjectController.ConnectionID;
-                    GamePlayerInstance.PlayerIdNumber = playerObjectController.PlayerIdNumber;
-                    GamePlayerInstance.PlayerSteamID = playerObjectController.PlayerSteamID;
-                    GamePlayerInstance.PlayerName = playerObjectController.PlayerName;
-                    GamePlayerInstance.Ready = true;
-                    GamePlayerInstance.Role = 2;
-                }
-                //NetworkServer.Spawn(GamePlayerInstance.gameObject,conn);
-                NetworkServer.ReplacePlayerForConnection(conn, GamePlayerInstance.gameObject, ReplacePlayerOptions.Destroy);
-            }
+            
         }
     }
 
     public void StartGame(string SceneName)
     {
-        ServerChangeScene(SceneName);
+        if (GameManager.instance == null) // GameManager 싱글톤이 이미 있는지 확인
+        {
+            // GameManager 프리팹을 추가 (여기서는 Resources 폴더에서 불러오는 방식 사용)
+            GameObject gameManagerPrefab = spawnPrefabs[2];
+            if (gameManagerPrefab != null)
+            {
+                GameObject gameManagerInstance = Instantiate(gameManagerPrefab);
+                NetworkServer.Spawn(gameManagerInstance); // 네트워크 상에서 GameManager 소환
+                Debug.Log("GameManager가 생성되었습니다.");
+            }
+            else
+            {
+                Debug.LogError("GameManager 프리팹을 찾을 수 없습니다. Resources 폴더에 프리팹을 추가하세요.");
+            }
+        }
+        Debug.Log("GameScene 입성");
+
+        foreach (var conn in NetworkServer.connections.Values)
+        {
+            PlayerObjectController playerObjectController = conn.identity.gameObject.GetComponent<PlayerObjectController>();
+            if (playerObjectController.Role == 1)
+            {
+                GameScenePrefab = Instantiate(spawnPrefabs[0], spawnPrefabs[0].transform.position + new Vector3(0,1,0), spawnPrefabs[0].transform.rotation);
+                GameScenePrefab.GetComponent<PlayerObjectController>().ConnectionID = playerObjectController.ConnectionID;
+                NetworkServer.Spawn(GameScenePrefab,conn);
+            }
+            else if (playerObjectController.Role == 2)
+            {
+                GameScenePrefab = Instantiate(spawnPrefabs[1], spawnPrefabs[1].transform.position + new Vector3(0, 1, 0), spawnPrefabs[1].transform.rotation);
+                GameScenePrefab.GetComponent<PlayerObjectController>().ConnectionID = playerObjectController.ConnectionID;
+                NetworkServer.Spawn(GameScenePrefab, conn);
+            }
+        }
+
+            ServerChangeScene(SceneName);
     }
 }
