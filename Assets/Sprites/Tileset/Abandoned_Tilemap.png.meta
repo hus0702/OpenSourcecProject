@@ -1806,6 +1806,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Abandoned_Tilemap_75
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 674ffe25de636d04f8c008862d94b9d3
+      internalID: 1327110218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -1893,6 +1915,7 @@ TextureImporter:
       Abandoned_Tilemap_72: -90684841
       Abandoned_Tilemap_73: 1200742613
       Abandoned_Tilemap_74: -1376500429
+      Abandoned_Tilemap_75: 1327110218
       Abandoned_Tilemap_8: 5459719182628721134
       Abandoned_Tilemap_9: -8526749752831938833
   mipmapLimitGroupName: 
