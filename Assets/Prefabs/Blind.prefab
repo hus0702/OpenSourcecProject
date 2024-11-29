@@ -209,8 +209,8 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   target: {fileID: 1527302452741640446}
-  syncPosition: 0
-  syncRotation: 0
+  syncPosition: 1
+  syncRotation: 1
   syncScale: 0
   onlySyncOnChange: 0
   compressRotation: 1
@@ -259,8 +259,8 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   target: {fileID: 1527302452741640446}
-  syncPosition: 0
-  syncRotation: 0
+  syncPosition: 1
+  syncRotation: 1
   syncScale: 0
   onlySyncOnChange: 0
   compressRotation: 1
