@@ -12,7 +12,6 @@ public class GameSceneCameraController : MonoBehaviour
 
     void Update()
     {
-        
 
         if (target != null)
         {
