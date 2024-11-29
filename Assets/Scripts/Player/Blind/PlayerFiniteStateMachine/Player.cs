@@ -99,6 +99,10 @@ public class Player : NetworkBehaviour
 
     private void Update()
     {
+        if (!isServer)
+        {
+            return;
+        }
         CurrentVelocity = RB.linearVelocity;
         StateMachine.playerCurrentState.LogicUpdate();
         

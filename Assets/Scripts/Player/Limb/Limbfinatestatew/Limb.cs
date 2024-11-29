@@ -95,6 +95,10 @@ public class Limb : NetworkBehaviour
 
     private void Update()
     {
+        if (!isServer)
+        {
+            return;
+        }
         CurrentVelocity = RB.linearVelocity;
         StateMachine.LimbCurrentState.LogicUpdate();
 
