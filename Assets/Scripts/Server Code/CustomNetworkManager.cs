@@ -30,6 +30,7 @@ public class CustomNetworkManager : NetworkManager
             GamePlayerInstance.PlayerSteamID = (ulong)SteamMatchmaking.GetLobbyMemberByIndex((CSteamID)SteamLobby.Instance.CurrentLobbyID, GamePlayers.Count);
         
             NetworkServer.AddPlayerForConnection(conn, GamePlayerInstance.gameObject);
+            Debug.Log("로비에서 생성된 connection : " + conn);
         }
     }
 
@@ -55,20 +56,31 @@ public class CustomNetworkManager : NetworkManager
                 }
             }
             Debug.Log("GameScene 입성");
-            foreach (NetworkConnectionToClient conn in NetworkServer.connections.Values)
+            foreach (var conn in NetworkServer.connections.Values)
             {
                 // 추가 프리팹 생성 위치 지정 (여기서는 간단히 랜덤 위치 사용)
                 PlayerObjectController playerObjectController = conn.identity.gameObject.GetComponent<PlayerObjectController>();
+
+                Debug.Log("게임씬에서 생성된 connection : " + conn);
                 if (playerObjectController.Role == 1)
                 {
-                    additionalInstance = Instantiate(spawnPrefabs[0], conn.identity.transform.position + new Vector3(0,-0.5f,0), Quaternion.identity);
+                    GamePlayerInstance = Instantiate(spawnPrefabs[0].GetComponent<PlayerObjectController>());
+                    GamePlayerInstance.ConnectionID = conn.connectionId;
+                    GamePlayerInstance.PlayerIdNumber = GamePlayers.Count + 1;
+                    GamePlayerInstance.Role = 1;
+                    GamePlayerInstance.PlayerSteamID = (ulong)SteamMatchmaking.GetLobbyMemberByIndex((CSteamID)SteamLobby.Instance.CurrentLobbyID, GamePlayers.Count);
+                    Debug.Log("장님 생성");
                 }
                 else if (playerObjectController.Role == 2)
                 {
-                    additionalInstance = Instantiate(spawnPrefabs[1], conn.identity.transform.position + new Vector3(0,-0.5f, 0), Quaternion.identity);
+                    GamePlayerInstance = Instantiate(spawnPrefabs[1].GetComponent<PlayerObjectController>());
+                    GamePlayerInstance.ConnectionID = conn.connectionId;
+                    GamePlayerInstance.PlayerIdNumber = GamePlayers.Count + 1;
+                    GamePlayerInstance.Role = 2;
+                    GamePlayerInstance.PlayerSteamID = (ulong)SteamMatchmaking.GetLobbyMemberByIndex((CSteamID)SteamLobby.Instance.CurrentLobbyID, GamePlayers.Count);
                 }
-                // 네트워크에 추가 프리팹을 생성
-                NetworkServer.Spawn(additionalInstance, conn);
+
+                NetworkServer.Spawn(GamePlayerInstance.gameObject, conn);
             }
         }
     }

@@ -91,6 +91,8 @@ public class Player : NetworkBehaviour
         playerTransform = GetComponent<Transform>();
         FacingDirection = 1;
         StateMachine.PlayerInitialize(IdleState, container);
+
+        Debug.Log("blind ป๓ลย:" + isOwned);
     }
 
     private void Update()
