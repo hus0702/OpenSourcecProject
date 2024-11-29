@@ -10,6 +10,10 @@ public class LimbRideState : LimbAbillityState
     public override void Enter()
     {
         base.Enter();
+
+        Limb.spriteRenderer.enabled = false;
+        Limb.RB.gravityScale = 0;
+
         if (Limb.isOwned)
         {
             if (Limb.isServer)

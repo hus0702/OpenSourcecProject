@@ -24,6 +24,10 @@ public class LimbPutDownState : LimbAbillityState
     public override void Enter()
     {
         base.Enter();
+
+        Limb.spriteRenderer.enabled = true;
+        Limb.RB.gravityScale = 5;
+
         Limb.SetVelocityY(4);
         if (Limb.isOwned)
         {

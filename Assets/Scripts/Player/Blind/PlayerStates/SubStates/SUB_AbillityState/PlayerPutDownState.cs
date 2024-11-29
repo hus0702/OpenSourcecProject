@@ -9,6 +9,7 @@ public class PlayerPutDownState : PlayerAbillityState
     public override void Enter()
     {
         base.Enter();
+
         if (player.isOwned)
         {
             if (player.isServer)
