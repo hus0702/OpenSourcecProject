@@ -99,21 +99,22 @@ public class Player : NetworkBehaviour
 
     private void Update()
     {
-        if (!isServer)
+        if (!isOwned)
         {
             return;
         }
+
         CurrentVelocity = RB.linearVelocity;
         StateMachine.playerCurrentState.LogicUpdate();
-        
-        //if (isOwned) 
-        //{
-        //    container.position = transform.position;
-        //}
-        //else
-        //{
-        //    transform.position = container.position;
-        //}
+
+        if (isOwned)
+        {
+            container.position = transform.position;
+        }
+        else
+        {
+            CmdSetposition(transform.position);
+        }
     }
 
     private void FixedUpdate()
@@ -240,11 +241,11 @@ public class Player : NetworkBehaviour
     {
         container.throwinputtime = newvalue;
     }
-    //[Command]
-    //public void CmdSetposition(Vector3 newvalue)
-    //{
-    //    container.position = newvalue;
-    //}
+    [Command]
+    public void CmdSetposition(Vector3 newvalue)
+    {
+        container.position = newvalue;
+    }
     [Command]
     public void CmdSetNormInputX(int newvalue)
     {

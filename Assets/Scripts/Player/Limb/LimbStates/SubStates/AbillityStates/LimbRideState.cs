@@ -4,6 +4,7 @@ public class LimbRideState : LimbAbillityState
 {
     public LimbRideState(Limb Limb, PlayerStateMachine stateMachine, LimbDataContainer container, string animBoolName) : base(Limb, stateMachine, container, animBoolName)
     {
+
     }
 
     public override void Enter()

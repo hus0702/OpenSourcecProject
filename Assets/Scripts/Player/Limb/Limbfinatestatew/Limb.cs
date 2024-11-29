@@ -95,7 +95,7 @@ public class Limb : NetworkBehaviour
 
     private void Update()
     {
-        if (!isServer)
+        if (!isOwned)
         {
             return;
         }
@@ -104,7 +104,7 @@ public class Limb : NetworkBehaviour
 
         if (container.isRiding)
         {
-            this.limbtransform.position = (container.position + new Vector3(0, 1f, 0));
+            this.limbtransform.position = (GameManager.instance.Pdcontainer.position + new Vector3(0, 0.1f, 0));
         }
     }
 
