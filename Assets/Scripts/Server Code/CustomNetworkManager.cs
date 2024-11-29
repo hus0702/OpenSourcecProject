@@ -64,20 +64,25 @@ public class CustomNetworkManager : NetworkManager
                 Debug.Log("게임씬에서 생성된 connection : " + conn);
                 if (playerObjectController.Role == 1)
                 {
-                    GamePlayerInstance = Instantiate(spawnPrefabs[0].GetComponent<PlayerObjectController>());
-                    GamePlayerInstance.ConnectionID = conn.connectionId;
-                    GamePlayerInstance.PlayerIdNumber = GamePlayers.Count + 1;
+                    GamePlayerInstance = Instantiate(spawnPrefabs[0].GetComponent<PlayerObjectController>(), spawnPrefabs[0].transform.position + new Vector3(0, 1, 0), spawnPrefabs[0].transform.rotation);
+                    GamePlayerInstance.ConnectionID = playerObjectController.ConnectionID;
+                    GamePlayerInstance.PlayerIdNumber = playerObjectController.PlayerIdNumber;
+                    GamePlayerInstance.PlayerSteamID = playerObjectController.PlayerSteamID;
+                    GamePlayerInstance.PlayerName = playerObjectController.PlayerName;
+                    GamePlayerInstance.Ready = true;
                     GamePlayerInstance.Role = 1;
-                    GamePlayerInstance.PlayerSteamID = (ulong)SteamMatchmaking.GetLobbyMemberByIndex((CSteamID)SteamLobby.Instance.CurrentLobbyID, GamePlayers.Count);
+
                     Debug.Log("장님 생성");
                 }
                 else if (playerObjectController.Role == 2)
                 {
-                    GamePlayerInstance = Instantiate(spawnPrefabs[1].GetComponent<PlayerObjectController>());
-                    GamePlayerInstance.ConnectionID = conn.connectionId;
-                    GamePlayerInstance.PlayerIdNumber = GamePlayers.Count + 1;
+                    GamePlayerInstance = Instantiate(spawnPrefabs[0].GetComponent<PlayerObjectController>(), spawnPrefabs[0].transform.position + new Vector3(0, 1, 0), spawnPrefabs[0].transform.rotation);
+                    GamePlayerInstance.ConnectionID = playerObjectController.ConnectionID;
+                    GamePlayerInstance.PlayerIdNumber = playerObjectController.PlayerIdNumber;
+                    GamePlayerInstance.PlayerSteamID = playerObjectController.PlayerSteamID;
+                    GamePlayerInstance.PlayerName = playerObjectController.PlayerName;
+                    GamePlayerInstance.Ready = true;
                     GamePlayerInstance.Role = 2;
-                    GamePlayerInstance.PlayerSteamID = (ulong)SteamMatchmaking.GetLobbyMemberByIndex((CSteamID)SteamLobby.Instance.CurrentLobbyID, GamePlayers.Count);
                 }
 
                 NetworkServer.Spawn(GamePlayerInstance.gameObject, conn);
