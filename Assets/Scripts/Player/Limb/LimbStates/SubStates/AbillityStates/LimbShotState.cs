@@ -28,9 +28,6 @@ public class LimbShotState : LimbAbillityState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("ShotState 입성");
-        // Die 코드 확인용
-        container.Hp -=5;
         if (Limb.isOwned)
         {
             if (Limb.isServer)
@@ -59,7 +56,6 @@ public class LimbShotState : LimbAbillityState
         base.LogicUpdate();
         if (isAnimationFinished)
         {
-            Debug.Log("ShotState 끝");
             isAbillityDone = true;
         }
 
