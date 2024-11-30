@@ -8,6 +8,7 @@ TagManager:
   - Blind
   - Limb
   - Bullet
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Ladder
   - bullet
   - 
-  - 
+  - Damageable
   - 
   - 
   - 
@@ -47,6 +48,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 4024264339
+    locked: 0
+  - name: Enemy
+    uniqueID: 2932555041
     locked: 0
   m_RenderingLayers:
   - Default
