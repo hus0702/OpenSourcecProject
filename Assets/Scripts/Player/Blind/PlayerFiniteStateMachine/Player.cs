@@ -27,7 +27,11 @@ public class Player : NetworkBehaviour
     public PlayerClimbState climbState { get; private set; }
     public PlayerPutDownState PutDownState { get; private set; }
     public PlayerThrowState ThrowState { get; private set; }
+
+    public PlayerDieState DieState { get; private set; }
     public PlayerDataContainer container { get; private set; }
+
+    
 
     #endregion
 
@@ -80,6 +84,7 @@ public class Player : NetworkBehaviour
         ThrowState = new PlayerThrowState(this, StateMachine, container, "throw");
         climbingState = new PlayerClimbingState(this, StateMachine, container, "climbing");
         climbState = new PlayerClimbState(this, StateMachine, container, "climb");
+        DieState = new PlayerDieState(this, StateMachine, container, "die");
     }
 
     private void Start()
@@ -107,7 +112,7 @@ public class Player : NetworkBehaviour
         CurrentVelocity = RB.linearVelocity;
         StateMachine.playerCurrentState.LogicUpdate();
 
-        if (isOwned)
+        if (isServer)
         {
             container.position = transform.position;
         }
@@ -205,7 +210,11 @@ public class Player : NetworkBehaviour
     {
         container.facingdirection *= -1;
     }
-
+    [Command]
+    public void CmdChangeHp(int newvalue)
+    {
+        container.Hp += newvalue;
+    }
     [Command]
     public void CmdSetIsCarrying(bool newvalue)
     {

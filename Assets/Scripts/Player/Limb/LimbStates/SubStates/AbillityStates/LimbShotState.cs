@@ -29,7 +29,8 @@ public class LimbShotState : LimbAbillityState
     {
         base.Enter();
         Debug.Log("ShotState 입성");
-
+        // Die 코드 확인용
+        container.Hp -=5;
         if (Limb.isOwned)
         {
             if (Limb.isServer)

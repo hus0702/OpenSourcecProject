@@ -11,7 +11,7 @@ public class LimbRideState : LimbAbillityState
     {
         base.Enter();
 
-        Limb.spriteRenderer.enabled = false;
+        
         Limb.RB.gravityScale = 0;
 
         if (Limb.isOwned)
@@ -20,11 +20,13 @@ public class LimbRideState : LimbAbillityState
             {
                 container.isRiding = true;
                 GameManager.instance.Pdcontainer.carryupcall = false;
+                Limb.RpcSetSpriteRenderer(false);
             }
             else
             {
                 Limb.CmdSetisRiding(true);
                 Limb.CmdSetCarryUpCall(false);
+                Limb.CmdSetSpriteRenderer(false);
             }
         }
 

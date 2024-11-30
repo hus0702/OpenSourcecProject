@@ -49,6 +49,10 @@ public class PlayerinAirState : PlayerState
             player.Anim.SetFloat("yVelocity", player.CurrentVelocity.y);
             player.Anim.SetFloat("xVelocity", Mathf.Abs(player.CurrentVelocity.x));
         }
+        if (container.Hp <= 0)
+        {
+            stateMachine.playerChangeState(player.DieState);
+        }
     }
 
     public override void PhysicsUpdate()

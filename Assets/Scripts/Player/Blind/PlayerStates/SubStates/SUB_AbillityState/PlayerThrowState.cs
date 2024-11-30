@@ -29,12 +29,10 @@ public class PlayerThrowState : PlayerAbillityState
         {
             if (player.isServer)
             {
-                container.iscarrying = false;
                 container.throwcall = false;
             }
             else
             {
-                player.CmdSetIsCarrying(false);
                 player.CmdSetThrowCall(false);
             }
         }
@@ -51,6 +49,14 @@ public class PlayerThrowState : PlayerAbillityState
         if (isAnimationFinished)
         {
             isAbillityDone = true;
+            if (player.isServer)
+            {
+                container.iscarrying = false;
+            }
+            else
+            {
+                player.CmdSetIsCarrying(false);
+            }
         }
     }
 

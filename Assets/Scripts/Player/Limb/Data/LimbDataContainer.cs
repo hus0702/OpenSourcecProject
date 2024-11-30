@@ -10,6 +10,7 @@ public class LimbDataContainer : NetworkBehaviour
     public float groundCheckRadious; 
     public LayerMask whatIsGround;
     public LayerMask whatIsBlind;
+
     [SyncVar] public int FacingDirection;
     [SyncVar] public Vector3 position;
     [SyncVar] public bool isRiding;
@@ -22,6 +23,7 @@ public class LimbDataContainer : NetworkBehaviour
     [SyncVar] public bool SitInput;
     [SyncVar] public bool attackInput;
     [SyncVar] public Vector3 mousePosition;
+    [SyncVar] public int Hp;
 
     private void Awake()
     {
@@ -38,9 +40,7 @@ public class LimbDataContainer : NetworkBehaviour
         JumpInput = false;
         SitInput = false;
         attackInput = false;
+        Hp = 10;
     }
 
-    #region CmdSetfunction
-
-    #endregion
 }

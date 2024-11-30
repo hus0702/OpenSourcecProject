@@ -57,6 +57,10 @@ public class PlayerGroundedState : PlayerState
         {
             stateMachine.playerChangeState(player.climbState);
         }
+        if (container.Hp <= 0)
+        {
+            stateMachine.playerChangeState(player.DieState);
+        }
     }
 
     public override void PhysicsUpdate()
