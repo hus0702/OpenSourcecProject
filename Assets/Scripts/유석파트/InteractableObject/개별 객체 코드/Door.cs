@@ -22,23 +22,28 @@ public class Door : InteractableObject
     public InteractFailTalkBubble failHandler;
     public SO_FailHandleInfo failHandleInfo;
 
+    public override bool CheckInteractable(GameObject requester)
+    {
+        if(!isOpened) return false;
+        else return true;
+    }
+
     public override void ExecuteOnSuccess(GameObject requester)
     {
-        if (isOpened)
-        {
             // 애니메이션이나 효과음의 재생 등이 이루어질 수도 있고
 
             // 플레이어의 Transform 을 텔레포트시켜야 함.
             requester.transform.position = new Vector3(teleportDest.position.x, teleportDest.position.y, teleportDest.position.z);
-        }
-        else
+    }
+
+    public override void ExecuteOnFail(GameObject requester)
+    {
+
+        Debug.Log("문이 잠겨 있습니다.");
+        // 실제로는 UI 로 말풍선 비슷하게 띄울 것. 필요한 아이템 이미지가 말풍선 안에 들어가고, 진동하게 만들 것.
+        if(failHandler != null)
         {
-            Debug.Log("문이 잠겨 있습니다.");
-            // 실제로는 UI 로 말풍선 비슷하게 띄울 것. 필요한 아이템 이미지가 말풍선 안에 들어가고, 진동하게 만들 것.
-            if(failHandler != null)
-            {
-                failHandler.FailHandle(this.gameObject, failHandleInfo);
-            }
+            failHandler.FailHandle(this.gameObject, failHandleInfo);
         }
     }
 }

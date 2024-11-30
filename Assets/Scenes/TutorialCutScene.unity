@@ -480,11 +480,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8431966807741254429, guid: 9cbc172cff1f12b44bbb0e25c0e1947a, type: 3}
   m_PrefabInstance: {fileID: 1301446458}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &231369679 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8289881615568194662, guid: 9cbc172cff1f12b44bbb0e25c0e1947a, type: 3}
-  m_PrefabInstance: {fileID: 1301446458}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &256170595
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,6 +744,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8705757679890154417, guid: 9cbc172cff1f12b44bbb0e25c0e1947a, type: 3}
+      propertyPath: yOffset
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8705757679890154417, guid: 9cbc172cff1f12b44bbb0e25c0e1947a, type: 3}
+      propertyPath: isFollow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8705757679890154417, guid: 9cbc172cff1f12b44bbb0e25c0e1947a, type: 3}
+      propertyPath: playerToFollow
+      value: 
+      objectReference: {fileID: 1506012650}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -773,11 +780,6 @@ MonoBehaviour:
 --- !u!1 &332006778 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 664541732294507451, guid: 9cbc172cff1f12b44bbb0e25c0e1947a, type: 3}
-  m_PrefabInstance: {fileID: 332006775}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &332006779 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8289881615568194662, guid: 9cbc172cff1f12b44bbb0e25c0e1947a, type: 3}
   m_PrefabInstance: {fileID: 332006775}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &419778555
@@ -837,14 +839,10 @@ PlayableDirector:
     value: {fileID: 3184971724595138873}
   - key: {fileID: -7480748502152429481, guid: d17cf01fb0fcdb045b372f0e5b299cd6, type: 2}
     value: {fileID: 2029246129}
-  - key: {fileID: -2584085124970810191, guid: d17cf01fb0fcdb045b372f0e5b299cd6, type: 2}
-    value: {fileID: 3184971724595138877}
   - key: {fileID: 540917924919398667, guid: d17cf01fb0fcdb045b372f0e5b299cd6, type: 2}
     value: {fileID: 231369677}
   - key: {fileID: 151547191400480239, guid: d17cf01fb0fcdb045b372f0e5b299cd6, type: 2}
     value: {fileID: 1400874298}
-  - key: {fileID: 6381430656295880091, guid: d17cf01fb0fcdb045b372f0e5b299cd6, type: 2}
-    value: {fileID: 231369679}
   - key: {fileID: 4074471111930701323, guid: d17cf01fb0fcdb045b372f0e5b299cd6, type: 2}
     value: {fileID: 870345008}
   - key: {fileID: -1891665323762368348, guid: d17cf01fb0fcdb045b372f0e5b299cd6, type: 2}
@@ -855,8 +853,6 @@ PlayableDirector:
     value: {fileID: 1506012651}
   - key: {fileID: 8041799328356586767, guid: d17cf01fb0fcdb045b372f0e5b299cd6, type: 2}
     value: {fileID: 332006778}
-  - key: {fileID: 5734757402162072126, guid: d17cf01fb0fcdb045b372f0e5b299cd6, type: 2}
-    value: {fileID: 332006779}
   - key: {fileID: -9083251023429938573, guid: d17cf01fb0fcdb045b372f0e5b299cd6, type: 2}
     value: {fileID: 332006777}
   - key: {fileID: -8194296374801122885, guid: d17cf01fb0fcdb045b372f0e5b299cd6, type: 2}
@@ -867,6 +863,8 @@ PlayableDirector:
     value: {fileID: 100113369}
   - key: {fileID: 8080462064564435406, guid: d17cf01fb0fcdb045b372f0e5b299cd6, type: 2}
     value: {fileID: 78787206}
+  - key: {fileID: -3550146744862980774, guid: d17cf01fb0fcdb045b372f0e5b299cd6, type: 2}
+    value: {fileID: 3184971724595138877}
   m_ExposedReferences:
     m_References: []
 --- !u!1 &465142168
@@ -1056,6 +1054,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 5
   scriptList: {fileID: 11400000, guid: 31ea9a5c1564e3e48afaec4c4e9cf550, type: 2}
+--- !u!1 &621501728
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 621501730}
+  - component: {fileID: 621501729}
+  m_Layer: 0
+  m_Name: SceneChanger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &621501729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621501728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56449edc88608d74daa355aebf8776d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: GameScene
+  spawnPointOnLoadForBlind: {x: 1, y: -41, z: 0}
+  spawnPointOnLoadForLimp: {x: -3.5, y: -41, z: 0}
+--- !u!4 &621501730
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621501728}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.7828322, y: -0.84803414, z: 0.025062902}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &638522249
 GameObject:
   m_ObjectHideFlags: 0
@@ -6412,6 +6457,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8705757679890154417, guid: 9cbc172cff1f12b44bbb0e25c0e1947a, type: 3}
+      propertyPath: yOffset
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 8705757679890154417, guid: 9cbc172cff1f12b44bbb0e25c0e1947a, type: 3}
+      propertyPath: isFollow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8705757679890154417, guid: 9cbc172cff1f12b44bbb0e25c0e1947a, type: 3}
+      propertyPath: playerToFollow
+      value: 
+      objectReference: {fileID: 652516709}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12465,6 +12522,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8705757679890154417, guid: 9cbc172cff1f12b44bbb0e25c0e1947a, type: 3}
+      propertyPath: yOffset
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8705757679890154417, guid: 9cbc172cff1f12b44bbb0e25c0e1947a, type: 3}
+      propertyPath: isFollow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8705757679890154417, guid: 9cbc172cff1f12b44bbb0e25c0e1947a, type: 3}
+      propertyPath: playerToFollow
+      value: 
+      objectReference: {fileID: 1083841731}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12498,3 +12567,4 @@ SceneRoots:
   - {fileID: 1596617502}
   - {fileID: 1654585181}
   - {fileID: 872073475}
+  - {fileID: 621501730}

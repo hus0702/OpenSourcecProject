@@ -906,6 +906,8 @@ PlayableDirector:
     value: {fileID: 1960051252}
   - key: {fileID: 2061215537221678607, guid: 01db3fd95f0060c4cbfee2e30eb96149, type: 2}
     value: {fileID: 235331212}
+  - key: {fileID: -6648160168833865487, guid: 01db3fd95f0060c4cbfee2e30eb96149, type: 2}
+    value: {fileID: 1137106598}
   m_ExposedReferences:
     m_References:
     - f99c0c9b98000834ca318102a899cbd8: {fileID: 429772618}
@@ -6237,6 +6239,83 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1137106595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1137106597}
+  - component: {fileID: 1137106596}
+  - component: {fileID: 1137106598}
+  m_Layer: 0
+  m_Name: SceneChanger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1137106596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137106595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56449edc88608d74daa355aebf8776d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: GameScene
+  spawnPointOnLoad: {x: -3.5, y: 14.8, z: 0}
+--- !u!4 &1137106597
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137106595}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1137106598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137106595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 8742d3124fe61d046b8ef900416ff022, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1137106596}
+          m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+          m_MethodName: StartScene
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &1301446458
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14526,3 +14605,4 @@ SceneRoots:
   - {fileID: 2026965176}
   - {fileID: 211304134}
   - {fileID: 379777439}
+  - {fileID: 1137106597}
