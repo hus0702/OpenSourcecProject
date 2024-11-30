@@ -53,6 +53,10 @@ public class LimbGroundedState : LimbState
         {
             stateMachine.LimbChangeState(Limb.ShotState);
         }
+        if (container.Hp <= 0)
+        {
+            stateMachine.LimbChangeState(Limb.DieState);
+        }
     }
     public override void PhysicsUpdate()
     {

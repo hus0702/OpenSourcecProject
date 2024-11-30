@@ -1,9 +1,8 @@
-using Mirror;
 using UnityEngine;
 
-public class LimbRidingState : LimbState
+public class PlayerDieState : PlayerAbillityState
 {
-    public LimbRidingState(Limb Limb, PlayerStateMachine stateMachine, LimbDataContainer container, string animBoolName) : base(Limb, stateMachine, container, animBoolName)
+    public PlayerDieState(Player player, PlayerStateMachine stateMachine, PlayerDataContainer container, string animBoolName) : base(player, stateMachine, container, animBoolName)
     {
     }
 
@@ -36,14 +35,18 @@ public class LimbRidingState : LimbState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (!GameManager.instance.Pdcontainer.iscarrying)
+
+        if (isAnimationFinished)
         {
-            stateMachine.LimbChangeState(Limb.ThrowState);
+            //Respawn ÇÔ¼ö
+
+            //ÀÓ½Ã ÄÚµå
+            Debug.Log("Á×¾ú´Ù ²Ð");
+            container.Hp = 10;
+            isAbillityDone = true;
         }
-        if (container.attackInput)
-        {
-            stateMachine.LimbChangeState(Limb.RidingShotState);
-        }
+        else
+            Debug.Log(isAnimationFinished);
     }
 
     public override void PhysicsUpdate()

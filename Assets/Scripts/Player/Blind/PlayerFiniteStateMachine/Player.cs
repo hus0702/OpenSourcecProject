@@ -27,7 +27,11 @@ public class Player : NetworkBehaviour
     public PlayerClimbState climbState { get; private set; }
     public PlayerPutDownState PutDownState { get; private set; }
     public PlayerThrowState ThrowState { get; private set; }
+
+    public PlayerDieState DieState { get; private set; }
     public PlayerDataContainer container { get; private set; }
+
+    
 
     #endregion
 
@@ -37,7 +41,6 @@ public class Player : NetworkBehaviour
     public Rigidbody2D RB { get; private set; }
     public Transform playerTransform { get; private set; }
     public GameObject detectedObject { get; private set; }
-
     public PlayerObjectController thisController { get; private set; }
     #endregion
 
@@ -62,7 +65,6 @@ public class Player : NetworkBehaviour
     private void Awake()
     {
         container = GameManager.instance.Pdcontainer;
-
         StateMachine = new PlayerStateMachine();
 
         IdleState = new PlayerIdleState(this, StateMachine, container, "idle");
@@ -82,6 +84,7 @@ public class Player : NetworkBehaviour
         ThrowState = new PlayerThrowState(this, StateMachine, container, "throw");
         climbingState = new PlayerClimbingState(this, StateMachine, container, "climbing");
         climbState = new PlayerClimbState(this, StateMachine, container, "climb");
+        DieState = new PlayerDieState(this, StateMachine, container, "die");
     }
 
     private void Start()
@@ -93,20 +96,30 @@ public class Player : NetworkBehaviour
         playerTransform = GetComponent<Transform>();
         FacingDirection = 1;
         StateMachine.PlayerInitialize(IdleState, container);
+        groundcheck = transform.GetChild(0);
+        myBoxCollider = GetComponent<BoxCollider2D>();
+
+
     }
 
     private void Update()
     {
+        if (!isOwned)
+        {
+            return;
+        }
+
         CurrentVelocity = RB.linearVelocity;
         StateMachine.playerCurrentState.LogicUpdate();
-        //if (isOwned) 
-        //{
-        //    container.position = transform.position;
-        //}
-        //else
-        //{
-        //    transform.position = container.position;
-        //}
+
+        if (isServer)
+        {
+            container.position = transform.position;
+        }
+        else
+        {
+            CmdSetposition(transform.position);
+        }
     }
 
     private void FixedUpdate()
@@ -131,7 +144,7 @@ public class Player : NetworkBehaviour
         CurrentVelocity = workspace;
     }
     public void SetLaddderPosition(GameObject gameobj)
-    {       
+    {
         Vector3 pos = gameobj.transform.position;
         pos.y = this.transform.position.y;
         pos.z = this.transform.position.z;
@@ -143,7 +156,7 @@ public class Player : NetworkBehaviour
     #region Check Functions
     public void CheckifShouldflip(int xinput)
     { 
-        if(xinput != 0 && xinput != container.facingdirection) 
+        if(xinput != 0 && xinput != container.facingdirection && isOwned) 
         {
             Flip();
         }
@@ -157,7 +170,6 @@ public class Player : NetworkBehaviour
     public bool CheckIftouchLimb()
     {
         return Physics2D.OverlapCircle(groundcheck.position, container.groundCheckRadious, container.whatIsLimb);
-
     }
     public bool CheckIftouchLadder()
     {
@@ -178,7 +190,7 @@ public class Player : NetworkBehaviour
         }
         else
         {
-            CmdSetFacingDirection(container.facingdirection *= -1);
+            CmdSetFacingDirection();
         }
         transform.Rotate(0.0f, 180.0f, 0.0f);
     }
@@ -194,11 +206,15 @@ public class Player : NetworkBehaviour
 
     #region ContainerCommandfunction
     [Command]
-    public void CmdSetFacingDirection(float newvalue)
+    public void CmdSetFacingDirection()
     {
-        container.facingdirection = newvalue;
+        container.facingdirection *= -1;
     }
-
+    [Command]
+    public void CmdChangeHp(int newvalue)
+    {
+        container.Hp += newvalue;
+    }
     [Command]
     public void CmdSetIsCarrying(bool newvalue)
     {

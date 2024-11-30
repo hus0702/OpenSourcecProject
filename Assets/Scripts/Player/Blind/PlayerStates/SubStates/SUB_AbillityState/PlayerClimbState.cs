@@ -24,13 +24,17 @@ public class PlayerClimbState : PlayerAbillityState
     public override void Enter()
     {
         base.Enter();
-        if (player.isServer)
+        if (player.isOwned)
         {
-            container.isclimbing = true;
-        }
-        else
-        {
-            player.CmdSetIsClimbing(true);
+            if (player.isServer)
+            {
+                container.isclimbing = true;
+            }
+            else
+            {
+                player.CmdSetIsClimbing(true);
+            }
+            
         }
         player.RB.gravityScale = 0;
         player.SetVelocityX(0);

@@ -16,45 +16,68 @@ public class LimbInputHandler : NetworkBehaviour
     {
         container = GameManager.instance.Ldcontainer;
         limb = GetComponent<Limb>();
+
+
     }
-    public void OnMoveInput(InputAction.CallbackContext context)
+
+    private void Update()
     {
-        if (isOwned)
+        if (!isOwned)
+            return;
+
+        #region move
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            RawMovementInput = context.ReadValue<Vector2>();
             if (isServer)
             {
-                container.NormInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
-                container.NormInputY = (int)(RawMovementInput * Vector2.right).normalized.y;
+                container.NormInputX = -1;
             }
             else
             {
-                limb.CmdSetNormInputX((int)(RawMovementInput * Vector2.right).normalized.x);
-                limb.CmdSetNormInputY((int)(RawMovementInput * Vector2.right).normalized.y);
+                limb.CmdSetNormInputX(-1);
             }
         }
-    }
-
-    public void OnEscInput(InputAction.CallbackContext context)
-    {
-        if (isOwned) 
-        { 
-        
-        }
-    }
-    public void OnInteractInput(InputAction.CallbackContext context)
-    {
-        if (isOwned)
+        if (Input.GetKeyUp(KeyCode.A))
         {
-
+            {
+                if (isServer)
+                {
+                    container.NormInputX = 0;
+                }
+                else
+                {
+                    limb.CmdSetNormInputX(0);
+                }
+            }
         }
-    }
-
-    public void OnAttackInput(InputAction.CallbackContext context)
-    {
-        if (isOwned)
+        if (Input.GetKeyDown(KeyCode.D))
         {
-            if (context.started && !isshotblocked)
+            if (isServer)
+            {
+                container.NormInputX = 1;
+            }
+            else
+            {
+                limb.CmdSetNormInputX(1);
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            if (isServer)
+            {
+                container.NormInputX = 0;
+            }
+            else
+            {
+                limb.CmdSetNormInputX(0);
+            }
+        }
+        #endregion
+
+        #region shot
+        if (!isshotblocked)
+        {
+            if (Input.GetMouseButtonDown(1))
             {
                 container.mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 container.mousePosition.z = 0;
@@ -68,17 +91,29 @@ public class LimbInputHandler : NetworkBehaviour
                 }
             }
         }
-        
-    } 
-    public IEnumerator stopcarryinput(float duration)
-    {
-        
-        carryinputblock = true;
-        yield return new WaitForSeconds(duration);
+        #endregion
+        #region Interact
+        if (Input.GetKeyDown(KeyCode.E))
+        {
 
-        carryinputblock = false;
+        }
+        #endregion
+    }
+
+    
+    public void OnEscInput(InputAction.CallbackContext context)
+    {
+        if (isOwned) 
+        { 
         
-        
+        }
+    }
+    public void OnInteractInput(InputAction.CallbackContext context)
+    {
+        if (isOwned)
+        {
+
+        }
     }
 
     public IEnumerator stopshotinput(float duration)

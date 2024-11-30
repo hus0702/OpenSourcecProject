@@ -45,6 +45,10 @@ public class PlayerGroundedState : PlayerState
         {
             stateMachine.playerChangeState(player.JumpState);
         }
+        if (!player.CheckIfGrounded())
+        {
+            stateMachine.playerChangeState(player.InAirState);
+        }
         if (CarryUpInput && player.CheckIftouchLimb())
         {
             stateMachine.playerChangeState(player.carryUpState);
@@ -52,6 +56,10 @@ public class PlayerGroundedState : PlayerState
         if (ladderInput && player.CheckIftouchLadder())
         {
             stateMachine.playerChangeState(player.climbState);
+        }
+        if (container.Hp <= 0)
+        {
+            stateMachine.playerChangeState(player.DieState);
         }
     }
 

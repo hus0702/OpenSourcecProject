@@ -70,7 +70,11 @@ public class PlayerClimbingState : PlayerState
             player.RB.gravityScale = 5;
             stateMachine.playerChangeState(player.InAirState);
         }
-            
+        if (container.Hp <= 0)
+        {
+            stateMachine.playerChangeState(player.DieState);
+        }
+
     }
 
     public override void PhysicsUpdate()

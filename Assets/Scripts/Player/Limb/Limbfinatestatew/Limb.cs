@@ -4,6 +4,7 @@ using Steamworks;
 using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.U2D;
 using UnityEngine.UIElements;
 
 public class Limb : NetworkBehaviour
@@ -18,8 +19,9 @@ public class Limb : NetworkBehaviour
     public LimbinAirState inAirState { get; private set; }
     public LimbPutDownState PutDownState { get; private set; }
     public LimbThrowState ThrowState { get; private set; }
-
     public LimbRidingShotState RidingShotState { get; private set; }
+
+    public LimbDieState DieState { get; private set; }
 
     public LimbDataContainer container;
 
@@ -75,6 +77,7 @@ public class Limb : NetworkBehaviour
         ThrowState = new LimbThrowState(this, StateMachine, container, "throw");
         inAirState = new LimbinAirState(this, StateMachine, container, "inair");
         RidingShotState = new LimbRidingShotState(this, StateMachine, container, "RidingShot");
+        DieState = new LimbDieState(this, StateMachine, container, "die");
     }
 
     private void Start()
@@ -87,16 +90,24 @@ public class Limb : NetworkBehaviour
         limbtransform = GetComponent<Transform>();
         StateMachine.LimbInitialize(IdleState, container);
         BulletPrefab = bulletprefab;
+        groundcheck = transform.GetChild(0);
+        myBoxCollider = GetComponent<BoxCollider2D>();
+
+
     }
 
     private void Update()
     {
+        if (!isOwned)
+        {
+            return;
+        }
         CurrentVelocity = RB.linearVelocity;
         StateMachine.LimbCurrentState.LogicUpdate();
 
         if (container.isRiding)
         {
-            this.limbtransform.position = (container.position + new Vector3(0, 1f, 0));
+            this.limbtransform.position = (GameManager.instance.Pdcontainer.position + new Vector3(0, 0.1f, 0));
         }
     }
 
@@ -131,7 +142,7 @@ public class Limb : NetworkBehaviour
     #region Check Functions
     public void CheckifShouldflip(int xinput)
     {
-        if (xinput != 0 && xinput != container.FacingDirection)
+        if (xinput != 0 && xinput != container.FacingDirection && isOwned)
         {
             Flip();
         }
@@ -196,7 +207,11 @@ public class Limb : NetworkBehaviour
     {
         container.isRiding = newvalue;
     }
-
+    [Command]
+    public void CmdChangeHp(int newvalue)
+    {
+        container.Hp += newvalue;
+    }
     [Command]
     public void CmdSetishavingGun(bool newvalue)
     {
@@ -267,6 +282,23 @@ public class Limb : NetworkBehaviour
     public void CmdSetPutDownCall(bool newvalue)
     {
         GameManager.instance.Pdcontainer.carryupcall = newvalue;
+    }
+
+    [Command]
+    public void CmdSetSpriteRenderer(bool newvalue)
+    { 
+        this.GetComponent<SpriteRenderer>().enabled = newvalue;
+        RpcSetSpriteRenderer(newvalue);
+    }
+
+    [ClientRpc]
+    public void RpcSetSpriteRenderer(bool newvalue)
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.enabled = newvalue; 
+        }
     }
     #endregion
 }
