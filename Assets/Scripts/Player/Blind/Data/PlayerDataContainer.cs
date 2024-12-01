@@ -25,14 +25,17 @@ public class PlayerDataContainer : NetworkBehaviour
     [SyncVar] public bool putdowncall;
     [SyncVar] public float throwinputtime;
     [SyncVar] public Vector3 position;
+    [SyncVar] public bool Interactable;
     [SyncVar] public int Hp;
+    [SyncVar] public bool ishaveCardKey;
 
     [SyncVar]public int NormInputX;
     [SyncVar]public int NormInputY;
     [SyncVar]public bool JumpInput;
     [SyncVar]public bool SitInput;
     [SyncVar]public bool ladderUp;
-    [SyncVar]public bool ladderDown;
+    [SyncVar] public bool ladderDown;
+    [SyncVar] public bool InteractInput;
 
 
 
@@ -51,6 +54,7 @@ public class PlayerDataContainer : NetworkBehaviour
         throwcall = false;
         putdowncall = false;
         throwinputtime = 0;
+        Interactable = true;
         Hp = 10;
         NormInputX = 0;
         NormInputY = 0;
@@ -58,6 +62,8 @@ public class PlayerDataContainer : NetworkBehaviour
         SitInput = false;
         ladderUp = false;
         ladderDown = false;
+        InteractInput = false;
+        ishaveCardKey = false;
     }
 
 

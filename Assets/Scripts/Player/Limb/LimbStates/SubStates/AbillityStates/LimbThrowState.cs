@@ -29,7 +29,7 @@ public class LimbThrowState : LimbAbillityState
     {
         base.Enter();
         Limb.spriteRenderer.enabled = true;
-        Limb.RB.gravityScale = 5;
+        Limb.RB.gravityScale = 1;
 
         throwtime = GameManager.instance.Pdcontainer.throwinputtime;
         if (throwtime > 1)

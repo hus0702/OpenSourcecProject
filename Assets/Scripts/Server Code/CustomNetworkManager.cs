@@ -12,10 +12,10 @@ public class CustomNetworkManager : NetworkManager
     public PlayerObjectController GamePlayerInstance;
     public GameObject GameScenePrefab;
     public List<PlayerObjectController> GamePlayers { get; } = new List<PlayerObjectController>();
-    public ulong CurrentLobbyID {get; private set;}
+    public ulong CurrentLobbyID { get; private set; }
 
     GameObject additionalInstance;
-    public void SetCurrentLobbyID(ulong id){
+    public void SetCurrentLobbyID(ulong id) {
         this.CurrentLobbyID = id;
     }
 
@@ -23,13 +23,13 @@ public class CustomNetworkManager : NetworkManager
     {
         Debug.Log("OnServerAddPlayer");
         //base.OnServerAddPlayer(conn);
-        if(SceneManager.GetActiveScene().name == "Lobby")
+        if (SceneManager.GetActiveScene().name == "Lobby")
         {
             GamePlayerInstance = Instantiate(GamePlayerPrefab);
             GamePlayerInstance.ConnectionID = conn.connectionId;
             GamePlayerInstance.PlayerIdNumber = GamePlayers.Count + 1;
             GamePlayerInstance.PlayerSteamID = (ulong)SteamMatchmaking.GetLobbyMemberByIndex((CSteamID)SteamLobby.Instance.CurrentLobbyID, GamePlayers.Count);
-        
+
             NetworkServer.AddPlayerForConnection(conn, GamePlayerInstance.gameObject);
             Debug.Log("로비에서 생성된 connection : " + conn);
         }
@@ -37,11 +37,10 @@ public class CustomNetworkManager : NetworkManager
 
     public override void OnServerSceneChanged(string sceneName)
     {
-        
         // 게임 씬에 진입했을 때 프리팹을 추가로 생성하도록 처리
         if (sceneName == "GameScene") // "GameScene"을 실제 게임 씬 이름으로 변경
         {
-            
+            SpawnPrefabs();
         }
     }
 
@@ -62,24 +61,28 @@ public class CustomNetworkManager : NetworkManager
                 Debug.LogError("GameManager 프리팹을 찾을 수 없습니다. Resources 폴더에 프리팹을 추가하세요.");
             }
         }
-        Debug.Log("GameScene 입성");
+        ServerChangeScene(SceneName);
+    }
 
+    public void SpawnPrefabs()
+    {
         foreach (var conn in NetworkServer.connections.Values)
         {
             PlayerObjectController playerObjectController = conn.identity.gameObject.GetComponent<PlayerObjectController>();
             if (playerObjectController.Role == 1)
             {
-                GameScenePrefab = Instantiate(spawnPrefabs[0], spawnPrefabs[0].transform.position + new Vector3(0,1,0), spawnPrefabs[0].transform.rotation);
+                GameScenePrefab = Instantiate(spawnPrefabs[0], GameManager.instance.SpawnPositionOnLoad, spawnPrefabs[0].transform.rotation);
                 GameScenePrefab.GetComponent<PlayerObjectController>().ConnectionID = playerObjectController.ConnectionID;
-                NetworkServer.Spawn(GameScenePrefab,conn);
+                NetworkServer.Spawn(GameScenePrefab, conn);
             }
             else if (playerObjectController.Role == 2)
             {
-                GameScenePrefab = Instantiate(spawnPrefabs[1], spawnPrefabs[1].transform.position + new Vector3(0, 1, 0), spawnPrefabs[1].transform.rotation);
+                GameScenePrefab = Instantiate(spawnPrefabs[1], GameManager.instance.SpawnPositionOnLoad, spawnPrefabs[1].transform.rotation);
                 GameScenePrefab.GetComponent<PlayerObjectController>().ConnectionID = playerObjectController.ConnectionID;
                 NetworkServer.Spawn(GameScenePrefab, conn);
             }
         }
-        ServerChangeScene(SceneName);
     }
 }
+
+

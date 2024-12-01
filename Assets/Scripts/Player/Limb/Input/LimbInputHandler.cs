@@ -91,11 +91,43 @@ public class LimbInputHandler : NetworkBehaviour
                 }
             }
         }
+        if (Input.GetMouseButtonUp(1))
+        {
+            if (isServer)
+            {
+                container.attackInput = false;
+            }
+            else
+            {
+                limb.CmdSetattackInput(false);
+            }
+        }
         #endregion
         #region Interact
-        if (Input.GetKeyDown(KeyCode.E))
+        if (container.Interactable)
         {
-
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (isServer)
+                {
+                    container.InteractInput = true;
+                }
+                else
+                {
+                    limb.CmdSetInteractInput(true);
+                }
+            }
+            if (Input.GetKeyUp(KeyCode.E))
+            {
+                if (isServer)
+                {
+                    container.InteractInput = false;
+                }
+                else
+                {
+                    limb.CmdSetInteractInput(false);
+                }
+            }
         }
         #endregion
     }
@@ -106,13 +138,6 @@ public class LimbInputHandler : NetworkBehaviour
         if (isOwned) 
         { 
         
-        }
-    }
-    public void OnInteractInput(InputAction.CallbackContext context)
-    {
-        if (isOwned)
-        {
-
         }
     }
 

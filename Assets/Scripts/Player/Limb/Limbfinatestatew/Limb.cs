@@ -189,6 +189,23 @@ public class Limb : NetworkBehaviour
         }
         base.transform.Rotate(0.0f, 180.0f, 0.0f);
     }
+
+    public void Interact(GameObject target)
+    { 
+        
+    }
+
+    public void TakingDamage(int value)
+    {
+        if (isServer)
+        {
+            container.Hp -= value;
+        }
+        else
+        { 
+            CmdChangeHp(-value);
+        }
+    }
     #endregion
 
     #region ContainerSetFunction
@@ -289,6 +306,22 @@ public class Limb : NetworkBehaviour
     { 
         this.GetComponent<SpriteRenderer>().enabled = newvalue;
         RpcSetSpriteRenderer(newvalue);
+    }
+    [Command]
+    public void CmdSetInteractable(bool newvalue)
+    {
+        container.Interactable = newvalue;
+    }
+    [Command]
+    public void CmdSetInteractInput(bool newvalue)
+    {
+        container.InteractInput = newvalue;
+    }
+
+    [Command]
+    public void CmdSetishaveCardKey(bool newvalue)
+    {
+        container.ishaveCardKey = newvalue;
     }
 
     [ClientRpc]

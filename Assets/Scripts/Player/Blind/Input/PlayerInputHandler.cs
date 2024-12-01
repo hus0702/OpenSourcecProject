@@ -21,7 +21,6 @@ public class PlayerInputHandler : NetworkBehaviour
 
     }
 
-
     private void Update()
     {
 
@@ -221,32 +220,37 @@ public class PlayerInputHandler : NetworkBehaviour
         }
         #endregion
         #region Interact
-        if(Input.GetKeyDown(KeyCode.E))
+        if(container.Interactable)
         {
-
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (isServer)
+                {
+                    container.InteractInput = true;
+                }
+                else
+                {
+                    player.CmdSetInteractInput(true);
+                }
+            }
+            if (Input.GetKeyUp(KeyCode.E))
+            {
+                if (isServer)
+                {
+                    container.InteractInput = false;
+                }
+                else
+                {
+                    player.CmdSetInteractInput(false);
+                }
+            }
         }
+
         #endregion
 
     }
 
-    public void OnJumpInput(InputAction.CallbackContext context)
-    {
-        if (isOwned)
-        {
-            if (context.started)
-            {
-                if (isServer)
-                {
-                    container.JumpInput = true;
-                }
-                else
-                {
-                    player.CmdSetJumpInput(true);
-                }
-            }
-        }
-           
-    }
+
     public void UseJumpInput() => container.JumpInput = false;
     public void OnEscInput(InputAction.CallbackContext context)
     {
@@ -259,7 +263,28 @@ public class PlayerInputHandler : NetworkBehaviour
     {
         if (isOwned)
         {
-
+            if (context.started)
+            {
+                if (isServer)
+                {
+                    container.InteractInput = true;
+                }
+                else
+                {
+                    player.CmdSetInteractInput(true);
+                }
+            }
+            if (context.canceled)
+            {
+                if (isServer)
+                {
+                    container.InteractInput = false;
+                }
+                else
+                {
+                    player.CmdSetInteractInput(false);
+                }
+            }
         }
     }
 

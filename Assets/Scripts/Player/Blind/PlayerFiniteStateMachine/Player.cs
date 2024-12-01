@@ -31,7 +31,7 @@ public class Player : NetworkBehaviour
     public PlayerDieState DieState { get; private set; }
     public PlayerDataContainer container { get; private set; }
 
-    
+
 
     #endregion
 
@@ -92,14 +92,12 @@ public class Player : NetworkBehaviour
         thisController = this.GetComponent<PlayerObjectController>();
         Anim = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputHandler>();
-        RB = GetComponent<Rigidbody2D>(); 
+        RB = GetComponent<Rigidbody2D>();
         playerTransform = GetComponent<Transform>();
         FacingDirection = 1;
         StateMachine.PlayerInitialize(IdleState, container);
         groundcheck = transform.GetChild(0);
         myBoxCollider = GetComponent<BoxCollider2D>();
-
-
     }
 
     private void Update()
@@ -155,8 +153,8 @@ public class Player : NetworkBehaviour
 
     #region Check Functions
     public void CheckifShouldflip(int xinput)
-    { 
-        if(xinput != 0 && xinput != container.facingdirection && isOwned) 
+    {
+        if (xinput != 0 && xinput != container.facingdirection && isOwned)
         {
             Flip();
         }
@@ -194,7 +192,22 @@ public class Player : NetworkBehaviour
         }
         transform.Rotate(0.0f, 180.0f, 0.0f);
     }
+    public void Interact(GameObject target)
+    {
 
+    }
+
+    public void TakingDamage(int value)
+    {
+        if (isServer)
+        {
+            container.Hp -= value;
+        }
+        else
+        {
+            CmdChangeHp(-value);
+        }
+    }
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.layer == container.whatIsLadder && container.isclimbing)
@@ -256,6 +269,11 @@ public class Player : NetworkBehaviour
         container.position = newvalue;
     }
     [Command]
+    public void CmdSetInteractable(bool newvalue)
+    {
+        container.Interactable = newvalue;
+    }
+    [Command]
     public void CmdSetNormInputX(int newvalue)
     {
         container.NormInputX = newvalue;
@@ -278,7 +296,11 @@ public class Player : NetworkBehaviour
     {
         container.SitInput = newvalue;
     }
-
+    [Command]
+    public void CmdSetInteractInput(bool newvalue)
+    { 
+        container.InteractInput = newvalue;
+    }
     [Command]
     public void CmdSetLadderUp(bool newvalue)
     {
@@ -289,6 +311,12 @@ public class Player : NetworkBehaviour
     public void CmdSetLadderDown(bool newvalue)
     {
         container.ladderDown = newvalue;
+    }
+
+    [Command]
+    public void CmdSetishaveCardKey(bool newvalue)
+    {
+        container.ishaveCardKey = newvalue;
     }
     #endregion
 
