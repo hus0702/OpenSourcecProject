@@ -53,14 +53,17 @@ public class PlayerClimbingState : PlayerState
 
         if (Up)
         {
+            player.Anim.speed = 1;
             player.SetVelocityY(container.climbVelocity);
         }
         else if (Down)
         {
+            player.Anim.speed = 1;
             player.SetVelocityY(container.climbVelocity * -1);
         }
         else
         {
+            player.Anim.speed = 0;
             player.SetVelocityY(0);
         }
 
@@ -68,6 +71,7 @@ public class PlayerClimbingState : PlayerState
         {
             container.isclimbing = false;
             player.RB.gravityScale = 5;
+            player.Anim.speed = 1;
             stateMachine.playerChangeState(player.InAirState);
         }
         if (container.Hp <= 0)

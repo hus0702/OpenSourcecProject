@@ -24,6 +24,9 @@ public class LimbDataContainer : NetworkBehaviour
     [SyncVar] public bool attackInput;
     [SyncVar] public Vector3 mousePosition;
     [SyncVar] public int Hp;
+    [SyncVar] public bool InteractInput;
+    [SyncVar] public bool Interactable;
+    [SyncVar] public bool ishaveCardKey;
 
     private void Awake()
     {
@@ -41,6 +44,9 @@ public class LimbDataContainer : NetworkBehaviour
         SitInput = false;
         attackInput = false;
         Hp = 10;
+        InteractInput = false;
+        Interactable = true;
+        ishaveCardKey = false;
     }
 
 }

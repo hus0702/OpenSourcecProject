@@ -54,7 +54,7 @@ public class PlayerC_GroundedState : PlayerState
         {
             stateMachine.playerChangeState(player.DieState);
         }
-
+        
     }
 
     public override void PhysicsUpdate()

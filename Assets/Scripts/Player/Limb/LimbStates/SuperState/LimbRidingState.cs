@@ -40,7 +40,7 @@ public class LimbRidingState : LimbState
         {
             stateMachine.LimbChangeState(Limb.ThrowState);
         }
-        if (container.attackInput)
+        if (container.attackInput && container.HoldingGun)
         {
             stateMachine.LimbChangeState(Limb.RidingShotState);
         }

@@ -49,7 +49,7 @@ public class LimbGroundedState : LimbState
         {
             stateMachine.LimbChangeState(Limb.inAirState);
         }
-        if (container.attackInput)
+        if (container.attackInput&&container.HoldingGun)
         {
             stateMachine.LimbChangeState(Limb.ShotState);
         }
