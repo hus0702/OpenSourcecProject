@@ -110,8 +110,6 @@ public class Limb : NetworkBehaviour
         {
             this.limbtransform.position = (GameManager.instance.Pdcontainer.position + new Vector3(0, 0.1f, 0));
         }
-
-        Debug.Log(container.holdingitem);
     }
 
     private void FixedUpdate()
@@ -198,6 +196,18 @@ public class Limb : NetworkBehaviour
         }
     }
 
+    public void SetLimbVisible(bool newvalue)
+    {
+        if (isServer)
+        {
+            InputHandler.enabled = newvalue;
+            spriteRenderer.enabled = newvalue;
+        }
+        else
+        {
+            CmdSetLimbVisible(newvalue);
+        }
+    }
     public void GetCardKey(bool newvalue)
     {
         if (isServer)
@@ -221,6 +231,8 @@ public class Limb : NetworkBehaviour
             CmdGetGun(newvalue);
         }
     }
+
+    
     #endregion
 
     #region Check Functions
@@ -407,6 +419,12 @@ public class Limb : NetworkBehaviour
         container.itemset[1] = newvalue;
     }
 
+    [Command]
+    public void CmdSetLimbVisible(bool newvalue)
+    {
+        InputHandler.enabled = newvalue;
+        spriteRenderer.enabled = newvalue;
+    }
     [ClientRpc]
     public void RpcSetSpriteRenderer(bool newvalue)
     {

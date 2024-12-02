@@ -45,6 +45,8 @@ public class Player : NetworkBehaviour
     public Transform playerTransform { get; private set; }
     public GameObject detectedObject { get; private set; }
     public PlayerObjectController thisController { get; private set; }
+
+    public SpriteRenderer spriteRenderer { get; private set; }
     #endregion
 
     #region Check Variables
@@ -103,6 +105,7 @@ public class Player : NetworkBehaviour
         StateMachine.PlayerInitialize(IdleState, container);
         groundcheck = transform.GetChild(0);
         myBoxCollider = GetComponent<BoxCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -211,6 +214,18 @@ public class Player : NetworkBehaviour
         }
     }
 
+    public void SetBlindVisible(bool newvalue)
+    {
+        if (isServer)
+        {
+            InputHandler.enabled = newvalue;
+            spriteRenderer.enabled = newvalue;
+        }
+        else
+        {
+            CmdSetBlindVisible(newvalue);
+        }
+    }
     public void GetCardKey(bool newvalue)
     {
         if (isServer)
@@ -396,6 +411,13 @@ public class Player : NetworkBehaviour
     public void CmdGetCardkey(bool newvalue)
     {
         container.itemset[1] = newvalue;
+    }
+
+    [Command]
+    public void CmdSetBlindVisible(bool newvalue)
+    {
+        InputHandler.enabled = newvalue;
+        spriteRenderer.enabled = newvalue;
     }
     #endregion
 
