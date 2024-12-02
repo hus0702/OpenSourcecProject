@@ -143,7 +143,8 @@ public class Limb : NetworkBehaviour
     {
         if (newvalue)
         {
-            while (true)
+            int k = 0;
+            while (k < 4)
             {
                 if (isServer)
                 {
@@ -164,13 +165,21 @@ public class Limb : NetworkBehaviour
 
 
                     if (container.itemset[container.holdingitem])
+                    {
                         break;
+                    }
+                    else
+                    {
+                        k++;
+                    }
+                       
                 }
             }
         }
         else 
         {
-            while (true)
+            int k = 0;
+            while (k < 4)
             {
                 if (isServer)
                 {
@@ -191,6 +200,7 @@ public class Limb : NetworkBehaviour
 
                     if (container.itemset[container.holdingitem])
                         break;
+                    else { k++; }
                 }
             }
         }
