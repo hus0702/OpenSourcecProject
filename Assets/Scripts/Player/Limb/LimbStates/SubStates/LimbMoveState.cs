@@ -41,10 +41,6 @@ public class LimbMoveState : LimbGroundedState
         {
             stateMachine.LimbChangeState(Limb.IdleState);
         }
-        if (container.holdingitem == 1)
-        {
-            stateMachine.LimbChangeState(Limb.holdinggunmoveState);
-        }
     }
 
     public override void PhysicsUpdate()

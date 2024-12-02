@@ -1,28 +1,16 @@
 fileFormatVersion: 2
-guid: 50de927bb418f6148b03fe43d6c9811b
+guid: 8e96574f3386eca4d87bd109c517fa29
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4035615717365401714
-    second: blind_ububa_0
+      213: -8182227758918111922
+    second: KakaoTalk_20241202_180214665_0
   - first:
-      213: -1058852955589293003
-    second: blind_ububa_1
+      213: -5000099493372934396
+    second: KakaoTalk_20241202_180214665_1
   - first:
-      213: -7505225158085537628
-    second: blind_ububa_2
-  - first:
-      213: 7768840814609657322
-    second: blind_ububa_3
-  - first:
-      213: -642054214563201014
-    second: blind_ububa_4
-  - first:
-      213: 6762523374699016992
-    second: blind_ububa_5
-  - first:
-      213: 3678479682790767583
-    second: blind_ububa_6
+      213: -7767015091405806919
+    second: KakaoTalk_20241202_180214665_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -55,7 +43,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -93,7 +81,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -103,6 +91,19 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -140,172 +141,71 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: blind_ububa_0
+      name: KakaoTalk_20241202_180214665_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 4
         y: 0
-        width: 64
+        width: 73
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 904de07f37167c14ea66ba34706265cc
-      internalID: 1180450791
+      spriteID: e4d685e5433e27e80800000000000000
+      internalID: -8182227758918111922
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blind_ububa_1
+      name: KakaoTalk_20241202_180214665_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 84
         y: 0
-        width: 64
+        width: 70
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: f83e13014a852e3419496b37142ad68d
-      internalID: -1837574557
+      spriteID: 40745ef90041c9ab0800000000000000
+      internalID: -5000099493372934396
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blind_ububa_2
+      name: KakaoTalk_20241202_180214665_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 163
         y: 0
-        width: 64
+        width: 73
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: c5b5a0c27041f0641a9a927ba902b039
-      internalID: 1797773228
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: blind_ububa_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1841b2f835cec0849a864bd3a806ab25
-      internalID: 509137321
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: blind_ububa_4
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d6994262b6313f142ac491883602402f
-      internalID: 1580676123
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: blind_ububa_5
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b59181131113daa4c9c6bc757eb010d3
-      internalID: 981301957
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: blind_ububa_6
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 12993ab12579b36448452e32f1436136
-      internalID: -804914284
+      spriteID: 9b2a8affce4063490800000000000000
+      internalID: -7767015091405806919
       vertices: []
       indices: 
       edges: []
@@ -314,7 +214,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 0dc9d8ffe3a69c0429cb9763cf08bde1
+    spriteID: bc6750a3b513cfa4494d19a1d10e5d2f
     internalID: 0
     vertices: []
     indices: 
@@ -324,13 +224,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      blind_ububa_0: 1180450791
-      blind_ububa_1: -1837574557
-      blind_ububa_2: 1797773228
-      blind_ububa_3: 509137321
-      blind_ububa_4: 1580676123
-      blind_ububa_5: 981301957
-      blind_ububa_6: -804914284
+      KakaoTalk_20241202_180214665_0: -8182227758918111922
+      KakaoTalk_20241202_180214665_1: -5000099493372934396
+      KakaoTalk_20241202_180214665_2: -7767015091405806919
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

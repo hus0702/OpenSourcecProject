@@ -26,6 +26,6 @@ public class GameManager : NetworkBehaviour
 
     private void Start()
     {
-        SpawnPositionOnLoad = transform.localPosition;
+        SpawnPositionOnLoad = new Vector3(-22.5f, 1, 0);
     }
 }

@@ -36,11 +36,15 @@ public class LimbholdinggunidleState : LimbGroundedState
         base.LogicUpdate();
         if (xinput != 0f)
         {
-            stateMachine.LimbChangeState(Limb.holdinggunmoveState);
+            stateMachine.LimbChangeState(Limb.MoveState);
         }
         if (container.holdingitem != 1)
         {
             stateMachine.LimbChangeState(Limb.IdleState);
+        }
+        if (container.attackInput)
+        {
+            stateMachine.LimbChangeState(Limb.ShotState);
         }
     }
     public override void PhysicsUpdate()

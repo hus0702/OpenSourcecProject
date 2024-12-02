@@ -21,9 +21,7 @@ public class Limb : NetworkBehaviour
     public LimbThrowState ThrowState { get; private set; }
     public LimbRidingShotState RidingShotState { get; private set; }
     public LimbDieState DieState { get; private set; }
-
     public LimbholdinggunidleState holdinggunidleState { get; private set; }
-    public LimbholdinggunmoveState holdinggunmoveState { get; private set; }
 
     public LimbDataContainer container;
 
@@ -81,7 +79,6 @@ public class Limb : NetworkBehaviour
         RidingShotState = new LimbRidingShotState(this, StateMachine, container, "RidingShot");
         DieState = new LimbDieState(this, StateMachine, container, "die");
         holdinggunidleState = new LimbholdinggunidleState(this, StateMachine, container, "holdinggunidle");
-        holdinggunmoveState = new LimbholdinggunmoveState(this, StateMachine, container, "holdinggunmove");
     }
 
     private void Start()
