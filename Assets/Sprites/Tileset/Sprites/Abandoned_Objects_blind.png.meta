@@ -684,7 +684,30 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Abandoned_Objects_blind_0: 244127949095087680
+      Abandoned_Objects_blind_1: -2475379514016460686
+      Abandoned_Objects_blind_10: 2011116388475593027
+      Abandoned_Objects_blind_11: 8718970430510600194
+      Abandoned_Objects_blind_12: -152244504789845950
+      Abandoned_Objects_blind_13: -4773812373140035979
+      Abandoned_Objects_blind_14: 1570396709054925933
+      Abandoned_Objects_blind_15: -5405631417308901381
+      Abandoned_Objects_blind_16: -6087751736876625757
+      Abandoned_Objects_blind_17: -2961826807887192811
+      Abandoned_Objects_blind_18: -9178111422638061677
+      Abandoned_Objects_blind_19: -1852010255501507973
+      Abandoned_Objects_blind_2: -7397979327162574055
+      Abandoned_Objects_blind_20: 7464275813002351497
+      Abandoned_Objects_blind_21: -6866580137483515544
+      Abandoned_Objects_blind_22: -961237386954573478
+      Abandoned_Objects_blind_3: -5910301688856440970
+      Abandoned_Objects_blind_4: -3103169997819730917
+      Abandoned_Objects_blind_5: 9222031527483854703
+      Abandoned_Objects_blind_6: 4503144389601913440
+      Abandoned_Objects_blind_7: 939851330489726160
+      Abandoned_Objects_blind_8: -4621384678506780535
+      Abandoned_Objects_blind_9: -4717045146532239525
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
