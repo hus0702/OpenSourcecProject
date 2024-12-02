@@ -200,6 +200,30 @@ public class Limb : NetworkBehaviour
             }
         }
     }
+
+    public void GetCardKey(bool newvalue)
+    {
+        if (isServer)
+        {
+            container.itemset[2] = newvalue;
+        }
+        else
+        {
+            CmdGetCardkey(newvalue);
+        }
+    }
+
+    public void GetGun(bool newvalue)
+    {
+        if (isServer)
+        {
+            container.itemset[1] = newvalue;
+        }
+        else
+        {
+            CmdGetGun(newvalue);
+        }
+    }
     #endregion
 
     #region Check Functions
@@ -369,12 +393,23 @@ public class Limb : NetworkBehaviour
         container.InteractInput = newvalue;
     }
 
-
     [Command]
     public void CmdSetholdingitem(int newvalue)
     { 
         container.holdingitem = newvalue;
     }
+    [Command]
+    public void CmdGetCardkey(bool newvalue)
+    {
+        container.itemset[2] = newvalue;
+    }
+
+    [Command]
+    public void CmdGetGun(bool newvalue)
+    {
+        container.itemset[1] = newvalue;
+    }
+
     [ClientRpc]
     public void RpcSetSpriteRenderer(bool newvalue)
     {

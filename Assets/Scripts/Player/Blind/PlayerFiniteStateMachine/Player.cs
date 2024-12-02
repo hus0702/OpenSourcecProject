@@ -210,6 +210,19 @@ public class Player : NetworkBehaviour
             }
         }
     }
+
+    public void GetCardKey(bool newvalue)
+    {
+        if (isServer)
+        {
+            container.itemset[1] = newvalue;
+        }
+        else
+        {
+            CmdGetCardkey(newvalue);
+        }
+    }
+
     #endregion
 
     #region Check Functions
@@ -378,6 +391,11 @@ public class Player : NetworkBehaviour
     public void CmdSetholdingitem(int newvalue)
     {
         container.holdingitem = newvalue;
+    }
+    [Command]
+    public void CmdGetCardkey(bool newvalue)
+    {
+        container.itemset[1] = newvalue;
     }
     #endregion
 
