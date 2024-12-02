@@ -29,6 +29,9 @@ public class Player : NetworkBehaviour
     public PlayerThrowState ThrowState { get; private set; }
 
     public PlayerDieState DieState { get; private set; }
+
+    public PlayerC_holdinggunidleState c_holdinggunidleState { get; private set; }
+    public PlayerC_holdinggunmoveState c_holdinggunmoveState { get; private set; }
     public PlayerDataContainer container { get; private set; }
 
 
@@ -85,6 +88,8 @@ public class Player : NetworkBehaviour
         climbingState = new PlayerClimbingState(this, StateMachine, container, "climbing");
         climbState = new PlayerClimbState(this, StateMachine, container, "climb");
         DieState = new PlayerDieState(this, StateMachine, container, "die");
+        c_holdinggunidleState = new PlayerC_holdinggunidleState(this, StateMachine, container, "C_holdinggunidle");
+        c_holdinggunmoveState = new PlayerC_holdinggunmoveState(this, StateMachine, container, "C_holdinggunmove");
     }
 
     private void Start()
@@ -149,6 +154,62 @@ public class Player : NetworkBehaviour
         this.transform.position = pos;
     }
 
+    public void changeitem(bool newvalue)
+    {
+        if (newvalue)
+        {
+            while (true)
+            {
+                if (isServer)
+                {
+                    if (container.holdingitem != 1)
+                        container.holdingitem++;
+                    else
+                        container.holdingitem = 0;
+
+                    if (container.itemset[container.holdingitem])
+                        break;
+                }
+                else
+                {
+                    if (container.holdingitem != 1)
+                        CmdSetholdingitem(container.holdingitem + 1);
+                    else
+                        CmdSetholdingitem(0);
+
+
+                    if (container.itemset[container.holdingitem])
+                        break;
+                }
+            }
+        }
+        else
+        {
+            while (true)
+            {
+                if (isServer)
+                {
+                    if (container.holdingitem != 0)
+                        container.holdingitem--;
+                    else
+                        container.holdingitem = 1;
+
+                    if (container.itemset[container.holdingitem])
+                        break;
+                }
+                else
+                {
+                    if (container.holdingitem != 0)
+                        CmdSetholdingitem(container.holdingitem - 1);
+                    else
+                        CmdSetholdingitem(1);
+
+                    if (container.itemset[container.holdingitem])
+                        break;
+                }
+            }
+        }
+    }
     #endregion
 
     #region Check Functions
@@ -314,9 +375,9 @@ public class Player : NetworkBehaviour
     }
 
     [Command]
-    public void CmdSetishaveCardKey(bool newvalue)
+    public void CmdSetholdingitem(int newvalue)
     {
-        container.ishaveCardKey = newvalue;
+        container.holdingitem = newvalue;
     }
     #endregion
 

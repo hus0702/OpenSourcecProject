@@ -14,8 +14,6 @@ public class LimbDataContainer : NetworkBehaviour
     [SyncVar] public int FacingDirection;
     [SyncVar] public Vector3 position;
     [SyncVar] public bool isRiding;
-    [SyncVar] public bool ishavingGun;
-    [SyncVar] public bool HoldingGun;
     [SyncVar] public float ShotDelay;
     [SyncVar] public int NormInputX;
     [SyncVar] public int NormInputY;
@@ -26,7 +24,9 @@ public class LimbDataContainer : NetworkBehaviour
     [SyncVar] public int Hp;
     [SyncVar] public bool InteractInput;
     [SyncVar] public bool Interactable;
-    [SyncVar] public bool ishaveCardKey;
+
+    [SyncVar] public bool[] itemset; // 0번은 빈손, 1번은 총, 2번은 카드키 예정
+    [SyncVar] public int holdingitem;
 
     private void Awake()
     {
@@ -35,8 +35,6 @@ public class LimbDataContainer : NetworkBehaviour
         groundCheckRadious = 0.5f;
         FacingDirection = 1;
         isRiding = false;
-        ishavingGun = false;
-        HoldingGun = false;
         ShotDelay = 0.3f;
         NormInputX = 0;
         NormInputY = 0;
@@ -46,7 +44,11 @@ public class LimbDataContainer : NetworkBehaviour
         Hp = 10;
         InteractInput = false;
         Interactable = true;
-        ishaveCardKey = false;
+
+        itemset = new bool[3];
+        itemset[0] = true;
+        itemset[1] = true;
+        holdingitem = 0;
     }
 
 }

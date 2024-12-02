@@ -20,8 +20,10 @@ public class Limb : NetworkBehaviour
     public LimbPutDownState PutDownState { get; private set; }
     public LimbThrowState ThrowState { get; private set; }
     public LimbRidingShotState RidingShotState { get; private set; }
-
     public LimbDieState DieState { get; private set; }
+
+    public LimbholdinggunidleState holdinggunidleState { get; private set; }
+    public LimbholdinggunmoveState holdinggunmoveState { get; private set; }
 
     public LimbDataContainer container;
 
@@ -78,6 +80,8 @@ public class Limb : NetworkBehaviour
         inAirState = new LimbinAirState(this, StateMachine, container, "inair");
         RidingShotState = new LimbRidingShotState(this, StateMachine, container, "RidingShot");
         DieState = new LimbDieState(this, StateMachine, container, "die");
+        holdinggunidleState = new LimbholdinggunidleState(this, StateMachine, container, "holdinggunidle");
+        holdinggunmoveState = new LimbholdinggunmoveState(this, StateMachine, container, "holdinggunmove");
     }
 
     private void Start()
@@ -109,6 +113,8 @@ public class Limb : NetworkBehaviour
         {
             this.limbtransform.position = (GameManager.instance.Pdcontainer.position + new Vector3(0, 0.1f, 0));
         }
+
+        Debug.Log(container.holdingitem);
     }
 
     private void FixedUpdate()
@@ -137,6 +143,63 @@ public class Limb : NetworkBehaviour
     {
         StateMachine.LimbChangeState(newstate);
     }
+
+    public void changeitem(bool newvalue)
+    {
+        if (newvalue)
+        {
+            while (true)
+            {
+                if (isServer)
+                {
+                    if (container.holdingitem != 2)
+                        container.holdingitem++;
+                    else
+                        container.holdingitem = 0;
+
+                    if (container.itemset[container.holdingitem])
+                        break;
+                }
+                else 
+                {
+                    if (container.holdingitem != 2)
+                        CmdSetholdingitem(container.holdingitem + 1);
+                    else
+                        CmdSetholdingitem(0);
+
+
+                    if (container.itemset[container.holdingitem])
+                        break;
+                }
+            }
+        }
+        else 
+        {
+            while (true)
+            {
+                if (isServer)
+                {
+                    if (container.holdingitem != 0)
+                        container.holdingitem--;
+                    else
+                        container.holdingitem = 2;
+
+                    if (container.itemset[container.holdingitem])
+                        break;
+                }
+                else
+                {
+                    if (container.holdingitem != 0)
+                        CmdSetholdingitem(container.holdingitem - 1);
+                    else
+                        CmdSetholdingitem(2);
+
+                    if (container.itemset[container.holdingitem])
+                        break;
+                }
+            }
+        }
+    }
     #endregion
 
     #region Check Functions
@@ -155,21 +218,18 @@ public class Limb : NetworkBehaviour
 
     public bool CheckIftouchBlind()
     {
-        //Collider2D[] results = new Collider2D[10];
-        //ContactFilter2D contactFilter = new ContactFilter2D();
-        //contactFilter.SetLayerMask(limbData.whitIsBlind);
-        //contactFilter.useLayerMask = true;
         return Physics2D.OverlapCircle(groundcheck.position, container.groundCheckRadious, container.whatIsBlind);
-        //if (Physics2D.OverlapCollider(Collider, contactFilter, results) == 0)
-        //{
-        //    return false;
-        //}
-        //else
-        //{
-        //    return true;
-        //}
     }
 
+    public bool ishaveCardKey()
+    {
+        return container.itemset[2];
+    }
+
+    public bool ishaveGun()
+    {
+        return container.itemset[1];
+    }
     #endregion
 
     #region Other Functions
@@ -229,17 +289,8 @@ public class Limb : NetworkBehaviour
     {
         container.Hp += newvalue;
     }
-    [Command]
-    public void CmdSetishavingGun(bool newvalue)
-    {
-        container.ishavingGun = newvalue;
-    }
 
-    [Command]
-    public void CmdSetHoldingGun(bool newvalue)
-    {
-        container.HoldingGun = newvalue;
-    }
+
 
     [Command]
     public void CmdSetshotDelay(float newvalue)
@@ -318,12 +369,12 @@ public class Limb : NetworkBehaviour
         container.InteractInput = newvalue;
     }
 
-    [Command]
-    public void CmdSetishaveCardKey(bool newvalue)
-    {
-        container.ishaveCardKey = newvalue;
-    }
 
+    [Command]
+    public void CmdSetholdingitem(int newvalue)
+    { 
+        container.holdingitem = newvalue;
+    }
     [ClientRpc]
     public void RpcSetSpriteRenderer(bool newvalue)
     {

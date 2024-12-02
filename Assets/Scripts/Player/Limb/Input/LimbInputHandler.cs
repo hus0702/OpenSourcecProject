@@ -1,4 +1,5 @@
 using Mirror;
+using Mirror.Examples.Basic;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -24,7 +25,6 @@ public class LimbInputHandler : NetworkBehaviour
     {
         if (!isOwned)
             return;
-
         #region move
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -73,7 +73,6 @@ public class LimbInputHandler : NetworkBehaviour
             }
         }
         #endregion
-
         #region shot
         if (!isshotblocked)
         {
@@ -130,13 +129,25 @@ public class LimbInputHandler : NetworkBehaviour
             }
         }
         #endregion
+        #region itemScroll
+
+        if (Input.mouseScrollDelta.y > 0)
+        {
+            limb.changeitem(true);
+        }
+        if (Input.mouseScrollDelta.y < 0)
+        {
+            limb.changeitem(false);
+        }
+
+        #endregion
     }
 
-    
+
     public void OnEscInput(InputAction.CallbackContext context)
     {
         if (isOwned) 
-        { 
+        {
         
         }
     }

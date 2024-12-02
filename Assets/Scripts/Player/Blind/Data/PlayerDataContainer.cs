@@ -27,7 +27,6 @@ public class PlayerDataContainer : NetworkBehaviour
     [SyncVar] public Vector3 position;
     [SyncVar] public bool Interactable;
     [SyncVar] public int Hp;
-    [SyncVar] public bool ishaveCardKey;
 
     [SyncVar]public int NormInputX;
     [SyncVar]public int NormInputY;
@@ -37,6 +36,8 @@ public class PlayerDataContainer : NetworkBehaviour
     [SyncVar] public bool ladderDown;
     [SyncVar] public bool InteractInput;
 
+    [SyncVar] public bool[] itemset; // 0번은 빈손, 1번은 카드키예정
+    [SyncVar] public int holdingitem;
 
 
     private void Awake()
@@ -63,7 +64,11 @@ public class PlayerDataContainer : NetworkBehaviour
         ladderUp = false;
         ladderDown = false;
         InteractInput = false;
-        ishaveCardKey = false;
+
+        itemset = new bool[2];
+        itemset[0] = true;
+        holdingitem = 0;
+
     }
 
 

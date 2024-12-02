@@ -1,10 +1,10 @@
-using Mirror;
 using UnityEngine;
 
-public class LimbRidingState : LimbState
+public class LimbholdinggunmoveState : LimbGroundedState
 {
-    public LimbRidingState(Limb Limb, PlayerStateMachine stateMachine, LimbDataContainer container, string animBoolName) : base(Limb, stateMachine, container, animBoolName)
+    public LimbholdinggunmoveState(Limb Limb, PlayerStateMachine stateMachine, LimbDataContainer container, string animBoolName) : base(Limb, stateMachine, container, animBoolName)
     {
+
     }
 
     public override void AnimationFinishTrigger()
@@ -25,7 +25,6 @@ public class LimbRidingState : LimbState
     public override void Enter()
     {
         base.Enter();
-
     }
 
     public override void Exit()
@@ -36,13 +35,15 @@ public class LimbRidingState : LimbState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (!GameManager.instance.Pdcontainer.iscarrying)
+        Limb.CheckifShouldflip(xinput);
+        Limb.SetVelocityX(container.movementVelocity * xinput);
+        if (xinput == 0f)
         {
-            stateMachine.LimbChangeState(Limb.ThrowState);
+            stateMachine.LimbChangeState(Limb.holdinggunidleState);
         }
-        if (container.attackInput)
+        if (container.holdingitem != 1)
         {
-            stateMachine.LimbChangeState(Limb.RidingShotState);
+            stateMachine.LimbChangeState(Limb.MoveState);
         }
     }
 

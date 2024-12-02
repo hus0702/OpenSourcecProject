@@ -5,6 +5,7 @@ using System.Collections;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.U2D.IK;
 
 public class PlayerInputHandler : NetworkBehaviour
 {
@@ -247,7 +248,17 @@ public class PlayerInputHandler : NetworkBehaviour
         }
 
         #endregion
+        #region itemscroll
+        if (Input.mouseScrollDelta.y > 0)
+        {
+            player.changeitem(true);
+        }
+        if (Input.mouseScrollDelta.y < 0)
+        {
+            player.changeitem(false);
+        }
 
+        #endregion
     }
 
 

@@ -38,6 +38,10 @@ public class LimbIdleState : LimbGroundedState
         {
             stateMachine.LimbChangeState(Limb.MoveState);
         }
+        if (container.holdingitem == 1)
+        {
+            stateMachine.LimbChangeState(Limb.holdinggunidleState);
+        }
     }
 
     public override void PhysicsUpdate()
