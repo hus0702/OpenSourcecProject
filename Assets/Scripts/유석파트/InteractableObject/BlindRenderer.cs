@@ -7,15 +7,12 @@ public class BlindRenderer : MonoBehaviour
 
     void Awake()
     {
-        /*
         PlayerObjectController localPlayer = NetworkClient.localPlayer.GetComponent<PlayerObjectController>();
 
         if(localPlayer.Role == PlayerObjectController.Blind)
         {
-            if (spriteForBlind == null) Debug.LogError(gameObject.name + " °´Ã¼¿¡ ºí¶óÀÎµåÇÑÅ× ·»´õ¸µ µÉ ½ºÇÁ¶óÀÌÆ®¸¦ ºÙ¿©ÁÖ¼¼¿ä!");
+            if (spriteForBlind == null) Debug.LogError(gameObject.name + "BlindRender ê°ì²´ì— ë¸”ë¼ì¸ë“œìš© ìŠ¤í”„ë¼ì´íŠ¸ê°€ í• ë‹¹ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤!");
             else GetComponent<SpriteRenderer>().sprite = spriteForBlind;
         }
-        TODO ÀÓ½Ã ÁÖ¼®
-        */
     }
 }
