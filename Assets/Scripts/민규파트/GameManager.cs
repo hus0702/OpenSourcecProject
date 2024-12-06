@@ -22,10 +22,29 @@ public class GameManager : NetworkBehaviour
         {
             Destroy(gameObject);
         }
+
     }
 
     private void Start()
     {
         SpawnPositionOnLoad = new Vector3(-22.5f, 1, 0);
     }
+
+    [Command]
+    public void CmdPlaySoundOnClient(AudioManager.Sfx name)
+    {
+        AudioManager.instance.PlaySfx(name);
+        RpcPlaySoundOnClient(name);
+    }
+
+    // 서버에서 클라이언트로 호출되는 RPC
+    [ClientRpc]
+    void RpcPlaySoundOnClient(AudioManager.Sfx name)
+    {
+        if (isLocalPlayer)
+        {
+            AudioManager.instance.PlaySfx(name);
+        }
+    }
+
 }

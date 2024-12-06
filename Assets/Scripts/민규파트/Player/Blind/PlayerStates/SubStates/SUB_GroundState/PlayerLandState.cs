@@ -11,7 +11,7 @@ public class PlayerLandState : PlayerGroundedState
     {
         base.Enter();
         player.InputHandler.UseJumpInput();
-
+        GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.BlindLand);
     }
 
     public override void LogicUpdate()

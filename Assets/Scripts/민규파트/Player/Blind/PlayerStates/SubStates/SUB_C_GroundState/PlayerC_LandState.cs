@@ -6,6 +6,12 @@ public class PlayerC_LandState : PlayerC_GroundedState
     {
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+
+        GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.BlindLand);
+    }
     public override void LogicUpdate()
     {
         base.LogicUpdate();

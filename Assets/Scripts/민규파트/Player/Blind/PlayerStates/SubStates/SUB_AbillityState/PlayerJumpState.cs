@@ -12,6 +12,7 @@ public class PlayerJumpState : PlayerAbillityState
     {
         base.Enter();
 
+
         player.SetVelocityY(container.jumpVelocity);
         if (player.isOwned)
         {

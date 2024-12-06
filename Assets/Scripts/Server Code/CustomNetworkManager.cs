@@ -32,6 +32,22 @@ public class CustomNetworkManager : NetworkManager
 
             NetworkServer.AddPlayerForConnection(conn, GamePlayerInstance.gameObject);
             Debug.Log("로비에서 생성된 connection : " + conn);
+
+            if (GameManager.instance == null) // GameManager 싱글톤이 이미 있는지 확인
+            {
+                // GameManager 프리팹을 추가 (여기서는 Resources 폴더에서 불러오는 방식 사용)
+                GameObject gameManagerPrefab = spawnPrefabs[2];
+                if (gameManagerPrefab != null)
+                {
+                    GameObject gameManagerInstance = Instantiate(gameManagerPrefab);
+                    NetworkServer.Spawn(gameManagerInstance, conn); // 네트워크 상에서 GameManager 소환
+                    Debug.Log("GameManager가 생성되었습니다.");
+                }
+                else
+                {
+                    Debug.LogError("GameManager 프리팹을 찾을 수 없습니다. Resources 폴더에 프리팹을 추가하세요.");
+                }
+            }
         }
     }
 
@@ -46,21 +62,7 @@ public class CustomNetworkManager : NetworkManager
 
     public void StartGame(string SceneName)
     {
-        if (GameManager.instance == null) // GameManager 싱글톤이 이미 있는지 확인
-        {
-            // GameManager 프리팹을 추가 (여기서는 Resources 폴더에서 불러오는 방식 사용)
-            GameObject gameManagerPrefab = spawnPrefabs[2];
-            if (gameManagerPrefab != null)
-            {
-                GameObject gameManagerInstance = Instantiate(gameManagerPrefab);
-                NetworkServer.Spawn(gameManagerInstance); // 네트워크 상에서 GameManager 소환
-                Debug.Log("GameManager가 생성되었습니다.");
-            }
-            else
-            {
-                Debug.LogError("GameManager 프리팹을 찾을 수 없습니다. Resources 폴더에 프리팹을 추가하세요.");
-            }
-        }
+
         ServerChangeScene(SceneName);
     }
 

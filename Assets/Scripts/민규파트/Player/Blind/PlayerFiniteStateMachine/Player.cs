@@ -264,6 +264,13 @@ public class Player : NetworkBehaviour
     }
     #endregion
 
+    #region SoundMaking Function
+    public void BlindSteppingSound()
+    {
+        GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.Blindwalk);
+    }
+    #endregion
+
     #region Other Functions
 
     private void AnimationTrigger() => StateMachine.playerCurrentState.AnimationTrigger();
