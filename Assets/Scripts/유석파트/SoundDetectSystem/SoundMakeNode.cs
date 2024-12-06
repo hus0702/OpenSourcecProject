@@ -4,6 +4,8 @@ using UnityEngine.Rendering.Universal;
 
 public class SoundMakeNode : MonoBehaviour
 {
+    private ObjectPool returnPool; // 만약 이벤트가 모두 끝나고 돌아가야 할 오브젝트 풀이 있다면 이 곳에 저장된다!
+
     private Light2D light2d;
 
     private float padeInDuration_goal;
@@ -37,10 +39,16 @@ public class SoundMakeNode : MonoBehaviour
         light2d.intensity = 0;
     }
 
+    public void setMyPool(ObjectPool pool)
+    {
+        returnPool = pool;
+    }
+
     public void MakeSound(GameObject sourceOfSound, float power, float duration)
     {
-
         InitSoundMakeNode();
+
+        transform.position = sourceOfSound.transform.position;
 
         // 일단 권장 사항으로 해놓겠습니당
         padeInDuration_goal = duration * padeInRatio;
@@ -53,7 +61,7 @@ public class SoundMakeNode : MonoBehaviour
         this.power = power;
 
         isPadeIning = true;
-        light2d.intensity = 1;
+        light2d.intensity = 0.8f;
     }
 
     public void Update()
@@ -96,13 +104,18 @@ public class SoundMakeNode : MonoBehaviour
         if(isPadeOuting)
         {
             padeOutDuration -= Time.deltaTime;
-            light2d.intensity = Mathf.SmoothStep(1, 0, Mathf.Pow((padeOutDuration_goal - padeOutDuration) / padeOutDuration_goal, 0.7f));
+            light2d.intensity = Mathf.SmoothStep(0.8f, 0, Mathf.Pow((padeOutDuration_goal - padeOutDuration) / padeOutDuration_goal, 0.2f));
 
             if(padeOutDuration <= 0)
             {
                 padeOutDuration = 0; // 일단 안전하게 이 값을 0으로 해줍시다
                 isPadeOuting = false;
                 // 이 시점에서 모든 작업이 끝날거임. 추가 작업이 필요.
+
+                if(returnPool != null)
+                {
+                    returnPool.ReleaseObject(gameObject);
+                }
             }       
         }
     }
