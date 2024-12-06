@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SoundMakeManager : MonoBehaviour
@@ -5,15 +6,33 @@ public class SoundMakeManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     public ObjectPool soundMakeNodePool;
-    
-    void Start()
+
+    private static SoundMakeManager instance;
+    public static SoundMakeManager Instance
     {
-        
+        get
+        {
+            if(instance == null)
+            {
+                instance = new GameObject("SoundMakeManager").AddComponent<SoundMakeManager>();
+                DontDestroyOnLoad(instance);
+            }
+            return instance;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void Awake()
     {
-        
+        if(instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(this.gameObject);
     }
+
+
+    //public void Make
 }
