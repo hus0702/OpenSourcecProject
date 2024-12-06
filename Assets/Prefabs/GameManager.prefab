@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 8206075932828855856}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.136, y: -1451.3679, z: -0.2684746}
+  m_LocalPosition: {x: 0, y: 0, z: -0.2684746}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -52,6 +52,7 @@ MonoBehaviour:
   syncInterval: 0
   Pdcontainer: {fileID: -6119897554559496774}
   Ldcontainer: {fileID: 8548898917212533010}
+  SpawnPositionOnLoad: {x: 0, y: 0, z: 0}
 --- !u!114 &6055457315341795781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,12 +108,15 @@ MonoBehaviour:
   putdowncall: 0
   throwinputtime: 0
   position: {x: 0, y: 0, z: 0}
+  Interactable: 0
+  Hp: 0
   NormInputX: 0
   NormInputY: 0
   JumpInput: 0
   SitInput: 0
   ladderUp: 0
   ladderDown: 0
+  InteractInput: 0
 --- !u!114 &8548898917212533010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,3 +154,6 @@ MonoBehaviour:
   SitInput: 0
   attackInput: 0
   mousePosition: {x: 0, y: 0, z: 0}
+  Hp: 0
+  InteractInput: 0
+  Interactable: 0

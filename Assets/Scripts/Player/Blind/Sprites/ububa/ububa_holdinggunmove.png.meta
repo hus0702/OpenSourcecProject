@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: d5571edd3f6a0fd42a18c64465cf7efe
+guid: 7376621deae5226468c8f56218d226ae
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8290600100354597752
-    second: blind_crouch_move_0
+      213: -3447054415517755152
+    second: ububa_holdinggunmove_0
   - first:
-      213: -2674943761127832952
-    second: blind_crouch_move_1
+      213: 1429101586847544885
+    second: ububa_holdinggunmove_1
   - first:
-      213: 7129743634199483248
-    second: blind_crouch_move_2
+      213: -707911485320912844
+    second: ububa_holdinggunmove_2
   - first:
-      213: -4400662515016932138
-    second: blind_crouch_move_3
+      213: 5448244923027188500
+    second: ububa_holdinggunmove_3
   - first:
-      213: -7062161979208515109
-    second: blind_crouch_move_4
+      213: -8605611641339758285
+    second: ububa_holdinggunmove_4
   - first:
-      213: -6722620708849741122
-    second: blind_crouch_move_5
+      213: -8185185510439920155
+    second: ububa_holdinggunmove_5
   - first:
-      213: 7659099750731844150
-    second: blind_crouch_move_6
+      213: -1790486541787233451
+    second: ububa_holdinggunmove_6
   - first:
-      213: -3781812616699274951
-    second: blind_crouch_move_7
+      213: -555187850122414543
+    second: ububa_holdinggunmove_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -58,7 +58,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -96,7 +96,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -143,181 +143,194 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: blind_crouch_move_0
+      name: ububa_holdinggunmove_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 14
         y: 0
-        width: 64
-        height: 64
+        width: 44
+        height: 56
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 240bab659ffc6a9418d5bf9d6a8443b1
-      internalID: 1601933352
+      spriteID: 0f85f99b54a9920d0800000000000000
+      internalID: -3447054415517755152
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blind_crouch_move_1
+      name: ububa_holdinggunmove_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 78
         y: 0
-        width: 64
-        height: 64
+        width: 44
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: dc815ac698c562c499e4c1ef1ca1dc49
-      internalID: 2081451108
+      spriteID: 536beff425035d310800000000000000
+      internalID: 1429101586847544885
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blind_crouch_move_2
+      name: ububa_holdinggunmove_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 142
         y: 0
-        width: 64
-        height: 64
+        width: 44
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 7a3b97e55652c7e428dd45ab7c3af128
-      internalID: -1713251469
+      spriteID: 4302709314efc26f0800000000000000
+      internalID: -707911485320912844
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blind_crouch_move_3
+      name: ububa_holdinggunmove_3
       rect:
         serializedVersion: 2
-        x: 192
+        x: 206
         y: 0
-        width: 64
-        height: 64
+        width: 44
+        height: 56
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 0445f7aee7996b440972869588290dbe
-      internalID: 1737315766
+      spriteID: 41b6c5634ed0c9b40800000000000000
+      internalID: 5448244923027188500
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blind_crouch_move_4
+      name: ububa_holdinggunmove_4
       rect:
         serializedVersion: 2
-        x: 256
+        x: 270
         y: 0
-        width: 64
-        height: 64
+        width: 44
+        height: 56
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 2b75a0dd71d1b544fb2240ebe733d0a2
-      internalID: 786699248
+      spriteID: 3393af28ec9b29880800000000000000
+      internalID: -8605611641339758285
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blind_crouch_move_5
+      name: ububa_holdinggunmove_5
       rect:
         serializedVersion: 2
-        x: 320
+        x: 334
         y: 0
-        width: 64
-        height: 64
+        width: 44
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 2fb41f445e59a6e488e3ba866ae56954
-      internalID: -516269367
+      spriteID: 5eddd8d2521686e80800000000000000
+      internalID: -8185185510439920155
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blind_crouch_move_6
+      name: ububa_holdinggunmove_6
       rect:
         serializedVersion: 2
-        x: 384
+        x: 398
         y: 0
-        width: 64
-        height: 64
+        width: 44
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 4e5cae1409128454699f43b1b6960547
-      internalID: 1168905809
+      spriteID: 55387a50af9e627e0800000000000000
+      internalID: -1790486541787233451
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blind_crouch_move_7
+      name: ububa_holdinggunmove_7
       rect:
         serializedVersion: 2
-        x: 448
+        x: 462
         y: 0
-        width: 64
-        height: 64
+        width: 44
+        height: 56
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 1b8353e6b7f666146adc963957f673ba
-      internalID: -951276099
+      spriteID: 13637d187939b48f0800000000000000
+      internalID: -555187850122414543
       vertices: []
       indices: 
       edges: []
@@ -326,7 +339,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: f40533990c24c56429086775845336c8
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -336,14 +349,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      blind_crouch_move_0: 1601933352
-      blind_crouch_move_1: 2081451108
-      blind_crouch_move_2: -1713251469
-      blind_crouch_move_3: 1737315766
-      blind_crouch_move_4: 786699248
-      blind_crouch_move_5: -516269367
-      blind_crouch_move_6: 1168905809
-      blind_crouch_move_7: -951276099
+      ububa_holdinggunmove_0: -3447054415517755152
+      ububa_holdinggunmove_1: 1429101586847544885
+      ububa_holdinggunmove_2: -707911485320912844
+      ububa_holdinggunmove_3: 5448244923027188500
+      ububa_holdinggunmove_4: -8605611641339758285
+      ububa_holdinggunmove_5: -8185185510439920155
+      ububa_holdinggunmove_6: -1790486541787233451
+      ububa_holdinggunmove_7: -555187850122414543
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

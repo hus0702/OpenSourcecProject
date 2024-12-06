@@ -27,19 +27,32 @@ public class LimbRidingShotState : LimbAbillityState
     public override void Enter()
     {
         base.Enter();
-        if (Limb.isServer)
+        if (Limb.isOwned)
         {
-            container.attackInput = false;
+            if (Limb.isServer)
+            {
+                container.attackInput = false;
+            }
+            else
+            {
+                Limb.CmdSetattackInput(false);
+            }
         }
-        else
-        {
-            Limb.CmdSetattackInput(false);
-        }
-        
         Limb.InputHandler.StartCoroutine(Limb.InputHandler.stopshotinput(container.ShotDelay));
         mousePosition = container.mousePosition;
         bulletrotation = mousePosition - Limb.transform.position;
-        var bullet = Limb.Instantiate(Limb.BulletPrefab, Limb.transform.position + bulletrotation.normalized, Quaternion.Euler(bulletrotation));
+
+        if (bulletrotation.y > 3) // 최대 총 각도 설정
+        {
+            bulletrotation.y = 3;
+        }
+
+        if (bulletrotation.y < -3)
+        {
+            bulletrotation.y = -3;
+        }
+
+        var bullet = Limb.Instantiate(Limb.BulletPrefab, GameManager.instance.Pdcontainer.position + bulletrotation.normalized, Quaternion.Euler(bulletrotation));
         bullet.GetComponent<Rigidbody2D>().linearVelocity = (bulletrotation).normalized * container.bulletspeed;
 
     }

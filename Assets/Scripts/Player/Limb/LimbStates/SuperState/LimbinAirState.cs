@@ -46,6 +46,10 @@ public class LimbinAirState : LimbState
         {
             stateMachine.LimbChangeState(Limb.IdleState);
         }
+        if (container.Hp <= 0)
+        {
+            stateMachine.LimbChangeState(Limb.DieState);
+        }
     }
     public override void PhysicsUpdate()
     {

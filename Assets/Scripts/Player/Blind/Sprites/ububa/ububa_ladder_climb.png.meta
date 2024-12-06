@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: 5c94cb39ed1d5da4a8a45e4ab5bc6633
+guid: 19c622ffb4c740b4cbe7faee3cb8f13f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5086973117480103845
-    second: blind_jump_0
+      213: -6867381734212359857
+    second: ububa_ladder_climb_0
   - first:
-      213: 5725940046057575230
-    second: blind_jump_1
+      213: -864632326939460298
+    second: ububa_ladder_climb_1
   - first:
-      213: 7801419768044857905
-    second: blind_jump_2
+      213: 6158096375317087812
+    second: ububa_ladder_climb_2
   - first:
-      213: 4771504304647235231
-    second: blind_jump_3
+      213: -7200265686159941520
+    second: ububa_ladder_climb_3
   - first:
-      213: -7265427146611648859
-    second: blind_jump_4
+      213: 2576333163045628294
+    second: ububa_ladder_climb_4
   - first:
-      213: -5812414591626290324
-    second: blind_jump_5
+      213: 8550537301706207588
+    second: ububa_ladder_climb_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -137,11 +137,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: blind_jump_0
+      name: ububa_ladder_climb_0
       rect:
         serializedVersion: 2
         x: 0
@@ -156,14 +169,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c125ad1180cff4a4ebdd701692f67ece
-      internalID: -1088520309
+      spriteID: eea55de12c1d59c41b29405256d4499d
+      internalID: -1931028460
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blind_jump_1
+      name: ububa_ladder_climb_1
       rect:
         serializedVersion: 2
         x: 64
@@ -178,14 +191,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 68a2aee8b1e44594a8f3bf012b3b4124
-      internalID: 368975405
+      spriteID: a2ccc423439fa4141ae6dff05beea81e
+      internalID: -1494528378
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blind_jump_2
+      name: ububa_ladder_climb_2
       rect:
         serializedVersion: 2
         x: 128
@@ -200,14 +213,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d18beccde3936942a231eb1973046af
-      internalID: 1563970354
+      spriteID: 9efb007ac0b914942ab8b48967b40f39
+      internalID: -77966451
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blind_jump_3
+      name: ububa_ladder_climb_3
       rect:
         serializedVersion: 2
         x: 192
@@ -222,14 +235,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22b82038f921fe844bf99c23befc3ee1
-      internalID: -96718662
+      spriteID: da5c9831824ce7d4684b449c95dd25be
+      internalID: -209550794
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blind_jump_4
+      name: ububa_ladder_climb_4
       rect:
         serializedVersion: 2
         x: 256
@@ -244,14 +257,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 839522e378ce2044dbfd2d73610a206e
-      internalID: 1675877888
+      spriteID: 5013ba18ab194e541acf236af2c04471
+      internalID: -1061992023
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blind_jump_5
+      name: ububa_ladder_climb_5
       rect:
         serializedVersion: 2
         x: 320
@@ -266,8 +279,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c0af02690f00b7b40af081b6fae9a30d
-      internalID: 1374439299
+      spriteID: f4d543e16408ab446b7ab4886d816f31
+      internalID: 1303240861
       vertices: []
       indices: 
       edges: []
@@ -276,7 +289,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: ee51c84e3691c9d46ac3e337b519ae00
+    spriteID: b62e24ec7c4fec04e868a0628dbfe805
     internalID: 0
     vertices: []
     indices: 
@@ -286,12 +299,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      blind_jump_0: -1088520309
-      blind_jump_1: 368975405
-      blind_jump_2: 1563970354
-      blind_jump_3: -96718662
-      blind_jump_4: 1675877888
-      blind_jump_5: 1374439299
+      ububa_ladder_climb_0: -1931028460
+      ububa_ladder_climb_1: -1494528378
+      ububa_ladder_climb_2: -77966451
+      ububa_ladder_climb_3: -209550794
+      ububa_ladder_climb_4: -1061992023
+      ububa_ladder_climb_5: 1303240861
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,25 +1,19 @@
 fileFormatVersion: 2
-guid: 19c622ffb4c740b4cbe7faee3cb8f13f
+guid: 7c128f23e9a70d6499d1f57aca6f07d8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6867381734212359857
-    second: ububa_ladder_climb_0
+      213: 2197150343059024723
+    second: ububa_idle_0
   - first:
-      213: -864632326939460298
-    second: ububa_ladder_climb_1
+      213: -6598062815057566245
+    second: ububa_idle_1
   - first:
-      213: 6158096375317087812
-    second: ububa_ladder_climb_2
+      213: -3956525431229129194
+    second: ububa_idle_2
   - first:
-      213: -7200265686159941520
-    second: ububa_ladder_climb_3
-  - first:
-      213: 2576333163045628294
-    second: ububa_ladder_climb_4
-  - first:
-      213: 8550537301706207588
-    second: ububa_ladder_climb_5
+      213: 4857901516667552909
+    second: ububa_idle_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -137,11 +131,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ububa_ladder_climb_0
+      name: ububa_idle_0
       rect:
         serializedVersion: 2
         x: 0
@@ -156,14 +163,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eea55de12c1d59c41b29405256d4499d
-      internalID: -1931028460
+      spriteID: bf281d89fce145b4eace4e47d27f021c
+      internalID: -1199601365
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ububa_ladder_climb_1
+      name: ububa_idle_1
       rect:
         serializedVersion: 2
         x: 64
@@ -178,14 +185,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a2ccc423439fa4141ae6dff05beea81e
-      internalID: -1494528378
+      spriteID: feb14ddf1b3b69d4e96385412a5c19d0
+      internalID: -628244666
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ububa_ladder_climb_2
+      name: ububa_idle_2
       rect:
         serializedVersion: 2
         x: 128
@@ -200,14 +207,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9efb007ac0b914942ab8b48967b40f39
-      internalID: -77966451
+      spriteID: a860de87c8ea20c4fbaf3ec2aedf8edb
+      internalID: -710912609
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ububa_ladder_climb_3
+      name: ububa_idle_3
       rect:
         serializedVersion: 2
         x: 192
@@ -222,52 +229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da5c9831824ce7d4684b449c95dd25be
-      internalID: -209550794
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ububa_ladder_climb_4
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5013ba18ab194e541acf236af2c04471
-      internalID: -1061992023
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ububa_ladder_climb_5
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f4d543e16408ab446b7ab4886d816f31
-      internalID: 1303240861
+      spriteID: 0ad4dceffbc96e24e9999079a58acddf
+      internalID: 1711823475
       vertices: []
       indices: 
       edges: []
@@ -276,7 +239,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b62e24ec7c4fec04e868a0628dbfe805
+    spriteID: 26918bb8f6dd9724991ef6c7ea8155ec
     internalID: 0
     vertices: []
     indices: 
@@ -286,12 +249,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ububa_ladder_climb_0: -1931028460
-      ububa_ladder_climb_1: -1494528378
-      ububa_ladder_climb_2: -77966451
-      ububa_ladder_climb_3: -209550794
-      ububa_ladder_climb_4: -1061992023
-      ububa_ladder_climb_5: 1303240861
+      ububa_idle_0: -1199601365
+      ububa_idle_1: -628244666
+      ububa_idle_2: -710912609
+      ububa_idle_3: 1711823475
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

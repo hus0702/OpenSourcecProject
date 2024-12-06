@@ -50,7 +50,11 @@ public class PlayerC_GroundedState : PlayerState
         {
             stateMachine.playerChangeState(player.ThrowState);
         }
-
+        if (container.Hp <= 0)
+        {
+            stateMachine.playerChangeState(player.DieState);
+        }
+        
     }
 
     public override void PhysicsUpdate()

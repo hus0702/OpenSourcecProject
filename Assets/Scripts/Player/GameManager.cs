@@ -8,6 +8,8 @@ public class GameManager : NetworkBehaviour
     public PlayerDataContainer Pdcontainer;
     public LimbDataContainer Ldcontainer;
 
+    public Vector3 SpawnPositionOnLoad;
+
     private void Awake()
     {
         // 일반적인 싱글톤 패턴 적용
@@ -22,4 +24,8 @@ public class GameManager : NetworkBehaviour
         }
     }
 
+    private void Start()
+    {
+        SpawnPositionOnLoad = new Vector3(-22.5f, 1, 0);
+    }
 }

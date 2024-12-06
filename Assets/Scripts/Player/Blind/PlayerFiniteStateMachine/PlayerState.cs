@@ -38,7 +38,7 @@ public class PlayerState
 
     public virtual void LogicUpdate()
     {
-
+        
     }
 
     public virtual void PhysicsUpdate()
@@ -56,5 +56,9 @@ public class PlayerState
 
     }
 
-    public virtual void AnimationFinishTrigger() => isAnimationFinished = true;
+    public virtual void AnimationFinishTrigger()
+    {
+        
+        isAnimationFinished = true;
+    } 
 }

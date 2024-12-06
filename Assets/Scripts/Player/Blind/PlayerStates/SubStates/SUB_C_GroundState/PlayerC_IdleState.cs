@@ -30,6 +30,10 @@ public class PlayerC_IdleState : PlayerC_GroundedState
         {
             stateMachine.playerChangeState(player.c_moveState);
         }
+        if (GameManager.instance.Ldcontainer.holdingitem == 1)
+        {
+            stateMachine.playerChangeState(player.c_holdinggunmoveState);
+        }
     }
 
     public override void PhysicsUpdate()

@@ -25,8 +25,7 @@ public class LimbRidingState : LimbState
     public override void Enter()
     {
         base.Enter();
-        Limb.spriteRenderer.enabled = false;
-        Limb.RB.gravityScale = 0;
+
     }
 
     public override void Exit()

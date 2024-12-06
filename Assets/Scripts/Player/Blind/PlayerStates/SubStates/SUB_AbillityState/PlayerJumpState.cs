@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Diagnostics;
 using UnityEngine;
 
@@ -12,15 +13,17 @@ public class PlayerJumpState : PlayerAbillityState
         base.Enter();
 
         player.SetVelocityY(container.jumpVelocity);
-        if (player.isServer)
+        if (player.isOwned)
         {
-            container.JumpInput = false;
+            if (player.isServer)
+            {
+                container.JumpInput = false;
+            }
+            else
+            {
+                player.CmdSetJumpInput(false);
+            }
         }
-        else
-        {
-            player.CmdSetJumpInput(false);
-        }
-        
         isAbillityDone = true;
     }
 }

@@ -27,7 +27,14 @@ public class Player : NetworkBehaviour
     public PlayerClimbState climbState { get; private set; }
     public PlayerPutDownState PutDownState { get; private set; }
     public PlayerThrowState ThrowState { get; private set; }
+
+    public PlayerDieState DieState { get; private set; }
+
+    public PlayerC_holdinggunidleState c_holdinggunidleState { get; private set; }
+    public PlayerC_holdinggunmoveState c_holdinggunmoveState { get; private set; }
     public PlayerDataContainer container { get; private set; }
+
+
 
     #endregion
 
@@ -37,8 +44,9 @@ public class Player : NetworkBehaviour
     public Rigidbody2D RB { get; private set; }
     public Transform playerTransform { get; private set; }
     public GameObject detectedObject { get; private set; }
-
     public PlayerObjectController thisController { get; private set; }
+
+    public SpriteRenderer spriteRenderer { get; private set; }
     #endregion
 
     #region Check Variables
@@ -62,7 +70,6 @@ public class Player : NetworkBehaviour
     private void Awake()
     {
         container = GameManager.instance.Pdcontainer;
-
         StateMachine = new PlayerStateMachine();
 
         IdleState = new PlayerIdleState(this, StateMachine, container, "idle");
@@ -82,6 +89,9 @@ public class Player : NetworkBehaviour
         ThrowState = new PlayerThrowState(this, StateMachine, container, "throw");
         climbingState = new PlayerClimbingState(this, StateMachine, container, "climbing");
         climbState = new PlayerClimbState(this, StateMachine, container, "climb");
+        DieState = new PlayerDieState(this, StateMachine, container, "die");
+        c_holdinggunidleState = new PlayerC_holdinggunidleState(this, StateMachine, container, "C_holdinggunidle");
+        c_holdinggunmoveState = new PlayerC_holdinggunmoveState(this, StateMachine, container, "C_holdinggunmove");
     }
 
     private void Start()
@@ -89,24 +99,33 @@ public class Player : NetworkBehaviour
         thisController = this.GetComponent<PlayerObjectController>();
         Anim = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputHandler>();
-        RB = GetComponent<Rigidbody2D>(); 
+        RB = GetComponent<Rigidbody2D>();
         playerTransform = GetComponent<Transform>();
         FacingDirection = 1;
         StateMachine.PlayerInitialize(IdleState, container);
+        groundcheck = transform.GetChild(0);
+        myBoxCollider = GetComponent<BoxCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
+        if (!isOwned)
+        {
+            return;
+        }
+
         CurrentVelocity = RB.linearVelocity;
         StateMachine.playerCurrentState.LogicUpdate();
-        //if (isOwned) 
-        //{
-        //    container.position = transform.position;
-        //}
-        //else
-        //{
-        //    transform.position = container.position;
-        //}
+
+        if (isServer)
+        {
+            container.position = transform.position;
+        }
+        else
+        {
+            CmdSetposition(transform.position);
+        }
     }
 
     private void FixedUpdate()
@@ -131,19 +150,100 @@ public class Player : NetworkBehaviour
         CurrentVelocity = workspace;
     }
     public void SetLaddderPosition(GameObject gameobj)
-    {       
+    {
         Vector3 pos = gameobj.transform.position;
         pos.y = this.transform.position.y;
         pos.z = this.transform.position.z;
         this.transform.position = pos;
     }
 
+    public void changeitem(bool newvalue)
+    {
+        if (newvalue)
+        {
+            while (true)
+            {
+                if (isServer)
+                {
+                    if (container.holdingitem != 1)
+                        container.holdingitem++;
+                    else
+                        container.holdingitem = 0;
+
+                    if (container.itemset[container.holdingitem])
+                        break;
+                }
+                else
+                {
+                    if (container.holdingitem != 1)
+                        CmdSetholdingitem(container.holdingitem + 1);
+                    else
+                        CmdSetholdingitem(0);
+
+
+                    if (container.itemset[container.holdingitem])
+                        break;
+                }
+            }
+        }
+        else
+        {
+            while (true)
+            {
+                if (isServer)
+                {
+                    if (container.holdingitem != 0)
+                        container.holdingitem--;
+                    else
+                        container.holdingitem = 1;
+
+                    if (container.itemset[container.holdingitem])
+                        break;
+                }
+                else
+                {
+                    if (container.holdingitem != 0)
+                        CmdSetholdingitem(container.holdingitem - 1);
+                    else
+                        CmdSetholdingitem(1);
+
+                    if (container.itemset[container.holdingitem])
+                        break;
+                }
+            }
+        }
+    }
+
+    public void SetBlindVisible(bool newvalue)
+    {
+        if (isServer)
+        {
+            InputHandler.enabled = newvalue;
+            spriteRenderer.enabled = newvalue;
+        }
+        else
+        {
+            CmdSetBlindVisible(newvalue);
+        }
+    }
+    public void GetCardKey(bool newvalue)
+    {
+        if (isServer)
+        {
+            container.itemset[1] = newvalue;
+        }
+        else
+        {
+            CmdGetCardkey(newvalue);
+        }
+    }
+
     #endregion
 
     #region Check Functions
     public void CheckifShouldflip(int xinput)
-    { 
-        if(xinput != 0 && xinput != container.facingdirection) 
+    {
+        if (xinput != 0 && xinput != container.facingdirection && isOwned)
         {
             Flip();
         }
@@ -157,7 +257,6 @@ public class Player : NetworkBehaviour
     public bool CheckIftouchLimb()
     {
         return Physics2D.OverlapCircle(groundcheck.position, container.groundCheckRadious, container.whatIsLimb);
-
     }
     public bool CheckIftouchLadder()
     {
@@ -178,11 +277,26 @@ public class Player : NetworkBehaviour
         }
         else
         {
-            CmdSetFacingDirection(container.facingdirection *= -1);
+            CmdSetFacingDirection();
         }
         transform.Rotate(0.0f, 180.0f, 0.0f);
     }
+    public void Interact(GameObject target)
+    {
 
+    }
+
+    public void TakingDamage(int value)
+    {
+        if (isServer)
+        {
+            container.Hp -= value;
+        }
+        else
+        {
+            CmdChangeHp(-value);
+        }
+    }
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.layer == container.whatIsLadder && container.isclimbing)
@@ -194,11 +308,15 @@ public class Player : NetworkBehaviour
 
     #region ContainerCommandfunction
     [Command]
-    public void CmdSetFacingDirection(float newvalue)
+    public void CmdSetFacingDirection()
     {
-        container.facingdirection = newvalue;
+        container.facingdirection *= -1;
     }
-
+    [Command]
+    public void CmdChangeHp(int newvalue)
+    {
+        container.Hp += newvalue;
+    }
     [Command]
     public void CmdSetIsCarrying(bool newvalue)
     {
@@ -240,6 +358,11 @@ public class Player : NetworkBehaviour
         container.position = newvalue;
     }
     [Command]
+    public void CmdSetInteractable(bool newvalue)
+    {
+        container.Interactable = newvalue;
+    }
+    [Command]
     public void CmdSetNormInputX(int newvalue)
     {
         container.NormInputX = newvalue;
@@ -262,7 +385,11 @@ public class Player : NetworkBehaviour
     {
         container.SitInput = newvalue;
     }
-
+    [Command]
+    public void CmdSetInteractInput(bool newvalue)
+    { 
+        container.InteractInput = newvalue;
+    }
     [Command]
     public void CmdSetLadderUp(bool newvalue)
     {
@@ -273,6 +400,24 @@ public class Player : NetworkBehaviour
     public void CmdSetLadderDown(bool newvalue)
     {
         container.ladderDown = newvalue;
+    }
+
+    [Command]
+    public void CmdSetholdingitem(int newvalue)
+    {
+        container.holdingitem = newvalue;
+    }
+    [Command]
+    public void CmdGetCardkey(bool newvalue)
+    {
+        container.itemset[1] = newvalue;
+    }
+
+    [Command]
+    public void CmdSetBlindVisible(bool newvalue)
+    {
+        InputHandler.enabled = newvalue;
+        spriteRenderer.enabled = newvalue;
     }
     #endregion
 

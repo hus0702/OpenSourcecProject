@@ -49,17 +49,20 @@ public class PlayerC_ClimbingState : PlayerState
 
         if (Up)
         {
+            player.Anim.speed = 1;
             player.SetVelocityY(container.climbVelocity);
         }
         else if (Down)
         {
+            player.Anim.speed = 1;
             player.SetVelocityY(container.climbVelocity * -1);
         }
         else
         {
+            player.Anim.speed = 0;
             player.SetVelocityY(0);
         }
-        if (!player.CheckIftouchLadder())
+        if (!player.CheckIftouchLadder() && player.isOwned)
         {
             if (player.isServer)
             {
@@ -71,7 +74,12 @@ public class PlayerC_ClimbingState : PlayerState
             }
             
             player.RB.gravityScale = 5;
+            player.Anim.speed = 1;
             stateMachine.playerChangeState(player.c_InAirState);
+        }
+        if (container.Hp <= 0)
+        {
+            stateMachine.playerChangeState(player.DieState);
         }
     }
     public override void PhysicsUpdate()

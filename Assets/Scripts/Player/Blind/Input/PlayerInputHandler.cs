@@ -1,8 +1,11 @@
 using Mirror;
 using Mirror.BouncyCastle.Asn1.BC;
+using Mirror.BouncyCastle.Math.Field;
 using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.U2D.IK;
 
 public class PlayerInputHandler : NetworkBehaviour
 {
@@ -16,129 +19,249 @@ public class PlayerInputHandler : NetworkBehaviour
     {
         container = GameManager.instance.Pdcontainer;
         player = GetComponent<Player>();
+
     }
-    public void OnMoveInput(InputAction.CallbackContext context)
+
+    private void Update()
     {
-        if (isOwned)
+
+        if (!isOwned)
+            return;
+        #region move
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            RawMovementInput = context.ReadValue<Vector2>();
             if (isServer)
             {
-                container.NormInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
-                container.NormInputY = (int)(RawMovementInput * Vector2.right).normalized.y;
+                container.NormInputX = -1;
             }
-            else 
+            else
             {
-                player.CmdSetNormInputX((int)(RawMovementInput * Vector2.right).normalized.x);
-                player.CmdSetNormInputY((int)(RawMovementInput * Vector2.right).normalized.y);
+                player.CmdSetNormInputX(-1);
             }
         }
-    }
-
-    public void ladderUpInput(InputAction.CallbackContext context)
-    {
-        if (isOwned)
+        if (Input.GetKeyUp(KeyCode.A))
         {
-            if (context.performed)
             {
                 if (isServer)
                 {
-                    container.ladderUp = true;
+                    container.NormInputX = 0;
                 }
                 else
                 {
-                    player.CmdSetLadderUp(true);
+                    player.CmdSetNormInputX(0);
                 }
-            }
-            if (context.canceled)
-            {
-                if (isServer)
-                {
-                    container.ladderUp = false;
-                }
-                else
-                {
-                    player.CmdSetLadderUp(false);
-                }
-                
             }
         }
-    }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            if (isServer)
+            {
+                container.NormInputX = 1;
+            }
+            else
+            {
+                player.CmdSetNormInputX(1);
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            if (isServer)
+            {
+                container.NormInputX = 0;
+            }
+            else
+            {
+                player.CmdSetNormInputX(0);
+            }
+        }
+        #endregion
+        #region ladder & sit
+        if (Input.GetKey(KeyCode.W))
+        {
+            if (isServer)
+            {
+                container.ladderUp = true;
+            }
+            else
+            {
+                player.CmdSetLadderUp(true);
+            }
+        }
 
-    public void OnSitInput(InputAction.CallbackContext context)
-    {
-        if (isOwned)
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            if (isServer)
+            {
+                container.ladderUp = false;
+            }
+            else
+            {
+                player.CmdSetLadderUp(false);
+            }
+        }
+
+        if (Input.GetKey(KeyCode.S))
         {
             if (container.isclimbing)
             {
-                if (context.performed)
+                if (isServer)
                 {
-                    if (isServer)
-                    {
-                        container.ladderDown = true;
-                    }
-                    else
-                    {
-                        player.CmdSetLadderDown(true);
-                    }
+                    container.ladderDown = true;
                 }
-                if (context.canceled)
+                else
                 {
-                    if (isServer)
-                    {
-                        container.ladderDown = false;
-                    }
-                    else
-                    {
-                        player.CmdSetLadderDown(false);
-                    }
+                    player.CmdSetLadderDown(true);
                 }
             }
             else
             {
-                if (context.performed)
-                {
-                    if (isServer)
-                    {
-                        container.SitInput = true;
-                    }
-                    else
-                    {
-                        player.CmdSetSitInput(true);
-                    }
-                }
-                if (context.canceled)
-                {
-                    if (isServer)
-                    {
-                        container.SitInput = false;
-                    }
-                    else
-                    {
-                        player.CmdSetSitInput(false);
-                    }
-                }
-            }
-        }
-    }
-    public void OnJumpInput(InputAction.CallbackContext context)
-    {
-        if (isOwned)
-        {
-            if (context.started)
-            {
                 if (isServer)
                 {
-                    container.JumpInput = true;
+                    container.SitInput = true;
                 }
                 else
                 {
-                    player.CmdSetJumpInput(true);
+                    player.CmdSetSitInput(true);
                 }
             }
         }
-           
+
+        if(Input.GetKeyUp(KeyCode.S))
+        {
+            if (container.isclimbing)
+            {
+                if (isServer)
+                {
+                    container.ladderDown = false;
+                }
+                else
+                {
+                    player.CmdSetLadderDown(false);
+                }
+            }
+            else
+            {
+                if (isServer)
+                {
+                    container.SitInput = false;
+                }
+                else
+                {
+                    player.CmdSetSitInput(false);
+                }
+            }
+            
+        }
+
+        #endregion
+        #region jump
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (isServer)
+            {
+                container.JumpInput = true;
+            }
+            else
+            {
+                player.CmdSetJumpInput(true);
+            }
+        }
+        #endregion
+        #region Carry
+        if (!carryinputblock)
+        {
+            if (Input.GetMouseButtonDown(1))
+            {
+                if (container.iscarrying)
+                {
+                    throwinputtime = Time.time;
+                }
+                else
+                {
+                    if (isServer)
+                    {
+                        container.carryupcall = true;
+                    }
+                    else
+                    {
+                        player.CmdSetCarryUpCall(true);
+                    }
+                }
+            }
+
+            if (Input.GetMouseButtonUp(1))
+            {
+                if (container.iscarrying)
+                {
+                    if (isServer)
+                    {
+                        container.throwinputtime = Time.time - throwinputtime;
+                        throwinputtime = 0;
+                        container.throwcall = true;
+                    }
+                    else
+                    {
+                        player.CmdSetThrowInputTime(Time.time - throwinputtime);
+                        throwinputtime = 0;
+                        player.CmdSetThrowCall(true);
+                    }
+                }
+                else
+                {
+                    if (isServer)
+                    {
+                        container.carryupcall = false;
+                    }
+                    else
+                    {
+                        player.CmdSetCarryUpCall(false);
+                    }
+                }
+            }
+        }
+        #endregion
+        #region Interact
+        if(container.Interactable)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (isServer)
+                {
+                    container.InteractInput = true;
+                }
+                else
+                {
+                    player.CmdSetInteractInput(true);
+                }
+            }
+            if (Input.GetKeyUp(KeyCode.E))
+            {
+                if (isServer)
+                {
+                    container.InteractInput = false;
+                }
+                else
+                {
+                    player.CmdSetInteractInput(false);
+                }
+            }
+        }
+
+        #endregion
+        #region itemscroll
+        if (Input.mouseScrollDelta.y > 0)
+        {
+            player.changeitem(true);
+        }
+        if (Input.mouseScrollDelta.y < 0)
+        {
+            player.changeitem(false);
+        }
+
+        #endregion
     }
+
+
     public void UseJumpInput() => container.JumpInput = false;
     public void OnEscInput(InputAction.CallbackContext context)
     {
@@ -151,7 +274,28 @@ public class PlayerInputHandler : NetworkBehaviour
     {
         if (isOwned)
         {
-
+            if (context.started)
+            {
+                if (isServer)
+                {
+                    container.InteractInput = true;
+                }
+                else
+                {
+                    player.CmdSetInteractInput(true);
+                }
+            }
+            if (context.canceled)
+            {
+                if (isServer)
+                {
+                    container.InteractInput = false;
+                }
+                else
+                {
+                    player.CmdSetInteractInput(false);
+                }
+            }
         }
     }
 

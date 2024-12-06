@@ -1,31 +1,34 @@
 fileFormatVersion: 2
-guid: 5a311a2c7a14ff643a327ddf04a910ff
+guid: b3e50110fb9259d439c89e39df9d66f2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4827280305394356887
-    second: blind_move_0
+      213: -941884198665654203
+    second: ububa_0
   - first:
-      213: 9066726401282787032
-    second: blind_move_1
+      213: 80168900923845216
+    second: ububa_1
   - first:
-      213: -1577098175934946012
-    second: blind_move_2
+      213: 6217759283678604940
+    second: ububa_2
   - first:
-      213: -4049428776701503066
-    second: blind_move_3
+      213: -301866887734923680
+    second: ububa_3
   - first:
-      213: -688399241414156364
-    second: blind_move_4
+      213: -4511405894928202473
+    second: ububa_4
   - first:
-      213: -1139070898066513646
-    second: blind_move_5
+      213: -689234033725496161
+    second: ububa_5
   - first:
-      213: -4274150375197199928
-    second: blind_move_6
+      213: -7491484643954013356
+    second: ububa_6
   - first:
-      213: -2805408434390017698
-    second: blind_move_7
+      213: -5481401523486825670
+    second: ububa_7
+  - first:
+      213: -8024113575140786900
+    second: ububa_8
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -143,11 +146,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: blind_move_0
+      name: ububa_0
       rect:
         serializedVersion: 2
         x: 0
@@ -162,14 +178,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 55bcb88d611115140b4c47cfc1a4227c
-      internalID: -423338061
+      spriteID: e2f8d2be1e5af1d4f82e252526b127c1
+      internalID: -225030634
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blind_move_1
+      name: ububa_1
       rect:
         serializedVersion: 2
         x: 64
@@ -184,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e9a99dfebdc079428158367ce73c391
-      internalID: 316693778
+      spriteID: 1b1ccf183c7225a4baf393b6d039ce36
+      internalID: -1611058652
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blind_move_2
+      name: ububa_2
       rect:
         serializedVersion: 2
         x: 128
@@ -206,14 +222,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 800654599599bbd4899902b13e8f579f
-      internalID: -241367742
+      spriteID: 6f8c17c745205f048928e5fc8ad9a256
+      internalID: 691493850
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blind_move_3
+      name: ububa_3
       rect:
         serializedVersion: 2
         x: 192
@@ -228,14 +244,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 222fdfd39d3bdfd4d9deed2062b2a66d
-      internalID: 1331388532
+      spriteID: 97f0b1bc71434224cb0e78076615034a
+      internalID: 1720846680
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blind_move_4
+      name: ububa_4
       rect:
         serializedVersion: 2
         x: 256
@@ -250,14 +266,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a007455df60a534490365475d16789d
-      internalID: -1062175493
+      spriteID: c4fd4423719ecf9418caa64215ae1759
+      internalID: -839176793
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blind_move_5
+      name: ububa_5
       rect:
         serializedVersion: 2
         x: 320
@@ -272,14 +288,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b39cd02b65609d34d8964d7c9268c723
-      internalID: -161853679
+      spriteID: 50aa4d1002fff6b459a014fd87cf7bad
+      internalID: -1547217312
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blind_move_6
+      name: ububa_6
       rect:
         serializedVersion: 2
         x: 384
@@ -294,14 +310,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 871aa2d600cd4d94ba597b3f97079c68
-      internalID: 1168445582
+      spriteID: ac04d1925d5bbfd4da9e27c9c4c59de7
+      internalID: 676097666
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blind_move_7
+      name: ububa_7
       rect:
         serializedVersion: 2
         x: 448
@@ -316,8 +332,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cdb00d3040c9cf641a94763c3dc68f47
-      internalID: 299693510
+      spriteID: 3c38facddb87e1640aef83e64947a4b8
+      internalID: 452608414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ububa_8
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee9e0d39916b7c44b9f4a47a2340942c
+      internalID: -818335030
       vertices: []
       indices: 
       edges: []
@@ -326,7 +364,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 9111f559606a8de4e9c31edcfd2a2bc5
+    spriteID: 17f5a509b66c5e2429af68f5a7ad151c
     internalID: 0
     vertices: []
     indices: 
@@ -336,14 +374,15 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      blind_move_0: -423338061
-      blind_move_1: 316693778
-      blind_move_2: -241367742
-      blind_move_3: 1331388532
-      blind_move_4: -1062175493
-      blind_move_5: -161853679
-      blind_move_6: 1168445582
-      blind_move_7: 299693510
+      ububa_0: -225030634
+      ububa_1: -1611058652
+      ububa_2: 691493850
+      ububa_3: 1720846680
+      ububa_4: -839176793
+      ububa_5: -1547217312
+      ububa_6: 676097666
+      ububa_7: 452608414
+      ububa_8: -818335030
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

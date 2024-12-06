@@ -1,19 +1,31 @@
 fileFormatVersion: 2
-guid: 7c128f23e9a70d6499d1f57aca6f07d8
+guid: 5a311a2c7a14ff643a327ddf04a910ff
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2197150343059024723
-    second: ububa_idle_0
+      213: -4827280305394356887
+    second: blind_move_0
   - first:
-      213: -6598062815057566245
-    second: ububa_idle_1
+      213: 9066726401282787032
+    second: blind_move_1
   - first:
-      213: -3956525431229129194
-    second: ububa_idle_2
+      213: -1577098175934946012
+    second: blind_move_2
   - first:
-      213: 4857901516667552909
-    second: ububa_idle_3
+      213: -4049428776701503066
+    second: blind_move_3
+  - first:
+      213: -688399241414156364
+    second: blind_move_4
+  - first:
+      213: -1139070898066513646
+    second: blind_move_5
+  - first:
+      213: -4274150375197199928
+    second: blind_move_6
+  - first:
+      213: -2805408434390017698
+    second: blind_move_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -131,11 +143,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ububa_idle_0
+      name: blind_move_0
       rect:
         serializedVersion: 2
         x: 0
@@ -150,14 +175,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf281d89fce145b4eace4e47d27f021c
-      internalID: -1199601365
+      spriteID: 55bcb88d611115140b4c47cfc1a4227c
+      internalID: -423338061
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ububa_idle_1
+      name: blind_move_1
       rect:
         serializedVersion: 2
         x: 64
@@ -172,14 +197,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: feb14ddf1b3b69d4e96385412a5c19d0
-      internalID: -628244666
+      spriteID: 2e9a99dfebdc079428158367ce73c391
+      internalID: 316693778
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ububa_idle_2
+      name: blind_move_2
       rect:
         serializedVersion: 2
         x: 128
@@ -194,14 +219,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a860de87c8ea20c4fbaf3ec2aedf8edb
-      internalID: -710912609
+      spriteID: 800654599599bbd4899902b13e8f579f
+      internalID: -241367742
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ububa_idle_3
+      name: blind_move_3
       rect:
         serializedVersion: 2
         x: 192
@@ -216,8 +241,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ad4dceffbc96e24e9999079a58acddf
-      internalID: 1711823475
+      spriteID: 222fdfd39d3bdfd4d9deed2062b2a66d
+      internalID: 1331388532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blind_move_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a007455df60a534490365475d16789d
+      internalID: -1062175493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blind_move_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b39cd02b65609d34d8964d7c9268c723
+      internalID: -161853679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blind_move_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 871aa2d600cd4d94ba597b3f97079c68
+      internalID: 1168445582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blind_move_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdb00d3040c9cf641a94763c3dc68f47
+      internalID: 299693510
       vertices: []
       indices: 
       edges: []
@@ -226,7 +339,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 26918bb8f6dd9724991ef6c7ea8155ec
+    spriteID: 9111f559606a8de4e9c31edcfd2a2bc5
     internalID: 0
     vertices: []
     indices: 
@@ -236,10 +349,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ububa_idle_0: -1199601365
-      ububa_idle_1: -628244666
-      ububa_idle_2: -710912609
-      ububa_idle_3: 1711823475
+      blind_move_0: -423338061
+      blind_move_1: 316693778
+      blind_move_2: -241367742
+      blind_move_3: 1331388532
+      blind_move_4: -1062175493
+      blind_move_5: -161853679
+      blind_move_6: 1168445582
+      blind_move_7: 299693510
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

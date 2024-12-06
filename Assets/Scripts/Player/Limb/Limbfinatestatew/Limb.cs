@@ -4,6 +4,7 @@ using Steamworks;
 using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.U2D;
 using UnityEngine.UIElements;
 
 public class Limb : NetworkBehaviour
@@ -18,8 +19,9 @@ public class Limb : NetworkBehaviour
     public LimbinAirState inAirState { get; private set; }
     public LimbPutDownState PutDownState { get; private set; }
     public LimbThrowState ThrowState { get; private set; }
-
     public LimbRidingShotState RidingShotState { get; private set; }
+    public LimbDieState DieState { get; private set; }
+    public LimbholdinggunidleState holdinggunidleState { get; private set; }
 
     public LimbDataContainer container;
 
@@ -75,6 +77,8 @@ public class Limb : NetworkBehaviour
         ThrowState = new LimbThrowState(this, StateMachine, container, "throw");
         inAirState = new LimbinAirState(this, StateMachine, container, "inair");
         RidingShotState = new LimbRidingShotState(this, StateMachine, container, "RidingShot");
+        DieState = new LimbDieState(this, StateMachine, container, "die");
+        holdinggunidleState = new LimbholdinggunidleState(this, StateMachine, container, "holdinggunidle");
     }
 
     private void Start()
@@ -87,16 +91,24 @@ public class Limb : NetworkBehaviour
         limbtransform = GetComponent<Transform>();
         StateMachine.LimbInitialize(IdleState, container);
         BulletPrefab = bulletprefab;
+        groundcheck = transform.GetChild(0);
+        myBoxCollider = GetComponent<BoxCollider2D>();
+
+
     }
 
     private void Update()
     {
+        if (!isOwned)
+        {
+            return;
+        }
         CurrentVelocity = RB.linearVelocity;
         StateMachine.LimbCurrentState.LogicUpdate();
 
         if (container.isRiding)
         {
-            this.limbtransform.position = (container.position + new Vector3(0, 1f, 0));
+            this.limbtransform.position = (GameManager.instance.Pdcontainer.position + new Vector3(0, 0.1f, 0));
         }
     }
 
@@ -126,12 +138,117 @@ public class Limb : NetworkBehaviour
     {
         StateMachine.LimbChangeState(newstate);
     }
+
+    public void changeitem(bool newvalue)
+    {
+        if (newvalue)
+        {
+            int k = 0;
+            while (k < 4)
+            {
+                if (isServer)
+                {
+                    if (container.holdingitem != 2)
+                        container.holdingitem++;
+                    else
+                        container.holdingitem = 0;
+
+                    if (container.itemset[container.holdingitem])
+                        break;
+                }
+                else 
+                {
+                    if (container.holdingitem != 2)
+                        CmdSetholdingitem(container.holdingitem + 1);
+                    else
+                        CmdSetholdingitem(0);
+
+
+                    if (container.itemset[container.holdingitem])
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        k++;
+                    }
+                       
+                }
+            }
+        }
+        else 
+        {
+            int k = 0;
+            while (k < 4)
+            {
+                if (isServer)
+                {
+                    if (container.holdingitem != 0)
+                        container.holdingitem--;
+                    else
+                        container.holdingitem = 2;
+
+                    if (container.itemset[container.holdingitem])
+                        break;
+                }
+                else
+                {
+                    if (container.holdingitem != 0)
+                        CmdSetholdingitem(container.holdingitem - 1);
+                    else
+                        CmdSetholdingitem(2);
+
+                    if (container.itemset[container.holdingitem])
+                        break;
+                    else { k++; }
+                }
+            }
+        }
+    }
+
+    public void SetLimbVisible(bool newvalue)
+    {
+        if (isServer)
+        {
+            InputHandler.enabled = newvalue;
+            spriteRenderer.enabled = newvalue;
+        }
+        else
+        {
+            CmdSetLimbVisible(newvalue);
+        }
+    }
+    public void GetCardKey(bool newvalue)
+    {
+        if (isServer)
+        {
+            container.itemset[2] = newvalue;
+        }
+        else
+        {
+            CmdGetCardkey(newvalue);
+        }
+    }
+
+    public void GetGun(bool newvalue)
+    {
+        if (isServer)
+        {
+            container.itemset[1] = newvalue;
+        }
+        else
+        {
+            CmdGetGun(newvalue);
+        }
+    }
+
+    
     #endregion
 
     #region Check Functions
     public void CheckifShouldflip(int xinput)
     {
-        if (xinput != 0 && xinput != container.FacingDirection)
+        if (xinput != 0 && xinput != container.FacingDirection && isOwned)
         {
             Flip();
         }
@@ -144,21 +261,18 @@ public class Limb : NetworkBehaviour
 
     public bool CheckIftouchBlind()
     {
-        //Collider2D[] results = new Collider2D[10];
-        //ContactFilter2D contactFilter = new ContactFilter2D();
-        //contactFilter.SetLayerMask(limbData.whitIsBlind);
-        //contactFilter.useLayerMask = true;
         return Physics2D.OverlapCircle(groundcheck.position, container.groundCheckRadious, container.whatIsBlind);
-        //if (Physics2D.OverlapCollider(Collider, contactFilter, results) == 0)
-        //{
-        //    return false;
-        //}
-        //else
-        //{
-        //    return true;
-        //}
     }
 
+    public bool ishaveCardKey()
+    {
+        return container.itemset[2];
+    }
+
+    public bool ishaveGun()
+    {
+        return container.itemset[1];
+    }
     #endregion
 
     #region Other Functions
@@ -178,6 +292,23 @@ public class Limb : NetworkBehaviour
         }
         base.transform.Rotate(0.0f, 180.0f, 0.0f);
     }
+
+    public void Interact(GameObject target)
+    { 
+        
+    }
+
+    public void TakingDamage(int value)
+    {
+        if (isServer)
+        {
+            container.Hp -= value;
+        }
+        else
+        { 
+            CmdChangeHp(-value);
+        }
+    }
     #endregion
 
     #region ContainerSetFunction
@@ -196,18 +327,13 @@ public class Limb : NetworkBehaviour
     {
         container.isRiding = newvalue;
     }
-
     [Command]
-    public void CmdSetishavingGun(bool newvalue)
+    public void CmdChangeHp(int newvalue)
     {
-        container.ishavingGun = newvalue;
+        container.Hp += newvalue;
     }
 
-    [Command]
-    public void CmdSetHoldingGun(bool newvalue)
-    {
-        container.HoldingGun = newvalue;
-    }
+
 
     [Command]
     public void CmdSetshotDelay(float newvalue)
@@ -267,6 +393,56 @@ public class Limb : NetworkBehaviour
     public void CmdSetPutDownCall(bool newvalue)
     {
         GameManager.instance.Pdcontainer.carryupcall = newvalue;
+    }
+
+    [Command]
+    public void CmdSetSpriteRenderer(bool newvalue)
+    { 
+        this.GetComponent<SpriteRenderer>().enabled = newvalue;
+        RpcSetSpriteRenderer(newvalue);
+    }
+    [Command]
+    public void CmdSetInteractable(bool newvalue)
+    {
+        container.Interactable = newvalue;
+    }
+    [Command]
+    public void CmdSetInteractInput(bool newvalue)
+    {
+        container.InteractInput = newvalue;
+    }
+
+    [Command]
+    public void CmdSetholdingitem(int newvalue)
+    { 
+        container.holdingitem = newvalue;
+    }
+    [Command]
+    public void CmdGetCardkey(bool newvalue)
+    {
+        container.itemset[2] = newvalue;
+    }
+
+    [Command]
+    public void CmdGetGun(bool newvalue)
+    {
+        container.itemset[1] = newvalue;
+    }
+
+    [Command]
+    public void CmdSetLimbVisible(bool newvalue)
+    {
+        InputHandler.enabled = newvalue;
+        spriteRenderer.enabled = newvalue;
+    }
+    [ClientRpc]
+    public void RpcSetSpriteRenderer(bool newvalue)
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.enabled = newvalue; 
+        }
     }
     #endregion
 }

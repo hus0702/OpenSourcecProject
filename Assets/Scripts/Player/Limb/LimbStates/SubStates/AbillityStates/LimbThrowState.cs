@@ -28,23 +28,30 @@ public class LimbThrowState : LimbAbillityState
     public override void Enter()
     {
         base.Enter();
+        Limb.spriteRenderer.enabled = true;
+        Limb.RB.gravityScale = 1;
+
         throwtime = GameManager.instance.Pdcontainer.throwinputtime;
         if (throwtime > 1)
             throwtime = 1;
-        Limb.SetVelocityX(12 * throwtime * container.FacingDirection);
-        Limb.SetVelocityY(4 * 2*throwtime);
+        Limb.SetVelocityX(12 * throwtime * GameManager.instance.Pdcontainer.facingdirection);
+        Limb.SetVelocityY(2*throwtime);
 
-        if (Limb.isServer)
+        if (Limb.isOwned)
         {
-            container.isRiding = false;
-            GameManager.instance.Pdcontainer.throwcall = false;
+            if (Limb.isServer)
+            {
+                container.isRiding = false;
+                GameManager.instance.Pdcontainer.throwcall = false;
+                Limb.RpcSetSpriteRenderer(true);
+            }
+            else
+            {
+                Limb.CmdSetisRiding(false);
+                Limb.CmdSetThrowCall(false);
+                Limb.CmdSetSpriteRenderer(true);
+            }
         }
-        else
-        {
-            Limb.CmdSetisRiding(false);
-            Limb.CmdSetThrowCall(false);
-        }
-        Limb.spriteRenderer.enabled = true;
         isAbillityDone = true;
     }
 
