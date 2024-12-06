@@ -18,7 +18,7 @@ public class AudioManager : MonoBehaviour
     AudioSource[] sfxPlayers;
     int channelIndex;
 
-    public enum Sfx { BlindLand, Blindwalk, Blindclimb, BlindDie, BlindCarryUp, LimpLand, LimpDie, electricity, opendoor, cardkey, acid, CellingCrash, Enemygrawl }
+    public enum Sfx { BlindLand, Blindwalk, Blindclimb, BlindDie, BlindCarryUp, Blindthrow, LimpLand, LimpShot, LimpDie, electricity, opendoor, cardkey, acid, CellingCrash, Enemygrawl }
     private void Awake()
     {
         // 일반적인 싱글톤 패턴 적용

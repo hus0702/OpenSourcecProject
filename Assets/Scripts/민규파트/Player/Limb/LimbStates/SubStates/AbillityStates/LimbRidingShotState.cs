@@ -27,6 +27,7 @@ public class LimbRidingShotState : LimbAbillityState
     public override void Enter()
     {
         base.Enter();
+        Limb.LimpShot();
         if (Limb.isOwned)
         {
             if (Limb.isServer)

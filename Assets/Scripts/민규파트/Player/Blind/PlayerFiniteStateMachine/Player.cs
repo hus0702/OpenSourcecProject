@@ -262,12 +262,67 @@ public class Player : NetworkBehaviour
     {
         return Physics2D.OverlapCircle(groundcheck.position, container.groundCheckRadious, container.whatIsLadder);
     }
+
+
     #endregion
 
     #region SoundMaking Function
-    public void BlindSteppingSound()
+    public void BlindLandSound()
+    {
+        GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.BlindLand);
+    }
+
+    public void BlindwalkSound()
     {
         GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.Blindwalk);
+    }
+    public void BlindclimbSound()
+    {
+        GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.Blindclimb);
+    }
+    public void BlindDieSound()
+    {
+        GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.BlindDie);
+    }
+
+    public void BlindCarryUpSound()
+    {
+        GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.BlindCarryUp);
+    }
+
+    public void BlindthrowSound()
+    {
+        GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.Blindthrow);
+    }
+    #endregion
+
+    #region animation clip call Function
+
+    public void BlindLand()
+    {
+        BlindLandSound();
+    }
+    public void Blindwalk()
+    {
+        BlindwalkSound();
+    }
+    public void Blindclimb()
+    {
+        BlindclimbSound();
+    }
+
+    public void BlindDie()
+    {
+        BlindDieSound();
+    }
+
+    public void BlindCarryUp()
+    {
+        BlindCarryUpSound();
+    }
+    public void Blindthrow()
+    {
+        BlindthrowSound();
     }
     #endregion
 
@@ -290,8 +345,9 @@ public class Player : NetworkBehaviour
     }
     public void Interact(GameObject target)
     {
-
+        
     }
+
 
     public void TakingDamage(int value)
     {

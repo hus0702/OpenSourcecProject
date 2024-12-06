@@ -275,6 +275,40 @@ public class Limb : NetworkBehaviour
     }
     #endregion
 
+    #region SoundMaking Function
+    public void LimpLandSound()
+    {
+        GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.LimpLand);
+    }
+    public void LimpShotSound()
+    {
+        GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.LimpShot);
+    }
+
+    public void LimpDieSound()
+    {
+        GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.LimpDie);
+    }
+
+    #endregion
+
+    #region animation clip call Function
+
+    public void LimpLand()
+    {
+        LimpLandSound();
+    }
+
+    public void LimpShot()
+    {
+        LimpShotSound();
+    }
+    public void LimpDie()
+    {
+        LimpDieSound();
+    }
+
+    #endregion
     #region Other Functions
 
     private void AnimationTrigger() => StateMachine.LimbCurrentState.AnimationTrigger();

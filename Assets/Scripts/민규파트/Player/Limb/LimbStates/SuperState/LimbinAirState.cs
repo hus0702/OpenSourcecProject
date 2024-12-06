@@ -44,6 +44,7 @@ public class LimbinAirState : LimbState
         Limb.SetVelocityX(container.movementVelocity * xInput);
         if (isGrounded)
         {
+            Limb.LimpLand();
             stateMachine.LimbChangeState(Limb.IdleState);
         }
         if (container.Hp <= 0)
