@@ -92,9 +92,25 @@ public class PlayerObjectController : NetworkBehaviour
 
     private void Update()
     {
+        
         if (isOwned && (this.CompareTag("Blind") || this.CompareTag("Limb")))
         {
-            Camera.main.transform.position = this.transform.position + new Vector3(0, 0, -10);
+            if (this.CompareTag("Limb"))
+            {
+                if (GameManager.instance.Ldcontainer.isRiding)
+                {
+                    Camera.main.transform.position = GameManager.instance.Pdcontainer.position + new Vector3(0, 0, -10);
+                }
+                else
+                {
+                    Camera.main.transform.position = this.transform.position + new Vector3(0, 0, -10);
+                }
+            }
+            else
+            {
+                Camera.main.transform.position = this.transform.position + new Vector3(0, 0, -10);
+            }
+            
         }
     }
     public void CanStartGame(string SceneName)

@@ -41,10 +41,9 @@ public class GameManager : NetworkBehaviour
     [ClientRpc]
     void RpcPlaySoundOnClient(AudioManager.Sfx name)
     {
-        if (isLocalPlayer)
-        {
-            AudioManager.instance.PlaySfx(name);
-        }
+        
+        AudioManager.instance.PlaySfx(name);
+        
     }
 
 }
