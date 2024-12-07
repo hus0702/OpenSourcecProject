@@ -11,7 +11,8 @@ public class BlindRenderer : MonoBehaviour
 
         if(localPlayer.Role == PlayerObjectController.Blind)
         {
-            GetComponent<SpriteRenderer>().sprite = spriteForBlind;
+            if (spriteForBlind == null) Debug.LogError(gameObject.name + "BlindRender 객체에 블라인드용 스프라이트가 할당되지 않았습니다!");
+            else GetComponent<SpriteRenderer>().sprite = spriteForBlind;
         }
     }
 }

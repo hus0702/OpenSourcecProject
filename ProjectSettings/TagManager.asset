@@ -25,6 +25,8 @@ TagManager:
   - bullet
   - 
   - Damageable
+  - InteractableObject
+  - 
   - 
   - 
   - 

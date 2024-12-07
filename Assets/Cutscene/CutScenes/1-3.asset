@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a7b6f128bc2b8d4bbf3f992bbbeb2f3, type: 3}
+  m_Name: 1-3
+  m_EditorClassIdentifier: 
+  scripts:
+  - script: "\uD5C8\uC5B5...<sleep(0.5)> \uD5C8\uC5B5....<sleep(0.5)>"
+  - script: "<color=#008099> \uD5C9... \uD5C9... \uB355\uBD84\uC5D0 \uC0B4\uC558\uC5B4\uC694.\n\uB370\uB9AC\uACE0
+      \uB098\uC640\uC918\uC11C \uACE0\uB9C8\uC6CC\uC694."
+  - script: "\uC800\uB3C4 \uB9C8\uCC2C\uAC00\uC9C0\uC5D0\uC694.\n\uD63C\uC790\uC600\uB2E4\uBA74
+      \uC808\uB300 \uC800 \uACF3\uC5D0\uC11C\n\uBABB \uB098\uC654\uC744 \uAC70\uC5D0\uC694."
+  - script: "<color=#008099> ... ... ... \uC5C4\uCCAD\uB09C \uAD6C\uBA4D\uC774\uB124\uC694.\n\uC5EC\uAE30\uC5D0
+      \uAD34\uBB3C\uC774\uB77C\uB3C4 \uB3CC\uC544\uB2E4\uB2C8\uB294 \uAC78\uAE4C\uC694?"
+  - script: "\uD558\uB098 \uD655\uC2E4\uD55C\uAC74 \uC774\uB7F0 \uACF3\uC5D0 \uACC4\uC18D
+      \uC788\uB2E4\uAC04\n\uC808\uB300 \uC548\uC804\uD558\uC9C0 \uC54A\uC744\uAC70\uB780
+      \uAC70\uC5D0\uC694."
+  - script: "<color=#008099>... \uC6B0\uC120 \uC5B4\uB5BB\uAC8C\uB4E0 \uB098\uAC08
+      \uBC29\uBC95\uC744 \uCC3E\uC544\uBD10\uC694.\n\uB2F9\uBD84\uAC04 \uC5C5\uD600\uC788\uC5B4\uB3C4
+      \uB420\uAE4C\uC694?"
+  - script: "\uC5B4\uCC28\uD53C \uC800\uB3C4 \uD63C\uC790\uC120 \uD560 \uC218 \uC788\uB294\uAC8C
+      \uC5C6\uC5B4\uC694.\n\uAE38\uB9CC \uC548\uB0B4\uD574 \uC8FC\uC138\uC694."
