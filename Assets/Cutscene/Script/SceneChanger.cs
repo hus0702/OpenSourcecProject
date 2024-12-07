@@ -21,6 +21,25 @@ public class SceneChanger : MonoBehaviour, ITriggered
     private void BeforeStartScene()
     {
         SetPlayerSpawnPositionOnLoad();
+
+
+
+        if(sceneName == "GameScene")
+        {
+            foreach(PlayerObjectController player in Manager.GamePlayers)
+            {
+                player.gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            foreach(PlayerObjectController player in Manager.GamePlayers)
+            {
+                player.gameObject.SetActive(false);
+            }
+        }
+
+
     }
 
     private void SetPlayerSpawnPositionOnLoad()
