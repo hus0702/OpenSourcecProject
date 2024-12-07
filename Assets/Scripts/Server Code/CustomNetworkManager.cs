@@ -68,13 +68,12 @@ public class CustomNetworkManager : NetworkManager
                     if (conn.Role == 1)
                     {
                         conn.gameObject.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
-
                     }
                     else
                     {
                         conn.gameObject.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
                     }
-                    conn.gameObject.SetActive(true);
+                    conn.RpcSetActive(true);
                 }
             }
         }
@@ -82,7 +81,7 @@ public class CustomNetworkManager : NetworkManager
         {
             foreach (PlayerObjectController conn in GamePlayers)
             {
-                conn.gameObject.SetActive(false);
+                conn.RpcSetActive(false);
             }
         }
     }
