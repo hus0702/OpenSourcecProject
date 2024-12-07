@@ -71,7 +71,7 @@ public class CustomNetworkManager : NetworkManager
                     }
                     else
                     {
-                        conn.gameObject.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
+                        conn.gameObject.transform.position = GameManager.instance.LimpSpawnPositionOnLoad;
                     }
                 }
             }
