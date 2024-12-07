@@ -57,24 +57,32 @@ public class CustomNetworkManager : NetworkManager
         if (sceneName == "GameScene") // "GameScene"을 실제 게임 씬 이름으로 변경
         {
             Rigidbody2D playerobject = NetworkClient.localPlayer.GetComponent<Rigidbody2D>();
-            if (playerobject != null)
+            if (playerobject == null)
             {
                 SpawnPrefabs();
             }
-            else 
+            else
             {
                 foreach (PlayerObjectController conn in GamePlayers)
                 {
                     if (conn.Role == 1)
                     {
                         conn.gameObject.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
+
                     }
                     else
                     {
                         conn.gameObject.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
                     }
-
+                    conn.gameObject.SetActive(true);
                 }
+            }
+        }
+        else if (sceneName == "TutorialCutScene" || sceneName == "TutorialCutScene2" || sceneName == "TutorialCutScene3")
+        {
+            foreach (PlayerObjectController conn in GamePlayers)
+            {
+                conn.gameObject.SetActive(false);
             }
         }
     }
