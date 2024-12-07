@@ -56,9 +56,9 @@ public class CustomNetworkManager : NetworkManager
         // 게임 씬에 진입했을 때 프리팹을 추가로 생성하도록 처리
         if (sceneName == "GameScene") // "GameScene"을 실제 게임 씬 이름으로 변경
         {
-            Rigidbody2D playerobject = NetworkClient.localPlayer.GetComponent<Rigidbody2D>();
-            if (playerobject == null)
+            if (!GameManager.instance.isGameStarted)
             {
+                GameManager.instance.isGameStarted = true;
                 SpawnPrefabs();
             }
             else

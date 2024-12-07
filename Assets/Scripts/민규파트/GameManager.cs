@@ -11,6 +11,7 @@ public class GameManager : NetworkBehaviour
     public Vector3 BlindSpawnPositionOnLoad;
     public Vector3 LimpSpawnPositionOnLoad;
 
+    public bool isGameStarted;
     private void Awake()
     {
         // 일반적인 싱글톤 패턴 적용
@@ -23,13 +24,13 @@ public class GameManager : NetworkBehaviour
         {
             Destroy(gameObject);
         }
-
     }
 
     private void Start()
     {
         BlindSpawnPositionOnLoad = new Vector3(-22.5f, 1, 0);
         LimpSpawnPositionOnLoad = new Vector3(-22.5f, 1, 0);
+        isGameStarted = false;
     }
 
     [Command]
