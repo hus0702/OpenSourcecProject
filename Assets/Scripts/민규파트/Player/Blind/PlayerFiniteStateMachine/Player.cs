@@ -343,9 +343,25 @@ public class Player : NetworkBehaviour
         }
         transform.Rotate(0.0f, 180.0f, 0.0f);
     }
-    public void Interact(GameObject target)
+    public void Interact()
     {
-        
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(myBoxCollider.bounds.center, myBoxCollider.bounds.size, 0);
+
+        foreach (Collider2D colliderItem in colliders)
+        {
+            if (colliderItem != myBoxCollider)
+            {
+                IInteracted interacted = colliderItem.GetComponent<InteractableObject>();
+                if (interacted == null)
+                {
+                    Debug.Log(colliderItem.gameObject.name + " 에는 상호작용 가능한 컴포넌트가 없음.");
+                }
+                else
+                {
+                    interacted.Interact(gameObject);
+                }
+            }
+        }
     }
 
 
