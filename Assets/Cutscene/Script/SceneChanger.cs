@@ -20,11 +20,16 @@ public class SceneChanger : MonoBehaviour, ITriggered
 
     public void StartScene()
     {
-        //GameManager.instance.
+        PlayerObjectController player = NetworkClient.localPlayer.GetComponent<PlayerObjectController>();
 
-        //Manager.StartGame(sceneName);
+        if(player == null) {Debug.LogError("현재 할당된 로컬 플레이어가 존재하지 않습니다."); return;}
+        
+        if(player.Role == PlayerObjectController.Blind) GameManager.instance.SpawnPositionOnLoad = spawnPointOnLoadForBlind;
+        else GameManager.instance.SpawnPositionOnLoad = spawnPointOnLoadForLimp;
 
-        SceneManager.LoadScene(sceneName);
+        Manager.StartGame(sceneName);
+        
+        //SceneManager.LoadScene(sceneName);
     }
 
     public void Trigger()
