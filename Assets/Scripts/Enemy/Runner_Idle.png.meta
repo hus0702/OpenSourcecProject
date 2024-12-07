@@ -1,31 +1,19 @@
 fileFormatVersion: 2
-guid: c31d7c06b59ecfb48af291514d5ddf2c
+guid: 158d647cedbca184f99e219eecea0413
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5995304393096486906
-    second: Runner 1_0
+      213: -927056687744691198
+    second: Runner_Idle_0
   - first:
-      213: 6928391842085243835
-    second: Runner 1_1
+      213: -4200178532090594408
+    second: Runner_Idle_1
   - first:
-      213: -5187902727383071835
-    second: Runner 1_2
+      213: 6142684884663031644
+    second: Runner_Idle_2
   - first:
-      213: -8237181960108377879
-    second: Runner 1_3
-  - first:
-      213: -9023011683554134375
-    second: Runner 1_4
-  - first:
-      213: 8850277602259510908
-    second: Runner 1_5
-  - first:
-      213: -6292885395934017086
-    second: Runner 1_6
-  - first:
-      213: 7950363729514560390
-    second: Runner 1_7
+      213: 2083757828666542996
+    second: Runner_Idle_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -121,7 +109,73 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Runner_0
+      name: Runner_Idle_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 204d350bade6223f0800000000000000
+      internalID: -927056687744691198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Runner_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89bb489e0e7f5b5c0800000000000000
+      internalID: -4200178532090594408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Runner_Idle_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5750857b533f3550800000000000000
+      internalID: 6142684884663031644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Runner_Idle_3
       rect:
         serializedVersion: 2
         x: 0
@@ -134,164 +188,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: c9615292be1322748812caf8d9136efd
-      internalID: 1660087338
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Runner_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2d97fe62830e8b54e995f3292e5610cd
-      internalID: -532318586
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Runner_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0a30f0e475b214448a4fcfea198ff6fc
-      internalID: -1727936810
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Runner_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2a63b19ccb8ac8b44987ccdf0ebb0bfd
-      internalID: -1196657550
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Runner_4
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 076e53b81bf31734981248b7a02adc28
-      internalID: 1169623102
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Runner_5
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 22d1d92637721ec43b5f3130d5c7654a
-      internalID: 723228947
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Runner_6
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 246ecaf5cef78de44815aa53b1445b56
-      internalID: -452797335
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Runner_7
-      rect:
-        serializedVersion: 2
-        x: 448
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c093de31d78f9aa4985f31bf07dbc0b9
-      internalID: -891043740
+      spriteID: 49bcb9774befaec10800000000000000
+      internalID: 2083757828666542996
       vertices: []
       indices: 
       edges: []
@@ -300,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 2f77aec355d360240a1293ff85ae26b9
+    spriteID: 4dc58cd7bad43ad4995d133f559405f6
     internalID: 0
     vertices: []
     indices: 
@@ -310,14 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Runner_0: 1660087338
-      Runner_1: -532318586
-      Runner_2: -1727936810
-      Runner_3: -1196657550
-      Runner_4: 1169623102
-      Runner_5: 723228947
-      Runner_6: -452797335
-      Runner_7: -891043740
+      Runner_Idle_0: -927056687744691198
+      Runner_Idle_1: -4200178532090594408
+      Runner_Idle_2: 6142684884663031644
+      Runner_Idle_3: 2083757828666542996
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
