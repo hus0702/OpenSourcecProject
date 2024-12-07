@@ -18,7 +18,16 @@ public class SceneChanger : MonoBehaviour, ITriggered
         }
     }
 
-    public void StartScene()
+    private void BeforeStartScene()
+    {
+        SetPlayerSpawnPositionOnLoad();
+
+        /*
+            이 뒤로 자유롭게 작성하시면 될 것 같습니다.
+        */
+    }
+
+    private void SetPlayerSpawnPositionOnLoad()
     {
         PlayerObjectController player = NetworkClient.localPlayer.GetComponent<PlayerObjectController>();
 
@@ -26,7 +35,12 @@ public class SceneChanger : MonoBehaviour, ITriggered
         
         if(player.Role == PlayerObjectController.Blind) GameManager.instance.SpawnPositionOnLoad = spawnPointOnLoadForBlind;
         else GameManager.instance.SpawnPositionOnLoad = spawnPointOnLoadForLimp;
+    }
 
+    public void StartScene()
+    {
+        BeforeStartScene();
+        
         Manager.StartGame(sceneName);
         
         //SceneManager.LoadScene(sceneName);
