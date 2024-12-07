@@ -110,7 +110,6 @@ public class PlayerObjectController : NetworkBehaviour
             {
                 Camera.main.transform.position = this.transform.position + new Vector3(0, 0, -10);
             }
-            
         }
     }
     public void CanStartGame(string SceneName)

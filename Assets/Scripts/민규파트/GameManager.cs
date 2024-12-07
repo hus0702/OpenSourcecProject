@@ -8,7 +8,8 @@ public class GameManager : NetworkBehaviour
     public PlayerDataContainer Pdcontainer;
     public LimbDataContainer Ldcontainer;
 
-    public Vector3 SpawnPositionOnLoad;
+    public Vector3 BlindSpawnPositionOnLoad;
+    public Vector3 LimpSpawnPositionOnLoad;
 
     private void Awake()
     {
@@ -27,7 +28,8 @@ public class GameManager : NetworkBehaviour
 
     private void Start()
     {
-        SpawnPositionOnLoad = new Vector3(-22.5f, 1, 0);
+        BlindSpawnPositionOnLoad = new Vector3(-22.5f, 1, 0);
+        LimpSpawnPositionOnLoad = new Vector3(-22.5f, 1, 0);
     }
 
     [Command]

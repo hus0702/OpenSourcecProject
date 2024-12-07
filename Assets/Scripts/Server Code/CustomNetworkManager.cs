@@ -56,13 +56,31 @@ public class CustomNetworkManager : NetworkManager
         // 게임 씬에 진입했을 때 프리팹을 추가로 생성하도록 처리
         if (sceneName == "GameScene") // "GameScene"을 실제 게임 씬 이름으로 변경
         {
-            SpawnPrefabs();
+            Rigidbody2D playerobject = NetworkClient.localPlayer.GetComponent<Rigidbody2D>();
+            if (playerobject != null)
+            {
+                SpawnPrefabs();
+            }
+            else 
+            {
+                foreach (PlayerObjectController conn in GamePlayers)
+                {
+                    if (conn.Role == 1)
+                    {
+                        conn.gameObject.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
+                    }
+                    else
+                    {
+                        conn.gameObject.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
+                    }
+
+                }
+            }
         }
     }
 
     public void StartGame(string SceneName)
     {
-
         ServerChangeScene(SceneName);
     }
 
@@ -73,13 +91,13 @@ public class CustomNetworkManager : NetworkManager
             PlayerObjectController playerObjectController = conn.identity.gameObject.GetComponent<PlayerObjectController>();
             if (playerObjectController.Role == 1)
             {
-                GameScenePrefab = Instantiate(spawnPrefabs[0], GameManager.instance.SpawnPositionOnLoad, spawnPrefabs[0].transform.rotation);
+                GameScenePrefab = Instantiate(spawnPrefabs[0], GameManager.instance.BlindSpawnPositionOnLoad, spawnPrefabs[0].transform.rotation);
                 GameScenePrefab.GetComponent<PlayerObjectController>().ConnectionID = playerObjectController.ConnectionID;
                 NetworkServer.Spawn(GameScenePrefab, conn);
             }
             else if (playerObjectController.Role == 2)
             {
-                GameScenePrefab = Instantiate(spawnPrefabs[1], GameManager.instance.SpawnPositionOnLoad, spawnPrefabs[1].transform.rotation);
+                GameScenePrefab = Instantiate(spawnPrefabs[1], GameManager.instance.LimpSpawnPositionOnLoad, spawnPrefabs[1].transform.rotation);
                 GameScenePrefab.GetComponent<PlayerObjectController>().ConnectionID = playerObjectController.ConnectionID;
                 NetworkServer.Spawn(GameScenePrefab, conn);
             }
