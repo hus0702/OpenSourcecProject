@@ -180,11 +180,4 @@ public class PlayerObjectController : NetworkBehaviour
             LobbyController.Instance.UpdatePlayerList();
         }
     }
-
-    [ClientRpc]
-    public void RpcSetActive(bool newvalue)
-    {
-        this.gameObject.SetActive(newvalue);
-    }
-
 }

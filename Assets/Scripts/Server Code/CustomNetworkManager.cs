@@ -73,15 +73,7 @@ public class CustomNetworkManager : NetworkManager
                     {
                         conn.gameObject.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
                     }
-                    conn.RpcSetActive(true);
                 }
-            }
-        }
-        else if (sceneName == "TutorialCutScene" || sceneName == "TutorialCutScene2" || sceneName == "TutorialCutScene3")
-        {
-            foreach (PlayerObjectController conn in GamePlayers)
-            {
-                conn.RpcSetActive(false);
             }
         }
     }
