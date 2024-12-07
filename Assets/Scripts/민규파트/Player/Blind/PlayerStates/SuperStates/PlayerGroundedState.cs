@@ -12,6 +12,8 @@ public class PlayerGroundedState : PlayerState
 
     private bool ladderInput;
 
+    private bool InteractInput;
+
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerDataContainer container, string animBoolName) : base(player, stateMachine, container, animBoolName)
     {
     }
@@ -40,6 +42,7 @@ public class PlayerGroundedState : PlayerState
         CarryUpInput = container.carryupcall;
         ladderInput = container.ladderUp;
         sinput = container.SitInput;
+        InteractInput = container.InteractInput;
 
         if (JumpInput)
         {
@@ -60,6 +63,10 @@ public class PlayerGroundedState : PlayerState
         if (container.Hp <= 0)
         {
             stateMachine.playerChangeState(player.DieState);
+        }
+        if (InteractInput)
+        {
+            player.Interact();
         }
     }
 

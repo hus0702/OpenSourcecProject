@@ -9,6 +9,7 @@ public class PlayerC_GroundedState : PlayerState
     protected bool PutDownInput;
     protected bool ThrowInput;
     private bool ladderInput;
+    private bool InteractInput;
 
     public PlayerC_GroundedState(Player player, PlayerStateMachine stateMachine, PlayerDataContainer container, string animBoolName) : base(player, stateMachine, container, animBoolName)
     {
@@ -36,16 +37,15 @@ public class PlayerC_GroundedState : PlayerState
         base.LogicUpdate();
         xinput = container.NormInputX;
         ladderInput = container.ladderUp;
+        InteractInput = container.InteractInput;
         if (ladderInput && player.CheckIftouchLadder())
         {
             stateMachine.playerChangeState(player.climbState);
         }
-
         if (PutDownInput)
         {
             stateMachine.playerChangeState(player.PutDownState);
         }
-
         if(ThrowInput) 
         {
             stateMachine.playerChangeState(player.ThrowState);
@@ -54,7 +54,10 @@ public class PlayerC_GroundedState : PlayerState
         {
             stateMachine.playerChangeState(player.DieState);
         }
-        
+        if (InteractInput)
+        {
+            player.Interact();
+        }
     }
 
     public override void PhysicsUpdate()

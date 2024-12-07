@@ -54,6 +54,11 @@ public class LimbGroundedState : LimbState
         {
             stateMachine.LimbChangeState(Limb.DieState);
         }
+
+        if (container.InteractInput)
+        {
+            Limb.Interact();
+        }
     }
     public override void PhysicsUpdate()
     {
