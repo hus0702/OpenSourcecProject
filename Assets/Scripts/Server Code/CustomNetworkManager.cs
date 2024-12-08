@@ -31,21 +31,21 @@ public class CustomNetworkManager : NetworkManager
             GamePlayerInstance.PlayerSteamID = (ulong)SteamMatchmaking.GetLobbyMemberByIndex((CSteamID)SteamLobby.Instance.CurrentLobbyID, GamePlayers.Count);
 
             NetworkServer.AddPlayerForConnection(conn, GamePlayerInstance.gameObject);
-            Debug.Log("·Îºñ¿¡¼­ »ý¼ºµÈ connection : " + conn);
+            Debug.Log("ï¿½Îºñ¿¡¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ connection : " + conn);
 
-            if (GameManager.instance == null) // GameManager ½Ì±ÛÅæÀÌ ÀÌ¹Ì ÀÖ´ÂÁö È®ÀÎ
+            if (GameManager.instance == null) // GameManager ï¿½Ì±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½
             {
-                // GameManager ÇÁ¸®ÆÕÀ» Ãß°¡ (¿©±â¼­´Â Resources Æú´õ¿¡¼­ ºÒ·¯¿À´Â ¹æ½Ä »ç¿ë)
+                // GameManager ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ (ï¿½ï¿½ï¿½â¼­ï¿½ï¿½ Resources ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½)
                 GameObject gameManagerPrefab = spawnPrefabs[2];
                 if (gameManagerPrefab != null)
                 {
                     GameObject gameManagerInstance = Instantiate(gameManagerPrefab);
-                    NetworkServer.Spawn(gameManagerInstance, conn); // ³×Æ®¿öÅ© »ó¿¡¼­ GameManager ¼ÒÈ¯
-                    Debug.Log("GameManager°¡ »ý¼ºµÇ¾ú½À´Ï´Ù.");
+                    NetworkServer.Spawn(gameManagerInstance, conn); // ï¿½ï¿½Æ®ï¿½ï¿½Å© ï¿½ó¿¡¼ï¿½ GameManager ï¿½ï¿½È¯
+                    Debug.Log("GameManagerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
                 }
                 else
                 {
-                    Debug.LogError("GameManager ÇÁ¸®ÆÕÀ» Ã£À» ¼ö ¾ø½À´Ï´Ù. Resources Æú´õ¿¡ ÇÁ¸®ÆÕÀ» Ãß°¡ÇÏ¼¼¿ä.");
+                    Debug.LogError("GameManager ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. Resources ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½.");
                 }
             }
         }
@@ -53,8 +53,8 @@ public class CustomNetworkManager : NetworkManager
 
     public override void OnServerSceneChanged(string sceneName)
     {
-        // °ÔÀÓ ¾À¿¡ ÁøÀÔÇßÀ» ¶§ ÇÁ¸®ÆÕÀ» Ãß°¡·Î »ý¼ºÇÏµµ·Ï Ã³¸®
-        if (sceneName == "GameScene") // "GameScene"À» ½ÇÁ¦ °ÔÀÓ ¾À ÀÌ¸§À¸·Î º¯°æ
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
+        if (sceneName == "GameScene") // "GameScene"ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         {
             if (!GameManager.instance.isGameStarted)
             {
@@ -80,6 +80,21 @@ public class CustomNetworkManager : NetworkManager
 
     public void StartGame(string SceneName)
     {
+        if(SceneName == "GameScene")
+        {
+            foreach(PlayerObjectController player in GamePlayers)
+            {
+                player.gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            foreach(PlayerObjectController player in GamePlayers)
+            {
+                player.gameObject.SetActive(false);
+            }
+        }
+
         ServerChangeScene(SceneName);
     }
 
