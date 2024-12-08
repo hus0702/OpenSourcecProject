@@ -44,9 +44,7 @@ public class GameManager : NetworkBehaviour
     [ClientRpc]
     void RpcPlaySoundOnClient(AudioManager.Sfx name)
     {
-        
         AudioManager.instance.PlaySfx(name);
-        
     }
 
 }

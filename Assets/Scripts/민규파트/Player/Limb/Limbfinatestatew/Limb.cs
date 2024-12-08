@@ -57,6 +57,7 @@ public class Limb : NetworkBehaviour
 
     private Vector2 workspace;
 
+    Vector3 bulletspawnSpot;
     public bool IsCarrying { get; private set; }
 
     #endregion
@@ -301,6 +302,7 @@ public class Limb : NetworkBehaviour
 
     public void LimpShot()
     {
+        CmdLimbShot();
         LimpShotSound();
     }
     public void LimpDie()
@@ -485,6 +487,25 @@ public class Limb : NetworkBehaviour
         InputHandler.enabled = newvalue;
         spriteRenderer.enabled = newvalue;
     }
+
+    [Command]
+    public void CmdLimbShot()
+    {
+        Debug.Log("รั น฿ป็!!");
+        InputHandler.StartCoroutine(InputHandler.stopshotinput(container.ShotDelay));
+        if (container.isRiding)
+        {
+            bulletspawnSpot = GameManager.instance.Pdcontainer.transform.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, 0, 0);
+        }
+        else
+        {
+            bulletspawnSpot = transform.position + new Vector3(container.FacingDirection, 0, 0);
+        }
+        var bullet = Instantiate(BulletPrefab, bulletspawnSpot, Quaternion.Euler(container.mousePosition - transform.position));
+        bullet.GetComponent<Rigidbody2D>().linearVelocity = new Vector3(container.FacingDirection, 0, 0) * container.bulletspeed;
+        RpcLimbShot();
+    }
+
     [ClientRpc]
     public void RpcSetSpriteRenderer(bool newvalue)
     {
@@ -493,6 +514,22 @@ public class Limb : NetworkBehaviour
         {
             spriteRenderer.enabled = newvalue; 
         }
+    }
+
+    [ClientRpc]
+    public void RpcLimbShot()
+    {
+        InputHandler.StartCoroutine(InputHandler.stopshotinput(container.ShotDelay));
+        if (container.isRiding)
+        {
+            bulletspawnSpot = GameManager.instance.Pdcontainer.transform.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, 0, 0);
+        }
+        else
+        {
+            bulletspawnSpot = transform.position + new Vector3(container.FacingDirection, 0, 0);
+        }
+        var bullet = Instantiate(BulletPrefab, bulletspawnSpot, Quaternion.Euler(container.mousePosition - transform.position));
+        bullet.GetComponent<Rigidbody2D>().linearVelocity = new Vector3(container.FacingDirection, 0, 0) * container.bulletspeed;
     }
     #endregion
 }
