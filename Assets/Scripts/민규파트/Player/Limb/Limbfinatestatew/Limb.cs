@@ -288,7 +288,7 @@ public class Limb : NetworkBehaviour
             }
             else
             {
-                GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.LimpLand);
+                CmdLimpLandSound();
             }
         }
     }
@@ -303,7 +303,7 @@ public class Limb : NetworkBehaviour
             }
             else
             {
-                GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.LimpShot);
+                CmdLimpShotSound();
             }
         }
     }
@@ -317,10 +317,30 @@ public class Limb : NetworkBehaviour
         }
         else
         {
-            GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.LimpDie);
+            CmdLimpDieSound();
         }
     }
 
+    [Command]
+    void CmdLimpLandSound()
+    {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.LimpLand);
+        GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.LimpLand);
+    }
+
+    [Command]
+    void CmdLimpShotSound()
+    {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.LimpShot);
+        GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.LimpShot);
+    }
+
+    [Command]
+    void CmdLimpDieSound()
+    {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.LimpDie);
+        GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.LimpDie);
+    }
     #endregion
 
     #region animation clip call Function

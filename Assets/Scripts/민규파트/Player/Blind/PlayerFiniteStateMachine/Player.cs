@@ -276,7 +276,7 @@ public class Player : NetworkBehaviour
         }
         else
         {
-            GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.BlindLand);
+            CmdBlindLandSound();
         }
     }
 
@@ -289,7 +289,7 @@ public class Player : NetworkBehaviour
         }
         else
         {
-            GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.Blindwalk);
+            CmdBlindwalkSound();
         }
     }
     public void BlindclimbSound()
@@ -301,7 +301,7 @@ public class Player : NetworkBehaviour
         }
         else
         {
-            GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.Blindclimb);
+            CmdBlindclimbSound();
         }
     }
     public void BlindDieSound()
@@ -313,7 +313,7 @@ public class Player : NetworkBehaviour
         }
         else
         {
-            GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.BlindDie);
+            CmdBlindDieSound();
         }
     }
 
@@ -326,7 +326,7 @@ public class Player : NetworkBehaviour
         }
         else
         {
-            GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.BlindCarryUp);
+            CmdBlindCarryUpSound();
         }
     }
 
@@ -339,8 +339,50 @@ public class Player : NetworkBehaviour
         }
         else
         {
-            GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.Blindthrow);
+            CmdBlindthrowSound();
         }
+    }
+
+    [Command]
+    void CmdBlindLandSound()
+    {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.BlindLand);
+        GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.BlindLand);
+    }
+
+    [Command]
+    void CmdBlindwalkSound()
+    {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Blindwalk);
+        GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.Blindwalk);
+    }
+
+    [Command]
+    void CmdBlindclimbSound()
+    {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Blindclimb);
+        GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.Blindclimb);
+    }
+
+    [Command]
+    void CmdBlindDieSound()
+    {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.BlindDie);
+        GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.BlindDie);
+    }
+
+    [Command]
+    void CmdBlindCarryUpSound()
+    {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.BlindCarryUp);
+        GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.BlindCarryUp);
+    }
+
+    [Command]
+    void CmdBlindthrowSound()
+    {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Blindthrow);
+        GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.Blindthrow);
     }
     #endregion
 
