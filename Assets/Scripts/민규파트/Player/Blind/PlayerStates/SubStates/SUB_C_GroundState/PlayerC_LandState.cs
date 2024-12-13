@@ -4,13 +4,13 @@ public class PlayerC_LandState : PlayerC_GroundedState
 {
     public PlayerC_LandState(Player player, PlayerStateMachine stateMachine, PlayerDataContainer container, string animBoolName) : base(player, stateMachine, container, animBoolName)
     {
+
     }
 
     public override void Enter()
     {
         base.Enter();
-
-        GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.BlindLand);
+        player.BlindLand();
     }
     public override void LogicUpdate()
     {

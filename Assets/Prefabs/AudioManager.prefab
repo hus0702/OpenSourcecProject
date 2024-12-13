@@ -47,15 +47,20 @@ MonoBehaviour:
   bgmClip: {fileID: 8300000, guid: e256a0ce51c68c34197a6aaa2f2fa63b, type: 3}
   bgmvolume: 0.2
   sfxClips:
-  - {fileID: 8300000, guid: 8bd1c096dd89f054c8c5cf3a4b336223, type: 3}
-  - {fileID: 8300000, guid: 5d58a78cd8a46084695c1e189a1f2ce4, type: 3}
-  - {fileID: 8300000, guid: 50fec0b7f34f8934bb9154fb76755944, type: 3}
-  - {fileID: 8300000, guid: 2080f9420776fdd4f8116dc4bfaf0b07, type: 3}
-  - {fileID: 8300000, guid: 08a68272aac0052459cae1273aa23515, type: 3}
-  - {fileID: 8300000, guid: 38f83b3b8016bea41ad3c9812873defb, type: 3}
-  - {fileID: 8300000, guid: 58b7c6e75a94f6047aa43a0d899c7d5e, type: 3}
-  - {fileID: 8300000, guid: ea001339e73eaa0478fb20d4ebdef984, type: 3}
-  - {fileID: 8300000, guid: 52d1f0ba08b55d943a62311d24e5e517, type: 3}
-  - {fileID: 8300000, guid: b86c7b3dba75fa844b494428e97838c2, type: 3}
+  - {fileID: 8300000, guid: 91842a3265a4fef4993f53799ec36943, type: 3}
+  - {fileID: 8300000, guid: 1f364850c77b9d846941ae27f519bc92, type: 3}
+  - {fileID: 8300000, guid: f9e4e6b491e9a914abd38835469a7083, type: 3}
+  - {fileID: 8300000, guid: 17531789444736c4a84448ebe2fd9e1d, type: 3}
+  - {fileID: 8300000, guid: a8903830fd6613f4e9b9cdecab60aee2, type: 3}
+  - {fileID: 8300000, guid: deb7553387cc43141850752c680394f8, type: 3}
+  - {fileID: 8300000, guid: d5ed2803429aa5d4f8de580cc45be783, type: 3}
+  - {fileID: 8300000, guid: 6585655fb139ebf4f88d7f28767d8034, type: 3}
+  - {fileID: 8300000, guid: 21191005f9b712a40ad93652ed231cfa, type: 3}
+  - {fileID: 8300000, guid: 68ba9c27898f5674a9df3aca11aa6f12, type: 3}
+  - {fileID: 8300000, guid: 34b364bcca694b94eaa94942a0f3eae1, type: 3}
+  - {fileID: 8300000, guid: 62d161beb1fc7cc4a8c6fb84877ed4a8, type: 3}
+  - {fileID: 8300000, guid: 8d00be005146fbd418b4ce495b9a06ad, type: 3}
+  - {fileID: 8300000, guid: 451b2161f9214d0478ddbddae7fd4811, type: 3}
+  - {fileID: 8300000, guid: 2f4c8b605d517414c85810260f0298fb, type: 3}
   sfxVolume: 0.5
   channels: 16

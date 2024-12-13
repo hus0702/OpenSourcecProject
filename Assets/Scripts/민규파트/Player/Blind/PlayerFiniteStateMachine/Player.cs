@@ -269,30 +269,48 @@ public class Player : NetworkBehaviour
     #region SoundMaking Function
     public void BlindLandSound()
     {
-        GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.BlindLand);
+        if (isOwned)
+        {
+            GameManager.instance.PlaySoundOnClient(AudioManager.Sfx.BlindLand);
+        }
     }
 
     public void BlindwalkSound()
     {
-        GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.Blindwalk);
+        if (isOwned)
+        {
+            GameManager.instance.PlaySoundOnClient(AudioManager.Sfx.Blindwalk);
+        }
     }
     public void BlindclimbSound()
     {
-        GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.Blindclimb);
+        if (isOwned)
+        {
+            GameManager.instance.PlaySoundOnClient(AudioManager.Sfx.Blindclimb);
+        }
     }
     public void BlindDieSound()
     {
-        GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.BlindDie);
+        if (isOwned)
+        {
+            GameManager.instance.PlaySoundOnClient(AudioManager.Sfx.BlindDie);
+        }
     }
 
     public void BlindCarryUpSound()
     {
-        GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.BlindCarryUp);
+        if (isOwned)
+        {
+            GameManager.instance.PlaySoundOnClient(AudioManager.Sfx.BlindCarryUp);
+        }
     }
 
     public void BlindthrowSound()
     {
-        GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.Blindthrow);
+        if (isOwned)
+        {
+            GameManager.instance.PlaySoundOnClient(AudioManager.Sfx.Blindthrow);
+        }
     }
     #endregion
 

@@ -11,6 +11,7 @@ public class GameManager : NetworkBehaviour
     public Vector3 BlindSpawnPositionOnLoad;
     public Vector3 LimpSpawnPositionOnLoad;
 
+    public AudioManager AudioManager;
     public bool isGameStarted;
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class GameManager : NetworkBehaviour
         {
             Destroy(gameObject);
         }
+        Instantiate(AudioManager);
     }
 
     private void Start()
@@ -33,8 +35,20 @@ public class GameManager : NetworkBehaviour
         isGameStarted = false;
     }
 
+    public void PlaySoundOnClient(AudioManager.Sfx name)
+    {
+        if (isServer)
+        {
+            CmdPlaySoundOnClient(name);
+        }
+        else
+        {
+            RpcPlaySoundOnClient(name);
+        }
+    }
+
     [Command]
-    public void CmdPlaySoundOnClient(AudioManager.Sfx name)
+     void CmdPlaySoundOnClient(AudioManager.Sfx name)
     {
         AudioManager.instance.PlaySfx(name);
         RpcPlaySoundOnClient(name);

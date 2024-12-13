@@ -279,16 +279,25 @@ public class Limb : NetworkBehaviour
     #region SoundMaking Function
     public void LimpLandSound()
     {
-        GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.LimpLand);
+        if (isOwned)
+        {
+            GameManager.instance.PlaySoundOnClient(AudioManager.Sfx.LimpLand);
+        }
     }
     public void LimpShotSound()
     {
-        GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.LimpShot);
+        if (isOwned)
+        {
+            GameManager.instance.PlaySoundOnClient(AudioManager.Sfx.LimpShot);
+        }
     }
 
     public void LimpDieSound()
     {
-        GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.LimpDie);
+        if (isOwned)
+        {
+            GameManager.instance.PlaySoundOnClient(AudioManager.Sfx.LimpDie);
+        }
     }
 
     #endregion
