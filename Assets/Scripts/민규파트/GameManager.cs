@@ -28,8 +28,8 @@ public class GameManager : NetworkBehaviour
 
     private void Start()
     {
-        BlindSpawnPositionOnLoad = new Vector3(-22.5f, 1, 0);
-        LimpSpawnPositionOnLoad = new Vector3(-22.5f, 1, 0);
+        BlindSpawnPositionOnLoad = new Vector3(-22.5f, 1, -1);
+        LimpSpawnPositionOnLoad = new Vector3(-22.5f, 1, -1);
         isGameStarted = false;
     }
 

@@ -31,7 +31,7 @@ public class LimbDataContainer : NetworkBehaviour
     private void Awake()
     {
         movementVelocity = 3f;
-        bulletspeed = 20f;
+        bulletspeed = 5f;
         groundCheckRadious = 0.5f;
         FacingDirection = 1;
         isRiding = false;

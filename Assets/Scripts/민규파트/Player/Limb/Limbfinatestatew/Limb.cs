@@ -302,7 +302,27 @@ public class Limb : NetworkBehaviour
 
     public void LimpShot()
     {
-        CmdLimbShot();
+        
+        if (isServer)
+        {
+            InputHandler.StartCoroutine(InputHandler.stopshotinput(container.ShotDelay));
+            if (container.isRiding)
+            {
+                bulletspawnSpot = GameManager.instance.Pdcontainer.transform.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, 0, 0);
+            }
+            else
+            {
+                bulletspawnSpot = transform.position + new Vector3(container.FacingDirection, -0.4f, 0);
+            }
+            GameObject bullet = Instantiate(BulletPrefab, bulletspawnSpot, Quaternion.Euler(container.mousePosition - transform.position));
+            bullet.GetComponent<Rigidbody2D>().linearVelocity = new Vector3(container.FacingDirection, 0, 0) * container.bulletspeed;
+            Debug.Log("ÃÑÀ» ½î±ä ½ú´Ù.");
+            RpcLimbShot();
+        }
+        else
+        {
+            CmdLimbShot();
+        }
         LimpShotSound();
     }
     public void LimpDie()
@@ -311,6 +331,7 @@ public class Limb : NetworkBehaviour
     }
 
     #endregion
+
     #region Other Functions
 
     private void AnimationTrigger() => StateMachine.LimbCurrentState.AnimationTrigger();
@@ -491,7 +512,7 @@ public class Limb : NetworkBehaviour
     [Command]
     public void CmdLimbShot()
     {
-        Debug.Log("ÃÑ ¹ß»ç!!");
+        
         InputHandler.StartCoroutine(InputHandler.stopshotinput(container.ShotDelay));
         if (container.isRiding)
         {
@@ -509,6 +530,7 @@ public class Limb : NetworkBehaviour
     [ClientRpc]
     public void RpcSetSpriteRenderer(bool newvalue)
     {
+        Debug.Log("ÃÑ ¹ß»ç!!");
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {

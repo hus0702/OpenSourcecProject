@@ -5,11 +5,11 @@ public class Bullet : MonoBehaviour
 {
     private void Awake()
     {
-        Destroy(gameObject, 1.0f);
+        Destroy(gameObject, 2.0f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }
