@@ -35,20 +35,10 @@ public class GameManager : NetworkBehaviour
         isGameStarted = false;
     }
 
-    public void PlaySoundOnClient(AudioManager.Sfx name)
-    {
-        if (isServer)
-        {
-            CmdPlaySoundOnClient(name);
-        }
-        else
-        {
-            RpcPlaySoundOnClient(name);
-        }
-    }
+
 
     [Command]
-     void CmdPlaySoundOnClient(AudioManager.Sfx name)
+    public void CmdPlaySoundOnClient(AudioManager.Sfx name)
     {
         AudioManager.instance.PlaySfx(name);
         RpcPlaySoundOnClient(name);
@@ -56,7 +46,7 @@ public class GameManager : NetworkBehaviour
 
     // 서버에서 클라이언트로 호출되는 RPC
     [ClientRpc]
-    void RpcPlaySoundOnClient(AudioManager.Sfx name)
+    public void RpcPlaySoundOnClient(AudioManager.Sfx name)
     {
         AudioManager.instance.PlaySfx(name);
     }

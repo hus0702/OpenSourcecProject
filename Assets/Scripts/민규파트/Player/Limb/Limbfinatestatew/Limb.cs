@@ -281,22 +281,43 @@ public class Limb : NetworkBehaviour
     {
         if (isOwned)
         {
-            GameManager.instance.PlaySoundOnClient(AudioManager.Sfx.LimpLand);
+            if (isServer)
+            {
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.LimpLand);
+                GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.LimpLand);
+            }
+            else
+            {
+                GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.LimpLand);
+            }
         }
     }
     public void LimpShotSound()
     {
         if (isOwned)
         {
-            GameManager.instance.PlaySoundOnClient(AudioManager.Sfx.LimpShot);
+            if (isServer)
+            {
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.LimpShot);
+                GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.LimpShot);
+            }
+            else
+            {
+                GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.LimpShot);
+            }
         }
     }
 
     public void LimpDieSound()
     {
-        if (isOwned)
+        if (isServer)
         {
-            GameManager.instance.PlaySoundOnClient(AudioManager.Sfx.LimpDie);
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.LimpDie);
+            GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.LimpDie);
+        }
+        else
+        {
+            GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.LimpDie);
         }
     }
 
@@ -317,7 +338,7 @@ public class Limb : NetworkBehaviour
             bulletrotation = Quaternion.Euler(container.mousePosition - transform.position);
             if (container.isRiding)
             {
-                bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, 0, 0);
+                bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, -0.4f, 0);
                 if (bulletrotation.y > 2) // 최대 총 각도 설정
                 {
                     bulletrotation.y = 2;

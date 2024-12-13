@@ -269,47 +269,77 @@ public class Player : NetworkBehaviour
     #region SoundMaking Function
     public void BlindLandSound()
     {
-        if (isOwned)
+        if (isServer)
         {
-            GameManager.instance.PlaySoundOnClient(AudioManager.Sfx.BlindLand);
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.BlindLand);
+            GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.BlindLand);
+        }
+        else
+        {
+            GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.BlindLand);
         }
     }
 
     public void BlindwalkSound()
     {
-        if (isOwned)
+        if (isServer)
         {
-            GameManager.instance.PlaySoundOnClient(AudioManager.Sfx.Blindwalk);
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Blindwalk);
+            GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.Blindwalk);
+        }
+        else
+        {
+            GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.Blindwalk);
         }
     }
     public void BlindclimbSound()
     {
-        if (isOwned)
+        if (isServer)
         {
-            GameManager.instance.PlaySoundOnClient(AudioManager.Sfx.Blindclimb);
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Blindclimb);
+            GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.Blindclimb);
+        }
+        else
+        {
+            GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.Blindclimb);
         }
     }
     public void BlindDieSound()
     {
-        if (isOwned)
+        if (isServer)
         {
-            GameManager.instance.PlaySoundOnClient(AudioManager.Sfx.BlindDie);
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.BlindDie);
+            GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.BlindDie);
+        }
+        else
+        {
+            GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.BlindDie);
         }
     }
 
     public void BlindCarryUpSound()
     {
-        if (isOwned)
+        if (isServer)
         {
-            GameManager.instance.PlaySoundOnClient(AudioManager.Sfx.BlindCarryUp);
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.BlindCarryUp);
+            GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.BlindCarryUp);
+        }
+        else
+        {
+            GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.BlindCarryUp);
         }
     }
 
     public void BlindthrowSound()
     {
-        if (isOwned)
+        if (isServer)
         {
-            GameManager.instance.PlaySoundOnClient(AudioManager.Sfx.Blindthrow);
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Blindthrow);
+            GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.Blindthrow);
+        }
+        else
+        {
+            GameManager.instance.CmdPlaySoundOnClient(AudioManager.Sfx.Blindthrow);
         }
     }
     #endregion
