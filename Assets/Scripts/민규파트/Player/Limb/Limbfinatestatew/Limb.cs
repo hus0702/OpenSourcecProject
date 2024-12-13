@@ -58,6 +58,7 @@ public class Limb : NetworkBehaviour
     private Vector2 workspace;
 
     Vector3 bulletspawnSpot;
+    Quaternion bulletrotation;
     public bool IsCarrying { get; private set; }
 
     #endregion
@@ -66,7 +67,6 @@ public class Limb : NetworkBehaviour
     private void Awake()
     {
         container = GameManager.instance.Ldcontainer;
-
         StateMachine = new PlayerStateMachine();
 
         IdleState = new LimbIdleState(this, StateMachine, container, "Idle");
@@ -302,21 +302,34 @@ public class Limb : NetworkBehaviour
 
     public void LimpShot()
     {
-        
+        InputHandler.StartCoroutine(InputHandler.stopshotinput(container.ShotDelay));
         if (isServer)
         {
-            InputHandler.StartCoroutine(InputHandler.stopshotinput(container.ShotDelay));
+            bulletrotation = Quaternion.Euler(container.mousePosition - transform.position);
             if (container.isRiding)
             {
                 bulletspawnSpot = GameManager.instance.Pdcontainer.transform.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, 0, 0);
+                if (bulletrotation.y > 2) // 최대 총 각도 설정
+                {
+                    bulletrotation.y = 2;
+                }
+
+                if (bulletrotation.y < -2)
+                {
+                    bulletrotation.y = -2;
+                }
             }
             else
             {
                 bulletspawnSpot = transform.position + new Vector3(container.FacingDirection, -0.4f, 0);
+                bulletrotation.y = 0;
+
             }
-            GameObject bullet = Instantiate(BulletPrefab, bulletspawnSpot, Quaternion.Euler(container.mousePosition - transform.position));
-            bullet.GetComponent<Rigidbody2D>().linearVelocity = new Vector3(container.FacingDirection, 0, 0) * container.bulletspeed;
-            Debug.Log("총을 쏘긴 쐈다.");
+            GameObject bullet = Instantiate(BulletPrefab, bulletspawnSpot, bulletrotation);
+            // 방향 설정 (Quaternion에서 벡터로 변환)
+            Vector2 bulletDirection = (Vector2)(Quaternion.Euler(0, 0, bulletrotation.eulerAngles.z) * new Vector3(container.FacingDirection, 0, 0));
+            // 총알 속도 설정
+            bullet.GetComponent<Rigidbody2D>().linearVelocity = bulletDirection * container.bulletspeed;
             RpcLimbShot();
         }
         else
@@ -405,9 +418,6 @@ public class Limb : NetworkBehaviour
     {
         container.Hp += newvalue;
     }
-
-
-
     [Command]
     public void CmdSetshotDelay(float newvalue)
     {
@@ -512,18 +522,31 @@ public class Limb : NetworkBehaviour
     [Command]
     public void CmdLimbShot()
     {
-        
-        InputHandler.StartCoroutine(InputHandler.stopshotinput(container.ShotDelay));
+        bulletrotation = Quaternion.Euler(container.mousePosition - transform.position);
         if (container.isRiding)
         {
             bulletspawnSpot = GameManager.instance.Pdcontainer.transform.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, 0, 0);
+            if (bulletrotation.y > 2) // 최대 총 각도 설정
+            {
+                bulletrotation.y = 2;
+            }
+
+            if (bulletrotation.y < -2)
+            {
+                bulletrotation.y = -2;
+            }
         }
         else
         {
-            bulletspawnSpot = transform.position + new Vector3(container.FacingDirection, 0, 0);
+            bulletspawnSpot = transform.position + new Vector3(container.FacingDirection, -0.4f, 0);
+            bulletrotation.y = 0;
+
         }
-        var bullet = Instantiate(BulletPrefab, bulletspawnSpot, Quaternion.Euler(container.mousePosition - transform.position));
-        bullet.GetComponent<Rigidbody2D>().linearVelocity = new Vector3(container.FacingDirection, 0, 0) * container.bulletspeed;
+        GameObject bullet = Instantiate(BulletPrefab, bulletspawnSpot, bulletrotation);
+        // 방향 설정 (Quaternion에서 벡터로 변환)
+        Vector2 bulletDirection = (Vector2)(Quaternion.Euler(0, 0, bulletrotation.eulerAngles.z) * new Vector3(container.FacingDirection, 0, 0));
+        // 총알 속도 설정
+        bullet.GetComponent<Rigidbody2D>().linearVelocity = bulletDirection * container.bulletspeed;
         RpcLimbShot();
     }
 
@@ -541,17 +564,31 @@ public class Limb : NetworkBehaviour
     [ClientRpc]
     public void RpcLimbShot()
     {
-        InputHandler.StartCoroutine(InputHandler.stopshotinput(container.ShotDelay));
+        bulletrotation = Quaternion.Euler(container.mousePosition - transform.position);
         if (container.isRiding)
         {
             bulletspawnSpot = GameManager.instance.Pdcontainer.transform.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, 0, 0);
+            if (bulletrotation.y > 2) // 최대 총 각도 설정
+            {
+                bulletrotation.y = 2;
+            }
+
+            if (bulletrotation.y < -2)
+            {
+                bulletrotation.y = -2;
+            }
         }
         else
         {
-            bulletspawnSpot = transform.position + new Vector3(container.FacingDirection, 0, 0);
+            bulletspawnSpot = transform.position + new Vector3(container.FacingDirection, -0.4f, 0);
+            bulletrotation.y = 0;
+
         }
-        var bullet = Instantiate(BulletPrefab, bulletspawnSpot, Quaternion.Euler(container.mousePosition - transform.position));
-        bullet.GetComponent<Rigidbody2D>().linearVelocity = new Vector3(container.FacingDirection, 0, 0) * container.bulletspeed;
+        GameObject bullet = Instantiate(BulletPrefab, bulletspawnSpot, bulletrotation);
+        // 방향 설정 (Quaternion에서 벡터로 변환)
+        Vector2 bulletDirection = (Vector2)(Quaternion.Euler(0, 0, bulletrotation.eulerAngles.z) * new Vector3(container.FacingDirection,0,0));
+        // 총알 속도 설정
+        bullet.GetComponent<Rigidbody2D>().linearVelocity = bulletDirection * container.bulletspeed;
     }
     #endregion
 }

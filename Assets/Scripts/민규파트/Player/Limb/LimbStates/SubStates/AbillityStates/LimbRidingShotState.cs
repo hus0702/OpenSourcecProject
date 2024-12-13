@@ -39,23 +39,6 @@ public class LimbRidingShotState : LimbAbillityState
                 Limb.CmdSetattackInput(false);
             }
         }
-        Limb.InputHandler.StartCoroutine(Limb.InputHandler.stopshotinput(container.ShotDelay));
-        mousePosition = container.mousePosition;
-        bulletrotation = mousePosition - Limb.transform.position;
-
-        if (bulletrotation.y > 3) // 최대 총 각도 설정
-        {
-            bulletrotation.y = 3;
-        }
-
-        if (bulletrotation.y < -3)
-        {
-            bulletrotation.y = -3;
-        }
-
-        var bullet = Limb.Instantiate(Limb.BulletPrefab, GameManager.instance.Pdcontainer.position + bulletrotation.normalized, Quaternion.Euler(bulletrotation));
-        bullet.GetComponent<Rigidbody2D>().linearVelocity = (bulletrotation).normalized * container.bulletspeed;
-
     }
 
     public override void Exit()
