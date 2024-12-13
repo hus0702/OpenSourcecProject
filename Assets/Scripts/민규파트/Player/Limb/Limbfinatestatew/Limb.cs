@@ -308,7 +308,7 @@ public class Limb : NetworkBehaviour
             bulletrotation = Quaternion.Euler(container.mousePosition - transform.position);
             if (container.isRiding)
             {
-                bulletspawnSpot = GameManager.instance.Pdcontainer.transform.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, 0, 0);
+                bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, 0, 0);
                 if (bulletrotation.y > 2) // 최대 총 각도 설정
                 {
                     bulletrotation.y = 2;
@@ -525,7 +525,7 @@ public class Limb : NetworkBehaviour
         bulletrotation = Quaternion.Euler(container.mousePosition - transform.position);
         if (container.isRiding)
         {
-            bulletspawnSpot = GameManager.instance.Pdcontainer.transform.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, 0, 0);
+            bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, 0, 0);
             if (bulletrotation.y > 2) // 최대 총 각도 설정
             {
                 bulletrotation.y = 2;
@@ -567,7 +567,7 @@ public class Limb : NetworkBehaviour
         bulletrotation = Quaternion.Euler(container.mousePosition - transform.position);
         if (container.isRiding)
         {
-            bulletspawnSpot = GameManager.instance.Pdcontainer.transform.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, 0, 0);
+            bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, 0, 0);
             if (bulletrotation.y > 2) // 최대 총 각도 설정
             {
                 bulletrotation.y = 2;
