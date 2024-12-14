@@ -354,10 +354,14 @@ public class Limb : NetworkBehaviour
         InputHandler.StartCoroutine(InputHandler.stopshotinput(container.ShotDelay));
         if (isServer)
         {
+            if ((container.mousePosition.x > 0 && GameManager.instance.Pdcontainer.facingdirection < 0) || (container.mousePosition.x < 0 && GameManager.instance.Pdcontainer.facingdirection > 0))
+                return;
+
             bulletrotation = Quaternion.Euler(container.mousePosition - transform.position);
-            if (container.isRiding)
+            
+            if (container.isRiding && container.holdingitem == 1)
             {
-                bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, +0.1f, 0);
+                bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, -0.1f, 0);
                 if (bulletrotation.y > 5) // 최대 총 각도 설정
                 {
                     bulletrotation.y = 5;
@@ -573,9 +577,10 @@ public class Limb : NetworkBehaviour
     public void CmdLimbShot()
     {
         bulletrotation = Quaternion.Euler(container.mousePosition - transform.position);
-        if (container.isRiding)
+
+        if (container.isRiding && container.holdingitem == 1)
         {
-            bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, +0.6f, 0);
+            bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, -0.1f, 0);
             if (bulletrotation.y > 5) // 최대 총 각도 설정
             {
                 bulletrotation.y = 5;
@@ -615,9 +620,10 @@ public class Limb : NetworkBehaviour
     public void RpcLimbShot()
     {
         bulletrotation = Quaternion.Euler(container.mousePosition - transform.position);
-        if (container.isRiding)
+
+        if (container.isRiding && container.holdingitem == 1)
         {
-            bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, +0.6f, 0);
+            bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, -0.1f, 0);
             if (bulletrotation.y > 5) // 최대 총 각도 설정
             {
                 bulletrotation.y = 5;
