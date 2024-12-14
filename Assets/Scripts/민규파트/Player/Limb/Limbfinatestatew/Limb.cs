@@ -354,33 +354,32 @@ public class Limb : NetworkBehaviour
         InputHandler.StartCoroutine(InputHandler.stopshotinput(container.ShotDelay));
         if (isServer)
         {
-            if ((container.mousePosition.x > 0 && GameManager.instance.Pdcontainer.facingdirection < 0) || (container.mousePosition.x < 0 && GameManager.instance.Pdcontainer.facingdirection > 0))
-                return;
 
             bulletrotation = Quaternion.Euler(container.mousePosition - transform.position);
-            
+
+            if ((bulletrotation.x > 0 && GameManager.instance.Pdcontainer.facingdirection < 0) || (bulletrotation.x < 0 && GameManager.instance.Pdcontainer.facingdirection > 0))
+                return;
+            Vector2 bulletDirection = new Vector2(bulletrotation.x, bulletrotation.y).normalized;
+
             if (container.isRiding && container.holdingitem == 1)
             {
                 bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, -0.1f, 0);
-                if (bulletrotation.y > 5) // 최대 총 각도 설정
-                {
-                    bulletrotation.y = 5;
-                }
+                if (bulletDirection.y > 0.3f)
+                    bulletDirection.y = 0.3f;
+                else if (bulletDirection.y < -0.3f)
+                    bulletDirection.y = -0.3f;
 
-                if (bulletrotation.y < -5)
-                {
-                    bulletrotation.y = -5;
-                }
+                bulletDirection = bulletDirection.normalized;
             }
             else
             {
                 bulletspawnSpot = transform.position + new Vector3(container.FacingDirection, -0.4f, 0);
-                bulletrotation.y = 0;
-
+                bulletDirection.y = 0;
+                bulletDirection.x = 1;
             }
             GameObject bullet = Instantiate(BulletPrefab, bulletspawnSpot, bulletrotation);
             // 방향 설정 (Quaternion에서 벡터로 변환)
-            Vector2 bulletDirection = new Vector2(bulletrotation.x, bulletrotation.y).normalized;
+            
             // 총알 속도 설정
             bullet.GetComponent<Rigidbody2D>().linearVelocity = bulletDirection * container.bulletspeed;
             RpcLimbShot();
@@ -578,28 +577,27 @@ public class Limb : NetworkBehaviour
     {
         bulletrotation = Quaternion.Euler(container.mousePosition - transform.position);
 
+        Vector2 bulletDirection = new Vector2(bulletrotation.x, bulletrotation.y).normalized;
+
         if (container.isRiding && container.holdingitem == 1)
         {
             bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, -0.1f, 0);
-            if (bulletrotation.y > 5) // 최대 총 각도 설정
-            {
-                bulletrotation.y = 5;
-            }
+            if (bulletDirection.y > 0.3f)
+                bulletDirection.y = 0.3f;
+            else if (bulletDirection.y < -0.3f)
+                bulletDirection.y = -0.3f;
 
-            if (bulletrotation.y < -5)
-            {
-                bulletrotation.y = -5;
-            }
+            bulletDirection = bulletDirection.normalized;
         }
         else
         {
             bulletspawnSpot = transform.position + new Vector3(container.FacingDirection, -0.4f, 0);
-            bulletrotation.y = 0;
-
+            bulletDirection.y = 0;
+            bulletDirection.x = 1;
         }
         GameObject bullet = Instantiate(BulletPrefab, bulletspawnSpot, bulletrotation);
         // 방향 설정 (Quaternion에서 벡터로 변환)
-        Vector2 bulletDirection = new Vector2(bulletrotation.x, bulletrotation.y).normalized;
+
         // 총알 속도 설정
         bullet.GetComponent<Rigidbody2D>().linearVelocity = bulletDirection * container.bulletspeed;
         RpcLimbShot();
@@ -621,28 +619,27 @@ public class Limb : NetworkBehaviour
     {
         bulletrotation = Quaternion.Euler(container.mousePosition - transform.position);
 
+        Vector2 bulletDirection = new Vector2(bulletrotation.x, bulletrotation.y).normalized;
+
         if (container.isRiding && container.holdingitem == 1)
         {
             bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, -0.1f, 0);
-            if (bulletrotation.y > 5) // 최대 총 각도 설정
-            {
-                bulletrotation.y = 5;
-            }
+            if (bulletDirection.y > 0.3f)
+                bulletDirection.y = 0.3f;
+            else if (bulletDirection.y < -0.3f)
+                bulletDirection.y = -0.3f;
 
-            if (bulletrotation.y < -5)
-            {
-                bulletrotation.y = -5;
-            }
+            bulletDirection = bulletDirection.normalized;
         }
         else
         {
             bulletspawnSpot = transform.position + new Vector3(container.FacingDirection, -0.4f, 0);
-            bulletrotation.y = 0;
-
+            bulletDirection.y = 0;
+            bulletDirection.x = 1;
         }
         GameObject bullet = Instantiate(BulletPrefab, bulletspawnSpot, bulletrotation);
         // 방향 설정 (Quaternion에서 벡터로 변환)
-        Vector2 bulletDirection = new Vector2(bulletrotation.x, bulletrotation.y).normalized;
+
         // 총알 속도 설정
         bullet.GetComponent<Rigidbody2D>().linearVelocity = bulletDirection * container.bulletspeed;
     }
