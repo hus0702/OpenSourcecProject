@@ -352,13 +352,15 @@ public class Limb : NetworkBehaviour
     public void LimpShot()
     {
         InputHandler.StartCoroutine(InputHandler.stopshotinput(container.ShotDelay));
+
+        bulletrotation = Quaternion.Euler(container.mousePosition - transform.position);
+
+        if ((bulletrotation.x > 0 && GameManager.instance.Pdcontainer.facingdirection < 0) || (bulletrotation.x < 0 && GameManager.instance.Pdcontainer.facingdirection > 0))
+            return;
+
         if (isServer)
         {
-
-            bulletrotation = Quaternion.Euler(container.mousePosition - transform.position);
-
-            if ((bulletrotation.x > 0 && GameManager.instance.Pdcontainer.facingdirection < 0) || (bulletrotation.x < 0 && GameManager.instance.Pdcontainer.facingdirection > 0))
-                return;
+            
             Vector2 bulletDirection = new Vector2(bulletrotation.x, bulletrotation.y).normalized;
 
             if (container.isRiding && container.holdingitem == 1)
