@@ -12,6 +12,7 @@ public class LimbInputHandler : NetworkBehaviour
     public Vector2 RawMovementInput;
     public bool isshotblocked;
     public Limb limb;
+    public Vector3 mouseposition;
 
     private void Awake()
     {
@@ -78,17 +79,19 @@ public class LimbInputHandler : NetworkBehaviour
         {
             if (Input.GetMouseButtonDown(1))
             {
-                
+                mouseposition = Input.mousePosition;
+                mouseposition.z = Mathf.Abs(Camera.main.transform.position.z);
+                Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mouseposition);
                 if (isServer)
                 {
                     container.attackInput = true;
-                    container.mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    container.mousePosition = worldPosition;
                     container.mousePosition.z = 0;
                 }
                 else
                 {
                     limb.CmdSetattackInput(true);
-                    limb.CmdSetmousePosition(Input.mousePosition);
+                    limb.CmdSetmousePosition(worldPosition);
                 }
             }
         }
