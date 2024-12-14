@@ -365,7 +365,7 @@ public class Limb : NetworkBehaviour
 
             if (container.isRiding && container.holdingitem == 1)
             {
-                bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, -0.1f, 0);
+                bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, 0, 0);
                 if (bulletDirection.y > 0.3f)
                     bulletDirection.y = 0.3f;
                 else if (bulletDirection.y < -0.3f)
@@ -583,7 +583,7 @@ public class Limb : NetworkBehaviour
 
         if (container.isRiding && container.holdingitem == 1)
         {
-            bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, -0.1f, 0);
+            bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, 0, 0);
             if (bulletDirection.y > 0.3f)
                 bulletDirection.y = 0.3f;
             else if (bulletDirection.y < -0.3f)
@@ -625,7 +625,7 @@ public class Limb : NetworkBehaviour
 
         if (container.isRiding && container.holdingitem == 1)
         {
-            bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, -0.1f, 0);
+            bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, 0, 0);
             if (bulletDirection.y > 0.3f)
                 bulletDirection.y = 0.3f;
             else if (bulletDirection.y < -0.3f)
