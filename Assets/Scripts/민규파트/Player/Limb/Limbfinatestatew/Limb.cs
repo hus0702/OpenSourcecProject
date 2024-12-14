@@ -108,8 +108,7 @@ public class Limb : NetworkBehaviour
 
         if (container.isRiding)
         {
-            //this.limbtransform.position = (GameManager.instance.Pdcontainer.position + new Vector3(0, 0.1f, 0));
-            this.RB.linearVelocity = GameManager.instance.Pdcontainer.position - transform.position;
+            this.limbtransform.position = (GameManager.instance.Pdcontainer.position + new Vector3(0, 0.1f, 0));
         }
     }
 
@@ -358,7 +357,7 @@ public class Limb : NetworkBehaviour
             bulletrotation = Quaternion.Euler(container.mousePosition - transform.position);
             if (container.isRiding)
             {
-                bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, +0.6f, 0);
+                bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, +0.1f, 0);
                 if (bulletrotation.y > 5) // 최대 총 각도 설정
                 {
                     bulletrotation.y = 5;
@@ -508,6 +507,7 @@ public class Limb : NetworkBehaviour
     public void CmdSetmousePosition(Vector3 newvalue)
     {
         container.mousePosition = newvalue;
+        container.mousePosition.z = 0;
     }
 
     [Command]
