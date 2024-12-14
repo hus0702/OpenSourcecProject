@@ -34,8 +34,7 @@ public class LimbThrowState : LimbAbillityState
         throwtime = GameManager.instance.Pdcontainer.throwinputtime;
         if (throwtime > 1)
             throwtime = 1;
-        Limb.SetVelocityX(30 * throwtime * GameManager.instance.Pdcontainer.facingdirection);
-        Limb.SetVelocityY(5*throwtime);
+
 
         if (Limb.isOwned)
         {
@@ -52,6 +51,8 @@ public class LimbThrowState : LimbAbillityState
                 Limb.CmdSetSpriteRenderer(true);
             }
         }
+        Limb.SetVelocityX(30 * throwtime * GameManager.instance.Pdcontainer.facingdirection);
+        Limb.SetVelocityY(5 * throwtime);
         isAbillityDone = true;
     }
 
