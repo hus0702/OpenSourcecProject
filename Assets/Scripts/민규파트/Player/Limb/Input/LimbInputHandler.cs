@@ -78,15 +78,17 @@ public class LimbInputHandler : NetworkBehaviour
         {
             if (Input.GetMouseButtonDown(1))
             {
-                container.mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                container.mousePosition.z = 0;
+                
                 if (isServer)
                 {
                     container.attackInput = true;
+                    container.mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    container.mousePosition.z = 0;
                 }
                 else
                 {
                     limb.CmdSetattackInput(true);
+                    limb.CmdSetmousePosition(Input.mousePosition);
                 }
             }
         }
