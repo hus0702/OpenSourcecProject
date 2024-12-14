@@ -377,7 +377,7 @@ public class Limb : NetworkBehaviour
             }
             GameObject bullet = Instantiate(BulletPrefab, bulletspawnSpot, bulletrotation);
             // 방향 설정 (Quaternion에서 벡터로 변환)
-            Vector2 bulletDirection = (Vector2)(Quaternion.Euler(0, 0, bulletrotation.eulerAngles.z) * new Vector3(container.FacingDirection, 0, 0));
+            Vector2 bulletDirection = bulletrotation * Vector2.right;
             // 총알 속도 설정
             bullet.GetComponent<Rigidbody2D>().linearVelocity = bulletDirection * container.bulletspeed;
             RpcLimbShot();
