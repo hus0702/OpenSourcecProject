@@ -95,7 +95,6 @@ public class Limb : NetworkBehaviour
         groundcheck = transform.GetChild(0);
         myBoxCollider = GetComponent<BoxCollider2D>();
 
-
     }
 
     private void Update()
@@ -109,7 +108,8 @@ public class Limb : NetworkBehaviour
 
         if (container.isRiding)
         {
-            this.limbtransform.position = (GameManager.instance.Pdcontainer.position + new Vector3(0, 0.1f, 0));
+            //this.limbtransform.position = (GameManager.instance.Pdcontainer.position + new Vector3(0, 0.1f, 0));
+            this.RB.linearVelocity = GameManager.instance.Pdcontainer.position - transform.position;
         }
     }
 
@@ -377,7 +377,7 @@ public class Limb : NetworkBehaviour
             }
             GameObject bullet = Instantiate(BulletPrefab, bulletspawnSpot, bulletrotation);
             // 방향 설정 (Quaternion에서 벡터로 변환)
-            Vector2 bulletDirection = bulletrotation * Vector2.right;
+            Vector2 bulletDirection = new Vector2(bulletrotation.x, bulletrotation.y).normalized;
             // 총알 속도 설정
             bullet.GetComponent<Rigidbody2D>().linearVelocity = bulletDirection * container.bulletspeed;
             RpcLimbShot();
@@ -594,7 +594,7 @@ public class Limb : NetworkBehaviour
         }
         GameObject bullet = Instantiate(BulletPrefab, bulletspawnSpot, bulletrotation);
         // 방향 설정 (Quaternion에서 벡터로 변환)
-        Vector2 bulletDirection = bulletrotation * Vector2.right;
+        Vector2 bulletDirection = new Vector2(bulletrotation.x, bulletrotation.y).normalized;
         // 총알 속도 설정
         bullet.GetComponent<Rigidbody2D>().linearVelocity = bulletDirection * container.bulletspeed;
         RpcLimbShot();
@@ -636,7 +636,7 @@ public class Limb : NetworkBehaviour
         }
         GameObject bullet = Instantiate(BulletPrefab, bulletspawnSpot, bulletrotation);
         // 방향 설정 (Quaternion에서 벡터로 변환)
-        Vector2 bulletDirection = bulletrotation * Vector2.right;
+        Vector2 bulletDirection = new Vector2(bulletrotation.x, bulletrotation.y).normalized;
         // 총알 속도 설정
         bullet.GetComponent<Rigidbody2D>().linearVelocity = bulletDirection * container.bulletspeed;
     }
