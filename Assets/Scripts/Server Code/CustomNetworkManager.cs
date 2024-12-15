@@ -51,6 +51,25 @@ public class CustomNetworkManager : NetworkManager
         }
     }
 
+    [ClientRpc]
+    private void RPCUpdatePlayerActivation(string sceneName)
+    {
+        if(sceneName == "GameScene")
+        {
+            foreach(PlayerObjectController player in GamePlayers)
+            {
+                player.gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            foreach(PlayerObjectController player in GamePlayers)
+            {
+                player.gameObject.SetActive(false);
+            }
+        }
+    }
+
     public override void OnServerSceneChanged(string sceneName)
     {
         // ���� ���� �������� �� �������� �߰��� �����ϵ��� ó��
@@ -77,20 +96,7 @@ public class CustomNetworkManager : NetworkManager
             }
         }
 
-        if(sceneName == "GameScene")
-        {
-            foreach(PlayerObjectController player in GamePlayers)
-            {
-                player.gameObject.SetActive(true);
-            }
-        }
-        else
-        {
-            foreach(PlayerObjectController player in GamePlayers)
-            {
-                player.gameObject.SetActive(false);
-            }
-        }
+        RPCUpdatePlayerActivation(sceneName);
     }
 
     public void StartGame(string SceneName)
