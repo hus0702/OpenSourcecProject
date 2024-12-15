@@ -58,7 +58,6 @@ public class PlayerGroundedState : PlayerState
         }
         if (ladderInput && player.CheckIftouchLadder() != null)
         {
-            Debug.Log("사다리 감지");
             player.Blindclimb();
             stateMachine.playerChangeState(player.climbState);
         }

@@ -558,10 +558,22 @@ public class Player : NetworkBehaviour
         if (isServer)
         {
             container.Hp -= value;
+            StartCoroutine(BlinkCoroutine());
+            RpcBlindBlink();
+            if (container.iscarrying)
+            {
+                container.throwcall = true;
+            }
         }
         else
         {
             CmdChangeHp(-value);
+            StartCoroutine(BlinkCoroutine());
+            CmdBlindBlink();
+            if (container.iscarrying)
+            {
+                CmdSetThrowCall(true);
+            }
         }
     }
     private void OnTriggerStay(Collider other)
@@ -698,6 +710,18 @@ public class Player : NetworkBehaviour
     public void CmdBlindclimboff()
     {
         RecentLadder.GetComponent<Ladder>().OnEnterLadder(this.gameObject);
+    }
+
+    [Command]
+    public void CmdBlindBlink()
+    {
+        StartCoroutine(BlinkCoroutine());
+    }
+
+    [ClientRpc]
+    public void RpcBlindBlink()
+    {
+        StartCoroutine(BlinkCoroutine());
     }
     #endregion
 
