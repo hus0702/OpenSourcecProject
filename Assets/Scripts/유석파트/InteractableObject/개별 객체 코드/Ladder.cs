@@ -57,10 +57,25 @@ public class Ladder : InteractableObject
 
     public void OnEnterLadder(GameObject playerGameObject)
     {
-        Physics2D.IgnoreCollision(colliderToPass, playerGameObject.GetComponent<Collider2D>(), true);
+        Collider2D playerCollider = playerGameObject.GetComponent<Collider2D>();
+        if(playerCollider == null) Debug.LogError("플레이어의 collider 가 null입니다!");
+        if(colliderToPass == null) Debug.LogError("충돌을 무시할 플랫폼이 null입니다!");
+
+        Debug.Log("충돌을 비활성화할 오브젝트 : " + playerGameObject.name + " , " + colliderToPass.gameObject.name);
+        Physics2D.IgnoreCollision(colliderToPass, playerCollider);
+        Debug.Log("충돌 가능 여부 : " + Physics2D.GetIgnoreCollision(colliderToPass, playerCollider));
+
+
+
+
+        // 위에꺼 작동 안 되는듯...? 이러면 이판사판이다
+        colliderToPass.enabled = false;
     }
     public void OnExitLadder(GameObject playerGameObject)
     {
+        Debug.Log("충돌을 활성화할 오브젝트 : " + playerGameObject.name + " , " + colliderToPass.gameObject.name);
         Physics2D.IgnoreCollision(colliderToPass, playerGameObject.GetComponent<Collider2D>(), false);
+
+        colliderToPass.enabled = true;
     }
 }
