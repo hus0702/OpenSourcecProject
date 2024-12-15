@@ -1,17 +1,34 @@
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class ElectricPlatform : DangerousObject
 {
-    [SerializeField] private List<Animator> platformAnimators;
-
-    public override void OnKeyInserted()
+    [SyncVar(hook = nameof(HookIsActiveChanged))]public bool isActive;
+    private void HookIsActiveChanged(bool oldVal, bool newVal)
     {
-        foreach(Animator animator in platformAnimators)
+        if(newVal == true)
         {
-            animator.SetBool("isInactive", true);
-        } // 이게 제일 단순하긴 한데 만약 이걸로 동기화 문제가 발생한다면 개별 플랫폼마다 스크립트를 달아야 함.
+            On();
+        }
+        else
+        {
+            Off();
+        }
+    }
 
-        base.OnKeyInserted();
+    public Light2D electricEffect;
+
+    public void Off()
+    {
+        electricEffect.gameObject.SetActive(false);
+        InActiveInteract();
+    }
+
+    public void On()
+    {
+        electricEffect.gameObject.SetActive(true);
+        ActiveInteract();
     }
 }

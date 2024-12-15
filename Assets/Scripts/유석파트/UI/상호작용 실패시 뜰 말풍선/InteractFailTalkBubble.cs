@@ -55,6 +55,7 @@ public class InteractFailTalkBubble : MonoBehaviour, IFailHandlable
         imageBubble.SetActive(false);
         textBubble.SetActive(true);
         text.text = message;
+        LayoutRebuilder.ForceRebuildLayoutImmediate(talkBubbleObject.GetComponent<RectTransform>());
     }
 
     public void Show(GameObject requester,Sprite spriteToShow)
@@ -63,6 +64,7 @@ public class InteractFailTalkBubble : MonoBehaviour, IFailHandlable
         imageBubble.SetActive(true);
         textBubble.SetActive(false);
         this.spriteToShow.sprite = spriteToShow;
+        LayoutRebuilder.ForceRebuildLayoutImmediate(talkBubbleObject.GetComponent<RectTransform>());
     }
 
     void Update()

@@ -33,7 +33,12 @@ public class Door : InteractableObject
             // 애니메이션이나 효과음의 재생 등이 이루어질 수도 있고
 
             // 플레이어의 Transform 을 텔레포트시켜야 함.
-            requester.transform.position = new Vector3(teleportDest.position.x, teleportDest.position.y, teleportDest.position.z);
+            TransportRequester(requester);
+    }
+
+    protected void TransportRequester(GameObject requester)
+    {
+        requester.transform.position = new Vector3(teleportDest.position.x, teleportDest.position.y, teleportDest.position.z);
     }
 
     public override void ExecuteOnFail(GameObject requester)

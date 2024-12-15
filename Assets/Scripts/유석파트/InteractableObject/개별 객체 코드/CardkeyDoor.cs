@@ -5,19 +5,19 @@ using Mirror;
 public class CardkeyDoor : Door
 {
     [SerializeField] private List<DoorCardSlot> cardSlots;
-    //[SyncVar(hook = nameof(HookIsOpened))] public bool isOpened = false;
+    [SyncVar(hook = nameof(HookIsOpened))] public bool isAnimatedOpened = false;
     private void HookIsOpened(bool oldVaule, bool newValue)
     {
-        if(newValue == true) ActiveInteract();
-        else InActiveInteract();
-    }
+        if(newValue == true)
+        {
+            Animator doorAnimator = GetComponent<Animator>();
+            doorAnimator.SetBool("isIdle", false);
+            doorAnimator.SetBool("isOpened", true);
+        }
 
-    protected override void Awake()
-    {
-        base.Awake();
-        // if ( 씬이 로드됐는데 열려있지 않아야 한다면 ) //
-        InActiveInteract();
+        isOpened = true;
     }
+    public GameObject errorMessagePosition;
 
     public void CheckAllKeyInputed(){
         foreach(CardSlot cardSlot in cardSlots)
@@ -36,7 +36,22 @@ public class CardkeyDoor : Door
         }
         Debug.Log("문이 열렸습니다!"); // 나중에 문 열리는 이벤트로 대체할 것.
 
-        CmdOpenDoor();
+        isAnimatedOpened = true;
+
+        //CmdOpenDoor();
     }
+
+    public override void ExecuteOnFail(GameObject requester)
+    {
+
+        Debug.Log("문이 잠겨 있습니다.");
+        // 실제로는 UI 로 말풍선 비슷하게 띄울 것. 필요한 아이템 이미지가 말풍선 안에 들어가고, 진동하게 만들 것.
+        if(failHandler != null)
+        {
+            failHandler.FailHandle(errorMessagePosition, failHandleInfo);
+        }
+    }
+
+
     [Command] private void CmdOpenDoor()=>isOpened = true;
 }

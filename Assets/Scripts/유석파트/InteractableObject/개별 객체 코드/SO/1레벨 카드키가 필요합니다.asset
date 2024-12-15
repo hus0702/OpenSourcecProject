@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yoffset: 65
   failHandleType: 2
-  message: "1\uB808\uBCA8 \uCE74\uB4DC\uD0A4\uAC00 \uD544\uC694\uD569\uB2C8\uB2E4."
+  message: "1\uB808\uBCA8 \uCE74\uB4DC\uD0A4\uAC00 \uD544\uC694\uD558\uB2E4."
   image: {fileID: 0}
