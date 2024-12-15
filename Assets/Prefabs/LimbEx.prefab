@@ -84,8 +84,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -270702957
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 140035959, guid: 778912edb58f4f741bb8e305057e7c87, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -160,7 +160,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 16f9d53ae53bd7e4fb8ded595f826b65, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -354,6 +354,7 @@ MonoBehaviour:
   RawMovementInput: {x: 0, y: 0}
   isshotblocked: 0
   limb: {fileID: 0}
+  mouseposition: {x: 0, y: 0, z: 0}
 --- !u!1 &5559569575567345883
 GameObject:
   m_ObjectHideFlags: 0
