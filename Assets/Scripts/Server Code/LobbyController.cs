@@ -192,7 +192,7 @@ public class LobbyController : MonoBehaviour
 
     public void UpdatePlayerItem()
     {
-        Debug.Log("LobbyController : Update Called!");
+        //Debug.Log("LobbyController : Update Called!");
         foreach(PlayerObjectController player in Manager.GamePlayers)
         {
             foreach(PlayerListItem PlayerListItemScript in PlayerListItems)
@@ -212,7 +212,7 @@ public class LobbyController : MonoBehaviour
                 {
                     item.playerName = player.PlayerName;
                     item.SetPlayerValues();
-                    Debug.Log("Player.Role : " + player.Role + ", and this is BlindUserList.");
+                    //Debug.Log("Player.Role : " + player.Role + ", and this is BlindUserList.");
                     if(player.Role != PlayerObjectController.Blind) item.ChangeRoleNotActive();
                     if(player.Role == PlayerObjectController.Blind) item.ChangeRoleActive();
                 }
@@ -223,11 +223,11 @@ public class LobbyController : MonoBehaviour
                 {
                     item.playerName = player.PlayerName;
                     item.SetPlayerValues();
-                    Debug.Log("Player.Role : " + player.Role + ", and this is LimpUserList.");
+                    //Debug.Log("Player.Role : " + player.Role + ", and this is LimpUserList.");
                     if(player.Role != PlayerObjectController.Limp) item.ChangeRoleNotActive();
                     if(player.Role == PlayerObjectController.Limp)
                     {
-                        Debug.Log("player.Role : " + player.Role + ", Limp값 : " + PlayerObjectController.Limp + "이 같습니다!");
+                        //Debug.Log("player.Role : " + player.Role + ", Limp값 : " + PlayerObjectController.Limp + "이 같습니다!");
                         item.ChangeRoleActive();
                     } 
                 }

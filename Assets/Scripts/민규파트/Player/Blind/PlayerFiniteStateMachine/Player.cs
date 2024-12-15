@@ -444,11 +444,12 @@ public class Player : NetworkBehaviour
                 IInteracted interacted = colliderItem.GetComponent<InteractableObject>();
                 if (interacted == null)
                 {
-                    Debug.Log(colliderItem.gameObject.name + " ¿¡´Â »óÈ£ÀÛ¿ë °¡´ÉÇÑ ÄÄÆ÷³ÍÆ®°¡ ¾øÀ½.");
+                    Debug.Log(colliderItem.gameObject.name + " ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.");
                 }
                 else
                 {
                     interacted.Interact(gameObject);
+                    break;
                 }
             }
         }

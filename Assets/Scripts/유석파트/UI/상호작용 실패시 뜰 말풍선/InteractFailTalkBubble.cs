@@ -19,6 +19,10 @@ public class InteractFailTalkBubble : MonoBehaviour, IFailHandlable
 
     public void FailHandle(GameObject requester, SO_FailHandleInfo failHandleInfo)
     {
+
+        Debug.Log("실패 처리 말풍선 호출!");
+
+        headTracker.FollowMe(requester);
         headTracker.yOffset = failHandleInfo.yoffset;
 
         switch (failHandleInfo.failHandleType)
@@ -41,6 +45,7 @@ public class InteractFailTalkBubble : MonoBehaviour, IFailHandlable
 
     public void Show(GameObject requester)
     {
+        Debug.Log("실패 처리 말풍선을 띄웠습니다!!");
         talkBubbleObject.SetActive(true);
         timer = timerInitVal;
     }

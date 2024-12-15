@@ -4,9 +4,16 @@ public class TeleportNPC : InteractableObject
 {
     public override bool CheckInteractable(GameObject requester)
     {
-        if(GameManager.instance.Pdcontainer.iscarrying) return true;
+        if(GameManager.instance.Pdcontainer.iscarrying) 
+        {
+            return true;
         // 플레이어 1이 업고 있는 상태가 아니라면 false 리턴
-        else return false;
+        }
+        else
+        {
+            Debug.Log("함께 말을 거세요!");
+            return false;
+        } 
     }
 
     public InteractFailTalkBubble failHandler;

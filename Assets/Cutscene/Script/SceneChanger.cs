@@ -2,7 +2,7 @@ using Mirror;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneChanger : MonoBehaviour, ITriggered
+public class SceneChanger : NetworkBehaviour, ITriggered
 {
     public string sceneName;
     public Vector3 spawnPointOnLoadForBlind;
@@ -40,7 +40,9 @@ public class SceneChanger : MonoBehaviour, ITriggered
     {
         BeforeStartScene();
 
-        Manager.StartGame(sceneName);
+        var localPlayer = NetworkClient.localPlayer.GetComponent<NetworkIdentity>();
+        
+        if(localPlayer.isServer) Manager.StartGame(sceneName);
         
         //SceneManager.LoadScene(sceneName);
     }

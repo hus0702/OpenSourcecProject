@@ -76,11 +76,8 @@ public class CustomNetworkManager : NetworkManager
                 }
             }
         }
-    }
 
-    public void StartGame(string SceneName)
-    {
-        if(SceneName == "GameScene")
+        if(sceneName == "GameScene")
         {
             foreach(PlayerObjectController player in GamePlayers)
             {
@@ -94,7 +91,10 @@ public class CustomNetworkManager : NetworkManager
                 player.gameObject.SetActive(false);
             }
         }
+    }
 
+    public void StartGame(string SceneName)
+    {
         ServerChangeScene(SceneName);
     }
 
