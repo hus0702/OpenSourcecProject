@@ -17,14 +17,15 @@ public class DangerousObject : ColliderOverlapInteractable
 
     public override void ExecuteOnSuccess(GameObject requester)
     {
-        OnKillPlayer();
+        OnKillPlayer(requester);
     }
 
-    public virtual void OnKillPlayer()
+    public virtual void OnKillPlayer(GameObject requester)
     {
         Debug.Log("플레이어를 죽이겠습니다.");
         // 플레이어를 죽일 고유 애니메이션을 재생한다던가 그런 로직을 추가하면 됨.
         //Player.Die();
+        requester.GetComponent<Player>().TakingDamage(10); // 바로 죽임
     }
 
     public virtual void OnKeyInserted()
