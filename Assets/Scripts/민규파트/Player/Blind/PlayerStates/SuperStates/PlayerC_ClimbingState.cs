@@ -72,9 +72,9 @@ public class PlayerC_ClimbingState : PlayerState
             {
                 player.CmdSetIsClimbing(false);
             }
-            
             player.RB.gravityScale = 5;
             player.Anim.speed = 1;
+            player.Blindclimboff();
             stateMachine.playerChangeState(player.c_InAirState);
         }
         if (container.Hp <= 0)

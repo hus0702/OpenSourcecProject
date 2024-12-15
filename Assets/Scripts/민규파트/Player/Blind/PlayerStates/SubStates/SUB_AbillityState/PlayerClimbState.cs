@@ -34,7 +34,7 @@ public class PlayerClimbState : PlayerAbillityState
             {
                 player.CmdSetIsClimbing(true);
             }
-            
+            player.Blindclimb();
         }
         player.RB.gravityScale = 0;
         player.SetVelocityX(0);

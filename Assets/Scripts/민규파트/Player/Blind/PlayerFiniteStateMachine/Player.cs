@@ -65,6 +65,8 @@ public class Player : NetworkBehaviour
 
     private Vector2 workspace;
 
+    private GameObject RecentLadder;
+
     #endregion
 
     #region Unity Callback Functions
@@ -259,11 +261,26 @@ public class Player : NetworkBehaviour
     {
         return Physics2D.OverlapCircle(groundcheck.position, container.groundCheckRadious, container.whatIsLimb);
     }
-    public bool CheckIftouchLadder()
+    public GameObject CheckIftouchLadder()
     {
-        return Physics2D.OverlapCircle(groundcheck.position, container.groundCheckRadious, container.whatIsLadder);
-    }
+        // OverlapCircleAll로 충돌한 모든 콜라이더 가져오기
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(
+            groundcheck.position,
+            container.groundCheckRadious,
+            container.whatIsLimb
+        );
 
+        // 충돌한 오브젝트 중 특정 Layer의 오브젝트 반환
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.gameObject.layer == container.whatIsLadder) // 해당 Layer 체크
+            {
+                return collider.gameObject; // 조건을 만족하는 게임 오브젝트 반환
+            }
+        }
+
+        return null; // 조건을 만족하는 오브젝트가 없으면 null 반환
+    }
 
     #endregion
 
@@ -399,7 +416,26 @@ public class Player : NetworkBehaviour
     }
     public void Blindclimb()
     {
-        BlindclimbSound();
+        if (isServer)
+        {
+            RecentLadder = CheckIftouchLadder();
+            CheckIftouchLadder().GetComponent<Ladder>().OnEnterLadder(this.gameObject);
+        }
+        else
+        {
+            CmdBlindclimb();
+        }
+    }
+    public void Blindclimboff()
+    {
+        if (isServer)
+        {
+            RecentLadder.GetComponent<Ladder>().OnExitLadder(this.gameObject);
+        }
+        else
+        {
+            CmdBlindclimboff();
+        }
     }
 
     public void BlindDie()
@@ -415,6 +451,8 @@ public class Player : NetworkBehaviour
     {
         BlindthrowSound();
     }
+
+    
     #endregion
 
     #region Other Functions
@@ -493,7 +531,6 @@ public class Player : NetworkBehaviour
                         interacted.Interact(gameObject);
                         StartCoroutine(cooldownInteract()); // HUS : 이 부분도 수정됐습니다. 바바바박 상호작용이 눌리는 부분이 있어 쿨타임을 줬습니다.
                     }
-
                     break;
                 }
             }
@@ -634,6 +671,19 @@ public class Player : NetworkBehaviour
     {
         InputHandler.enabled = newvalue;
         spriteRenderer.enabled = newvalue;
+    }
+
+    [Command]
+    public void CmdBlindclimb()
+    {
+        RecentLadder = CheckIftouchLadder();
+        CheckIftouchLadder().GetComponent<Ladder>().OnEnterLadder(this.gameObject);
+    }
+
+    [Command]
+    public void CmdBlindclimboff()
+    {
+        RecentLadder.GetComponent<Ladder>().OnEnterLadder(this.gameObject);
     }
     #endregion
 

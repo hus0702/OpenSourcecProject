@@ -40,6 +40,7 @@ public class PlayerC_GroundedState : PlayerState
         InteractInput = container.InteractInput;
         if (ladderInput && player.CheckIftouchLadder())
         {
+            player.Blindclimb();
             stateMachine.playerChangeState(player.climbState);
         }
         if (PutDownInput)

@@ -58,6 +58,7 @@ public class PlayerGroundedState : PlayerState
         }
         if (ladderInput && player.CheckIftouchLadder())
         {
+            player.Blindclimb();
             stateMachine.playerChangeState(player.climbState);
         }
         if (container.Hp <= 0)
