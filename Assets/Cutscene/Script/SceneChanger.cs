@@ -42,9 +42,30 @@ public class SceneChanger : NetworkBehaviour, ITriggered
 
         var localPlayer = NetworkClient.localPlayer.GetComponent<NetworkIdentity>();
         
+        RPCUpdatePlayerActivation(sceneName);
+
         if(localPlayer.isServer) Manager.StartGame(sceneName);
         
         //SceneManager.LoadScene(sceneName);
+    }
+
+    [ClientRpc]
+    private void RPCUpdatePlayerActivation(string sceneName)
+    {
+        if(sceneName == "GameScene")
+        {
+            foreach(PlayerObjectController player in Manager.GamePlayers)
+            {
+                player.gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            foreach(PlayerObjectController player in Manager.GamePlayers)
+            {
+                player.gameObject.SetActive(false);
+            }
+        }
     }
 
     public void Trigger()
