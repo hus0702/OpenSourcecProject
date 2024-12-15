@@ -1,10 +1,10 @@
-using System.Data;
 using UnityEngine;
 
-public class E1_MoveState : MoveState
+public class E1_PlayerDetectedState : PlayerDetectedState
 {
     private Enemy1 enemy;
-    public E1_MoveState(Entity etity, FiniteStateMachine stateMachine, string animBoolName, D_MoveState stateData, Enemy1 enemy) : base(etity, stateMachine, animBoolName, stateData)
+
+    public E1_PlayerDetectedState(Entity etity, FiniteStateMachine stateMachine, string animBoolName, D_PlayerDetected stateData, Enemy1 enemy) : base(etity, stateMachine, animBoolName, stateData)
     {
         this.enemy = enemy;
     }
@@ -23,15 +23,9 @@ public class E1_MoveState : MoveState
     {
         base.LogicUpdate();
 
-        if(isPlayerInMinAgroRange)
+        if(!isPlayerInMaxAgroRange)
         {
             enemy.idleState.SetFlipAfterIdle(false);
-            stateMachine.ChangeState(enemy.idleState);
-        }
-
-        else if(isDetectingWall || !isDetectingLedge)
-        {
-            enemy.idleState.SetFlipAfterIdle(true);
             stateMachine.ChangeState(enemy.idleState);
         }
     }
@@ -40,5 +34,4 @@ public class E1_MoveState : MoveState
     {
         base.PhysicsUpdate();
     }
-
 }

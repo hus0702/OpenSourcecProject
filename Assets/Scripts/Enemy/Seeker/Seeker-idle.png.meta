@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 6cc49e1742b776c4a894e2aa1c1a8b0f
+guid: 2e80f7fbe29415548857d6c73da52686
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3414027516992799809
-    second: Runner_Move_0
+      213: 2859662237741484346
+    second: Seeker-idle_0
   - first:
-      213: 2044078520325927763
-    second: Runner_Move_1
+      213: 3293855468565362637
+    second: Seeker-idle_1
   - first:
-      213: 5276977073242094945
-    second: Runner_Move_2
+      213: 3777871626153881417
+    second: Seeker-idle_2
   - first:
-      213: -5225523664171677419
-    second: Runner_Move_3
+      213: 8227115743944934032
+    second: Seeker-idle_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -60,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -84,7 +84,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -109,79 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Runner_Move_0
+      name: Seeker-idle_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fbb3c34cf00fe90d0800000000000000
-      internalID: -3414027516992799809
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Runner_Move_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 353780195960e5c10800000000000000
-      internalID: 2044078520325927763
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Runner_Move_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 16db97280b69b3940800000000000000
-      internalID: 5276977073242094945
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Runner_Move_3
-      rect:
-        serializedVersion: 2
-        x: 0
+        x: 20
         y: 0
-        width: 64
-        height: 64
+        width: 30
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,8 +124,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 51946a7d9e53b77b0800000000000000
-      internalID: -5225523664171677419
+      spriteID: a390e2277af8fa720800000000000000
+      internalID: 2859662237741484346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seeker-idle_1
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 0
+        width: 30
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc7f059d81026bd20800000000000000
+      internalID: 3293855468565362637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seeker-idle_2
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 0
+        width: 30
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94fedeb5a32bd6430800000000000000
+      internalID: 3777871626153881417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seeker-idle_3
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 0
+        width: 30
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0928cd31e269c2270800000000000000
+      internalID: 8227115743944934032
       vertices: []
       indices: 
       edges: []
@@ -200,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: a0aa131e5e2270b45916a8e1066f3210
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -209,11 +209,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Runner_Move_0: -3414027516992799809
-      Runner_Move_1: 2044078520325927763
-      Runner_Move_2: 5276977073242094945
-      Runner_Move_3: -5225523664171677419
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

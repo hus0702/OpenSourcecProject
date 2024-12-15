@@ -22,11 +22,15 @@ public class E1_IdleState : IdleState
     {
         base.LogicUpdate();
 
-        if (isIdleTimeOver)
+        if (isIdleTimeOver && isPlayerInMaxAgroRange)
+        {
+            stateMachine.ChangeState(enemy.playerDetectedState);
+        }
+
+        else if (isIdleTimeOver)
         {
             stateMachine.ChangeState(enemy.moveState);
         }
-
     }
 
     public override void PhysicsUpdate()

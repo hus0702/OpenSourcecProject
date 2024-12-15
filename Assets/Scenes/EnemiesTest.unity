@@ -145,7 +145,7 @@ Transform:
   m_GameObject: {fileID: 160576394}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3889898, y: 1.0875906, z: 0.1837525}
+  m_LocalPosition: {x: -1.12, y: 1.03, z: 0.1837525}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -170,8 +170,10 @@ MonoBehaviour:
   entityData: {fileID: 11400000, guid: 978e83e0e94d98440b5875afab223ecd, type: 2}
   wallCheck: {fileID: 828330074}
   ledgeCheck: {fileID: 2007760370}
+  playerCheck: {fileID: 1169709836}
   idleStateData: {fileID: 11400000, guid: 9266be96be71e1e41b13613623b22193, type: 2}
   moveStateData: {fileID: 11400000, guid: ff2f6e4961358b04c9556ac8504486b7, type: 2}
+  playerDetectedData: {fileID: 11400000, guid: 0843a55bbbd9a844db3671cc5cf056df, type: 2}
 --- !u!1 &342923210
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,7 +365,7 @@ Transform:
   m_GameObject: {fileID: 828330073}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.15, y: -1.93, z: 0}
+  m_LocalPosition: {x: 0.24, y: -0.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -380,7 +382,8 @@ GameObject:
   - component: {fileID: 916058534}
   - component: {fileID: 916058533}
   - component: {fileID: 916058532}
-  m_Layer: 0
+  - component: {fileID: 916058535}
+  m_Layer: 7
   m_Name: "\uC9C1\uC6D0"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -479,6 +482,83 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &916058535
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916058531}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.28, y: 1.28}
+    newSize: {x: 0.45, y: 0.58}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.28, y: 1.28}
+  m_EdgeRadius: 0
+--- !u!1 &1169709835
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1169709836}
+  m_Layer: 14
+  m_Name: PlayerCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1169709836
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169709835}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.05, y: -0.06, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1309585621}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1285528088
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,12 +620,13 @@ Transform:
   m_GameObject: {fileID: 1309585620}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.48, y: -2.86, z: 0}
-  m_LocalScale: {x: 0.41664, y: 0.41664, z: 0.41664}
+  m_LocalPosition: {x: -2.055, y: -2.982, z: 0}
+  m_LocalScale: {x: 1.0154529, y: 1.0623084, z: 0.8108235}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2007760370}
   - {fileID: 828330074}
+  - {fileID: 1169709836}
   m_Father: {fileID: 160576395}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1309585622
@@ -582,17 +663,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.023389459, y: -0.27131778}
+  m_Offset: {x: -0.004026681, y: 0.031134874}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4, y: 4}
+    oldSize: {x: 0.5, y: 1.22}
     newSize: {x: 4, y: 4}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.0446408, y: 3.4573646}
+  m_Size: {x: 0.6464215, y: 1.3193603}
   m_EdgeRadius: 0
 --- !u!95 &1309585623
 Animator:
@@ -631,8 +712,8 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 8
-  m_Material: {fileID: 0}
+  m_GravityScale: 1
+  m_Material: {fileID: 6200000, guid: 97f69731e7e1c0a4d9410efab3b688ca, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -666,7 +747,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6c267cf1fca10874798238dc07d64588, type: 2}
+  - {fileID: 2100000, guid: 3a70d6ffe329c904e8815ee3cab2bb6d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -687,7 +768,7 @@ SpriteRenderer:
   m_SortingLayerID: -1362412255
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -927056687744691198, guid: 158d647cedbca184f99e219eecea0413, type: 3}
+  m_Sprite: {fileID: 1935432085922782192, guid: 5813881af8b8ec745901d0959f7c85ee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1346,7 +1427,7 @@ Transform:
   m_GameObject: {fileID: 2007760369}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.16, y: -1.95, z: 0}
+  m_LocalPosition: {x: 0.27, y: -0.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

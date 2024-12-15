@@ -1,19 +1,16 @@
 fileFormatVersion: 2
-guid: 158d647cedbca184f99e219eecea0413
+guid: cc06189dca3453c408882db80f20cea5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -927056687744691198
-    second: Runner_Idle_0
+      213: 5014775830168959182
+    second: Boss-special_attack_ready_0
   - first:
-      213: -4200178532090594408
-    second: Runner_Idle_1
+      213: 7047386900555058822
+    second: Boss-special_attack_ready_1
   - first:
-      213: 6142684884663031644
-    second: Runner_Idle_2
-  - first:
-      213: 2083757828666542996
-    second: Runner_Idle_3
+      213: 1401963908946755952
+    second: Boss-special_attack_ready_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +43,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -60,7 +57,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -84,7 +81,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -109,79 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Runner_Idle_0
+      name: Boss-special_attack_ready_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 204d350bade6223f0800000000000000
-      internalID: -927056687744691198
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Runner_Idle_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 89bb489e0e7f5b5c0800000000000000
-      internalID: -4200178532090594408
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Runner_Idle_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c5750857b533f3550800000000000000
-      internalID: 6142684884663031644
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Runner_Idle_3
-      rect:
-        serializedVersion: 2
-        x: 0
+        x: 14
         y: 0
-        width: 64
-        height: 64
+        width: 97
+        height: 84
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,8 +121,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 49bcb9774befaec10800000000000000
-      internalID: 2083757828666542996
+      spriteID: ec87f615c00189540800000000000000
+      internalID: 5014775830168959182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss-special_attack_ready_1
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 0
+        width: 93
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68e43522c095dc160800000000000000
+      internalID: 7047386900555058822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss-special_attack_ready_2
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 0
+        width: 94
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07180bc4fb6c47310800000000000000
+      internalID: 1401963908946755952
       vertices: []
       indices: 
       edges: []
@@ -200,7 +175,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 4dc58cd7bad43ad4995d133f559405f6
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -209,11 +184,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Runner_Idle_0: -927056687744691198
-      Runner_Idle_1: -4200178532090594408
-      Runner_Idle_2: 6142684884663031644
-      Runner_Idle_3: 2083757828666542996
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
