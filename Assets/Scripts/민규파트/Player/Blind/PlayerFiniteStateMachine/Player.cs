@@ -1,3 +1,4 @@
+using System.Collections;
 using Mirror;
 using Mirror.Examples.Common;
 using NUnit.Framework.Constraints;
@@ -433,8 +434,46 @@ public class Player : NetworkBehaviour
         }
         transform.Rotate(0.0f, 180.0f, 0.0f);
     }
+
+
+
+    /*
+####################################################################################################
+        \  \  \      \        \\\\\\      \\  \     \      \\  \       \\\ 
+        \  \  \     \\\       \\\\\\      \ \ \     \      \ \ \     \\   \\\\
+         \\\\\\     \   \     \    \      \  \\     \      \  \\       \\\\  \
+
+        황유석 팀원이 해당 코드 부분에 기생했습니다. 건들지도 않은 코드가 바뀌어 있을 위험이 있습니다.
+    */
+    private IInteracted objectHandlingMe = null;
+    public void SetObjectHandlingMe(IInteracted interacted){objectHandlingMe = interacted;}
+    bool isInteractable = true;
+    IEnumerator cooldownInteract()
+    {
+        isInteractable = false;
+        yield return new WaitForSeconds(0.3f);
+        isInteractable = true;
+    }
+
     public void Interact()
     {
+        /*
+            캐비닛의 경우 플레이어의 Collider 를 비활성화시킵니다. 이러면 더 이상 상호작용이 불가능해지므로
+            이런 객체들을 위해
+
+            "플레이어의 상호작용 권리를 쥐고 있는 녀석" 을 하나 만들겠습니다.
+            콜라이더가 없어도 이 객체에 대해서는 항상 상호작용을 할 수 있게 됩니다.
+        */
+        if(objectHandlingMe != null)
+        {
+            if(!isInteractable) return;
+            objectHandlingMe.Interact(gameObject);
+            objectHandlingMe = null;
+            StartCoroutine(cooldownInteract());
+            return; // 이게 그 코드입니다!
+        }
+
+
         Collider2D[] colliders = Physics2D.OverlapBoxAll(myBoxCollider.bounds.center, myBoxCollider.bounds.size, 0);
 
         foreach (Collider2D colliderItem in colliders)
@@ -444,16 +483,23 @@ public class Player : NetworkBehaviour
                 IInteracted interacted = colliderItem.GetComponent<InteractableObject>();
                 if (interacted == null)
                 {
-                    Debug.Log(colliderItem.gameObject.name + " ���� ��ȣ�ۿ� ������ ������Ʈ�� ����.");
+                    //Debug.Log(colliderItem.gameObject.name + " ���� ��ȣ�ۿ� ������ ������Ʈ�� ����.");
                 }
                 else
                 {
-                    interacted.Interact(gameObject);
+                    if (isInteractable) 
+                    {
+                        Debug.Log(colliderItem.gameObject.name + " 과 플레이어가 상호작용합니다.");
+                        interacted.Interact(gameObject);
+                        StartCoroutine(cooldownInteract()); // HUS : 이 부분도 수정됐습니다. 바바바박 상호작용이 눌리는 부분이 있어 쿨타임을 줬습니다.
+                    }
+
                     break;
                 }
             }
         }
     }
+// ###############################################################################################
 
 
     public void TakingDamage(int value)

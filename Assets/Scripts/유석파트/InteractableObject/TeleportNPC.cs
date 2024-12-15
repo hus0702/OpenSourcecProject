@@ -28,7 +28,7 @@ public class TeleportNPC : InteractableObject
         
             //34.5 , 11.5
 
-            requester.transform.position = new Vector3(34.5f, 11.5f, 0f);
+            requester.transform.position = new Vector3(-4f, 0.5f, 0f);
         }
     }
 
@@ -36,7 +36,7 @@ public class TeleportNPC : InteractableObject
     public override void ExecuteOnFail(GameObject requester)
     {
 
-        requester.transform.position = new Vector3(34.5f, 11.5f, 0f); // 임시!!!!!!!!!!!!!
+        requester.transform.position = new Vector3(-4f, 0.5f, 0f); // 임시!!!!!!!!!!!!!
 
         if(failHandler != null)
         {

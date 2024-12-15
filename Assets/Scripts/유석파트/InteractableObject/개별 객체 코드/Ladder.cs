@@ -25,7 +25,11 @@ public class Ladder : InteractableObject
 
     public override bool CheckInteractable(GameObject requester)
     {
-        return isColliderOverlap(requester.GetComponent<Collider2D>(), colliderToPass);
+
+        return false; // 더 이상 이 오브젝트와는 상호작용할 수 없기 때문에 비활성화.
+
+
+        //return isColliderOverlap(requester.GetComponent<Collider2D>(), colliderToPass);
     }
 
     public override void ExecuteOnSuccess(GameObject requester)
@@ -42,5 +46,21 @@ public class Ladder : InteractableObject
     public void OnTriggerExit2D(Collider2D outer){
         //if(outer.CompareTag("Player"))
         Physics2D.IgnoreCollision(colliderToPass, outer, false);
+    }
+
+
+
+
+
+
+
+
+    public void OnEnterLadder(GameObject playerGameObject)
+    {
+        Physics2D.IgnoreCollision(colliderToPass, playerGameObject.GetComponent<Collider2D>(), true);
+    }
+    public void OnExitLadder(GameObject playerGameObject)
+    {
+        Physics2D.IgnoreCollision(colliderToPass, playerGameObject.GetComponent<Collider2D>(), false);
     }
 }

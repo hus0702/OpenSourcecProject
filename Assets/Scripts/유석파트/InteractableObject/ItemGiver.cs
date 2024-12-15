@@ -21,5 +21,7 @@ public class ItemGiver : InteractableObject
     public override void ExecuteOnSuccess(GameObject requester)
     {
         // 플레이어한테 아이템을 전달해주면 됩니다.
+
+        isHaveItem = false;
     }
 }
