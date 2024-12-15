@@ -1,7 +1,7 @@
 using UnityEngine;
 using Mirror;
 
-public class DangerousObject : NetworkBehaviour
+public class DangerousObject : ColliderOverlapInteractable
 {
     [SyncVar(hook = nameof(OnInActiveObject))]private bool isActive = true;
     private void OnInActiveObject(bool oldValue, bool newValue)
@@ -10,16 +10,19 @@ public class DangerousObject : NetworkBehaviour
         Debug.Log("위험한 객체가 비활성화됐습니다. : " + gameObject.name);
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if(isActive)
-        {
-            // 만약 닿은게 플레이어라면
-            // 플레이어를 죽인다
-            OnKillPlayer();
-        }
+    public override bool CheckInteractable(GameObject requester)
+    {
+        return isActive;
     }
+
+    public override void ExecuteOnSuccess(GameObject requester)
+    {
+        OnKillPlayer();
+    }
+
     public virtual void OnKillPlayer()
     {
+        Debug.Log("플레이어를 죽이겠습니다.");
         // 플레이어를 죽일 고유 애니메이션을 재생한다던가 그런 로직을 추가하면 됨.
         //Player.Die();
     }
