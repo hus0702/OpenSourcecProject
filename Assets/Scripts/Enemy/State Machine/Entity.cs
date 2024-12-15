@@ -69,6 +69,17 @@ public class Entity : NetworkBehaviour
         return Physics2D.Raycast(playerCheck.position, aliveGO.transform.right, entityData.maxAgroDistance, entityData.whatIsPlayer);
     }
 
+    public virtual bool CheckPlayerInDownAgroRange()
+    {
+        return Physics2D.Raycast(playerCheck.position, -aliveGO.transform.up, 10000f, entityData.whatIsPlayer);
+    }
+
+    public virtual bool CheckAttackPlayer()
+    {
+        Collider2D player = Physics2D.OverlapCircle(playerCheck.position, entityData.attackRange, entityData.whatIsPlayer);
+        return player != null;
+    }
+
     public virtual void Flip()
     {
         facingDirection *= -1;

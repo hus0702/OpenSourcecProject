@@ -66,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 50
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -259,7 +259,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Crawler-climb_0: 4637784296112618641
+      Crawler-climb_1: 6151014865981439490
+      Crawler-climb_2: 6450030245679565054
+      Crawler-climb_3: 6502745397910320831
+      Crawler-climb_4: 7591842063025270652
+      Crawler-climb_5: 2424603374130629607
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

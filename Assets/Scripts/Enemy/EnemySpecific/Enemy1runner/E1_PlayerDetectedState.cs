@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class E1_PlayerDetectedState : PlayerDetectedState
@@ -22,6 +23,14 @@ public class E1_PlayerDetectedState : PlayerDetectedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
+        if(enemy.CheckAttackPlayer())
+        {
+            Debug.Log("Player hit!");
+            /*player 데미지 함수*/
+            enemy.idleState.SetFlipAfterIdle(true);
+            stateMachine.ChangeState(enemy.idleState);
+        }
 
         if(!isPlayerInMaxAgroRange)
         {
