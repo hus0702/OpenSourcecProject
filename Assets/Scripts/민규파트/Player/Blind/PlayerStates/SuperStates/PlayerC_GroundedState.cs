@@ -38,8 +38,9 @@ public class PlayerC_GroundedState : PlayerState
         xinput = container.NormInputX;
         ladderInput = container.ladderUp;
         InteractInput = container.InteractInput;
-        if (ladderInput && player.CheckIftouchLadder())
+        if (ladderInput && player.CheckIftouchLadder() != null)
         {
+            
             player.Blindclimb();
             stateMachine.playerChangeState(player.climbState);
         }

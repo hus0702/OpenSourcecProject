@@ -56,8 +56,9 @@ public class PlayerGroundedState : PlayerState
         {
             stateMachine.playerChangeState(player.carryUpState);
         }
-        if (ladderInput && player.CheckIftouchLadder())
+        if (ladderInput && player.CheckIftouchLadder() != null)
         {
+            Debug.Log("사다리 감지");
             player.Blindclimb();
             stateMachine.playerChangeState(player.climbState);
         }

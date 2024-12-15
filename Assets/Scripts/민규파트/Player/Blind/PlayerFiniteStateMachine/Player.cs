@@ -241,6 +241,20 @@ public class Player : NetworkBehaviour
         }
     }
 
+    IEnumerator BlinkCoroutine()
+    {
+        float elapsed = 0f;
+
+        while (elapsed < 1.0f)
+        {
+            spriteRenderer.enabled = !spriteRenderer.enabled; // 스프라이트 ON/OFF 전환
+            yield return new WaitForSeconds(0.2f); // 지정된 시간 동안 대기
+            elapsed += 0.2f;
+        }
+
+        spriteRenderer.enabled = true; // 마지막에는 스프라이트를 켜둠
+    }
+
     #endregion
 
     #region Check Functions
@@ -267,13 +281,13 @@ public class Player : NetworkBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(
             groundcheck.position,
             container.groundCheckRadious,
-            container.whatIsLimb
+            container.whatIsLadder
         );
 
         // 충돌한 오브젝트 중 특정 Layer의 오브젝트 반환
         foreach (Collider2D collider in colliders)
         {
-            if (collider.gameObject.layer == container.whatIsLadder) // 해당 Layer 체크
+            if ((container.whatIsLadder & (1 << collider.gameObject.layer)) != 0) // 해당 Layer 체크
             {
                 return collider.gameObject; // 조건을 만족하는 게임 오브젝트 반환
             }

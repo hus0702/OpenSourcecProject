@@ -1,4 +1,5 @@
 using Mirror;
+using System.Collections;
 using Mirror.BouncyCastle.Asn1.TeleTrust;
 using Steamworks;
 using Unity.IO.LowLevel.Unsafe;
@@ -242,7 +243,19 @@ public class Limb : NetworkBehaviour
         }
     }
 
-    
+    IEnumerator BlinkCoroutine()
+    {
+        float elapsed = 0f;
+
+        while (elapsed < 1.0f)
+        {
+            spriteRenderer.enabled = !spriteRenderer.enabled; // 스프라이트 ON/OFF 전환
+            yield return new WaitForSeconds(0.2f); // 지정된 시간 동안 대기
+            elapsed += 0.2f;
+        }
+
+        spriteRenderer.enabled = true; // 마지막에는 스프라이트를 켜둠
+    }
     #endregion
 
     #region Check Functions
@@ -443,10 +456,14 @@ public class Limb : NetworkBehaviour
         if (isServer)
         {
             container.Hp -= value;
+            StartCoroutine(BlinkCoroutine());
+            RpcLimbBlink();
         }
         else
         { 
             CmdChangeHp(-value);
+            StartCoroutine(BlinkCoroutine());
+            CmdLimbBlink();
         }
     }
     #endregion
@@ -605,6 +622,11 @@ public class Limb : NetworkBehaviour
         RpcLimbShot();
     }
 
+    [Command]
+    public void CmdLimbBlink()
+    {
+        StartCoroutine(BlinkCoroutine());
+    }
     [ClientRpc]
     public void RpcSetSpriteRenderer(bool newvalue)
     {
@@ -644,6 +666,12 @@ public class Limb : NetworkBehaviour
 
         // 총알 속도 설정
         bullet.GetComponent<Rigidbody2D>().linearVelocity = bulletDirection * container.bulletspeed;
+    }
+
+    [ClientRpc]
+    public void RpcLimbBlink()
+    {
+        StartCoroutine(BlinkCoroutine());
     }
     #endregion
 }
