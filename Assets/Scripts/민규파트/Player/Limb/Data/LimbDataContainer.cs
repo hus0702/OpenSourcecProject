@@ -47,7 +47,7 @@ public class LimbDataContainer : NetworkBehaviour
         InteractInput = false;
         Interactable = true;
 
-        itemset = new bool[3];
+        itemset = new bool[4];
         itemset[0] = true;
         itemset[1] = false;
         itemset[2] = false;

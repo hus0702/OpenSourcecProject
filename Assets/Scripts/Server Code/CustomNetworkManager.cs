@@ -71,8 +71,11 @@ public class CustomNetworkManager : NetworkManager
                     }
                     else
                     {
-                        conn.gameObject.transform.position = GameManager.instance.LimpSpawnPositionOnLoad;
-                        Debug.Log("Limp 소환" + GameManager.instance.LimpSpawnPositionOnLoad);
+                        if (!GameManager.instance.Ldcontainer.isRiding)
+                        {
+                            conn.gameObject.transform.position = GameManager.instance.LimpSpawnPositionOnLoad;
+                            Debug.Log("Limp 소환" + GameManager.instance.LimpSpawnPositionOnLoad);
+                        }
                     }
                 }
             }
