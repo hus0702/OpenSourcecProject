@@ -41,7 +41,7 @@ public class InteractableObject : NetworkBehaviour, IInteracted
     }
 
     public virtual void ExecuteOnSuccess(GameObject requester){
-    
+        Debug.Log(gameObject.name + "객체와 상호작용에 성공했습니다.");
     }
 
     public virtual void ExecuteOnFail(GameObject requester){}

@@ -48,6 +48,29 @@ public class Presser : MonoBehaviour
             rayLength = 0;
         } 
     }
+
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log("이걸로 하면 되나?");
+        GameObject requester = other.gameObject;
+
+        if (requester.tag == "Blind")
+        {
+            requester.GetComponent<Player>().TakingDamage(10); // 바로 죽임
+        }
+        else if (requester.tag == "Limb")
+        {
+            requester.GetComponent<Limb>().TakingDamage(10); // 바로 죽임
+        }
+    }
+
+    public void KillPlayer()
+    {
+        
+        // 걍 죽이기
+        Debug.Log("플레이어를 죽였습니다!");
+    }
+
     void OnDrawGizmos()
     {
         // 기즈모 색상 설정

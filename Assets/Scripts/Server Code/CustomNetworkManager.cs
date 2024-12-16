@@ -10,11 +10,12 @@ public class CustomNetworkManager : NetworkManager
 {
     [SerializeField] private PlayerObjectController GamePlayerPrefab;
     public PlayerObjectController GamePlayerInstance;
+    public GameObject GameScenePrefab;
     public List<PlayerObjectController> GamePlayers { get; } = new List<PlayerObjectController>();
-    public ulong CurrentLobbyID {get; private set;}
+    public ulong CurrentLobbyID { get; private set; }
 
     GameObject additionalInstance;
-    public void SetCurrentLobbyID(ulong id){
+    public void SetCurrentLobbyID(ulong id) {
         this.CurrentLobbyID = id;
     }
 
@@ -22,53 +23,58 @@ public class CustomNetworkManager : NetworkManager
     {
         Debug.Log("OnServerAddPlayer");
         //base.OnServerAddPlayer(conn);
-        if(SceneManager.GetActiveScene().name == "Lobby")
+        if (SceneManager.GetActiveScene().name == "Lobby")
         {
             GamePlayerInstance = Instantiate(GamePlayerPrefab);
             GamePlayerInstance.ConnectionID = conn.connectionId;
             GamePlayerInstance.PlayerIdNumber = GamePlayers.Count + 1;
             GamePlayerInstance.PlayerSteamID = (ulong)SteamMatchmaking.GetLobbyMemberByIndex((CSteamID)SteamLobby.Instance.CurrentLobbyID, GamePlayers.Count);
-        
+
             NetworkServer.AddPlayerForConnection(conn, GamePlayerInstance.gameObject);
+            Debug.Log("ï¿½Îºñ¿¡¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ connection : " + conn);
+
+            if (GameManager.instance == null) // GameManager ï¿½Ì±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½
+            {
+                // GameManager ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ (ï¿½ï¿½ï¿½â¼­ï¿½ï¿½ Resources ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½)
+                GameObject gameManagerPrefab = spawnPrefabs[2];
+                if (gameManagerPrefab != null)
+                {
+                    GameObject gameManagerInstance = Instantiate(gameManagerPrefab);
+                    NetworkServer.Spawn(gameManagerInstance, conn); // ï¿½ï¿½Æ®ï¿½ï¿½Å© ï¿½ó¿¡¼ï¿½ GameManager ï¿½ï¿½È¯
+                    Debug.Log("GameManagerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
+                }
+                else
+                {
+                    Debug.LogError("GameManager ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. Resources ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½.");
+                }
+            }
         }
     }
 
     public override void OnServerSceneChanged(string sceneName)
     {
-        
-        // °ÔÀÓ ¾À¿¡ ÁøÀÔÇßÀ» ¶§ ÇÁ¸®ÆÕÀ» Ãß°¡·Î »ý¼ºÇÏµµ·Ï Ã³¸®
-        if (sceneName == "GameScene") // "GameScene"À» ½ÇÁ¦ °ÔÀÓ ¾À ÀÌ¸§À¸·Î º¯°æ
+        if (sceneName == "GameScene") // "GameScene"ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         {
-            if (GameManager.instance == null) // GameManager ½Ì±ÛÅæÀÌ ÀÌ¹Ì ÀÖ´ÂÁö È®ÀÎ
+            if (!GameManager.instance.isGameStarted)
             {
-                // GameManager ÇÁ¸®ÆÕÀ» Ãß°¡ (¿©±â¼­´Â Resources Æú´õ¿¡¼­ ºÒ·¯¿À´Â ¹æ½Ä »ç¿ë)
-                GameObject gameManagerPrefab = spawnPrefabs[2];
-                if (gameManagerPrefab != null)
-                {
-                    GameObject gameManagerInstance = Instantiate(gameManagerPrefab);
-                    NetworkServer.Spawn(gameManagerInstance); // ³×Æ®¿öÅ© »ó¿¡¼­ GameManager ¼ÒÈ¯
-                    Debug.Log("GameManager°¡ »ý¼ºµÇ¾ú½À´Ï´Ù.");
-                }
-                else
-                {
-                    Debug.LogError("GameManager ÇÁ¸®ÆÕÀ» Ã£À» ¼ö ¾ø½À´Ï´Ù. Resources Æú´õ¿¡ ÇÁ¸®ÆÕÀ» Ãß°¡ÇÏ¼¼¿ä.");
-                }
+                GameManager.instance.isGameStarted = true;
+                SpawnPrefabs();
             }
-            Debug.Log("GameScene ÀÔ¼º");
-            foreach (NetworkConnectionToClient conn in NetworkServer.connections.Values)
+            else
             {
-                // Ãß°¡ ÇÁ¸®ÆÕ »ý¼º À§Ä¡ ÁöÁ¤ (¿©±â¼­´Â °£´ÜÈ÷ ·£´ý À§Ä¡ »ç¿ë)
-                PlayerObjectController playerObjectController = conn.identity.gameObject.GetComponent<PlayerObjectController>();
-                if (playerObjectController.Role == 1)
+                foreach (PlayerObjectController conn in GamePlayers)
                 {
-                    additionalInstance = Instantiate(spawnPrefabs[0], conn.identity.transform.position + new Vector3(0,2,0), Quaternion.identity);
+                    if (conn.Role == 1)
+                    {
+                        conn.gameObject.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
+                        Debug.Log("BLind ì†Œí™˜" + GameManager.instance.BlindSpawnPositionOnLoad);
+                    }
+                    else
+                    {
+                        conn.gameObject.transform.position = GameManager.instance.LimpSpawnPositionOnLoad;
+                        Debug.Log("Limp ì†Œí™˜" + GameManager.instance.LimpSpawnPositionOnLoad);
+                    }
                 }
-                else if (playerObjectController.Role == 2)
-                {
-                    additionalInstance = Instantiate(spawnPrefabs[1], conn.identity.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
-                }
-                // ³×Æ®¿öÅ©¿¡ Ãß°¡ ÇÁ¸®ÆÕÀ» »ý¼º
-                NetworkServer.Spawn(additionalInstance, conn);
             }
         }
     }
@@ -77,4 +83,30 @@ public class CustomNetworkManager : NetworkManager
     {
         ServerChangeScene(SceneName);
     }
+
+    public void SpawnPrefabs()
+    {
+        foreach (var conn in NetworkServer.connections.Values)
+        {
+            PlayerObjectController playerObjectController = conn.identity.gameObject.GetComponent<PlayerObjectController>();
+            if (playerObjectController.Role == 1)
+            {
+                GameScenePrefab = Instantiate(spawnPrefabs[0], GameManager.instance.BlindSpawnPositionOnLoad, spawnPrefabs[0].transform.rotation);
+                GameScenePrefab.GetComponent<PlayerObjectController>().ConnectionID = playerObjectController.ConnectionID;
+                GameScenePrefab.GetComponent<PlayerObjectController>().Role = 1;
+                GameManager.instance.Blind = GameScenePrefab;
+                NetworkServer.Spawn(GameScenePrefab, conn);
+            }
+            else if (playerObjectController.Role == 2)
+            {
+                GameScenePrefab = Instantiate(spawnPrefabs[1], GameManager.instance.LimpSpawnPositionOnLoad, spawnPrefabs[1].transform.rotation);
+                GameScenePrefab.GetComponent<PlayerObjectController>().ConnectionID = playerObjectController.ConnectionID;
+                GameScenePrefab.GetComponent<PlayerObjectController>().Role = 2;
+                GameManager.instance.Limp = GameScenePrefab;
+                NetworkServer.Spawn(GameScenePrefab, conn);
+            }
+        }
+    }
 }
+
+

@@ -86,14 +86,30 @@ public class PlayerObjectController : NetworkBehaviour
     private void Start()
     {
         DontDestroyOnLoad(this.gameObject); // 이 객체를 게임 씬까지 끌고 갈 거다!
+        Debug.Log("권한 부여 상태 : " + isOwned);
         
     }
 
     private void Update()
     {
+        
         if (isOwned && (this.CompareTag("Blind") || this.CompareTag("Limb")))
         {
-            Camera.main.transform.position = this.transform.position + new Vector3(0, 0, -10);
+            if (this.CompareTag("Limb"))
+            {
+                if (GameManager.instance.Ldcontainer.isRiding)
+                {
+                    Camera.main.transform.position = GameManager.instance.Pdcontainer.position + new Vector3(0, 0, -10);
+                }
+                else
+                {
+                    Camera.main.transform.position = this.transform.position + new Vector3(0, 0, -10);
+                }
+            }
+            else
+            {
+                Camera.main.transform.position = this.transform.position + new Vector3(0, 0, -10);
+            }
         }
     }
     public void CanStartGame(string SceneName)

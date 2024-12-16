@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class CardSlot : InteractableObject
 {
+    public bool Debug_isInteractable;
+    public InteractFailTalkBubble failHandler;
+    public SO_FailHandleInfo failHandleInfo;
+    
+    public GameObject doorSlotPosition; 
+
     [SerializeField] private string keyName;
     [SyncVar(hook = nameof(HookIsKeyInserted))] public bool IsKeyInserted = false;
     private void HookIsKeyInserted(bool OldValue, bool NewValue)
@@ -17,32 +23,36 @@ public class CardSlot : InteractableObject
         // 만약 플레이어가 지정된 카드키를 지니고 있는 상태라면
         // Player = requester.GetComponent; if (Player.hasItem(keyName))
 
-        return true;
-
+        if(Debug_isInteractable) return true;
+        else return false;
         // else return false;
     }
     public override void ExecuteOnSuccess(GameObject requester)
     {
         // 상호작용에 성공했을 경우
-        CmdSetKeyInserted();
+        SetKeyInserted();
     }
-    [Command] private void CmdSetKeyInserted()=>IsKeyInserted = !IsKeyInserted;
+    private void SetKeyInserted()=>IsKeyInserted = !IsKeyInserted;
 
     public void OnTriggerExit2D(Collider2D outer){ // 상호작용한다고 했는데 그 자리를 벗어나면 키 삽입 상태가 취소된다!
         //if (!isServer) return;
-        Debug.Log("카드슬롯에 대해 OnTriggerExit 이 발동! isServer : " + isServer);
-        //if(outer.CompareTag("Player"))
-        /*if(IsKeyInserted)*/
-        CmdSetKeyInserted();
-        IsKeyInserted = !IsKeyInserted;
-        
+        if(IsKeyInserted)
+        {
+            Debug.Log("카드슬롯에 대해 OnTriggerExit 이 발동! isServer : " + isServer);
+            //if(outer.CompareTag("Player"))
+            /*if(IsKeyInserted)*/
+            IsKeyInserted = false;
+        }
     }
 
     public override void ExecuteOnFail(GameObject requester)
     {
         if(IsKeyInserted) return; // 열쇠가 꽂혀 있는 상태면 실패 메시지를 따로 출력하지 않는다.
 
-        Debug.Log(keyName + "이(가) 필요한 것 같다.");
+        if(failHandler != null)
+        {
+            failHandler.FailHandle(doorSlotPosition, failHandleInfo);
+        }
         // 나중에 UI로 띄울 것.
     }
 

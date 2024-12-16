@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BlindDoubleGate
+  m_Controller: {fileID: 9100000, guid: c3f23e8dfcc3b504aacc4ae1680488ec, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 57a0a7fe5e8f4184e953937ea88bcb81, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a11e9352279885749a8dee6efefd0c32, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 1f35bc65837bed24e9ac6d51692f34d5, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 9e4852e9ef2d4dc49a7ab06796f86baf, type: 2}
