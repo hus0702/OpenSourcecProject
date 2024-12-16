@@ -37,7 +37,8 @@ public class LimbDieState : LimbAbillityState
             {
                 Limb.CmdChangeHp(10);
             }
-            GameManager.instance.Respawn();
+            Limb.Respawn();
+            GameManager.instance.Blind.GetComponent<Player>().Respawn();
             isAbillityDone = true;
         }
     }

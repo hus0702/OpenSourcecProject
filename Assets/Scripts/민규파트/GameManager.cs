@@ -38,27 +38,6 @@ public class GameManager : NetworkBehaviour
         isGameStarted = false;
     }
 
-    public void Respawn()
-    {
-        if (Blind != null)
-        {
-            Blind.GetComponent<Player>().Respawn();
-        }
-        else
-        {
-            Debug.Log("blind 오브젝트가 GameManager에 없습니다.");
-        }
-        if (Limp != null)
-        {
-            Limp.GetComponent<Limb>().Respawn();
-        }
-        else
-        {
-            Debug.Log("Limp 오브젝트가 GameManager에 없습니다.");
-        }
-        
-    }
-
     [Command]
     public void CmdPlaySoundOnClient(AudioManager.Sfx name)
     {

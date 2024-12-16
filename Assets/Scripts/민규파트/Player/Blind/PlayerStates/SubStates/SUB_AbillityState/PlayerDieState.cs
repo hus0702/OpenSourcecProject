@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.U2D.IK;
 
 public class PlayerDieState : PlayerAbillityState
 {
@@ -50,7 +51,8 @@ public class PlayerDieState : PlayerAbillityState
                 player.CmdChangeHp(10);
             }
             //Respawn 함수
-            GameManager.instance.Respawn();
+            player.Respawn();
+            GameManager.instance.Limp.GetComponent<Limb>().Respawn();
             //임시 코드
             isAbillityDone = true;
         }
