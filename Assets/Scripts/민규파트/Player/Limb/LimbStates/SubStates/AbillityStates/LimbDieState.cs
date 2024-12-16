@@ -32,13 +32,14 @@ public class LimbDieState : LimbAbillityState
             if (Limb.isServer)
             {
                 container.Hp = 10;
+                container.Respawncall = true;
             }
             else
             {
                 Limb.CmdChangeHp(10);
+                Limb.CmdSetRespawncall(true);
             }
-            Limb.Respawn();
-            GameManager.instance.Blind.GetComponent<Player>().Respawn();
+            
             isAbillityDone = true;
         }
     }
@@ -47,6 +48,4 @@ public class LimbDieState : LimbAbillityState
     {
         base.PhysicsUpdate();
     }
-
-
 }

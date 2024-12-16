@@ -39,6 +39,7 @@ public class PlayerDataContainer : NetworkBehaviour
     [SyncVar] public bool[] itemset; // 0번은 빈손, 1번은 카드키예정
     [SyncVar] public int holdingitem;
 
+    [SyncVar] public bool Respawncall;
     private void Awake()
     {
         movementVelocity = 8f;
@@ -68,6 +69,7 @@ public class PlayerDataContainer : NetworkBehaviour
         itemset[0] = true;
         holdingitem = 0;
 
+        Respawncall = false;
     }
 
 

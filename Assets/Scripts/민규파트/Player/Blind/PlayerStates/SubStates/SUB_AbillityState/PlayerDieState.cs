@@ -45,14 +45,13 @@ public class PlayerDieState : PlayerAbillityState
             if (player.isServer)
             {
                 container.Hp = 10;
+                container.Respawncall = true;
             }
             else
             {
                 player.CmdChangeHp(10);
+                player.CmdSetRespawncall(true);
             }
-            //Respawn 함수
-            player.Respawn();
-            GameManager.instance.Limp.GetComponent<Limb>().Respawn();
             //임시 코드
             isAbillityDone = true;
         }

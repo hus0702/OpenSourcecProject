@@ -67,10 +67,12 @@ public class CustomNetworkManager : NetworkManager
                     if (conn.Role == 1)
                     {
                         conn.gameObject.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
+                        Debug.Log("BLind 소환" + GameManager.instance.BlindSpawnPositionOnLoad);
                     }
                     else
                     {
                         conn.gameObject.transform.position = GameManager.instance.LimpSpawnPositionOnLoad;
+                        Debug.Log("Limp 소환" + GameManager.instance.LimpSpawnPositionOnLoad);
                     }
                 }
             }
@@ -91,6 +93,7 @@ public class CustomNetworkManager : NetworkManager
             {
                 GameScenePrefab = Instantiate(spawnPrefabs[0], GameManager.instance.BlindSpawnPositionOnLoad, spawnPrefabs[0].transform.rotation);
                 GameScenePrefab.GetComponent<PlayerObjectController>().ConnectionID = playerObjectController.ConnectionID;
+                GameScenePrefab.GetComponent<PlayerObjectController>().Role = 1;
                 GameManager.instance.Blind = GameScenePrefab;
                 NetworkServer.Spawn(GameScenePrefab, conn);
             }
@@ -98,6 +101,7 @@ public class CustomNetworkManager : NetworkManager
             {
                 GameScenePrefab = Instantiate(spawnPrefabs[1], GameManager.instance.LimpSpawnPositionOnLoad, spawnPrefabs[1].transform.rotation);
                 GameScenePrefab.GetComponent<PlayerObjectController>().ConnectionID = playerObjectController.ConnectionID;
+                GameScenePrefab.GetComponent<PlayerObjectController>().Role = 2;
                 GameManager.instance.Limp = GameScenePrefab;
                 NetworkServer.Spawn(GameScenePrefab, conn);
             }

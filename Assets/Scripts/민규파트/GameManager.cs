@@ -31,11 +31,41 @@ public class GameManager : NetworkBehaviour
         Instantiate(AudioManager);
     }
 
+    private void Update()
+    {
+        if ((Pdcontainer.Respawncall || Ldcontainer.Respawncall)&&isServer)
+        {
+            Respawn();
+        }
+    }
     private void Start()
     {
         BlindSpawnPositionOnLoad = new Vector3(-22.5f, 1, -1);
         LimpSpawnPositionOnLoad = new Vector3(-22.5f, 1, -1);
         isGameStarted = false;
+    }
+
+    public void Respawn()
+    {
+        if (Blind != null)
+        {
+            Blind.GetComponent<Player>().Respawn();
+        }
+        else
+        {
+            Debug.Log("blind 오브젝트가 GameManager에 없습니다.");
+        }
+        if (Limp != null)
+        {
+            Limp.GetComponent<Limb>().Respawn();
+        }
+        else
+        {
+            Debug.Log("Limp 오브젝트가 GameManager에 없습니다.");
+        }
+
+        Pdcontainer.Respawncall = false;
+        Ldcontainer.Respawncall = false;
     }
 
     [Command]

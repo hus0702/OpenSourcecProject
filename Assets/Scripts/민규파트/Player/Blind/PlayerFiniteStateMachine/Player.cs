@@ -553,6 +553,15 @@ public class Player : NetworkBehaviour
                 }
             }
         }
+
+        if (isServer)
+        {
+            container.InteractInput = false;
+        }
+        else
+        {
+            CmdSetInteractInput(false);
+        }
     }
     // ###############################################################################################
 
@@ -571,7 +580,7 @@ public class Player : NetworkBehaviour
         }
         else
         {
-            CmdChangeHp(-value);
+            CmdChangeHp(container.Hp-value);
             StartCoroutine(BlinkCoroutine());
             CmdBlindBlink();
             if (container.iscarrying)
@@ -583,13 +592,27 @@ public class Player : NetworkBehaviour
 
     public void Respawn()
     {
-        if (isServer)
+        if (isOwned)
         {
-            this.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
+            if (isServer)
+            {
+                this.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
+            }
+            else
+            {
+                CmdBlindRespawn();
+            }
         }
         else
         {
-            CmdBlindRespawn();
+            if (isServer)
+            {
+                RpcBlindRespawn();
+            }
+            else
+            {
+                CmdBlindRespawn();
+            }
         }
     }
     private void OnTriggerStay(Collider other)
@@ -610,7 +633,7 @@ public class Player : NetworkBehaviour
     [Command]
     public void CmdChangeHp(int newvalue)
     {
-        container.Hp += newvalue;
+        container.Hp = newvalue;
     }
     [Command]
     public void CmdSetIsCarrying(bool newvalue)
@@ -739,12 +762,24 @@ public class Player : NetworkBehaviour
     {
         this.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
     }
+
+    [Command]
+    public void CmdSetRespawncall(bool newvalue)
+    {
+        container.Respawncall = newvalue;
+    }
+
     [ClientRpc]
     public void RpcBlindBlink()
     {
         StartCoroutine(BlinkCoroutine());
     }
 
+    [ClientRpc]
+    public void RpcBlindRespawn()
+    {
+        this.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
+    }
     #endregion
 
 }

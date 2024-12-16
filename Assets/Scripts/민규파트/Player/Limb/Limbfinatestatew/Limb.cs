@@ -449,6 +449,14 @@ public class Limb : NetworkBehaviour
                 }
             }
         }
+        if (isServer)
+        {
+            container.InteractInput = false;
+        }
+        else
+        {
+            CmdSetInteractInput(false);
+        }
     }
 
     public void TakingDamage(int value)
@@ -462,7 +470,7 @@ public class Limb : NetworkBehaviour
         }
         else
         { 
-            CmdChangeHp(-value);
+            CmdChangeHp(container.Hp-value);
             StartCoroutine(BlinkCoroutine());
             CmdLimbBlink();
         }
@@ -470,14 +478,29 @@ public class Limb : NetworkBehaviour
 
     public void Respawn()
     {
-        if (isServer)
+        if (isOwned)
         {
-            this.transform.position = GameManager.instance.LimpSpawnPositionOnLoad;
+            if (isServer)
+            {
+                this.transform.position = GameManager.instance.LimpSpawnPositionOnLoad;
+            }
+            else
+            {
+                CmdLimbRespawn();
+            }
         }
         else
         {
-            CmdLimbRespawn();
+            if (isServer)
+            {
+                RpcLimbRespawn();
+            }
+            else
+            {
+                CmdLimbRespawn();
+            }
         }
+        
     }
     #endregion
 
@@ -500,7 +523,7 @@ public class Limb : NetworkBehaviour
     [Command]
     public void CmdChangeHp(int newvalue)
     {
-        container.Hp += newvalue;
+        container.Hp = newvalue;
     }
     [Command]
     public void CmdSetshotDelay(float newvalue)
@@ -646,6 +669,12 @@ public class Limb : NetworkBehaviour
     {
         this.transform.position = GameManager.instance.LimpSpawnPositionOnLoad;
     }
+
+    [Command]
+    public void CmdSetRespawncall(bool newvalue)
+    { 
+        container.Respawncall = newvalue;
+    }
     [ClientRpc]
     public void RpcSetSpriteRenderer(bool newvalue)
     {
@@ -691,6 +720,12 @@ public class Limb : NetworkBehaviour
     public void RpcLimbBlink()
     {
         StartCoroutine(BlinkCoroutine());
+    }
+
+    [ClientRpc]
+    public void RpcLimbRespawn()
+    {
+        this.transform.position = GameManager.instance.LimpSpawnPositionOnLoad;
     }
     #endregion
 }
