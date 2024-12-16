@@ -45,6 +45,7 @@ public class PlayerDieState : PlayerAbillityState
             if (player.isServer)
             {
                 container.Hp = 10;
+                GameManager.instance.Ldcontainer.Hp = 10000;
                 container.Respawncall = true;
             }
             else

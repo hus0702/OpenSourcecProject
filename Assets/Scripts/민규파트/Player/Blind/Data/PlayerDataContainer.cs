@@ -42,12 +42,12 @@ public class PlayerDataContainer : NetworkBehaviour
     [SyncVar] public bool Respawncall;
     private void Awake()
     {
-        movementVelocity = 8f;
-        sitmovementVelocity = 4f;
+        movementVelocity = 6f;
+        sitmovementVelocity = 3f;
         facingdirection = 1;
-        climbVelocity = 3;
-        C_movementVelocity = 5f;
-        jumpVelocity = 15f;
+        climbVelocity = 1.5f;
+        C_movementVelocity = 4f;
+        jumpVelocity = 9f;
         groundCheckRadious = 0.5f;
         iscarrying = false;
         isclimbing = false;

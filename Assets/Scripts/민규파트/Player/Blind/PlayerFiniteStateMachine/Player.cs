@@ -120,7 +120,7 @@ public class Player : NetworkBehaviour
 
         CurrentVelocity = RB.linearVelocity;
         StateMachine.playerCurrentState.LogicUpdate();
-
+        Debug.Log(StateMachine.playerCurrentState);
         if (isServer)
         {
             container.position = transform.position;
@@ -757,6 +757,7 @@ public class Player : NetworkBehaviour
     public void CmdSetRespawncall(bool newvalue)
     {
         container.Respawncall = newvalue;
+        GameManager.instance.Ldcontainer.Hp = 10000;
     }
 
     [ClientRpc]

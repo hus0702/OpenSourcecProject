@@ -674,6 +674,7 @@ public class Limb : NetworkBehaviour
     public void CmdSetRespawncall(bool newvalue)
     { 
         container.Respawncall = newvalue;
+        GameManager.instance.Pdcontainer.Hp = 10000;
     }
     [ClientRpc]
     public void RpcSetSpriteRenderer(bool newvalue)
