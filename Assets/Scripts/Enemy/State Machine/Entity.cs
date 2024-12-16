@@ -81,8 +81,7 @@ public class Entity : NetworkBehaviour
     public virtual void Flip()
     {
         facingDirection *= -1;
-        if(aliveGO.transform.position.y == 0f) aliveGO.transform.Rotate(0f, 180f, 0f);
-        else aliveGO.transform.Rotate(0f, 0f, 0f);
+        aliveGO.transform.Rotate(0f, 180f, 0f);
     }
 
     private void OnDrawGizmos() {
