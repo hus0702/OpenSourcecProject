@@ -53,7 +53,6 @@ public class CustomNetworkManager : NetworkManager
 
     public override void OnServerSceneChanged(string sceneName)
     {
-        // ���� ���� �������� �� �������� �߰��� �����ϵ��� ó��
         if (sceneName == "GameScene") // "GameScene"�� ���� ���� �� �̸����� ����
         {
             if (!GameManager.instance.isGameStarted)
@@ -92,12 +91,14 @@ public class CustomNetworkManager : NetworkManager
             {
                 GameScenePrefab = Instantiate(spawnPrefabs[0], GameManager.instance.BlindSpawnPositionOnLoad, spawnPrefabs[0].transform.rotation);
                 GameScenePrefab.GetComponent<PlayerObjectController>().ConnectionID = playerObjectController.ConnectionID;
+                GameManager.instance.Blind = GameScenePrefab;
                 NetworkServer.Spawn(GameScenePrefab, conn);
             }
             else if (playerObjectController.Role == 2)
             {
                 GameScenePrefab = Instantiate(spawnPrefabs[1], GameManager.instance.LimpSpawnPositionOnLoad, spawnPrefabs[1].transform.rotation);
                 GameScenePrefab.GetComponent<PlayerObjectController>().ConnectionID = playerObjectController.ConnectionID;
+                GameManager.instance.Limp = GameScenePrefab;
                 NetworkServer.Spawn(GameScenePrefab, conn);
             }
         }

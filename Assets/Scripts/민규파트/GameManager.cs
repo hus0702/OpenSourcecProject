@@ -11,6 +11,9 @@ public class GameManager : NetworkBehaviour
     public Vector3 BlindSpawnPositionOnLoad;
     public Vector3 LimpSpawnPositionOnLoad;
 
+    public GameObject Blind;
+    public GameObject Limp;
+
     public AudioManager AudioManager;
     public bool isGameStarted;
     private void Awake()
@@ -35,7 +38,26 @@ public class GameManager : NetworkBehaviour
         isGameStarted = false;
     }
 
-
+    public void Respawn()
+    {
+        if (Blind != null)
+        {
+            Blind.GetComponent<Player>().Respawn();
+        }
+        else
+        {
+            Debug.Log("blind 오브젝트가 GameManager에 없습니다.");
+        }
+        if (Limp != null)
+        {
+            Limp.GetComponent<Limb>().Respawn();
+        }
+        else
+        {
+            Debug.Log("Limp 오브젝트가 GameManager에 없습니다.");
+        }
+        
+    }
 
     [Command]
     public void CmdPlaySoundOnClient(AudioManager.Sfx name)

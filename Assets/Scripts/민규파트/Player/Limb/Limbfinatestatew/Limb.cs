@@ -390,7 +390,7 @@ public class Limb : NetworkBehaviour
             {
                 bulletspawnSpot = transform.position + new Vector3(container.FacingDirection, -0.4f, 0);
                 bulletDirection.y = 0;
-                bulletDirection.x = 1;
+                bulletDirection.x = container.FacingDirection;
             }
             GameObject bullet = Instantiate(BulletPrefab, bulletspawnSpot, bulletrotation);
             // 방향 설정 (Quaternion에서 벡터로 변환)
@@ -455,6 +455,7 @@ public class Limb : NetworkBehaviour
     {
         if (isServer)
         {
+            Debug.Log("Damage받음 " + value);
             container.Hp -= value;
             StartCoroutine(BlinkCoroutine());
             RpcLimbBlink();
@@ -464,6 +465,18 @@ public class Limb : NetworkBehaviour
             CmdChangeHp(-value);
             StartCoroutine(BlinkCoroutine());
             CmdLimbBlink();
+        }
+    }
+
+    public void Respawn()
+    {
+        if (isServer)
+        {
+            this.transform.position = GameManager.instance.LimpSpawnPositionOnLoad;
+        }
+        else
+        {
+            CmdLimbRespawn();
         }
     }
     #endregion
@@ -568,31 +581,31 @@ public class Limb : NetworkBehaviour
     }
 
     [Command]
-    public void CmdSetholdingitem(int newvalue)
+    void CmdSetholdingitem(int newvalue)
     { 
         container.holdingitem = newvalue;
     }
     [Command]
-    public void CmdGetCardkey(bool newvalue)
+    void CmdGetCardkey(bool newvalue)
     {
         container.itemset[2] = newvalue;
     }
 
     [Command]
-    public void CmdGetGun(bool newvalue)
+    void CmdGetGun(bool newvalue)
     {
         container.itemset[1] = newvalue;
     }
 
     [Command]
-    public void CmdSetLimbVisible(bool newvalue)
+    void CmdSetLimbVisible(bool newvalue)
     {
         InputHandler.enabled = newvalue;
         spriteRenderer.enabled = newvalue;
     }
 
     [Command]
-    public void CmdLimbShot()
+    void CmdLimbShot()
     {
         bulletrotation = Quaternion.Euler(container.mousePosition - transform.position);
 
@@ -612,7 +625,7 @@ public class Limb : NetworkBehaviour
         {
             bulletspawnSpot = transform.position + new Vector3(container.FacingDirection, -0.4f, 0);
             bulletDirection.y = 0;
-            bulletDirection.x = 1;
+            bulletDirection.x = container.FacingDirection;
         }
         GameObject bullet = Instantiate(BulletPrefab, bulletspawnSpot, bulletrotation);
         // 방향 설정 (Quaternion에서 벡터로 변환)
@@ -623,9 +636,15 @@ public class Limb : NetworkBehaviour
     }
 
     [Command]
-    public void CmdLimbBlink()
+    void CmdLimbBlink()
     {
         StartCoroutine(BlinkCoroutine());
+    }
+
+    [Command]
+    void CmdLimbRespawn()
+    {
+        this.transform.position = GameManager.instance.LimpSpawnPositionOnLoad;
     }
     [ClientRpc]
     public void RpcSetSpriteRenderer(bool newvalue)
@@ -659,7 +678,7 @@ public class Limb : NetworkBehaviour
         {
             bulletspawnSpot = transform.position + new Vector3(container.FacingDirection, -0.4f, 0);
             bulletDirection.y = 0;
-            bulletDirection.x = 1;
+            bulletDirection.x = container.FacingDirection;
         }
         GameObject bullet = Instantiate(BulletPrefab, bulletspawnSpot, bulletrotation);
         // 방향 설정 (Quaternion에서 벡터로 변환)

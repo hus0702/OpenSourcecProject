@@ -25,7 +25,19 @@ public class DangerousObject : ColliderOverlapInteractable
         Debug.Log("플레이어를 죽이겠습니다.");
         // 플레이어를 죽일 고유 애니메이션을 재생한다던가 그런 로직을 추가하면 됨.
         //Player.Die();
-        requester.GetComponent<Player>().TakingDamage(10); // 바로 죽임
+
+        /////////////////////////////////////////////////// 송민규 팀원이 코드 변경했습니다.
+
+        if (requester.tag == "Blind")
+        {
+            requester.GetComponent<Player>().TakingDamage(10); // 바로 죽임
+        }
+        else if (requester.tag == "Limb")
+        {
+            requester.GetComponent<Limb>().TakingDamage(10); // 바로 죽임
+        }
+        
+        /////////////////////////////////////////////////// 이 사이 부분을 변경했습니다.
     }
 
     public virtual void OnKeyInserted()

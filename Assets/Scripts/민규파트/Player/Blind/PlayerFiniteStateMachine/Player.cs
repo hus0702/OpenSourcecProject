@@ -466,7 +466,7 @@ public class Player : NetworkBehaviour
         BlindthrowSound();
     }
 
-    
+
     #endregion
 
     #region Other Functions
@@ -498,7 +498,7 @@ public class Player : NetworkBehaviour
         황유석 팀원이 해당 코드 부분에 기생했습니다. 건들지도 않은 코드가 바뀌어 있을 위험이 있습니다.
     */
     private IInteracted objectHandlingMe = null;
-    public void SetObjectHandlingMe(IInteracted interacted){objectHandlingMe = interacted;}
+    public void SetObjectHandlingMe(IInteracted interacted) { objectHandlingMe = interacted; }
     bool isInteractable = true;
     IEnumerator cooldownInteract()
     {
@@ -516,9 +516,9 @@ public class Player : NetworkBehaviour
             "플레이어의 상호작용 권리를 쥐고 있는 녀석" 을 하나 만들겠습니다.
             콜라이더가 없어도 이 객체에 대해서는 항상 상호작용을 할 수 있게 됩니다.
         */
-        if(objectHandlingMe != null)
+        if (objectHandlingMe != null)
         {
-            if(!isInteractable) return;
+            if (!isInteractable) return;
             objectHandlingMe.Interact(gameObject);
             objectHandlingMe = null;
             StartCoroutine(cooldownInteract());
@@ -539,7 +539,7 @@ public class Player : NetworkBehaviour
                 }
                 else
                 {
-                    if (isInteractable) 
+                    if (isInteractable)
                     {
                         Debug.Log(colliderItem.gameObject.name + " 과 플레이어가 상호작용합니다.");
                         interacted.Interact(gameObject);
@@ -550,7 +550,7 @@ public class Player : NetworkBehaviour
             }
         }
     }
-// ###############################################################################################
+    // ###############################################################################################
 
 
     public void TakingDamage(int value)
@@ -574,6 +574,18 @@ public class Player : NetworkBehaviour
             {
                 CmdSetThrowCall(true);
             }
+        }
+    }
+
+    public void Respawn()
+    {
+        if (isServer)
+        {
+            this.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
+        }
+        else
+        {
+            CmdBlindRespawn();
         }
     }
     private void OnTriggerStay(Collider other)
@@ -718,11 +730,17 @@ public class Player : NetworkBehaviour
         StartCoroutine(BlinkCoroutine());
     }
 
+    [Command]
+    public void CmdBlindRespawn()
+    {
+        this.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
+    }
     [ClientRpc]
     public void RpcBlindBlink()
     {
         StartCoroutine(BlinkCoroutine());
     }
+
     #endregion
 
 }

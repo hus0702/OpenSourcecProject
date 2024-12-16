@@ -51,8 +51,7 @@ public class LimbThrowState : LimbAbillityState
                 Limb.CmdSetSpriteRenderer(true);
             }
         }
-        Limb.SetVelocityX(30 * throwtime * GameManager.instance.Pdcontainer.facingdirection);
-        Limb.SetVelocityY(5 * throwtime);
+
         isAbillityDone = true;
     }
 
@@ -63,7 +62,8 @@ public class LimbThrowState : LimbAbillityState
 
     public override void LogicUpdate()
     {
-
+        Limb.SetVelocityX(30 * throwtime * GameManager.instance.Pdcontainer.facingdirection);
+        Limb.SetVelocityY(5 * throwtime);
         base.LogicUpdate();
 
     }

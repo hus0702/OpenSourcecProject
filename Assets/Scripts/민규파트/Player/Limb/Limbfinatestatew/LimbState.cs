@@ -40,10 +40,7 @@ public class LimbState
 
     public virtual void LogicUpdate()
     {
-        if (container.Hp <= 0)
-        {
-            stateMachine.LimbChangeState(Limb.DieState);
-        }
+
     }
 
     public virtual void PhysicsUpdate()

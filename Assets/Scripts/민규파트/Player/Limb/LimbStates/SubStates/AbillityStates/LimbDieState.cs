@@ -26,15 +26,20 @@ public class LimbDieState : LimbAbillityState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        Limb.SetVelocityX(0);
         if (isAnimationFinished)
         {
-            //Respawn ÇÔ¼ö
-
-            container.Hp = 10;
+            if (Limb.isServer)
+            {
+                container.Hp = 10;
+            }
+            else
+            {
+                Limb.CmdChangeHp(10);
+            }
+            GameManager.instance.Respawn();
             isAbillityDone = true;
         }
-        else
-            Debug.Log(isAnimationFinished);
     }
 
     public override void PhysicsUpdate()

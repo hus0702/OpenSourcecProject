@@ -23,26 +23,35 @@ public class PlayerDieState : PlayerAbillityState
 
     public override void Enter()
     {
+        
         base.Enter();
+        
 
     }
 
     public override void Exit()
     {
         base.Exit();
+        
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
+        player.SetVelocityX(0);
         if (isAnimationFinished)
         {
+            if (player.isServer)
+            {
+                container.Hp = 10;
+            }
+            else
+            {
+                player.CmdChangeHp(10);
+            }
             //Respawn ÇÔ¼ö
-
+            GameManager.instance.Respawn();
             //ÀÓ½Ã ÄÚµå
-            Debug.Log("Á×¾ú´Ù ²Ð");
-            container.Hp = 10;
             isAbillityDone = true;
         }
         else

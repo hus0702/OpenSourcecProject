@@ -38,10 +38,7 @@ public class PlayerState
 
     public virtual void LogicUpdate()
     {
-        if (container.Hp <= 0)
-        {
-            stateMachine.playerChangeState(player.DieState);
-        }
+
     }
 
     public virtual void PhysicsUpdate()
@@ -61,7 +58,6 @@ public class PlayerState
 
     public virtual void AnimationFinishTrigger()
     {
-        
         isAnimationFinished = true;
     } 
 }
