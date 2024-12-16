@@ -20,10 +20,16 @@ public class CardkeyDoor : Door
     public GameObject errorMessagePosition;
 
     public void CheckAllKeyInputed(){
+        bool isAllInserted = true;
         foreach(CardSlot cardSlot in cardSlots)
         {
-            if(!cardSlot.IsKeyInserted) return;
+            if(!cardSlot.IsKeyInserted)
+            {
+                Debug.Log("카드 슬롯 " + cardSlot.gameObject.name + "이 아직 삽입이 안 됨.");
+                isAllInserted = false;
+            }
         }
+        if(!isAllInserted) return;
         // 모든 키가 동시에 입력되어 있는 것을 확인했다!
         OnEveryKeyInserted(); // 문 열리는 이벤트를 실행한다.
     }

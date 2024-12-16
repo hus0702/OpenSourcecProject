@@ -5,6 +5,11 @@ public class ItemGiver : InteractableObject
 {
     public string itemToGive;
 
+    [SyncVar(hook = nameof(HookIsGivable))] bool isGivable = true;
+    private void HookIsGivable(bool ov, bool nv)
+    {
+        InActiveInteract();
+    }
 
     public InteractFailTalkBubble successHandler;
     public SO_FailHandleInfo successHandleInfo;
@@ -72,6 +77,6 @@ public class ItemGiver : InteractableObject
             successHandler.FailHandle(this.gameObject, successHandleInfo);
         }
 
-        InActiveInteract();
+        isGivable = false;
     }
 }
