@@ -44,8 +44,8 @@ public class GameManager : NetworkBehaviour
         LimpSpawnPositionOnLoad = new Vector3(-22.5f, 1, -1);
 
 
-        BlindSpawnPositionOnLoad = new Vector3(1f, 1, -1);
-        LimpSpawnPositionOnLoad = new Vector3(1f, 1, -1);
+        //BlindSpawnPositionOnLoad = new Vector3(1f, 1, -1);
+        //LimpSpawnPositionOnLoad = new Vector3(1f, 1, -1);
 
         isGameStarted = false;
     }
