@@ -23,7 +23,7 @@ public class CardSlot : InteractableObject
         // 만약 플레이어가 지정된 카드키를 지니고 있는 상태라면
         // Player = requester.GetComponent; if (Player.hasItem(keyName))
 
-        if(requester.tag == "Limb" && GameManager.instance.Ldcontainer.itemset[2] || requester.tag == "Blind" && GameManager.instance.Pdcontainer.itemset[2]) return true;
+        if(requester.tag == "Limb" && GameManager.instance.Ldcontainer.itemset[2] || requester.tag == "Blind" && GameManager.instance.Pdcontainer.itemset[1]) return true;
         else return false;
         // else return false;
     }
