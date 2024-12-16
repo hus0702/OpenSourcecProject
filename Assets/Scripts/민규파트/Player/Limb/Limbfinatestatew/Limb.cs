@@ -295,7 +295,7 @@ public class Limb : NetworkBehaviour
         {
             if (isServer)
             {
-                AudioManager.instance.PlaySfx(AudioManager.Sfx.LimpLand);
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.LimpLand); 
                 GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.LimpLand);
             }
             else
@@ -310,8 +310,8 @@ public class Limb : NetworkBehaviour
         {
             if (isServer)
             {
-                AudioManager.instance.PlaySfx(AudioManager.Sfx.LimpShot);
-                GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.LimpShot);
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.LimpShot); // 일단 내꺼 소리내고
+                GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.LimpShot); // 모든 클라이언트에 소리내라.
             }
             else
             {

@@ -771,5 +771,4 @@ public class Player : NetworkBehaviour
         this.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
     }
     #endregion
-
 }

@@ -67,6 +67,7 @@ public class PlayerDataContainer : NetworkBehaviour
 
         itemset = new bool[2];
         itemset[0] = true;
+        itemset[1] = false;
         holdingitem = 0;
 
         Respawncall = false;
