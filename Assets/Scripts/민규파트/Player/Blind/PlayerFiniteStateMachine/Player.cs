@@ -499,7 +499,7 @@ public class Player : NetworkBehaviour
     */
     private IInteracted objectHandlingMe = null;
     public void SetObjectHandlingMe(IInteracted interacted) { objectHandlingMe = interacted; }
-    bool isInteractable = true;
+    public bool isInteractable = true;
     IEnumerator cooldownInteract()
     {
         isInteractable = false;
@@ -509,6 +509,7 @@ public class Player : NetworkBehaviour
 
     public void Interact()
     {
+        Debug.Log("플레이어가 상호작용을 시도 : E ");
         /*
             캐비닛의 경우 플레이어의 Collider 를 비활성화시킵니다. 이러면 더 이상 상호작용이 불가능해지므로
             이런 객체들을 위해
@@ -528,6 +529,8 @@ public class Player : NetworkBehaviour
 
         Collider2D[] colliders = Physics2D.OverlapBoxAll(myBoxCollider.bounds.center, myBoxCollider.bounds.size, 0);
 
+        Debug.Log("감지된 콜라이더 개수 : " + colliders.Length);
+
         foreach (Collider2D colliderItem in colliders)
         {
             if (colliderItem != myBoxCollider)
@@ -536,6 +539,7 @@ public class Player : NetworkBehaviour
                 if (interacted == null)
                 {
                     //Debug.Log(colliderItem.gameObject.name + " ���� ��ȣ�ۿ� ������ ������Ʈ�� ����.");
+                    Debug.Log(colliderItem.gameObject.name + "은 상호작용 가능한 객체가 아닙니다.");
                 }
                 else
                 {

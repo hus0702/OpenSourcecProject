@@ -24,23 +24,28 @@ public class TeleportNPC : InteractableObject
     public override void ExecuteOnSuccess(GameObject requester)
     {
         {
-            //myChanger.StartScene();
+            myChanger.StartScene();
         
             //34.5 , 11.5
 
-            requester.transform.position = new Vector3(-4f, 0.5f, 0f);
+            //requester.transform.position = new Vector3(-4f, 0.5f, 0f);
         }
     }
 
 
     public override void ExecuteOnFail(GameObject requester)
     {
+        ExecuteOnSuccess(requester);
 
-        requester.transform.position = new Vector3(-4f, 0.5f, 0f); // 임시!!!!!!!!!!!!!
+/*
+
+        //requester.transform.position = new Vector3(-4f, 0.5f, 0f); // 임시!!!!!!!!!!!!!
 
         if(failHandler != null)
         {
             failHandler.FailHandle(this.gameObject, failHandleInfo);
         }
+
+*/
     }
 }

@@ -34,6 +34,9 @@ public class SceneChanger : NetworkBehaviour, ITriggered
 
         GameManager.instance.BlindSpawnPositionOnLoad = spawnPointOnLoadForBlind;
         GameManager.instance.LimpSpawnPositionOnLoad = spawnPointOnLoadForLimp;
+
+        Debug.Log("블라인드 스폰 포인트 : " + GameManager.instance.BlindSpawnPositionOnLoad.x + " , " + GameManager.instance.BlindSpawnPositionOnLoad.y);
+        Debug.Log("절름발이 스폰 포인트 : " + GameManager.instance.LimpSpawnPositionOnLoad.x + " , " + GameManager.instance.LimpSpawnPositionOnLoad.y);
     }
 
     public void StartScene()
@@ -44,6 +47,8 @@ public class SceneChanger : NetworkBehaviour, ITriggered
         
         RPCUpdatePlayerActivation(sceneName);
 
+        Debug.Log("씬을 전환합니다!");
+
         if(localPlayer.isServer) Manager.StartGame(sceneName);
         
         //SceneManager.LoadScene(sceneName);
@@ -52,18 +57,24 @@ public class SceneChanger : NetworkBehaviour, ITriggered
     [ClientRpc]
     private void RPCUpdatePlayerActivation(string sceneName)
     {
-        if(sceneName == "GameScene")
+        // "클라이언트 측" 에서 호출되는 함수임.
+
+        foreach(PlayerObjectController player in Manager.GamePlayers)
         {
-            foreach(PlayerObjectController player in Manager.GamePlayers)
+            if(sceneName == "GameScene")
             {
                 player.gameObject.SetActive(true);
             }
-        }
-        else
-        {
-            foreach(PlayerObjectController player in Manager.GamePlayers)
+            else
             {
                 player.gameObject.SetActive(false);
+            }
+
+            var playerPlayer = player.GetComponent<Player>();
+            if(playerPlayer != null)
+            {
+                Debug.Log("Player 컴포넌트가 붙은 플레이어를 발견, 상호작용 가능 여부를 활성화합니다.");
+                playerPlayer.isInteractable = true;
             }
         }
     }

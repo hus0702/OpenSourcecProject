@@ -15,5 +15,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yoffset: 100
   failHandleType: 2
-  message: "\uBB38\uC774 \uC7A0\uACA8 \uC788\uB2E4."
+  message: "\uBB38\uC740 \uAD73\uAC8C \uB2EB\uD600 \uC788\uB2E4."
   image: {fileID: 0}
