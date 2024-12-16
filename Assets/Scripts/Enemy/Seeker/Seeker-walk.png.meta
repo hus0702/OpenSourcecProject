@@ -309,15 +309,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Seeker-walk_0: 9105038388607538166
-      Seeker-walk_1: -7580596726679116944
-      Seeker-walk_2: -6059517186593674739
-      Seeker-walk_3: 3264594801089746908
-      Seeker-walk_4: -1454394389640267810
-      Seeker-walk_5: -7292110377095553390
-      Seeker-walk_6: 7968859451313219723
-      Seeker-walk_7: 7945586455547365053
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

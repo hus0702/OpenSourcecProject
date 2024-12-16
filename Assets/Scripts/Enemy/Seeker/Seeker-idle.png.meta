@@ -209,11 +209,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Seeker-idle_0: 2859662237741484346
-      Seeker-idle_1: 3293855468565362637
-      Seeker-idle_2: 3777871626153881417
-      Seeker-idle_3: 8227115743944934032
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

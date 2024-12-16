@@ -234,12 +234,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Seeker-attack_0: -4430035016178514870
-      Seeker-attack_1: 8936263516624476306
-      Seeker-attack_2: -5435485430243443183
-      Seeker-attack_3: 6429766280035534317
-      Seeker-attack_4: -3634478041150247141
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

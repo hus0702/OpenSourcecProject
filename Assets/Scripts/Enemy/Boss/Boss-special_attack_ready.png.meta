@@ -184,10 +184,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Boss-special_attack_ready_0: 5014775830168959182
-      Boss-special_attack_ready_1: 7047386900555058822
-      Boss-special_attack_ready_2: 1401963908946755952
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
