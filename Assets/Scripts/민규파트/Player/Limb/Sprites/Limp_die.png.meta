@@ -46,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -84,7 +84,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -135,89 +135,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: limp_die_0
+      name: Limp_die_0
       rect:
         serializedVersion: 2
-        x: 4
+        x: 0
         y: 0
-        width: 52
-        height: 27
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6478e46a90d8f8f30800000000000000
-      internalID: 4580034418643470150
+      spriteID: 85ea0d19e4ad7c141acf7a286e6bdbfc
+      internalID: -397682187
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: limp_die_1
+      name: Limp_die_1
       rect:
         serializedVersion: 2
-        x: 68
+        x: 64
         y: 0
-        width: 52
-        height: 24
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f07c87f1e95625360800000000000000
-      internalID: 7156894487652386575
+      spriteID: 0e056a9e71cfd0641aeb32ee011aae19
+      internalID: 1348852530
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: limp_die_2
+      name: Limp_die_2
       rect:
         serializedVersion: 2
-        x: 132
+        x: 128
         y: 0
-        width: 53
-        height: 21
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5c2c2806a4572aee0800000000000000
-      internalID: -1251308784148364603
+      spriteID: 1e780d609e7c1dd4098dcb04eb691ba6
+      internalID: -235797782
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: limp_die_3
+      name: Limp_die_3
       rect:
         serializedVersion: 2
-        x: 196
+        x: 192
         y: 0
-        width: 54
-        height: 15
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f516d041031bbbbe0800000000000000
-      internalID: -1460378834098626209
+      spriteID: 1e93bc5d4ffd2b742b401ff7899eb0f8
+      internalID: 1288284435
       vertices: []
       indices: 
       edges: []
@@ -226,7 +226,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b8c54d821a2a1a94b9d3de2765cfcb66
     internalID: 0
     vertices: []
     indices: 
@@ -236,10 +236,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      limp_die_0: 4580034418643470150
-      limp_die_1: 7156894487652386575
-      limp_die_2: -1251308784148364603
-      limp_die_3: -1460378834098626209
+      Limp_die_0: -397682187
+      Limp_die_1: 1348852530
+      Limp_die_2: -235797782
+      Limp_die_3: 1288284435
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

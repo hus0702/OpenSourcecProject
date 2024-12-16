@@ -70,12 +70,7 @@ public class SceneChanger : NetworkBehaviour, ITriggered
                 player.gameObject.SetActive(false);
             }
 
-            var playerPlayer = player.GetComponent<Player>();
-            if(playerPlayer != null)
-            {
-                Debug.Log("Player 컴포넌트가 붙은 플레이어를 발견, 상호작용 가능 여부를 활성화합니다.");
-                playerPlayer.isInteractable = true;
-            }
+            //var playerPlayer = player.GetComponent<Player>();
         }
     }
 

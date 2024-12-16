@@ -498,15 +498,11 @@ public class Player : NetworkBehaviour
         황유석 팀원이 해당 코드 부분에 기생했습니다. 건들지도 않은 코드가 바뀌어 있을 위험이 있습니다.
     */
     private IInteracted objectHandlingMe = null;
-    public void SetObjectHandlingMe(IInteracted interacted) { objectHandlingMe = interacted; }
-    public bool isInteractable = true;
-    IEnumerator cooldownInteract()
+    public void SetObjectHandlingMe(IInteracted interacted) 
     {
-        isInteractable = false;
-        yield return new WaitForSeconds(0.3f);
-        isInteractable = true;
+        Debug.Log("플레이어의 상호작용 주도권이 다른 객체로 넘어갔습니다.");
+        objectHandlingMe = interacted; 
     }
-
     public void Interact()
     {
         Debug.Log("플레이어가 상호작용을 시도 : E ");
@@ -519,10 +515,8 @@ public class Player : NetworkBehaviour
         */
         if (objectHandlingMe != null)
         {
-            if (!isInteractable) return;
             objectHandlingMe.Interact(gameObject);
             objectHandlingMe = null;
-            StartCoroutine(cooldownInteract());
             return; // 이게 그 코드입니다!
         }
 
@@ -543,12 +537,8 @@ public class Player : NetworkBehaviour
                 }
                 else
                 {
-                    if (isInteractable)
-                    {
-                        Debug.Log(colliderItem.gameObject.name + " 과 플레이어가 상호작용합니다.");
-                        interacted.Interact(gameObject);
-                        StartCoroutine(cooldownInteract()); // HUS : 이 부분도 수정됐습니다. 바바바박 상호작용이 눌리는 부분이 있어 쿨타임을 줬습니다.
-                    }
+                    Debug.Log(colliderItem.gameObject.name + " 과 플레이어가 상호작용합니다.");
+                    interacted.Interact(gameObject);
                     break;
                 }
             }

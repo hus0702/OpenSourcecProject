@@ -1,5 +1,6 @@
 using UnityEngine;
 using Mirror;
+using System.Collections;
 
 public class Cabinet : InteractableObject
 {
@@ -51,7 +52,20 @@ public class Cabinet : InteractableObject
 
             ChangeAlpha(requester, 1);
             objInMe = null; // 그냥 이렇게만 해주면 될 듯.
+
+
+            /*
+                바로 다시 들어갈 수 있도록 하는건 금지하겠음. 쿨타임을 좀 줄 것.
+            */
+            InActiveInteract();
+            StartCoroutine(Cooldown());
         }
+    }
+
+    IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(0.1f);
+        ActiveInteract();
     }
 
     private void ChangeAlpha(GameObject target, float alpha)

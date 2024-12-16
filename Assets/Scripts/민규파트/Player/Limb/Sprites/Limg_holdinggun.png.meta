@@ -43,7 +43,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -81,7 +81,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -145,12 +145,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: KakaoTalk_20241202_180214665_0
+      name: Limg_holdinggun_0
       rect:
         serializedVersion: 2
-        x: 4
+        x: 0
         y: 0
-        width: 73
+        width: 80
         height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -158,21 +158,21 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e4d685e5433e27e80800000000000000
-      internalID: -8182227758918111922
+      spriteID: 69de990c83e59c545b5a18c347f03c33
+      internalID: -1515638805
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: KakaoTalk_20241202_180214665_1
+      name: Limg_holdinggun_1
       rect:
         serializedVersion: 2
-        x: 84
+        x: 80
         y: 0
-        width: 70
+        width: 80
         height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -180,21 +180,21 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 40745ef90041c9ab0800000000000000
-      internalID: -5000099493372934396
+      spriteID: 38bfebb86ef53f8488f115f6e9d365af
+      internalID: -1090976481
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: KakaoTalk_20241202_180214665_2
+      name: Limg_holdinggun_2
       rect:
         serializedVersion: 2
-        x: 163
+        x: 160
         y: 0
-        width: 73
+        width: 80
         height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -202,10 +202,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9b2a8affce4063490800000000000000
-      internalID: -7767015091405806919
+      spriteID: 2c51040d01f9e284e8746ca8346fa8e5
+      internalID: -973826529
       vertices: []
       indices: 
       edges: []
@@ -224,9 +224,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      KakaoTalk_20241202_180214665_0: -8182227758918111922
-      KakaoTalk_20241202_180214665_1: -5000099493372934396
-      KakaoTalk_20241202_180214665_2: -7767015091405806919
+      Limg_holdinggun_0: -1515638805
+      Limg_holdinggun_1: -1090976481
+      Limg_holdinggun_2: -973826529
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
