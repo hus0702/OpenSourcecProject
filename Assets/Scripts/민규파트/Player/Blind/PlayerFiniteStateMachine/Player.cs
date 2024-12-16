@@ -549,6 +549,15 @@ public class Player : NetworkBehaviour
                 }
             }
         }
+
+        if (isServer)
+        {
+            container.InteractInput = false;
+        }
+        else
+        {
+            CmdSetInteractInput(false);
+        }
     }
     // ###############################################################################################
 

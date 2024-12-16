@@ -449,6 +449,14 @@ public class Limb : NetworkBehaviour
                 }
             }
         }
+        if (isServer)
+        {
+            container.InteractInput = false;
+        }
+        else
+        {
+            CmdSetInteractInput(false);
+        }
     }
 
     public void TakingDamage(int value)
