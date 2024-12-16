@@ -5,10 +5,13 @@ using UnityEngine;
 public class CircuitBreaker : InteractableObject
 {
     [SyncVar(hook = nameof(HookIsActiveChanged))] bool isActive = true;
-    private void HookIsActiveChanged(bool oldVal, bool newVal)
+    public void HookIsActiveChanged(bool oldVal, bool newVal)
     {
         Debug.Log("차단기가 " + newVal + " 상태로 변경됐습니다.");
-        platformToManage.isActive = newVal;
+
+        if(newVal == true) platformToManage.On();
+        else platformToManage.Off();
+
         foreach(GameObject item in gameObjectsToManage)
         {
             item.SetActive(newVal);
