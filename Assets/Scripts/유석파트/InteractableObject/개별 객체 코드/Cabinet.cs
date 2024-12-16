@@ -29,8 +29,22 @@ public class Cabinet : InteractableObject
         {
             Debug.Log(requester.name + "을 캐비넷에 넣습니다.");
 
-            Player player = requester.GetComponent<Player>();
-            player.SetObjectHandlingMe(this);
+
+
+
+            if (requester.tag == "Blind")
+            {
+                Player player = requester.GetComponent<Player>();
+                player.SetObjectHandlingMe(this);
+            }
+            else if (requester.tag == "Limb")
+            {
+                Limb player = requester.GetComponent<Limb>();
+                player.SetObjectHandlingMe(this);
+            }
+
+
+
 
             requester.GetComponent<Collider2D>().enabled = false;
 

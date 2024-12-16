@@ -249,12 +249,12 @@ public class Limb : NetworkBehaviour
 
         while (elapsed < 1.0f)
         {
-            spriteRenderer.enabled = !spriteRenderer.enabled; // ½ºÇÁ¶óÀÌÆ® ON/OFF ÀüÈ¯
-            yield return new WaitForSeconds(0.2f); // ÁöÁ¤µÈ ½Ã°£ µ¿¾È ´ë±â
+            spriteRenderer.enabled = !spriteRenderer.enabled; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ON/OFF ï¿½ï¿½È¯
+            yield return new WaitForSeconds(0.2f); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
             elapsed += 0.2f;
         }
 
-        spriteRenderer.enabled = true; // ¸¶Áö¸·¿¡´Â ½ºÇÁ¶óÀÌÆ®¸¦ ÄÑµÒ
+        spriteRenderer.enabled = true; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ñµï¿½
     }
     #endregion
 
@@ -393,9 +393,9 @@ public class Limb : NetworkBehaviour
                 bulletDirection.x = container.FacingDirection;
             }
             GameObject bullet = Instantiate(BulletPrefab, bulletspawnSpot, bulletrotation);
-            // ¹æÇâ ¼³Á¤ (Quaternion¿¡¼­ º¤ÅÍ·Î º¯È¯)
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (Quaternionï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í·ï¿½ ï¿½ï¿½È¯)
             
-            // ÃÑ¾Ë ¼Óµµ ¼³Á¤
+            // ï¿½Ñ¾ï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½
             bullet.GetComponent<Rigidbody2D>().linearVelocity = bulletDirection * container.bulletspeed;
             RpcLimbShot();
         }
@@ -430,9 +430,41 @@ public class Limb : NetworkBehaviour
         base.transform.Rotate(0.0f, 180.0f, 0.0f);
     }
 
+    /*
+####################################################################################################
+        \  \  \      \        \\\\\\      \\  \     \      \\  \       \\\ 
+        \  \  \     \\\       \\\\\\      \ \ \     \      \ \ \     \\   \\\\
+         \\\\\\     \   \     \    \      \  \\     \      \  \\       \\\\  \
+
+        í™©ìœ ì„ íŒ€ì›ì´ í•´ë‹¹ ì½”ë“œ ë¶€ë¶„ì— ê¸°ìƒí–ˆìŠµë‹ˆë‹¤. ê±´ë“¤ì§€ë„ ì•Šì€ ì½”ë“œê°€ ë°”ë€Œì–´ ìˆì„ ìœ„í—˜ì´ ìˆìŠµë‹ˆë‹¤.
+    */
+    private IInteracted objectHandlingMe = null;
+    public void SetObjectHandlingMe(IInteracted interacted) 
+    {
+        Debug.Log("í”Œë ˆì´ì–´ì˜ ìƒí˜¸ì‘ìš© ì£¼ë„ê¶Œì´ ë‹¤ë¥¸ ê°ì²´ë¡œ ë„˜ì–´ê°”ìŠµë‹ˆë‹¤.");
+        objectHandlingMe = interacted; 
+    }
     public void Interact()
     {
+        Debug.Log("í”Œë ˆì´ì–´ê°€ ìƒí˜¸ì‘ìš©ì„ ì‹œë„ : E ");
+        /*
+            ìºë¹„ë‹›ì˜ ê²½ìš° í”Œë ˆì´ì–´ì˜ Collider ë¥¼ ë¹„í™œì„±í™”ì‹œí‚µë‹ˆë‹¤. ì´ëŸ¬ë©´ ë” ì´ìƒ ìƒí˜¸ì‘ìš©ì´ ë¶ˆê°€ëŠ¥í•´ì§€ë¯€ë¡œ
+            ì´ëŸ° ê°ì²´ë“¤ì„ ìœ„í•´
+
+            "í”Œë ˆì´ì–´ì˜ ìƒí˜¸ì‘ìš© ê¶Œë¦¬ë¥¼ ì¥ê³  ìˆëŠ” ë…€ì„" ì„ í•˜ë‚˜ ë§Œë“¤ê² ìŠµë‹ˆë‹¤.
+            ì½œë¼ì´ë”ê°€ ì—†ì–´ë„ ì´ ê°ì²´ì— ëŒ€í•´ì„œëŠ” í•­ìƒ ìƒí˜¸ì‘ìš©ì„ í•  ìˆ˜ ìˆê²Œ ë©ë‹ˆë‹¤.
+        */
+        if (objectHandlingMe != null)
+        {
+            objectHandlingMe.Interact(gameObject);
+            objectHandlingMe = null;
+            return; // ì´ê²Œ ê·¸ ì½”ë“œì…ë‹ˆë‹¤!
+        }
+
+
         Collider2D[] colliders = Physics2D.OverlapBoxAll(myBoxCollider.bounds.center, myBoxCollider.bounds.size, 0);
+
+        Debug.Log("ê°ì§€ëœ ì½œë¼ì´ë” ê°œìˆ˜ : " + colliders.Length);
 
         foreach (Collider2D colliderItem in colliders)
         {
@@ -441,14 +473,18 @@ public class Limb : NetworkBehaviour
                 IInteracted interacted = colliderItem.GetComponent<InteractableObject>();
                 if (interacted == null)
                 {
-                    Debug.Log(colliderItem.gameObject.name + " ¿¡´Â »óÈ£ÀÛ¿ë °¡´ÉÇÑ ÄÄÆ÷³ÍÆ®°¡ ¾øÀ½.");
+                    //Debug.Log(colliderItem.gameObject.name + " ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.");
+                    Debug.Log(colliderItem.gameObject.name + "ì€ ìƒí˜¸ì‘ìš© ê°€ëŠ¥í•œ ê°ì²´ê°€ ì•„ë‹™ë‹ˆë‹¤.");
                 }
                 else
                 {
+                    Debug.Log(colliderItem.gameObject.name + " ê³¼ í”Œë ˆì´ì–´ê°€ ìƒí˜¸ì‘ìš©í•©ë‹ˆë‹¤.");
                     interacted.Interact(gameObject);
+                    break;
                 }
             }
         }
+
         if (isServer)
         {
             container.InteractInput = false;
@@ -458,12 +494,13 @@ public class Limb : NetworkBehaviour
             CmdSetInteractInput(false);
         }
     }
+    // ###############################################################################################
 
     public void TakingDamage(int value)
     {
         if (isServer)
         {
-            Debug.Log("Damage¹ŞÀ½ " + value);
+            Debug.Log("Damageï¿½ï¿½ï¿½ï¿½ " + value);
             container.Hp -= value;
             StartCoroutine(BlinkCoroutine());
             RpcLimbBlink();
@@ -651,9 +688,9 @@ public class Limb : NetworkBehaviour
             bulletDirection.x = container.FacingDirection;
         }
         GameObject bullet = Instantiate(BulletPrefab, bulletspawnSpot, bulletrotation);
-        // ¹æÇâ ¼³Á¤ (Quaternion¿¡¼­ º¤ÅÍ·Î º¯È¯)
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (Quaternionï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í·ï¿½ ï¿½ï¿½È¯)
 
-        // ÃÑ¾Ë ¼Óµµ ¼³Á¤
+        // ï¿½Ñ¾ï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½
         bullet.GetComponent<Rigidbody2D>().linearVelocity = bulletDirection * container.bulletspeed;
         RpcLimbShot();
     }
@@ -678,7 +715,7 @@ public class Limb : NetworkBehaviour
     [ClientRpc]
     public void RpcSetSpriteRenderer(bool newvalue)
     {
-        Debug.Log("ÃÑ ¹ß»ç!!");
+        Debug.Log("ï¿½ï¿½ ï¿½ß»ï¿½!!");
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {
@@ -710,9 +747,9 @@ public class Limb : NetworkBehaviour
             bulletDirection.x = container.FacingDirection;
         }
         GameObject bullet = Instantiate(BulletPrefab, bulletspawnSpot, bulletrotation);
-        // ¹æÇâ ¼³Á¤ (Quaternion¿¡¼­ º¤ÅÍ·Î º¯È¯)
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (Quaternionï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í·ï¿½ ï¿½ï¿½È¯)
 
-        // ÃÑ¾Ë ¼Óµµ ¼³Á¤
+        // ï¿½Ñ¾ï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½
         bullet.GetComponent<Rigidbody2D>().linearVelocity = bulletDirection * container.bulletspeed;
     }
 
