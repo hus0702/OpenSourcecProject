@@ -579,13 +579,27 @@ public class Player : NetworkBehaviour
 
     public void Respawn()
     {
-        if (isServer)
+        if (isOwned)
         {
-            this.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
+            if (isServer)
+            {
+                this.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
+            }
+            else
+            {
+                CmdBlindRespawn();
+            }
         }
         else
         {
-            CmdBlindRespawn();
+            if (isServer)
+            {
+                RpcBlindRespawn();
+            }
+            else
+            {
+                CmdBlindRespawn();
+            }
         }
     }
     private void OnTriggerStay(Collider other)
@@ -748,6 +762,11 @@ public class Player : NetworkBehaviour
         StartCoroutine(BlinkCoroutine());
     }
 
+    [ClientRpc]
+    public void RpcBlindRespawn()
+    {
+        this.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
+    }
     #endregion
 
 }

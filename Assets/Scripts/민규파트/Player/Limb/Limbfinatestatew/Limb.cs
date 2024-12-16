@@ -470,14 +470,29 @@ public class Limb : NetworkBehaviour
 
     public void Respawn()
     {
-        if (isServer)
+        if (isOwned)
         {
-            this.transform.position = GameManager.instance.LimpSpawnPositionOnLoad;
+            if (isServer)
+            {
+                this.transform.position = GameManager.instance.LimpSpawnPositionOnLoad;
+            }
+            else
+            {
+                CmdLimbRespawn();
+            }
         }
         else
         {
-            CmdLimbRespawn();
+            if (isServer)
+            {
+                RpcLimbRespawn();
+            }
+            else
+            {
+                CmdLimbRespawn();
+            }
         }
+        
     }
     #endregion
 
@@ -697,6 +712,12 @@ public class Limb : NetworkBehaviour
     public void RpcLimbBlink()
     {
         StartCoroutine(BlinkCoroutine());
+    }
+
+    [ClientRpc]
+    public void RpcLimbRespawn()
+    {
+        this.transform.position = GameManager.instance.LimpSpawnPositionOnLoad;
     }
     #endregion
 }
