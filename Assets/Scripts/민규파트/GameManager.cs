@@ -73,6 +73,7 @@ public class GameManager : NetworkBehaviour
         Ldcontainer.Respawncall = false;
     }
 
+<<<<<<< Updated upstream
     [Command]
     public void CmdPlaySoundOnClient(AudioManager.Sfx name)
     {
@@ -81,8 +82,16 @@ public class GameManager : NetworkBehaviour
     }
 
     // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ È£ï¿½ï¿½Ç´ï¿½ RPC
+=======
+    // ¼­¹ö¿¡¼­ Å¬¶óÀÌ¾ðÆ®·Î È£ÃâµÇ´Â RPC
+>>>>>>> Stashed changes
     [ClientRpc]
     public void RpcPlaySoundOnClient(AudioManager.Sfx name)
+    {
+        AudioManager.instance.PlaySfx(name);
+    }
+
+    public void PlaySoundOnClient(AudioManager.Sfx name)
     {
         AudioManager.instance.PlaySfx(name);
     }
