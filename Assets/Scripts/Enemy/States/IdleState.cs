@@ -33,6 +33,7 @@ public class IdleState : State
         if(flipAfterIdle)
         {
             entity.Flip();
+            flipAfterIdle = false;
         }
     }
 

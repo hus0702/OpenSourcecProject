@@ -11,7 +11,6 @@ public class E2_MoveState : MoveState
 
     public override void Enter()
     {
-        enemy.SetVelocity(0f);
         base.Enter();
         enemy.rb.gravityScale = 0;
     }

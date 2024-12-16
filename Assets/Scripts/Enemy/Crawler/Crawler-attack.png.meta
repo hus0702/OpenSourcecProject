@@ -66,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 50
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -259,7 +259,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Crawler-attack_0: 4403617901489126470
+      Crawler-attack_1: -1027210094538017935
+      Crawler-attack_2: 6970205388214600010
+      Crawler-attack_3: 1416617713447277047
+      Crawler-attack_4: -8875377570925307762
+      Crawler-attack_5: 1022638569512331675
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
