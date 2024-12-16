@@ -44,36 +44,45 @@ public class Cabinet : InteractableObject
             }
 
 
+            SetPlayerInvisible(requester);
 
 
-            requester.GetComponent<Collider2D>().enabled = false;
-
-            Rigidbody2D objRigidBody = requester.GetComponent<Rigidbody2D>();
-            gravityScale = objRigidBody.gravityScale;
-            objRigidBody.gravityScale = 0;
-
-            ChangeAlpha(requester, 0);
             objInMe = requester;
         }
         else
         {
             Debug.Log(objInMe.name + "을 캐비넷에서 빼겠습니다.");
 
-            requester.GetComponent<Collider2D>().enabled = true;
 
-            Rigidbody2D objRigidBody = requester.GetComponent<Rigidbody2D>();
-            objRigidBody.gravityScale = gravityScale;
-
-            ChangeAlpha(requester, 1);
             objInMe = null; // 그냥 이렇게만 해주면 될 듯.
 
-
+            SetPlayerVisible(requester);
             /*
                 바로 다시 들어갈 수 있도록 하는건 금지하겠음. 쿨타임을 좀 줄 것.
             */
             InActiveInteract();
             StartCoroutine(Cooldown());
         }
+    }
+
+    [ClientRpc] void SetPlayerInvisible(GameObject requester)
+    {
+        requester.GetComponent<Collider2D>().enabled = false;
+
+        Rigidbody2D objRigidBody = requester.GetComponent<Rigidbody2D>();
+        gravityScale = objRigidBody.gravityScale;
+        objRigidBody.gravityScale = 0;
+
+        ChangeAlpha(requester, 0);
+    }
+    [ClientRpc] void SetPlayerVisible(GameObject requester)
+    {
+        requester.GetComponent<Collider2D>().enabled = true;
+
+        Rigidbody2D objRigidBody = requester.GetComponent<Rigidbody2D>();
+        objRigidBody.gravityScale = gravityScale;
+
+        ChangeAlpha(requester, 1);
     }
 
     IEnumerator Cooldown()

@@ -77,6 +77,11 @@ public class ItemGiver : InteractableObject
             successHandler.FailHandle(this.gameObject, successHandleInfo);
         }
 
+        ServerSetIsGivable();
+    }
+
+    [Command(requiresAuthority = false)] public void ServerSetIsGivable()
+    {
         isGivable = false;
     }
 }

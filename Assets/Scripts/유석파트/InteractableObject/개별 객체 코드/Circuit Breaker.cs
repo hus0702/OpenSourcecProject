@@ -9,8 +9,7 @@ public class CircuitBreaker : InteractableObject
     {
         Debug.Log("차단기가 " + newVal + " 상태로 변경됐습니다.");
 
-        if(newVal == true) platformToManage.On();
-        else platformToManage.Off();
+        platformToManage.SetIsActive(newVal);
 
         foreach(GameObject item in gameObjectsToManage)
         {
@@ -24,6 +23,11 @@ public class CircuitBreaker : InteractableObject
     public override void ExecuteOnSuccess(GameObject requester)
     {
         base.ExecuteOnSuccess(requester);
-        isActive = !isActive;
+        SetIsActive(!isActive);
+    }
+
+    [Command(requiresAuthority = false)] public void SetIsActive(bool val)
+    {
+        isActive = val;
     }
 }

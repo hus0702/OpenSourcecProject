@@ -38,13 +38,18 @@ public class Vent : Door
         if(!isOpened)
         {
             // 여기에서는 벤트를 열어야 함.
-            isSyncOpen = true;
+            CmdSetIsSyncOpen(true);
         }
         else
         {
             //if(NetworkClient.localPlayer.GetComponent<PlayerObjectController>().Role == PlayerObjectController.Blind) return;
             TransportRequester(requester);
         }
+    }
+
+    [Command(requiresAuthority =false)] public void CmdSetIsSyncOpen(bool val)
+    {
+        isSyncOpen = val;
     }
 
     public override void ExecuteOnFail(GameObject requester)

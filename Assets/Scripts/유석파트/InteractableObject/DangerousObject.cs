@@ -3,7 +3,7 @@ using Mirror;
 
 public class DangerousObject : ColliderOverlapInteractable
 {
-    [SyncVar(hook = nameof(OnInActiveObject))]private bool isActive = true;
+    //[SyncVar(hook = nameof(OnInActiveObject))]private bool isActive = true;
     private void OnInActiveObject(bool oldValue, bool newValue)
     {
         // 꺼졌을 때 애니메이션을 작동하면 되겠습니다
@@ -12,7 +12,8 @@ public class DangerousObject : ColliderOverlapInteractable
 
     public override bool CheckInteractable(GameObject requester)
     {
-        return isActive;
+        //return isActive;
+        return true;
     }
 
     public override void ExecuteOnSuccess(GameObject requester)
@@ -42,8 +43,8 @@ public class DangerousObject : ColliderOverlapInteractable
 
     public virtual void OnKeyInserted()
     {
-        InActiveObject();
+        //InActiveObject();
     }
 
-    [Command]public void InActiveObject()=>isActive=false;
+    //[Command(requiresAuthority =false)]public void InActiveObject()=>isActive=false;
 }

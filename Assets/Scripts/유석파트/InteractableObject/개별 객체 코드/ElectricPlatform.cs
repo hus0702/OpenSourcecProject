@@ -5,7 +5,7 @@ using UnityEngine.Rendering.Universal;
 
 public class ElectricPlatform : DangerousObject
 {
-    [SyncVar(hook = nameof(HookIsActiveChanged))]public bool isActive;
+    [SyncVar(hook = nameof(HookIsActiveChanged))]private bool isActive;
     private void HookIsActiveChanged(bool oldVal, bool newVal)
     {
         Debug.Log("전기장판에 대한 isActive 변경 감지! : " + newVal);
@@ -17,6 +17,10 @@ public class ElectricPlatform : DangerousObject
         {
             Off();
         }
+    }
+    [Command(requiresAuthority = false)] public void SetIsActive(bool val)
+    {
+        isActive = val;
     }
 
     public Light2D electricEffect;

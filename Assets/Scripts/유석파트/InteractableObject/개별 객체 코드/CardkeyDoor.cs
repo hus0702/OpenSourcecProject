@@ -42,9 +42,13 @@ public class CardkeyDoor : Door
         }
         Debug.Log("문이 열렸습니다!"); // 나중에 문 열리는 이벤트로 대체할 것.
 
-        isAnimatedOpened = true;
-
+        CmdSetIsAnimatedOpened(true);
         //CmdOpenDoor();
+    }
+
+    [Command(requiresAuthority =false)] public void CmdSetIsAnimatedOpened(bool val)
+    {
+        isAnimatedOpened = val;
     }
 
     public override void ExecuteOnFail(GameObject requester)
