@@ -462,7 +462,7 @@ public class Limb : NetworkBehaviour
         }
         else
         { 
-            CmdChangeHp(-value);
+            CmdChangeHp(container.Hp-value);
             StartCoroutine(BlinkCoroutine());
             CmdLimbBlink();
         }
@@ -500,7 +500,7 @@ public class Limb : NetworkBehaviour
     [Command]
     public void CmdChangeHp(int newvalue)
     {
-        container.Hp += newvalue;
+        container.Hp = newvalue;
     }
     [Command]
     public void CmdSetshotDelay(float newvalue)
@@ -645,6 +645,12 @@ public class Limb : NetworkBehaviour
     void CmdLimbRespawn()
     {
         this.transform.position = GameManager.instance.LimpSpawnPositionOnLoad;
+    }
+
+    [Command]
+    public void CmdSetRespawncall(bool newvalue)
+    { 
+        container.Respawncall = newvalue;
     }
     [ClientRpc]
     public void RpcSetSpriteRenderer(bool newvalue)

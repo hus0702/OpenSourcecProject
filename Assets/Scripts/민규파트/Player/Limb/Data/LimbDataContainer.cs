@@ -28,6 +28,8 @@ public class LimbDataContainer : NetworkBehaviour
     [SyncVar] public bool[] itemset; // 0번은 빈손, 1번은 총, 2번은 카드키 예정
     [SyncVar] public int holdingitem;
 
+    [SyncVar] public bool Respawncall;
+
     private void Awake()
     {
         movementVelocity = 3f;
@@ -49,6 +51,8 @@ public class LimbDataContainer : NetworkBehaviour
         itemset[0] = true;
         itemset[1] = true;
         holdingitem = 0;
+
+        Respawncall = false;
     }
 
 }
