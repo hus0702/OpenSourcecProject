@@ -22,14 +22,21 @@ public class E2_IdleState : IdleState
     {
         base.LogicUpdate();
 
-        if (isIdleTimeOver && isPlayerInMaxAgroRange)
+        if (isIdleTimeOver)
         {
-            stateMachine.ChangeState(enemy.playerDetectedState);
-        }
+            if(enemy.initialX == enemy.aliveGO.transform.position.x)
+            {
+                stateMachine.ChangeState(enemy.moveState);
+            }
 
-        else if (isIdleTimeOver)
-        {
-            stateMachine.ChangeState(enemy.moveState);
+            if(isPlayerInMaxAgroRange)
+            {
+                stateMachine.ChangeState(enemy.playerDetectedState);
+            }
+            else
+            {
+                stateMachine.ChangeState(enemy.returnState);
+            }
         }
     }
 

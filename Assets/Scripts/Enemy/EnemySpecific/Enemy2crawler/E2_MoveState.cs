@@ -11,7 +11,9 @@ public class E2_MoveState : MoveState
 
     public override void Enter()
     {
+        enemy.SetVelocity(0f);
         base.Enter();
+        enemy.rb.gravityScale = 0;
     }
 
     public override void Exit()
@@ -22,18 +24,18 @@ public class E2_MoveState : MoveState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
-        if(isPlayerInMinAgroRange)
+        /*climb*/
+        if(enemy.initialY != enemy.aliveGO.transform.position.y)
         {
-            enemy.idleState.SetFlipAfterIdle(false);
-            stateMachine.ChangeState(enemy.idleState);
+            enemy.ResetToInitialYPosition();
         }
 
-        else if(isDetectingWall || !isDetectingLedge)
+        if(enemy.CheckPlayerInDownAgroRange())
         {
-            enemy.idleState.SetFlipAfterIdle(true);
-            stateMachine.ChangeState(enemy.idleState);
+            enemy.rb.gravityScale = 1;
+            stateMachine.ChangeState(enemy.dropState);
         }
+
     }
 
     public override void PhysicsUpdate()

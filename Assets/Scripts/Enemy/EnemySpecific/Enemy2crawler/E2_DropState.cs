@@ -1,18 +1,19 @@
-using System.Data;
 using UnityEngine;
 
-public class E1_MoveState : MoveState
+public class E2_DropState : State
 {
-    private Enemy1 enemy;
-    public E1_MoveState(Entity etity, FiniteStateMachine stateMachine, string animBoolName, D_MoveState stateData, Enemy1 enemy) : base(etity, stateMachine, animBoolName, stateData)
+    private Enemy2 enemy;
+    private bool isDetectingLedge;
+
+    public E2_DropState(Entity etity, FiniteStateMachine stateMachine, string animBoolName, Enemy2 enemy) : base(etity, stateMachine, animBoolName)
     {
         this.enemy = enemy;
     }
 
     public override void Enter()
     {
+        isDetectingLedge = enemy.CheckLedge();
         base.Enter();
-        enemy.SetVelocity(stateData.movementSpeed);
     }
 
     public override void Exit()
@@ -23,16 +24,17 @@ public class E1_MoveState : MoveState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
-        if(isPlayerInMinAgroRange)
+        isDetectingLedge = enemy.CheckLedge();
+        
+        if(isDetectingLedge)
         {
-            enemy.idleState.SetFlipAfterIdle(false);
             stateMachine.ChangeState(enemy.idleState);
         }
 
-        else if(isDetectingWall || !isDetectingLedge)
+        if(enemy.CheckAttackPlayer())
         {
-            enemy.idleState.SetFlipAfterIdle(true);
+            Debug.Log("Player hit!");
+            /*player 데미지 함수(즉사)*/
             stateMachine.ChangeState(enemy.idleState);
         }
     }
@@ -41,5 +43,4 @@ public class E1_MoveState : MoveState
     {
         base.PhysicsUpdate();
     }
-
 }

@@ -7,7 +7,7 @@ public class Entity : NetworkBehaviour
     public FiniteStateMachine stateMachine;
 
     public D_Entity entityData;
-    public int facingDirection{get; private set;}
+    public int facingDirection;
     public Rigidbody2D rb {get; private set;}
     public Animator anim { get; private set;}
     public GameObject aliveGO { get; private set;}
@@ -24,8 +24,6 @@ public class Entity : NetworkBehaviour
     
     public virtual void Start()
     {
-        facingDirection = 1;
-
         aliveGO = transform.Find("Alive").gameObject;
         rb = aliveGO.GetComponent<Rigidbody2D>();
         anim = aliveGO.GetComponent<Animator>();
@@ -83,7 +81,8 @@ public class Entity : NetworkBehaviour
     public virtual void Flip()
     {
         facingDirection *= -1;
-        aliveGO.transform.Rotate(0f, 180f, 0f);
+        if(aliveGO.transform.position.y == 0f) aliveGO.transform.Rotate(0f, 180f, 0f);
+        else aliveGO.transform.Rotate(0f, 0f, 0f);
     }
 
     private void OnDrawGizmos() {

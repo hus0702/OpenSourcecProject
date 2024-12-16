@@ -16,12 +16,10 @@ public class MoveState : State
     public override void Enter()
     {
         base.Enter();
-        entity.SetVelocity(stateData.movementSpeed);
-
+        /*velocity 설정*/
         isDetectingWall = entity.CheckWall();
         isDetectingLedge = entity.CheckLedge();
         isPlayerInMinAgroRange = entity.CheckPlayerInMinAgroRange();
-        
     }
 
     public override void Exit()
