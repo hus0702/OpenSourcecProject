@@ -24,7 +24,7 @@ public class Vent : Door
     {
         if(!isOpened)
         {
-            if(Debug_isPlayerHasDrill)
+            if(requester.tag == "Limb" && GameManager.instance.Ldcontainer.itemset[3] || requester.tag == "Blind" && GameManager.instance.Pdcontainer.itemset[3])
             {
                 return true;
             }
