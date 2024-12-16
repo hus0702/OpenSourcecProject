@@ -142,69 +142,32 @@ public class Limb : NetworkBehaviour
 
     public void changeitem(bool newvalue)
     {
-        if (newvalue)
+        
+        if (isServer)
         {
-            int k = 0;
-            while (k < 4)
+            if (container.holdingitem == 0)
             {
-                if (isServer)
-                {
-                    if (container.holdingitem != 2)
-                        container.holdingitem++;
-                    else
-                        container.holdingitem = 0;
-
-                    if (container.itemset[container.holdingitem])
-                        break;
-                }
-                else 
-                {
-                    if (container.holdingitem != 2)
-                        CmdSetholdingitem(container.holdingitem + 1);
-                    else
-                        CmdSetholdingitem(0);
-
-
-                    if (container.itemset[container.holdingitem])
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        k++;
-                    }
-                       
-                }
+                if (container.itemset[1])
+                    container.holdingitem = 1;
+            }
+            else
+            {
+                container.holdingitem = 0;
             }
         }
         else 
         {
-            int k = 0;
-            while (k < 4)
+            if (container.holdingitem == 0)
             {
-                if (isServer)
+                if (container.itemset[1])
                 {
-                    if (container.holdingitem != 0)
-                        container.holdingitem--;
-                    else
-                        container.holdingitem = 2;
-
-                    if (container.itemset[container.holdingitem])
-                        break;
-                }
-                else
-                {
-                    if (container.holdingitem != 0)
-                        CmdSetholdingitem(container.holdingitem - 1);
-                    else
-                        CmdSetholdingitem(2);
-
-                    if (container.itemset[container.holdingitem])
-                        break;
-                    else { k++; }
+                    CmdSetholdingitem(1);
                 }
             }
+            else
+                CmdSetholdingitem(0);
         }
+
     }
 
     public void SetLimbVisible(bool newvalue)
