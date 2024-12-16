@@ -23,12 +23,17 @@ public class CardSlot : InteractableObject
         // 만약 플레이어가 지정된 카드키를 지니고 있는 상태라면
         // Player = requester.GetComponent; if (Player.hasItem(keyName))
 
-        if(requester.tag == "Limb" && GameManager.instance.Ldcontainer.itemset[2] || requester.tag == "Blind" && GameManager.instance.Pdcontainer.itemset[1]) return true;
+        if(requester.tag == "Limb" && GameManager.instance.Ldcontainer.itemset[2] || requester.tag == "Blind" && GameManager.instance.Pdcontainer.itemset[1]) 
+        {
+            Debug.Log("플레이어가 키를 가지고 있습니다! 상호작용을 시작합니다.");
+            return true;
+        }
         else return false;
         // else return false;
     }
     public override void ExecuteOnSuccess(GameObject requester)
     {
+        Debug.Log("키를 꽂습니다!!!");
         // 상호작용에 성공했을 경우
         SetKeyInserted();
     }
