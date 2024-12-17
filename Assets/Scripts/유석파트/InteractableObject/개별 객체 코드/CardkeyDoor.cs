@@ -43,6 +43,8 @@ public class CardkeyDoor : Door
         }
         Debug.Log("문이 열렸습니다!"); // 나중에 문 열리는 이벤트로 대체할 것.
 
+        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.opendoor, true, gameObject, 4f, 0.8f);
+
         CmdSetIsAnimatedOpened(true);
         //CmdOpenDoor();
     }

@@ -16,7 +16,9 @@ public class SWM : NetworkBehaviour
 */
     public void MakeSoundwave(int sfxNum, bool isShouldCheckCollider, GameObject sourceOfSound , float power , float duration)
     {
-        RpcMakeSoundwave(sfxNum, isShouldCheckCollider, sourceOfSound, power, duration);
+        if(sourceOfSound == null) Debug.LogError("최상단 인터페이스 : sourceOfSound가 null입니다");
+        else Debug.Log("$$$$$$$$$$$$ SWM MakeSoundWave : 난 분명 줬다 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        RpcMakeSoundwave(sfxNum, isShouldCheckCollider, sourceOfSound.transform.position, power, duration);
     }
 
     private static SWM instance;
@@ -50,8 +52,9 @@ public class SWM : NetworkBehaviour
 
 
 
-    [ClientRpc] private void RpcMakeSoundwave(int sfxNum, bool isShouldCheckCollider, GameObject sourceOfSound , float power , float duration)
+    [ClientRpc] private void RpcMakeSoundwave(int sfxNum, bool isShouldCheckCollider, Vector3 sourceOfSound , float power , float duration)
     {
+        if(sourceOfSound == null) Debug.LogError("SWM : sourceOf  SOOOOOOOund가 null입니다!");
         SoundWaveManager.Instance.MakeSoundWave(sfxNum, isShouldCheckCollider, sourceOfSound, power, duration);
     }
 }

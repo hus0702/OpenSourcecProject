@@ -15,7 +15,7 @@ public class SoundWaveManager : MonoBehaviour
             power : 음파의 반지름입니다
             duration : 음파의 지속 시간입니다
 */
-    public void MakeSoundWave(int sfxNum, bool isShouldCheckCollider, GameObject sourceOfSound , float power , float duration)
+    public void MakeSoundWave(int sfxNum, bool isShouldCheckCollider, Vector3 sourceOfSound , float power , float duration)
     {
         Debug.Log("Manager : 음파 생성");
 
@@ -36,6 +36,8 @@ public class SoundWaveManager : MonoBehaviour
 
         node.setMyPool(soundMakeNodePool);
         // 하나 가져왔다면
+
+        if(sourceOfSound == null) Debug.LogError("SoundWaveManager : sourceOfSound 가 null입니다!");
         node.MakeSound(sfxNum, isShouldCheckCollider, sourceOfSound, power, duration);
     }
 

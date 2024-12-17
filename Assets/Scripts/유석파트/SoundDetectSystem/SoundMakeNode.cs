@@ -67,14 +67,22 @@ public class SoundMakeNode : MonoBehaviour
         returnPool = pool;
     }
 
-    public void MakeSound(int sfxNum, bool isShouldCheckCollider, GameObject sourceOfSound, float power, float duration)
+    public void MakeSound(int sfxNum, bool isShouldCheckCollider, Vector3 sourceOfSound, float power, float duration)
     {
         sfxToPlay = sfxNum;
         this.isShouldCheckCollider = isShouldCheckCollider;
 
         InitSoundMakeNode();
 
-        transform.position = sourceOfSound.transform.position;
+        if(transform == null)
+        {
+            Debug.LogError("노드의 transform 이 null 입니다!!!");
+        }
+        else if(sourceOfSound == null)
+        {
+            Debug.LogError("소리를 낼 객체가 할당되지 않았습니다!!");
+        }
+        transform.position = sourceOfSound;
 
         // 일단 권장 사항으로 해놓겠습니당
         padeInDuration_goal = duration * padeInRatio;

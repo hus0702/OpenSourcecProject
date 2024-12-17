@@ -5,7 +5,7 @@ using UnityEngine.Rendering.Universal;
 
 public class ElectricPlatform : DangerousObject
 {
-    [SyncVar(hook = nameof(HookIsActiveChanged))]private bool isActive;
+    [SyncVar(hook = nameof(HookIsActiveChanged))]public bool isActive = true;
     private void HookIsActiveChanged(bool oldVal, bool newVal)
     {
         Debug.Log("전기장판에 대한 isActive 변경 감지! : " + newVal);

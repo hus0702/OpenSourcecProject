@@ -6,6 +6,6 @@ public class MakeSoundTrigger : Trigger
     public bool isShouldCheckCollider;
     public override void ActiveTrigger()
     {
-        SoundWaveManager.Instance.MakeSoundWave(sfxNum, isShouldCheckCollider, this.gameObject, 4f, 1.5f);
+        SoundWaveManager.Instance.MakeSoundWave(sfxNum, isShouldCheckCollider, this.gameObject.transform.position, 4f, 1.5f);
     }
 }

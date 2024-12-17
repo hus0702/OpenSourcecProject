@@ -23,6 +23,9 @@ public class CircuitBreaker : InteractableObject
     public override void ExecuteOnSuccess(GameObject requester)
     {
         base.ExecuteOnSuccess(requester);
+        
+        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.cardkey, true, gameObject, 4f, 0.8f);
+        
         SetIsActive(!isActive);
     }
 

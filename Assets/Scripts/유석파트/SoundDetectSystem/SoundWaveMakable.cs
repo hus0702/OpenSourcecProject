@@ -21,6 +21,6 @@ public class SoundWaveMakable : MonoBehaviour
             if(playerObjectController.Role == PlayerObjectController.Limp) return;
         }
 
-        SoundWaveManager.Instance.MakeSoundWave(sfxNum, isShouldCheckCollider, soundSource, 4f, 0.8f);
+        SoundWaveManager.Instance.MakeSoundWave(sfxNum, isShouldCheckCollider, soundSource.transform.position, 4f, 0.8f);
     }
 }

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class CardSlot : InteractableObject
 {
+
+    public GameObject SoundSource;
+
+
     public bool Debug_isInteractable;
     public InteractFailTalkBubble failHandler;
     public SO_FailHandleInfo failHandleInfo;
@@ -35,6 +39,10 @@ public class CardSlot : InteractableObject
     {
         Debug.Log("키를 꽂습니다!!!");
         // 상호작용에 성공했을 경우
+
+        if(SoundSource == null) Debug.LogError("소리를 낼 곳이 없습니다!!!");
+        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.cardkey, true, SoundSource, 4f, 0.8f);
+
         SetKeyInserted();
     }
     private void SetKeyInserted()=>IsKeyInserted = !IsKeyInserted;

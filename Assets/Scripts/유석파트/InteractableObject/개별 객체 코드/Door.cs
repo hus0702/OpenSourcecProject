@@ -31,6 +31,9 @@ public class Door : InteractableObject
     public override void ExecuteOnSuccess(GameObject requester)
     {
             // 애니메이션이나 효과음의 재생 등이 이루어질 수도 있고
+            SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.opendoor, true, gameObject, 4f, 0.8f);
+            SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.opendoor, true, teleportDest.gameObject, 4f, 0.8f);
+
 
             // 플레이어의 Transform 을 텔레포트시켜야 함.
             TransportRequester(requester);

@@ -7,6 +7,16 @@ public class Vent : Door
 
     public bool Debug_isPlayerHasDrill;
 
+    void Start()
+    {
+        if(isOpened)
+        {
+            Animator doorAnimator = GetComponent<Animator>();
+            doorAnimator.SetBool("isIdle", false);
+            doorAnimator.SetBool("isOpened", true);   
+        }
+    }
+
     [SyncVar(hook = nameof(HookIsOpened))] public bool isSyncOpen = false;
     private void HookIsOpened(bool oldVaule, bool newValue)
     {
@@ -37,6 +47,7 @@ public class Vent : Door
     {
         if(!isOpened)
         {
+            SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.opendoor, true, gameObject, 4f, 0.8f);
             // 여기에서는 벤트를 열어야 함.
             CmdSetIsSyncOpen(true);
         }
