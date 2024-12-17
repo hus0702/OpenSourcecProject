@@ -20,10 +20,12 @@ public class Entity : NetworkBehaviour
     private Transform ledgeCheck;
     [SerializeField]
     private Transform playerCheck;
-
+    [SerializeField]
+    private Transform playerCheck2;
 
     private Vector2 velocityWorkspace;
-    
+    private SWM swm;
+
     [ServerCallback]
     public virtual void Start()
     {
@@ -32,6 +34,7 @@ public class Entity : NetworkBehaviour
         anim = aliveGO.GetComponent<Animator>();
         damageAmount = 5;
         stateMachine = new FiniteStateMachine();
+        swm = new SWM();
     }
 
     public virtual void Update()
@@ -50,33 +53,31 @@ public class Entity : NetworkBehaviour
         rb.linearVelocity = velocityWorkspace;
     }
 
-    public virtual void OnCollisionEnter2D(Collision2D collision)
+    public virtual void PlayAttackSound()
     {
-        if (isServer)
+    SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.Enemygrawl, true, aliveGO, 6f, 0.8f);
+    }
+
+    IEnumerator WaitForAnimation(string animationName)
+    {
+        // 현재 상태 정보 가져오기
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+
+        // 애니메이션 재생 시작
+        anim.Play(animationName);
+
+        // 애니메이션이 끝날 때까지 대기
+        while (stateInfo.IsName(animationName) && stateInfo.normalizedTime < 1.0f)
         {
-            if (collision.gameObject.CompareTag("Limb")) 
-            {
-                // Player의 TakingDamage 함수를 호출
-                Limb player = collision.gameObject.GetComponent<Limb>();
-                if (player != null)
-                {
-                    player.TakingDamage(damageAmount);
-                }
-            }
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0); // 상태 정보 업데이트
+            yield return null; // 다음 프레임까지 대기
         }
 
-         if (isServer) // 서버에서만 처리
-        {
-            if (collision.gameObject.CompareTag("Blind")) 
-            {
-                Player player = collision.gameObject.GetComponent<Player>();
-                if (player != null)
-                {
-                    player.TakingDamage(damageAmount);
-                }
-            }
-        }
+        Debug.Log("애니메이션 종료!");
+        // 여기서 다음 동작을 실행
     }
+
+//************************************************************
 
     public virtual bool CheckWall()
     {
@@ -103,32 +104,34 @@ public class Entity : NetworkBehaviour
         return Physics2D.Raycast(playerCheck.position, -aliveGO.transform.up, 10000f, entityData.whatIsPlayer);
     }
 
-    public virtual bool CheckAttackPlayer()
+    public virtual Collider2D CheckAttackPlayer()
     {
         Collider2D player = Physics2D.OverlapCircle(playerCheck.position, entityData.attackRange, entityData.whatIsPlayer);
-        return player != null;
+        return player;
     }
 
     public virtual bool CheckPlayerInMinAgroRange2()
     {
-        return Physics2D.Raycast(playerCheck.position, aliveGO.transform.right, entityData.minAgroDistance, entityData.whatIsPlayer2);
+        return Physics2D.Raycast(playerCheck2.position, aliveGO.transform.right, entityData.minAgroDistance, entityData.whatIsPlayer2);
     }
 
     public virtual bool CheckPlayerInMaxAgroRange2()
     {
-        return Physics2D.Raycast(playerCheck.position, aliveGO.transform.right, entityData.maxAgroDistance, entityData.whatIsPlayer2);
+        return Physics2D.Raycast(playerCheck2.position, aliveGO.transform.right, entityData.maxAgroDistance, entityData.whatIsPlayer2);
     }
 
     public virtual bool CheckPlayerInDownAgroRange2()
     {
-        return Physics2D.Raycast(playerCheck.position, -aliveGO.transform.up, 10000f, entityData.whatIsPlayer2);
+        return Physics2D.Raycast(playerCheck2.position, -aliveGO.transform.up, 10000f, entityData.whatIsPlayer2);
     }
 
-    public virtual bool CheckAttackPlayer2()
+    public virtual Collider2D CheckAttackPlayer2()
     {
-        Collider2D player = Physics2D.OverlapCircle(playerCheck.position, entityData.attackRange, entityData.whatIsPlayer2);
-        return player != null;
+        Collider2D player = Physics2D.OverlapCircle(playerCheck2.position, entityData.attackRange, entityData.whatIsPlayer2);
+        return player;
     }
+
+//*********************************************************************************
 
     public virtual void Flip()
     {
@@ -142,8 +145,8 @@ public class Entity : NetworkBehaviour
         Gizmos.DrawLine(ledgeCheck.position, ledgeCheck.position * (Vector2.down * entityData.wallCheckDistance));
     }
 
-    public IEnumerator WaitCoroutine()
+    public IEnumerator WaitCoroutine(float time)
     {
-        yield return new WaitForSeconds(2f); // 2초 대기
+        yield return new WaitForSeconds(time); // 3초 대기
     }
 }

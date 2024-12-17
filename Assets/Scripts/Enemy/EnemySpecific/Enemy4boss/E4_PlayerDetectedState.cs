@@ -4,6 +4,13 @@ using UnityEngine;
 public class E4_PlayerDetectedState : PlayerDetectedState
 {
     private Enemy4 enemy;
+    private Collider2D hit;
+    private Player blind;
+    private Limb limb;
+
+    private bool isWall;
+
+    public float chargeSpeed = 3f;
 
     public E4_PlayerDetectedState(Entity etity, FiniteStateMachine stateMachine, string animBoolName, D_PlayerDetected stateData, Enemy4 enemy) : base(etity, stateMachine, animBoolName, stateData)
     {
@@ -12,7 +19,11 @@ public class E4_PlayerDetectedState : PlayerDetectedState
 
     public override void Enter()
     {
+        enemy.SetVelocity(0f);
+        isWall = enemy.CheckWall();
         base.Enter();
+        entity.WaitCoroutine(chargeSpeed);
+        enemy.SetVelocity(stateData.chaseSpeed);
     }
 
     public override void Exit()
@@ -24,24 +35,32 @@ public class E4_PlayerDetectedState : PlayerDetectedState
     {
         base.LogicUpdate();
 
-        if(enemy.CheckAttackPlayer())
+        if (isWall)
         {
-            Debug.Log("Player hit!");
-            /*player 데미지 함수*/
-            enemy.idleState.SetFlipAfterIdle(true);
             stateMachine.ChangeState(enemy.idleState);
         }
-        if(enemy.CheckAttackPlayer2())
+
+        hit = entity.CheckAttackPlayer();
+
+        if(hit != null)
         {
+            blind = hit.GetComponent<Player>();
             Debug.Log("Player hit!");
-            /*player2 데미지 함수*/
+            /*player1 데미지 함수*/
+            blind.TakingDamage(10);
             enemy.idleState.SetFlipAfterIdle(true);
             stateMachine.ChangeState(enemy.idleState);
         }
 
-        if(!isPlayerInMaxAgroRange || !isPlayerInMaxAgroRange2)
+        hit = entity.CheckAttackPlayer2();
+        
+        if(hit != null)
         {
-            enemy.idleState.SetFlipAfterIdle(false);
+            limb = hit.GetComponent<Limb>();
+            Debug.Log("Player2 hit!");
+            /*player2 데미지 함수*/
+            limb.TakingDamage(10);
+            enemy.idleState.SetFlipAfterIdle(true);
             stateMachine.ChangeState(enemy.idleState);
         }
     }

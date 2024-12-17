@@ -25,12 +25,4 @@ public class Enemy1 : Entity
         stateMachine.Initialize(idleState);
 
     }
-
-    public override void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (stateMachine.currentState == playerDetectedState)
-        {
-        base.OnCollisionEnter2D(collision);
-        }
-    }
 }

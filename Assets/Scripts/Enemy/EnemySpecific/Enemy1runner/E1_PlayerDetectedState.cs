@@ -4,6 +4,9 @@ using UnityEngine;
 public class E1_PlayerDetectedState : PlayerDetectedState
 {
     private Enemy1 enemy;
+    private Collider2D hit;
+    private Player blind;
+    private Limb limb;
 
     public E1_PlayerDetectedState(Entity etity, FiniteStateMachine stateMachine, string animBoolName, D_PlayerDetected stateData, Enemy1 enemy) : base(etity, stateMachine, animBoolName, stateData)
     {
@@ -23,19 +26,29 @@ public class E1_PlayerDetectedState : PlayerDetectedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        
+        hit = entity.CheckAttackPlayer();
 
-        if(enemy.CheckAttackPlayer())
+        if(hit != null)
         {
+            blind = hit.GetComponent<Player>();
             Debug.Log("Player hit!");
+            entity.PlayAttackSound();
             /*player1 데미지 함수*/
+            blind.TakingDamage(enemy.damageAmount);
             enemy.idleState.SetFlipAfterIdle(true);
             stateMachine.ChangeState(enemy.idleState);
         }
 
-        if(enemy.CheckAttackPlayer2())
+        hit = entity.CheckAttackPlayer2();
+        
+        if(hit != null)
         {
-            Debug.Log("Player hit!");
+            limb = hit.GetComponent<Limb>();
+            Debug.Log("Player2 hit!");
+            entity.PlayAttackSound();
             /*player2 데미지 함수*/
+            limb.TakingDamage(enemy.damageAmount);
             enemy.idleState.SetFlipAfterIdle(true);
             stateMachine.ChangeState(enemy.idleState);
         }

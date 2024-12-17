@@ -12,6 +12,7 @@ public class E4_MoveState : MoveState
     public override void Enter()
     {
         base.Enter();
+        enemy.SetVelocity(stateData.movementSpeed);
     }
 
     public override void Exit()
@@ -25,8 +26,7 @@ public class E4_MoveState : MoveState
 
         if(isPlayerInMinAgroRange|| isPlayerInMinAgroRange2)
         {
-            enemy.idleState.SetFlipAfterIdle(false);
-            stateMachine.ChangeState(enemy.idleState);
+            stateMachine.ChangeState(enemy.playerDetectedState);
         }
 
         else if(isDetectingWall || !isDetectingLedge)
