@@ -141,7 +141,7 @@ public class Player : NetworkBehaviour
         else
         {
             ShotParticle.gameObject.SetActive(false);
-            RpcSetShotParticle(true);
+            RpcSetShotParticle(false);
         }
             
     }
