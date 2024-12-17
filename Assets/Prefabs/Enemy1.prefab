@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 48588236759435089}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.055, y: -2.982, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0154529, y: 1.0623084, z: 0.8108235}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -222,7 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncDirection: 1
   syncMode: 0
-  syncInterval: 0
+  syncInterval: 0.71
   target: {fileID: 4616958367581898557}
   syncPosition: 1
   syncRotation: 1
@@ -376,7 +376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneId: 0
   _assetId: 3087199271
-  serverOnly: 1
+  serverOnly: 0
   visibility: 0
   hasSpawned: 0
 --- !u!1 &7748730782860589594
