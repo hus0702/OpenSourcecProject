@@ -52,7 +52,7 @@ public class PlayerDataContainer : NetworkBehaviour
         facingdirection = 1;
         climbVelocity = 1.5f;
         C_movementVelocity = 4f;
-        jumpVelocity = 9f;
+        jumpVelocity = 14f;
         groundCheckRadious = 0.5f;
         iscarrying = false;
         isclimbing = false;
