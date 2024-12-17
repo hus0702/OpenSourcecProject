@@ -49,7 +49,7 @@ public class CardkeyDoor : Door
         //CmdOpenDoor();
     }
 
-    [Command(requiresAuthority =false)] public void CmdSetIsAnimatedOpened(bool val)
+    [Command(requiresAuthority = false)] public void CmdSetIsAnimatedOpened(bool val)
     {
         isAnimatedOpened = val;
     }
