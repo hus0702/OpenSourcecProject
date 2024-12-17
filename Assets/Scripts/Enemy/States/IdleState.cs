@@ -7,7 +7,8 @@ public class IdleState : State
     protected bool flipAfterIdle;
     protected bool isIdleTimeOver;
     protected bool isPlayerInMaxAgroRange;
-
+    protected bool isPlayerInMaxAgroRange2;
+    
     protected float idleTime;
 
     public IdleState(Entity etity, FiniteStateMachine stateMachine, string animBoolName, D_IdleState stateData) : base(etity, stateMachine, animBoolName)
@@ -22,7 +23,8 @@ public class IdleState : State
         entity.SetVelocity(0f);
         isIdleTimeOver = false;
         isPlayerInMaxAgroRange = entity.CheckPlayerInMinAgroRange();
-        
+        isPlayerInMaxAgroRange2 = entity.CheckPlayerInMinAgroRange2();
+
         SetRandomIdleTime();
     }
 
@@ -51,6 +53,7 @@ public class IdleState : State
     {
         base.PhysicsUpdate();
         isPlayerInMaxAgroRange = entity.CheckPlayerInMinAgroRange();
+        isPlayerInMaxAgroRange2 = entity.CheckPlayerInMinAgroRange2();
     }
 
     public void SetFlipAfterIdle(bool flip)

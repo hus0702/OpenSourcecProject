@@ -4,6 +4,7 @@ public class E2_ReturnState : State
 {
     private Enemy2 enemy;
     private bool isPlayerInMinAgroRange;
+    private bool isPlayerInMinAgroRange2;
 
     public E2_ReturnState(Entity etity, FiniteStateMachine stateMachine, string animBoolName, Enemy2 enemy) : base(etity, stateMachine, animBoolName)
     {
@@ -25,6 +26,8 @@ public class E2_ReturnState : State
         base.LogicUpdate();
         enemy.ResetToInitialXPosition();
         isPlayerInMinAgroRange = enemy.CheckPlayerInMinAgroRange();
+        isPlayerInMinAgroRange2 = enemy.CheckPlayerInMinAgroRange2();
+
 
         if(enemy.initialX == enemy.aliveGO.transform.position.x)
         {
@@ -33,7 +36,7 @@ public class E2_ReturnState : State
             stateMachine.ChangeState(enemy.moveState);
         }
 
-        if(isPlayerInMinAgroRange)
+        if(isPlayerInMinAgroRange || isPlayerInMinAgroRange2)
         {
             stateMachine.ChangeState(enemy.playerDetectedState);
         }

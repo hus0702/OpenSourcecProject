@@ -22,7 +22,7 @@ public class E3_IdleState : IdleState
     {
         base.LogicUpdate();
 
-        if (isIdleTimeOver && isPlayerInMaxAgroRange)
+        if (isIdleTimeOver  && (isPlayerInMaxAgroRange || isPlayerInMaxAgroRange2))
         {
             stateMachine.ChangeState(enemy.playerDetectedState);
         }

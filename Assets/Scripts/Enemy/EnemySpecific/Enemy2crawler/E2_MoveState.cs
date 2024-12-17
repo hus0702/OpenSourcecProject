@@ -29,7 +29,7 @@ public class E2_MoveState : MoveState
             enemy.ResetToInitialYPosition();
         }
 
-        if(enemy.CheckPlayerInDownAgroRange())
+        if(enemy.CheckPlayerInDownAgroRange() || enemy.CheckPlayerInDownAgroRange2())
         {
             enemy.rb.gravityScale = 1;
             stateMachine.ChangeState(enemy.dropState);

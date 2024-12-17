@@ -309,7 +309,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Boss-walk_0: -881709887677725335
+      Boss-walk_1: -2751868776412534437
+      Boss-walk_2: -6196024870083699917
+      Boss-walk_3: 2488500117491754785
+      Boss-walk_4: 3885491536066006276
+      Boss-walk_5: 935767828636768749
+      Boss-walk_6: 8993298048916660171
+      Boss-walk_7: 3309700238560163763
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

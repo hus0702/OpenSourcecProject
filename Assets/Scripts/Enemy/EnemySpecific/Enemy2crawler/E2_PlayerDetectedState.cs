@@ -31,7 +31,14 @@ public class E2_PlayerDetectedState : PlayerDetectedState
             stateMachine.ChangeState(enemy.idleState);
         }
 
-        if(!isPlayerInMaxAgroRange)
+        if(enemy.CheckAttackPlayer2())
+        {
+            Debug.Log("Player hit!");
+            /*player2 데미지 함수*/
+            stateMachine.ChangeState(enemy.idleState);
+        }
+
+        if(!(isPlayerInMaxAgroRange || isPlayerInMaxAgroRange2))
         {
             stateMachine.ChangeState(enemy.idleState);
         }

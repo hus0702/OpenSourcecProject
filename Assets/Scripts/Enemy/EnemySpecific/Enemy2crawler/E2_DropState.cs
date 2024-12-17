@@ -34,7 +34,14 @@ public class E2_DropState : State
         if(enemy.CheckAttackPlayer())
         {
             Debug.Log("Player hit!");
-            /*player 데미지 함수(즉사)*/
+            /*player1 데미지 함수(즉사)*/
+            stateMachine.ChangeState(enemy.idleState);
+        }
+
+        if(enemy.CheckAttackPlayer2())
+        {
+            Debug.Log("Player hit!");
+            /*player2 데미지 함수(즉사)*/
             stateMachine.ChangeState(enemy.idleState);
         }
     }

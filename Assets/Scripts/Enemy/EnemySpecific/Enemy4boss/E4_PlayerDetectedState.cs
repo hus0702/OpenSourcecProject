@@ -31,8 +31,15 @@ public class E4_PlayerDetectedState : PlayerDetectedState
             enemy.idleState.SetFlipAfterIdle(true);
             stateMachine.ChangeState(enemy.idleState);
         }
+        if(enemy.CheckAttackPlayer2())
+        {
+            Debug.Log("Player hit!");
+            /*player2 데미지 함수*/
+            enemy.idleState.SetFlipAfterIdle(true);
+            stateMachine.ChangeState(enemy.idleState);
+        }
 
-        if(!isPlayerInMaxAgroRange)
+        if(!isPlayerInMaxAgroRange || !isPlayerInMaxAgroRange2)
         {
             enemy.idleState.SetFlipAfterIdle(false);
             stateMachine.ChangeState(enemy.idleState);

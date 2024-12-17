@@ -22,4 +22,7 @@ MonoBehaviour:
     m_Bits: 512
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 256
+  whatIsPlayer2:
+    serializedVersion: 2
+    m_Bits: 1024

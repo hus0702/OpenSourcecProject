@@ -27,12 +27,20 @@ public class E1_PlayerDetectedState : PlayerDetectedState
         if(enemy.CheckAttackPlayer())
         {
             Debug.Log("Player hit!");
-            /*player 데미지 함수*/
+            /*player1 데미지 함수*/
             enemy.idleState.SetFlipAfterIdle(true);
             stateMachine.ChangeState(enemy.idleState);
         }
 
-        if(!isPlayerInMaxAgroRange)
+        if(enemy.CheckAttackPlayer2())
+        {
+            Debug.Log("Player hit!");
+            /*player2 데미지 함수*/
+            enemy.idleState.SetFlipAfterIdle(true);
+            stateMachine.ChangeState(enemy.idleState);
+        }
+
+        if(!(isPlayerInMaxAgroRange || isPlayerInMaxAgroRange2))
         {
             enemy.idleState.SetFlipAfterIdle(false);
             stateMachine.ChangeState(enemy.idleState);

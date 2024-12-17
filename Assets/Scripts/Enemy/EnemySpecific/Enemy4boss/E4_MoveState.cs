@@ -23,7 +23,7 @@ public class E4_MoveState : MoveState
     {
         base.LogicUpdate();
 
-        if(isPlayerInMinAgroRange)
+        if(isPlayerInMinAgroRange|| isPlayerInMinAgroRange2)
         {
             enemy.idleState.SetFlipAfterIdle(false);
             stateMachine.ChangeState(enemy.idleState);
