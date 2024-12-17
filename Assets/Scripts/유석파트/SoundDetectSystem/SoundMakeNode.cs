@@ -1,9 +1,27 @@
 using UnityEngine;
 using Mirror;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class SoundMakeNode : MonoBehaviour
 {
+    /*
+        여기에 소리를 재생하는 코드를 넣으면 됩니다. 조건 검사는 이미 OnTriggerEnter2D() 함수에서 마쳤습니다.
+    
+        인자는 주시는 대로 주시면 받는 대로 받아 PlaySound 함수를 수정하겠습니다!
+    */
+    public void PlaySound()
+    {
+        Debug.Log("소리를 재생합니다!");
+
+        AudioManager.instance.PlaySfx((AudioManager.Sfx)sfxToPlay); // 일단 이렇게 넣어봤음.
+    }
+
+
+    public int sfxToPlay;
+    public bool isShouldCheckCollider;
+
+
     private ObjectPool returnPool; // 만약 이벤트가 모두 끝나고 돌아가야 할 오브젝트 풀이 있다면 이 곳에 저장된다!
 
     private Light2D light2d;
@@ -27,6 +45,10 @@ public class SoundMakeNode : MonoBehaviour
     private float power;
 
 
+
+    private bool isLigitOff;
+
+
     void Awake()
     {
         light2d = GetComponent<Light2D>();
@@ -34,6 +56,7 @@ public class SoundMakeNode : MonoBehaviour
 
     void InitSoundMakeNode()
     {
+        light2d.gameObject.SetActive(true);
         light2d.pointLightInnerRadius = 0;
         light2d.pointLightOuterRadius = 0;
         light2d.intensity = 0;
@@ -44,8 +67,11 @@ public class SoundMakeNode : MonoBehaviour
         returnPool = pool;
     }
 
-    public void MakeSound(GameObject sourceOfSound, float power, float duration)
+    public void MakeSound(int sfxNum, bool isShouldCheckCollider, GameObject sourceOfSound, float power, float duration)
     {
+        sfxToPlay = sfxNum;
+        this.isShouldCheckCollider = isShouldCheckCollider;
+
         InitSoundMakeNode();
 
         transform.position = sourceOfSound.transform.position;
@@ -62,6 +88,18 @@ public class SoundMakeNode : MonoBehaviour
 
         isPadeIning = true;
         light2d.intensity = 0.8f;
+        
+        if(!SoundWaveManager.Instance.isBlind)
+        {
+            isLigitOff = true;
+            light2d.intensity = 0.0f;
+        }
+        else
+        {
+            isLigitOff = false;
+        }
+        
+        if(!isShouldCheckCollider) PlaySound();
     }
 
     public void Update()
@@ -104,7 +142,7 @@ public class SoundMakeNode : MonoBehaviour
         if(isPadeOuting)
         {
             padeOutDuration -= Time.deltaTime;
-            light2d.intensity = Mathf.SmoothStep(0.8f, 0, Mathf.Pow((padeOutDuration_goal - padeOutDuration) / padeOutDuration_goal, 0.2f));
+            if(!isLigitOff) light2d.intensity = Mathf.SmoothStep(0.8f, 0, Mathf.Pow((padeOutDuration_goal - padeOutDuration) / padeOutDuration_goal, 0.2f));
 
             if(padeOutDuration <= 0)
             {
@@ -117,6 +155,28 @@ public class SoundMakeNode : MonoBehaviour
                     returnPool.ReleaseObject(gameObject);
                 }
             }       
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D detectedCollider)
+    {
+        if(!isShouldCheckCollider)
+        {
+            return;
+        }
+
+        var gameObjectOfColliderTag = detectedCollider.gameObject.tag;
+    
+        if(gameObjectOfColliderTag == "Blind" || gameObjectOfColliderTag == "Limb")
+        {
+            // 일단 플레이어를 감지했다는건 로컬 플레이어를 확인할 수 있는 상태가 됐단거임.
+            var localPlayer = NetworkClient.localPlayer.GetComponent<PlayerObjectController>();
+
+            if((gameObjectOfColliderTag == "Blind" && localPlayer.Role == PlayerObjectController.Blind)
+                || (gameObjectOfColliderTag == "Limb" && localPlayer.Role == PlayerObjectController.Limp))
+            {
+                PlaySound();
+            }
         }
     }
 }

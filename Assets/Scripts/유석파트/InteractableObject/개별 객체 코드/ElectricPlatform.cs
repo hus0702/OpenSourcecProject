@@ -20,6 +20,7 @@ public class ElectricPlatform : DangerousObject
     }
     [Command(requiresAuthority = false)] public void SetIsActive(bool val)
     {
+        Debug.Log("전기장판에 " + val + " 요청이 왔습니다.");
         isActive = val;
     }
 

@@ -8,6 +8,7 @@ public class CardkeyDoor : Door
     [SyncVar(hook = nameof(HookIsOpened))] public bool isAnimatedOpened = false;
     private void HookIsOpened(bool oldVaule, bool newValue)
     {
+        Debug.Log("문이 열리는 애니메이션을 작동");
         if(newValue == true)
         {
             Animator doorAnimator = GetComponent<Animator>();

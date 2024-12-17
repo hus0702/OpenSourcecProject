@@ -9,6 +9,7 @@ TagManager:
   - Limb
   - Bullet
   - Enemy
+  - DummyPlayerToDisplay
   layers:
   - Default
   - TransparentFX

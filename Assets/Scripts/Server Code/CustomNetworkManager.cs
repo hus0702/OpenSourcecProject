@@ -58,7 +58,15 @@ public class CustomNetworkManager : NetworkManager
             if (!GameManager.instance.isGameStarted)
             {
                 GameManager.instance.isGameStarted = true;
+
                 SpawnPrefabs();
+
+                if(NetworkClient.localPlayer.GetComponent<PlayerObjectController>().Role == PlayerObjectController.Blind)
+                {
+                    SoundWaveManager.Instance.isBlind = true;
+                }
+                else SoundWaveManager.Instance.isBlind = false;
+
             }
             else
             {

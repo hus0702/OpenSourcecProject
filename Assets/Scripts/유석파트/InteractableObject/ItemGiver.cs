@@ -48,7 +48,10 @@ public class ItemGiver : InteractableObject
         else if(itemToGive == "카드키")
         {
             if(requester.tag == "Limb")
+            {
+                if(GameManager.instance.Ldcontainer.itemset[2]) return;
                 GameManager.instance.Ldcontainer.itemset[2] = true;
+            }
             else if(requester.tag == "Blind")
             {
                 if(GameManager.instance.Pdcontainer.iscarrying)
@@ -59,6 +62,7 @@ public class ItemGiver : InteractableObject
                     }
                     else
                     {
+                        if(GameManager.instance.Pdcontainer.itemset[1]) return;
                         GameManager.instance.Pdcontainer.itemset[1] = true;
                     }
                 }

@@ -42,8 +42,7 @@ public class Vent : Door
         }
         else
         {
-            //if(NetworkClient.localPlayer.GetComponent<PlayerObjectController>().Role == PlayerObjectController.Blind) return;
-            TransportRequester(requester);
+            if(requester.tag == "Limb") TransportRequester(requester);
         }
     }
 

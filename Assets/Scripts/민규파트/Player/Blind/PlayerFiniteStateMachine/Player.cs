@@ -120,7 +120,7 @@ public class Player : NetworkBehaviour
 
         CurrentVelocity = RB.linearVelocity;
         StateMachine.playerCurrentState.LogicUpdate();
-        Debug.Log(StateMachine.playerCurrentState);
+        //Debug.Log(StateMachine.playerCurrentState);
         if (isServer)
         {
             container.position = transform.position;
