@@ -48,6 +48,8 @@ public class Limb : NetworkBehaviour
     private Transform groundcheck;
 
     [SerializeField]
+    private SpriteRenderer ShotParticle;
+    [SerializeField]
     private BoxCollider2D myBoxCollider;
 
 
@@ -95,6 +97,7 @@ public class Limb : NetworkBehaviour
         BulletPrefab = bulletprefab;
         groundcheck = transform.GetChild(0);
         myBoxCollider = GetComponent<BoxCollider2D>();
+        ShotParticle.enabled = false;
 
     }
 
@@ -232,6 +235,35 @@ public class Limb : NetworkBehaviour
 
         spriteRenderer.enabled = true; // ���������� ��������Ʈ�� �ѵ�
     }
+
+    IEnumerator ShotspriteCoroutine()
+    {
+        float elapsed = 0f;
+        if (isServer)
+        {
+            GameManager.instance.Pdcontainer.Shotparticle = true;
+        }
+        else
+        {
+            CmdSetPdShotParticle(true);
+        }
+
+        while (elapsed < 0.2f)
+        {
+            ShotParticle.enabled = true; 
+            yield return new WaitForSeconds(0.1f); 
+            elapsed += 0.1f;
+        }
+        ShotParticle.enabled = false;
+        if (isServer)
+        {
+            GameManager.instance.Pdcontainer.Shotparticle = false;
+        }
+        else
+        {
+            CmdSetPdShotParticle(false);
+        }
+    }
     #endregion
 
     #region Check Functions
@@ -365,15 +397,14 @@ public class Limb : NetworkBehaviour
         if ((bulletrotation.x > 0 && GameManager.instance.Pdcontainer.facingdirection < 0) || (bulletrotation.x < 0 && GameManager.instance.Pdcontainer.facingdirection > 0))
             if (container.isRiding)
                 return;
-
+        StartCoroutine(ShotspriteCoroutine());
         if (isServer)
         {
-            
             Vector2 bulletDirection = new Vector2(bulletrotation.x, bulletrotation.y).normalized;
 
             if (container.isRiding && container.holdingitem == 1)
             {
-                bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection, 0, 0);
+                bulletspawnSpot = GameManager.instance.Pdcontainer.position + new Vector3(GameManager.instance.Pdcontainer.facingdirection * 0.49f, 0.282f, 0);
                 if (bulletDirection.y > 0.3f)
                     bulletDirection.y = 0.3f;
                 else if (bulletDirection.y < -0.3f)
@@ -383,7 +414,7 @@ public class Limb : NetworkBehaviour
             }
             else
             {
-                bulletspawnSpot = transform.position + new Vector3(container.FacingDirection, -0.4f, 0);
+                bulletspawnSpot = transform.position + new Vector3(container.FacingDirection*0.72f, -0.333f, 0);
                 bulletDirection = new Vector2(container.FacingDirection, 0);
             }
             GameObject bullet = Instantiate(BulletPrefab, bulletspawnSpot, bulletrotation);
@@ -683,7 +714,7 @@ public class Limb : NetworkBehaviour
     void CmdLimbShot()
     {
         bulletrotation = Quaternion.Euler(container.mousePosition - transform.position);
-
+        StartCoroutine(ShotspriteCoroutine());
         Vector2 bulletDirection = new Vector2(bulletrotation.x, bulletrotation.y).normalized;
 
         if (container.isRiding && container.holdingitem == 1)
@@ -736,6 +767,12 @@ public class Limb : NetworkBehaviour
         spriteRenderer.color = color;
     }
 
+    [Command]
+    public void CmdSetPdShotParticle(bool newvalue)
+    { 
+        GameManager.instance.Pdcontainer.Shotparticle = newvalue;
+    }
+
     [ClientRpc]
     public void RpcSetSpriteRenderer(bool newvalue)
     {
@@ -751,7 +788,7 @@ public class Limb : NetworkBehaviour
     public void RpcLimbShot()
     {
         bulletrotation = Quaternion.Euler(container.mousePosition - transform.position);
-
+        StartCoroutine(ShotspriteCoroutine());
         Vector2 bulletDirection = new Vector2(bulletrotation.x, bulletrotation.y).normalized;
 
         if (container.isRiding && container.holdingitem == 1)

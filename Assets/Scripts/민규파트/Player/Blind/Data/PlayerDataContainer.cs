@@ -43,6 +43,8 @@ public class PlayerDataContainer : NetworkBehaviour
 
     [SyncVar] public int holdingitem;
     [SyncVar] public bool Respawncall;
+
+    [SyncVar] public bool Shotparticle;
     private void Awake()
     {
         movementVelocity = 6f;
@@ -76,6 +78,7 @@ public class PlayerDataContainer : NetworkBehaviour
         holdingitem = 0;
 
         Respawncall = false;
+        Shotparticle = false;
     }
 
     private void Update()
