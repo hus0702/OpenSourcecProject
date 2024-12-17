@@ -54,6 +54,7 @@ public class GameManager : NetworkBehaviour
     {
         if (Blind != null)
         {
+            Pdcontainer.iscarrying = false;
             Blind.GetComponent<Player>().Respawn();
         }
         else

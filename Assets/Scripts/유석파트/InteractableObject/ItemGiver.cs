@@ -22,12 +22,12 @@ public class ItemGiver : InteractableObject
         if(itemToGive == "총")
         {
             if(requester.tag == "Limb")
-                GameManager.instance.Ldcontainer.itemset[1] = true;
+                GameManager.instance.Ldcontainer.item1 = true;
             else if(requester.tag == "Blind")
             {
                 if(GameManager.instance.Pdcontainer.iscarrying)
                 {   
-                    GameManager.instance.Ldcontainer.itemset[1] = true;
+                    GameManager.instance.Ldcontainer.item1 = true;
                 }
                 else return;
             }
@@ -35,12 +35,12 @@ public class ItemGiver : InteractableObject
         else if(itemToGive == "드릴")
         {
             if(requester.tag == "Limb")
-                GameManager.instance.Ldcontainer.itemset[3] = true;
+                GameManager.instance.Ldcontainer.item3 = true;
             else if(requester.tag == "Blind")
             {
                 if(GameManager.instance.Pdcontainer.iscarrying)
                 {   
-                    GameManager.instance.Ldcontainer.itemset[3] = true;
+                    GameManager.instance.Ldcontainer.item3 = true;
                 }
                 else return;
             }
@@ -49,27 +49,27 @@ public class ItemGiver : InteractableObject
         {
             if(requester.tag == "Limb")
             {
-                if(GameManager.instance.Ldcontainer.itemset[2]) return;
-                GameManager.instance.Ldcontainer.itemset[2] = true;
+                if(GameManager.instance.Ldcontainer.item2) return;
+                GameManager.instance.Ldcontainer.item2 = true;
             }
             else if(requester.tag == "Blind")
             {
                 if(GameManager.instance.Pdcontainer.iscarrying)
                 {   
-                    if(GameManager.instance.Pdcontainer.itemset[1])
+                    if(GameManager.instance.Pdcontainer.item1)
                     {
                         return;
-                        GameManager.instance.Ldcontainer.itemset[2] = true;
+                        GameManager.instance.Ldcontainer.item2 = true;
                     }
                     else
                     {
-                        GameManager.instance.Pdcontainer.itemset[1] = true;
+                        GameManager.instance.Pdcontainer.item1 = true;
                     }
                 }
                 else
                 {
-                    if(!GameManager.instance.Pdcontainer.itemset[1])
-                        GameManager.instance.Pdcontainer.itemset[1] = true;
+                    if(!GameManager.instance.Pdcontainer.item1)
+                        GameManager.instance.Pdcontainer.item1 = true;
                     else return;
                 }
             }
