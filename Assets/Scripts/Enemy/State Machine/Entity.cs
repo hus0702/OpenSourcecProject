@@ -26,7 +26,6 @@ public class Entity : NetworkBehaviour
     private Vector2 velocityWorkspace;
     private SWM swm;
 
-    [ServerCallback]
     public virtual void Start()
     {
         aliveGO = transform.Find("Alive").gameObject;
@@ -39,12 +38,19 @@ public class Entity : NetworkBehaviour
 
     public virtual void Update()
     {
-        stateMachine.currentState.LogicUpdate();
+        if (isServer)
+        {
+            stateMachine.currentState.LogicUpdate();
+        }
+        
     }
 
     public virtual void FixedUpdate()
     {
-        stateMachine.currentState.PhysicsUpdate();
+        if (isServer)
+        {
+            stateMachine.currentState.LogicUpdate();
+        }
     }
 
     public virtual void SetVelocity(float velocity)
