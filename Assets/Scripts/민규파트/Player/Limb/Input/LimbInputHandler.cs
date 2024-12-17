@@ -114,11 +114,13 @@ public class LimbInputHandler : NetworkBehaviour
             {
                 if (isServer)
                 {
-                    container.InteractInput = true;
+                    //container.InteractInput = true;
+                    limb.Interact();
                 }
                 else
                 {
-                    limb.CmdSetInteractInput(true);
+                    //limb.CmdSetInteractInput(true);
+                    limb.Interact();
                 }
             }
             if (Input.GetKeyUp(KeyCode.E))
