@@ -36,9 +36,12 @@ public class PlayerDataContainer : NetworkBehaviour
     [SyncVar] public bool ladderDown;
     [SyncVar] public bool InteractInput;
 
-    [SyncVar] public bool[] itemset; // 0번은 빈손, 1번은 카드키예정
-    [SyncVar] public int holdingitem;
+    public bool[] itemset; // 0번은 빈손, 1번은 카드키예정
 
+    [SyncVar] public bool item0;
+    [SyncVar] public bool item1;
+
+    [SyncVar] public int holdingitem;
     [SyncVar] public bool Respawncall;
     private void Awake()
     {
@@ -66,12 +69,19 @@ public class PlayerDataContainer : NetworkBehaviour
         InteractInput = false;
 
         itemset = new bool[2];
-        itemset[0] = true;
-        itemset[1] = false;
+        item0 = true;
+        item1 = false;
+        itemset[0] = item0;
+        itemset[1] = item1;
         holdingitem = 0;
 
         Respawncall = false;
     }
 
+    private void Update()
+    {
+        itemset[0] = item0;
+        itemset[1] = item1;
+    }
 
 }
