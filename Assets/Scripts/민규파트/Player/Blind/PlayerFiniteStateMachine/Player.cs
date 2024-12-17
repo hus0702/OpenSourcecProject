@@ -29,7 +29,6 @@ public class Player : NetworkBehaviour
     public PlayerClimbState climbState { get; private set; }
     public PlayerPutDownState PutDownState { get; private set; }
     public PlayerThrowState ThrowState { get; private set; }
-
     public PlayerDieState DieState { get; private set; }
 
     public PlayerC_holdinggunidleState c_holdinggunidleState { get; private set; }
@@ -112,7 +111,6 @@ public class Player : NetworkBehaviour
         groundcheck = transform.GetChild(0);
         myBoxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        ShotParticle.enabled = false;
     }
 
     private void Update()
@@ -136,11 +134,11 @@ public class Player : NetworkBehaviour
 
         //샷
         if (container.Shotparticle)
-            ShotParticle.enabled = true;
+        {
+            ShotParticle.gameObject.SetActive(true);
+        }
         else
-            ShotParticle.enabled = false;
-
-
+            ShotParticle.gameObject.SetActive(false);
     }
 
     private void FixedUpdate()
