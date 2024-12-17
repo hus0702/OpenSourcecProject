@@ -54,6 +54,8 @@ public class SWM : NetworkBehaviour
 
     [ClientRpc] private void RpcMakeSoundwave(int sfxNum, bool isShouldCheckCollider, Vector3 sourceOfSound , float power , float duration)
     {
+        Debug.Log("서버로부터 음파 생성 명령을 받았습니다!");
+
         if(sourceOfSound == null) Debug.LogError("SWM : sourceOf  SOOOOOOOund가 null입니다!");
         SoundWaveManager.Instance.MakeSoundWave(sfxNum, isShouldCheckCollider, sourceOfSound, power, duration);
     }
