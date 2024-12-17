@@ -239,30 +239,44 @@ public class Limb : NetworkBehaviour
     IEnumerator ShotspriteCoroutine()
     {
         float elapsed = 0f;
-        if (isServer)
+        if (container.isRiding)
         {
-            GameManager.instance.Pdcontainer.Shotparticle = true;
+            if (isServer)
+            {
+                GameManager.instance.Pdcontainer.Shotparticle = true;
+            }
+            else
+            {
+                CmdSetPdShotParticle(true);
+            }
+            while (elapsed < 0.2f)
+            {
+                yield return new WaitForSeconds(0.1f);
+                elapsed += 0.1f;
+            }
+            if (isServer)
+            {
+                GameManager.instance.Pdcontainer.Shotparticle = false;
+            }
+            else
+            {
+                CmdSetPdShotParticle(false);
+            }
         }
         else
         {
-            CmdSetPdShotParticle(true);
+            while (elapsed < 0.2f)
+            {
+                ShotParticle.enabled = true;
+                yield return new WaitForSeconds(0.1f);
+                elapsed += 0.1f;
+            }
         }
 
-        while (elapsed < 0.2f)
-        {
-            ShotParticle.enabled = true; 
-            yield return new WaitForSeconds(0.1f); 
-            elapsed += 0.1f;
-        }
+
+
         ShotParticle.enabled = false;
-        if (isServer)
-        {
-            GameManager.instance.Pdcontainer.Shotparticle = false;
-        }
-        else
-        {
-            CmdSetPdShotParticle(false);
-        }
+
     }
     #endregion
 
