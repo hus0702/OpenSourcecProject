@@ -66,7 +66,6 @@ public class CustomNetworkManager : NetworkManager
                     SoundWaveManager.Instance.isBlind = true;
                 }
                 else SoundWaveManager.Instance.isBlind = false;
-
             }
             else
             {

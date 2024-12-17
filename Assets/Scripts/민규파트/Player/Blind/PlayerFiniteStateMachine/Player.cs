@@ -656,6 +656,7 @@ public class Player : NetworkBehaviour
             if (isServer)
             {
                 this.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
+                RpcBlindRespawn();
             }
             else
             {

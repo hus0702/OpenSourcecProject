@@ -566,6 +566,7 @@ public class Limb : NetworkBehaviour
             if (isServer)
             {
                 this.transform.position = GameManager.instance.LimpSpawnPositionOnLoad;
+                RpcLimbRespawn();
             }
             else
             {
