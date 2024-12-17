@@ -47311,7 +47311,7 @@ PrefabInstance:
       objectReference: {fileID: 1785790292}
     - target: {fileID: 3680313076077086695, guid: 664421ad4bc6dec4586f82f7f4626275, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartGame
+      value: DebugStartGame
       objectReference: {fileID: 0}
     - target: {fileID: 3680313076077086695, guid: 664421ad4bc6dec4586f82f7f4626275, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -48155,9 +48155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffd77d5bbe9aff74ab7fd9b347a01c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
   soundMakeNodePool: {fileID: 1132810328}
   isBlind: 0
 --- !u!4 &1170614482

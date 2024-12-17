@@ -1508,7 +1508,14 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.3833333
+    functionName: PlayBlindLand
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
 --- !u!114 &-3862968476971795942
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6333,7 +6340,6 @@ MonoBehaviour:
   m_Markers:
     m_Objects:
     - {fileID: -8773973296494943410}
-    - {fileID: 4067722336025237008}
 --- !u!114 &3492639423092157679
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6434,22 +6440,6 @@ MonoBehaviour:
   m_Loop: 0
   m_Version: 1
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
---- !u!114 &4067722336025237008
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
-  m_Name: Signal Emitter
-  m_EditorClassIdentifier: 
-  m_Time: 5.150000000000006
-  m_Retroactive: 0
-  m_EmitOnce: 0
-  m_Asset: {fileID: 11400000, guid: 8742d3124fe61d046b8ef900416ff022, type: 2}
 --- !u!114 &4074471111930701323
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6572,7 +6562,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 58.966667
+    m_StopTime: 59
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -6690,7 +6680,21 @@ AnimationClip:
     flags: 0
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 2
+    functionName: PlayOpenDoor
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 59
+    functionName: PlayOpenDoor
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
 --- !u!114 &4593396744095840893
 MonoBehaviour:
   m_ObjectHideFlags: 1
