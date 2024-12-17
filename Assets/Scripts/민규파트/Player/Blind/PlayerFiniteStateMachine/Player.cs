@@ -120,7 +120,7 @@ public class Player : NetworkBehaviour
 
         CurrentVelocity = RB.linearVelocity;
         StateMachine.playerCurrentState.LogicUpdate();
-
+        //Debug.Log(StateMachine.playerCurrentState);
         if (isServer)
         {
             container.position = transform.position;
@@ -301,6 +301,10 @@ public class Player : NetworkBehaviour
     #region SoundMaking Function
     public void BlindLandSound()
     {
+
+        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.BlindLand, true, groundcheck.gameObject, 6f, 0.8f);
+        return;
+
         if (isServer)
         {
             AudioManager.instance.PlaySfx(AudioManager.Sfx.BlindLand);
@@ -314,6 +318,11 @@ public class Player : NetworkBehaviour
 
     public void BlindwalkSound()
     {
+
+        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.Blindwalk, true, groundcheck.gameObject, 4f, 0.8f);
+        return;
+
+
         if (isServer)
         {
             AudioManager.instance.PlaySfx(AudioManager.Sfx.Blindwalk);
@@ -326,6 +335,10 @@ public class Player : NetworkBehaviour
     }
     public void BlindclimbSound()
     {
+
+        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.Blindclimb, true, gameObject, 4f, 0.8f);
+        return;
+
         if (isServer)
         {
             AudioManager.instance.PlaySfx(AudioManager.Sfx.Blindclimb);
@@ -338,6 +351,10 @@ public class Player : NetworkBehaviour
     }
     public void BlindDieSound()
     {
+
+        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.BlindDie, true, gameObject, 5f, 0.8f);
+        return;
+
         if (isServer)
         {
             AudioManager.instance.PlaySfx(AudioManager.Sfx.BlindDie);
@@ -351,6 +368,10 @@ public class Player : NetworkBehaviour
 
     public void BlindCarryUpSound()
     {
+
+        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.BlindCarryUp, true, gameObject, 4f, 0.8f);
+        return;
+
         if (isServer)
         {
             AudioManager.instance.PlaySfx(AudioManager.Sfx.BlindCarryUp);
@@ -364,6 +385,10 @@ public class Player : NetworkBehaviour
 
     public void BlindthrowSound()
     {
+
+        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.Blindthrow, true, gameObject, 4f, 0.8f);
+        return;
+
         if (isServer)
         {
             AudioManager.instance.PlaySfx(AudioManager.Sfx.Blindthrow);
@@ -505,6 +530,16 @@ public class Player : NetworkBehaviour
     }
     public void Interact()
     {
+
+        if (isServer)
+        {
+            container.InteractInput = false;
+        }
+        else
+        {
+            CmdSetInteractInput(false);
+        }
+
         Debug.Log("플레이어가 상호작용을 시도 : E ");
         /*
             캐비닛의 경우 플레이어의 Collider 를 비활성화시킵니다. 이러면 더 이상 상호작용이 불가능해지므로
@@ -544,14 +579,7 @@ public class Player : NetworkBehaviour
             }
         }
 
-        if (isServer)
-        {
-            container.InteractInput = false;
-        }
-        else
-        {
-            CmdSetInteractInput(false);
-        }
+
     }
     // ###############################################################################################
 
@@ -757,6 +785,7 @@ public class Player : NetworkBehaviour
     public void CmdSetRespawncall(bool newvalue)
     {
         container.Respawncall = newvalue;
+        GameManager.instance.Ldcontainer.Hp = 10000;
     }
 
     [ClientRpc]
@@ -771,5 +800,4 @@ public class Player : NetworkBehaviour
         this.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
     }
     #endregion
-
 }

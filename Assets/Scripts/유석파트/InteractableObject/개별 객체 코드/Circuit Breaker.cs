@@ -5,10 +5,12 @@ using UnityEngine;
 public class CircuitBreaker : InteractableObject
 {
     [SyncVar(hook = nameof(HookIsActiveChanged))] bool isActive = true;
-    private void HookIsActiveChanged(bool oldVal, bool newVal)
+    public void HookIsActiveChanged(bool oldVal, bool newVal)
     {
         Debug.Log("차단기가 " + newVal + " 상태로 변경됐습니다.");
-        platformToManage.isActive = newVal;
+
+        platformToManage.SetIsActive(newVal);
+
         foreach(GameObject item in gameObjectsToManage)
         {
             item.SetActive(newVal);
@@ -21,6 +23,14 @@ public class CircuitBreaker : InteractableObject
     public override void ExecuteOnSuccess(GameObject requester)
     {
         base.ExecuteOnSuccess(requester);
-        isActive = !isActive;
+        
+        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.cardkey, true, gameObject, 4f, 0.8f);
+        
+        SetIsActive(!isActive);
+    }
+
+    [Command(requiresAuthority = false)] public void SetIsActive(bool val)
+    {
+        isActive = val;
     }
 }

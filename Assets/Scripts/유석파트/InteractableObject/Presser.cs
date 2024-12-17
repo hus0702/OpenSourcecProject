@@ -62,13 +62,10 @@ public class Presser : MonoBehaviour
         {
             requester.GetComponent<Limb>().TakingDamage(10); // 바로 죽임
         }
-    }
 
-    public void KillPlayer()
-    {
-        
-        // 걍 죽이기
-        Debug.Log("플레이어를 죽였습니다!");
+        GameManager.instance.BlindSpawnPositionOnLoad = new Vector3(1, -40.8f, 0);
+        GameManager.instance.LimpSpawnPositionOnLoad = new Vector3(-3.5f, -40.8f, 0);
+
     }
 
     void OnDrawGizmos()

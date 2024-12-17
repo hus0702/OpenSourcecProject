@@ -142,69 +142,32 @@ public class Limb : NetworkBehaviour
 
     public void changeitem(bool newvalue)
     {
-        if (newvalue)
+        
+        if (isServer)
         {
-            int k = 0;
-            while (k < 4)
+            if (container.holdingitem == 0)
             {
-                if (isServer)
-                {
-                    if (container.holdingitem != 2)
-                        container.holdingitem++;
-                    else
-                        container.holdingitem = 0;
-
-                    if (container.itemset[container.holdingitem])
-                        break;
-                }
-                else 
-                {
-                    if (container.holdingitem != 2)
-                        CmdSetholdingitem(container.holdingitem + 1);
-                    else
-                        CmdSetholdingitem(0);
-
-
-                    if (container.itemset[container.holdingitem])
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        k++;
-                    }
-                       
-                }
+                if (container.itemset[1])
+                    container.holdingitem = 1;
+            }
+            else
+            {
+                container.holdingitem = 0;
             }
         }
         else 
         {
-            int k = 0;
-            while (k < 4)
+            if (container.holdingitem == 0)
             {
-                if (isServer)
+                if (container.itemset[1])
                 {
-                    if (container.holdingitem != 0)
-                        container.holdingitem--;
-                    else
-                        container.holdingitem = 2;
-
-                    if (container.itemset[container.holdingitem])
-                        break;
-                }
-                else
-                {
-                    if (container.holdingitem != 0)
-                        CmdSetholdingitem(container.holdingitem - 1);
-                    else
-                        CmdSetholdingitem(2);
-
-                    if (container.itemset[container.holdingitem])
-                        break;
-                    else { k++; }
+                    CmdSetholdingitem(1);
                 }
             }
+            else
+                CmdSetholdingitem(0);
         }
+
     }
 
     public void SetLimbVisible(bool newvalue)
@@ -291,11 +254,17 @@ public class Limb : NetworkBehaviour
     #region SoundMaking Function
     public void LimpLandSound()
     {
+
+        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.LimpLand, true, groundcheck.gameObject, 5f, 0.8f);
+        return;
+
+
+        
         if (isOwned)
         {
             if (isServer)
             {
-                AudioManager.instance.PlaySfx(AudioManager.Sfx.LimpLand);
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.LimpLand); 
                 GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.LimpLand);
             }
             else
@@ -306,12 +275,18 @@ public class Limb : NetworkBehaviour
     }
     public void LimpShotSound()
     {
+
+
+        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.LimpShot, true, gameObject, 6f, 0.8f);
+        return;
+
+
         if (isOwned)
         {
             if (isServer)
             {
-                AudioManager.instance.PlaySfx(AudioManager.Sfx.LimpShot);
-                GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.LimpShot);
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.LimpShot); // 일단 내꺼 소리내고
+                GameManager.instance.RpcPlaySoundOnClient(AudioManager.Sfx.LimpShot); // 모든 클라이언트에 소리내라.
             }
             else
             {
@@ -322,6 +297,12 @@ public class Limb : NetworkBehaviour
 
     public void LimpDieSound()
     {
+
+
+        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.LimpDie, true, gameObject, 5f, 0.8f);
+        return;
+
+
         if (isServer)
         {
             AudioManager.instance.PlaySfx(AudioManager.Sfx.LimpDie);
@@ -446,6 +427,15 @@ public class Limb : NetworkBehaviour
     }
     public void Interact()
     {
+        if (isServer)
+        {
+            container.InteractInput = false;
+        }
+        else
+        {
+            CmdSetInteractInput(false);
+        }
+
         Debug.Log("플레이어가 상호작용을 시도 : E ");
         /*
             캐비닛의 경우 플레이어의 Collider 를 비활성화시킵니다. 이러면 더 이상 상호작용이 불가능해지므로
@@ -485,14 +475,7 @@ public class Limb : NetworkBehaviour
             }
         }
 
-        if (isServer)
-        {
-            container.InteractInput = false;
-        }
-        else
-        {
-            CmdSetInteractInput(false);
-        }
+
     }
     // ###############################################################################################
 
@@ -711,6 +694,7 @@ public class Limb : NetworkBehaviour
     public void CmdSetRespawncall(bool newvalue)
     { 
         container.Respawncall = newvalue;
+        GameManager.instance.Pdcontainer.Hp = 10000;
     }
     [ClientRpc]
     public void RpcSetSpriteRenderer(bool newvalue)

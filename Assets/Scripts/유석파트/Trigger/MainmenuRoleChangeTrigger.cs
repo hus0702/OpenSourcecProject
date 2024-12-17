@@ -52,7 +52,8 @@ public class MainmenuRoleChangeTrigger : ColliderOverlapTrigger
         }
         isBlindMap = !isBlindMap;
         // 발자국 효과가 나오도록 한다.
-        soundMakable.active = isBlindMap;
+        //soundMakable.active = isBlindMap;
+        SoundWaveManager.Instance.isBlind = isBlindMap;
 
         yield return new WaitForSeconds(2f);
 

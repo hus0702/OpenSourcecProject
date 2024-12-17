@@ -4,6 +4,8 @@ public class SoundWaveMakable : MonoBehaviour
 {
     public GameObject soundSource;
     public bool active = true; // 직접 끄지 않는 이상은 true 임.
+    public int sfxNum;
+    public bool isShouldCheckCollider;
 
     private PlayerObjectController playerObjectController;
 
@@ -19,6 +21,6 @@ public class SoundWaveMakable : MonoBehaviour
             if(playerObjectController.Role == PlayerObjectController.Limp) return;
         }
 
-        SoundWaveManager.Instance.MakeSoundWave(soundSource, 4f, 0.8f);
+        SoundWaveManager.Instance.MakeSoundWave(sfxNum, isShouldCheckCollider, soundSource.transform.position, 4f, 0.8f);
     }
 }

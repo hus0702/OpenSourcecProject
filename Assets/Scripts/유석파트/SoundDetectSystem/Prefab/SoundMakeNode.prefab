@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2316080319818376008}
   - component: {fileID: 2095278598460700998}
   - component: {fileID: 3813101037133473926}
+  - component: {fileID: 1844421711227850126}
   m_Layer: 0
   m_Name: SoundMakeNode
   m_TagString: Untagged
@@ -46,7 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6917f32397eb94941955274109af8c97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  node: {fileID: 2095278598460700998}
+  sfxNum: 0
+  isShouldCheckCollider: 0
 --- !u!114 &2095278598460700998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,6 +61,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a98651d0a76627449a2bf61da6bfb3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxToPlay: 0
+  isShouldCheckCollider: 0
 --- !u!114 &3813101037133473926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,7 +83,7 @@ MonoBehaviour:
   m_Intensity: 0
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 000000009366ddef
+  m_ApplyToSortingLayers: 0000000025f941e89366ddef9d46dd22213dcbae
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -111,3 +115,39 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!58 &1844421711227850126
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064235093364957172}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 5

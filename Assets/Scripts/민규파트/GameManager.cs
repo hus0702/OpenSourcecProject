@@ -18,7 +18,7 @@ public class GameManager : NetworkBehaviour
     public bool isGameStarted;
     private void Awake()
     {
-        // ÀÏ¹ÝÀûÀÎ ½Ì±ÛÅæ ÆÐÅÏ Àû¿ë
+        // ï¿½Ï¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (instance == null)
         {
             instance = this;
@@ -42,6 +42,11 @@ public class GameManager : NetworkBehaviour
     {
         BlindSpawnPositionOnLoad = new Vector3(-22.5f, 1, -1);
         LimpSpawnPositionOnLoad = new Vector3(-22.5f, 1, -1);
+
+
+        //BlindSpawnPositionOnLoad = new Vector3(1f, 1, -1);
+        //LimpSpawnPositionOnLoad = new Vector3(1f, 1, -1);
+
         isGameStarted = false;
     }
 
@@ -53,7 +58,7 @@ public class GameManager : NetworkBehaviour
         }
         else
         {
-            Debug.Log("blind ¿ÀºêÁ§Æ®°¡ GameManager¿¡ ¾ø½À´Ï´Ù.");
+            Debug.Log("blind ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ GameManagerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
         }
         if (Limp != null)
         {
@@ -61,23 +66,21 @@ public class GameManager : NetworkBehaviour
         }
         else
         {
-            Debug.Log("Limp ¿ÀºêÁ§Æ®°¡ GameManager¿¡ ¾ø½À´Ï´Ù.");
+            Debug.Log("Limp ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ GameManagerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
         }
 
         Pdcontainer.Respawncall = false;
         Ldcontainer.Respawncall = false;
     }
 
-    [Command]
-    public void CmdPlaySoundOnClient(AudioManager.Sfx name)
-    {
-        AudioManager.instance.PlaySfx(name);
-        RpcPlaySoundOnClient(name);
-    }
-
-    // ¼­¹ö¿¡¼­ Å¬¶óÀÌ¾ðÆ®·Î È£ÃâµÇ´Â RPC
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ È£ï¿½ï¿½Ç´ï¿½ RPC
     [ClientRpc]
     public void RpcPlaySoundOnClient(AudioManager.Sfx name)
+    {
+        AudioManager.instance.PlaySfx(name);
+    }
+
+    public void PlaySoundOnClient(AudioManager.Sfx name)
     {
         AudioManager.instance.PlaySfx(name);
     }

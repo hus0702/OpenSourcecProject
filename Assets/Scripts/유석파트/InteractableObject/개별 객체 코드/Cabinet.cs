@@ -30,7 +30,9 @@ public class Cabinet : InteractableObject
             Debug.Log(requester.name + "을 캐비넷에 넣습니다.");
 
 
-
+            SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.opendoor, true, gameObject, 4f, 0.8f);
+            // 이 녀석은 콜라이더가 비활성화돼버렸음. 따라서 감지를 못 하니까 내가 직접 소리를 추가로 내줘야 함.
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.opendoor);
 
             if (requester.tag == "Blind")
             {
@@ -44,36 +46,46 @@ public class Cabinet : InteractableObject
             }
 
 
+            SetPlayerInvisible(requester);
 
 
-            requester.GetComponent<Collider2D>().enabled = false;
-
-            Rigidbody2D objRigidBody = requester.GetComponent<Rigidbody2D>();
-            gravityScale = objRigidBody.gravityScale;
-            objRigidBody.gravityScale = 0;
-
-            ChangeAlpha(requester, 0);
             objInMe = requester;
         }
         else
         {
             Debug.Log(objInMe.name + "을 캐비넷에서 빼겠습니다.");
 
-            requester.GetComponent<Collider2D>().enabled = true;
+            SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.opendoor, true, gameObject, 4f, 0.8f);
 
-            Rigidbody2D objRigidBody = requester.GetComponent<Rigidbody2D>();
-            objRigidBody.gravityScale = gravityScale;
-
-            ChangeAlpha(requester, 1);
             objInMe = null; // 그냥 이렇게만 해주면 될 듯.
 
-
+            SetPlayerVisible(requester);
             /*
                 바로 다시 들어갈 수 있도록 하는건 금지하겠음. 쿨타임을 좀 줄 것.
             */
             InActiveInteract();
             StartCoroutine(Cooldown());
         }
+    }
+
+    [ClientRpc] void SetPlayerInvisible(GameObject requester)
+    {
+        requester.GetComponent<Collider2D>().enabled = false;
+
+        Rigidbody2D objRigidBody = requester.GetComponent<Rigidbody2D>();
+        gravityScale = objRigidBody.gravityScale;
+        objRigidBody.gravityScale = 0;
+
+        ChangeAlpha(requester, 0);
+    }
+    [ClientRpc] void SetPlayerVisible(GameObject requester)
+    {
+        requester.GetComponent<Collider2D>().enabled = true;
+
+        Rigidbody2D objRigidBody = requester.GetComponent<Rigidbody2D>();
+        objRigidBody.gravityScale = gravityScale;
+
+        ChangeAlpha(requester, 1);
     }
 
     IEnumerator Cooldown()

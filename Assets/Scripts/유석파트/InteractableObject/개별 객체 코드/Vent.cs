@@ -7,6 +7,16 @@ public class Vent : Door
 
     public bool Debug_isPlayerHasDrill;
 
+    void Start()
+    {
+        if(isOpened)
+        {
+            Animator doorAnimator = GetComponent<Animator>();
+            doorAnimator.SetBool("isIdle", false);
+            doorAnimator.SetBool("isOpened", true);   
+        }
+    }
+
     [SyncVar(hook = nameof(HookIsOpened))] public bool isSyncOpen = false;
     private void HookIsOpened(bool oldVaule, bool newValue)
     {
@@ -24,7 +34,7 @@ public class Vent : Door
     {
         if(!isOpened)
         {
-            if(Debug_isPlayerHasDrill)
+            if(requester.tag == "Limb" && GameManager.instance.Ldcontainer.itemset[3])
             {
                 return true;
             }
@@ -37,14 +47,19 @@ public class Vent : Door
     {
         if(!isOpened)
         {
+            SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.opendoor, true, gameObject, 4f, 0.8f);
             // 여기에서는 벤트를 열어야 함.
-            isSyncOpen = true;
+            CmdSetIsSyncOpen(true);
         }
         else
         {
-            //if(NetworkClient.localPlayer.GetComponent<PlayerObjectController>().Role == PlayerObjectController.Blind) return;
-            TransportRequester(requester);
+            if(requester.tag == "Limb") TransportRequester(requester);
         }
+    }
+
+    [Command(requiresAuthority =false)] public void CmdSetIsSyncOpen(bool val)
+    {
+        isSyncOpen = val;
     }
 
     public override void ExecuteOnFail(GameObject requester)

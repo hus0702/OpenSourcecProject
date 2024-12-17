@@ -31,7 +31,7 @@ public class ObjectPool : MonoBehaviour
 
     public GameObject GetObject()
     {
-        Debug.Log("GetObject 호출. 현재 큐의 크기 : " + prefabQueue.Count);
+        //Debug.Log("GetObject 호출. 현재 큐의 크기 : " + prefabQueue.Count);
         if(prefabQueue.Count > 0)
         {
             GameObject objectToReturn = prefabQueue.Dequeue();

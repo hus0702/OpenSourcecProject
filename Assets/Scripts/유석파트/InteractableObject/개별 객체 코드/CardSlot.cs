@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class CardSlot : InteractableObject
 {
+
+    public GameObject SoundSource;
+
+
     public bool Debug_isInteractable;
     public InteractFailTalkBubble failHandler;
     public SO_FailHandleInfo failHandleInfo;
@@ -23,13 +27,22 @@ public class CardSlot : InteractableObject
         // 만약 플레이어가 지정된 카드키를 지니고 있는 상태라면
         // Player = requester.GetComponent; if (Player.hasItem(keyName))
 
-        if(Debug_isInteractable) return true;
+        if(requester.tag == "Limb" && GameManager.instance.Ldcontainer.itemset[2] || requester.tag == "Blind" && GameManager.instance.Pdcontainer.itemset[1]) 
+        {
+            Debug.Log("플레이어가 키를 가지고 있습니다! 상호작용을 시작합니다.");
+            return true;
+        }
         else return false;
         // else return false;
     }
     public override void ExecuteOnSuccess(GameObject requester)
     {
+        Debug.Log("키를 꽂습니다!!!");
         // 상호작용에 성공했을 경우
+
+        if(SoundSource == null) Debug.LogError("소리를 낼 곳이 없습니다!!!");
+        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.cardkey, true, SoundSource, 4f, 0.8f);
+
         SetKeyInserted();
     }
     private void SetKeyInserted()=>IsKeyInserted = !IsKeyInserted;

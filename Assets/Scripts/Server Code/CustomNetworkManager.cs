@@ -58,7 +58,15 @@ public class CustomNetworkManager : NetworkManager
             if (!GameManager.instance.isGameStarted)
             {
                 GameManager.instance.isGameStarted = true;
+
                 SpawnPrefabs();
+
+                if(NetworkClient.localPlayer.GetComponent<PlayerObjectController>().Role == PlayerObjectController.Blind)
+                {
+                    SoundWaveManager.Instance.isBlind = true;
+                }
+                else SoundWaveManager.Instance.isBlind = false;
+
             }
             else
             {
@@ -71,8 +79,11 @@ public class CustomNetworkManager : NetworkManager
                     }
                     else
                     {
-                        conn.gameObject.transform.position = GameManager.instance.LimpSpawnPositionOnLoad;
-                        Debug.Log("Limp 소환" + GameManager.instance.LimpSpawnPositionOnLoad);
+                        if (!GameManager.instance.Ldcontainer.isRiding)
+                        {
+                            conn.gameObject.transform.position = GameManager.instance.LimpSpawnPositionOnLoad;
+                            Debug.Log("Limp 소환" + GameManager.instance.LimpSpawnPositionOnLoad);
+                        }
                     }
                 }
             }

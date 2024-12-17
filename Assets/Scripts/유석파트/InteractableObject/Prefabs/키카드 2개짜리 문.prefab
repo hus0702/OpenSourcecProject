@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 905901060449756327}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: "\uD0A4\uCE74\uB4DC \uC704\uCE58"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1551499318731067786}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.33, y: 0, z: 0}
+  m_LocalPosition: {x: 0.33, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 2736293983103059765}
   - component: {fileID: 1888553248154734859}
   - component: {fileID: 4043609400305401162}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: "\uD0A4\uC2AC\uB86F_\uC624\uB978\uCABD"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,6 +82,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  SoundSource: {fileID: 7696641935751956308}
   Debug_isInteractable: 0
   failHandler: {fileID: 0}
   failHandleInfo: {fileID: 11400000, guid: ce3f692bc20c59545959c01dd527eca8, type: 2}
@@ -219,7 +220,7 @@ GameObject:
   - component: {fileID: 6017010491441796015}
   - component: {fileID: 3872924098294424879}
   - component: {fileID: 8542334418928824368}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: "\uD0A4\uCE74\uB4DC 2\uAC1C\uC9DC\uB9AC \uBB38"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,7 +438,7 @@ GameObject:
   - component: {fileID: 6949777119958595006}
   - component: {fileID: 4500230319203095999}
   - component: {fileID: 4253267662733270972}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: "\uD0A4\uC2AC\uB86F_\uC67C\uCABD"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -475,6 +476,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  SoundSource: {fileID: 1551499318731067786}
   Debug_isInteractable: 0
   failHandler: {fileID: 0}
   failHandleInfo: {fileID: 11400000, guid: ce3f692bc20c59545959c01dd527eca8, type: 2}
@@ -606,7 +608,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8531873558281714368}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: "\uC5D0\uB7EC\uBA54\uC2DC\uC9C0 \uC704\uCE58"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -637,7 +639,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 675498906823294625}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: "\uD0A4\uCE74\uB4DC \uC704\uCE58"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -653,7 +655,7 @@ Transform:
   m_GameObject: {fileID: 7696641935751956308}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.33, y: 0, z: 0}
+  m_LocalPosition: {x: -0.33, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

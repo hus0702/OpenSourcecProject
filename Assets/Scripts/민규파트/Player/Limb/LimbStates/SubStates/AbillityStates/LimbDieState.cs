@@ -32,6 +32,7 @@ public class LimbDieState : LimbAbillityState
             if (Limb.isServer)
             {
                 container.Hp = 10;
+                GameManager.instance.Pdcontainer.Hp = 100000;
                 container.Respawncall = true;
             }
             else
