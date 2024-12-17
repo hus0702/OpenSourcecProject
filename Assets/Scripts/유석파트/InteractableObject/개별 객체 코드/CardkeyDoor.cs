@@ -65,6 +65,12 @@ public class CardkeyDoor : Door
         }
     }
 
+    public override void ExecuteOnSuccess(GameObject requester)
+    {
+        // 아무 소리를 내지 않고 플레이어의 Transform 을 텔레포트시켜야 함.
+        TransportRequester(requester);
+    }
+
 
     [Command] private void CmdOpenDoor()=>isOpened = true;
 }
