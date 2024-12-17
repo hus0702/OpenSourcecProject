@@ -136,9 +136,14 @@ public class Player : NetworkBehaviour
         if (container.Shotparticle)
         {
             ShotParticle.gameObject.SetActive(true);
+            RpcSetShotParticle(true);
         }
         else
+        {
             ShotParticle.gameObject.SetActive(false);
+            RpcSetShotParticle(true);
+        }
+            
     }
 
     private void FixedUpdate()
@@ -863,5 +868,12 @@ public class Player : NetworkBehaviour
         BlindchangeColor(UnityEngine.Color.white);
         spriteRenderer.color = color;
     }
+
+    [ClientRpc]
+    public void RpcSetShotParticle(bool newvalue)
+    {
+        ShotParticle.gameObject.SetActive(newvalue);
+    }
+    
     #endregion
 }

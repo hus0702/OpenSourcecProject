@@ -78,7 +78,7 @@ public class PlayerDataContainer : NetworkBehaviour
         holdingitem = 0;
 
         Respawncall = false;
-        Shotparticle = true;
+        Shotparticle = false;
     }
 
     private void Update()
