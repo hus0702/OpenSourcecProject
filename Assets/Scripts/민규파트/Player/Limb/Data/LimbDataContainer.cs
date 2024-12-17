@@ -25,7 +25,11 @@ public class LimbDataContainer : NetworkBehaviour
     [SyncVar] public bool InteractInput;
     [SyncVar] public bool Interactable;
 
-    [SyncVar] public bool[] itemset; // 0번은 빈손, 1번은 총, 2번은 카드키 3번은 드릴
+     public bool[] itemset; // 0번은 빈손, 1번은 총, 2번은 카드키 3번은 드릴
+    [SyncVar] public bool item0;
+    [SyncVar] public bool item1;
+    [SyncVar] public bool item2;
+    [SyncVar] public bool item3;
     [SyncVar] public int holdingitem;
 
     [SyncVar] public bool Respawncall;
@@ -48,14 +52,24 @@ public class LimbDataContainer : NetworkBehaviour
         Interactable = true;
 
         itemset = new bool[4];
-        itemset[0] = true;
-        itemset[1] = false;
-        itemset[2] = false;
-        itemset[3] = false;
+        item0 = true;
+        item1 = false;
+        item2 = false;
+        item3 = false;
+        itemset[0] = item0;
+        itemset[1] = item1;
+        itemset[2] = item2;
+        itemset[3] = item3;
         holdingitem = 0;
 
         Respawncall = false;
     }
 
-    
+    private void Update()
+    {
+        itemset[0] = item0;
+        itemset[1] = item1;
+        itemset[2] = item2;
+        itemset[3] = item3;
+    }
 }
