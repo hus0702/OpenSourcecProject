@@ -249,7 +249,7 @@ public class Limb : NetworkBehaviour
             {
                 CmdSetPdShotParticle(true);
             }
-            while (elapsed < 0.2f)
+            while (elapsed < 0.1f)
             {
                 yield return new WaitForSeconds(0.1f);
                 elapsed += 0.1f;
