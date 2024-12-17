@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.tag == "Blind")
         {
             Debug.Log("ÃÑ¿¡ ¸ÂÀ½");
-            this.gameObject.GetComponent<Player>().TakingDamage(5);
+            collision.gameObject.GetComponent<Player>().TakingDamage(5);
         }
 
         if (collision.gameObject.tag == "Boss")
