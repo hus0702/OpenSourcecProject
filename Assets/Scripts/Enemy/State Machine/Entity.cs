@@ -49,7 +49,7 @@ public class Entity : NetworkBehaviour
     {
         if (isServer)
         {
-            stateMachine.currentState.LogicUpdate();
+            stateMachine.currentState.PhysicsUpdate();
         }
     }
 

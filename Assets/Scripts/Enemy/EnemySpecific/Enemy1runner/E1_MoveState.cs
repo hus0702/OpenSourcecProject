@@ -11,12 +11,14 @@ public class E1_MoveState : MoveState
 
     public override void Enter()
     {
+        Debug.Log("enter move");
         base.Enter();
         enemy.SetVelocity(stateData.movementSpeed);
     }
 
     public override void Exit()
     {
+        Debug.Log("exit move");
         base.Exit();
     }
 

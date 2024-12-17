@@ -10,11 +10,13 @@ public class E1_IdleState : IdleState
 
     public override void Enter()
     {
+        Debug.Log("enter idle");
         base.Enter();
     }
 
     public override void Exit()
     {
+        Debug.Log("exit idle");
         base.Exit();
     }
 

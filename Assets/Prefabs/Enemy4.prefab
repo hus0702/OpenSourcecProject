@@ -102,8 +102,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5727403179569603929}
-  - component: {fileID: 8155409725484068715}
   - component: {fileID: 3801746200854046058}
+  - component: {fileID: 8155409725484068715}
   m_Layer: 0
   m_Name: Enemy4
   m_TagString: Untagged
@@ -127,23 +127,6 @@ Transform:
   - {fileID: 2113519217018302386}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8155409725484068715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4274267648434238274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  _assetId: 1101115745
-  serverOnly: 0
-  visibility: 0
-  hasSpawned: 0
 --- !u!114 &3801746200854046058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,6 +152,23 @@ MonoBehaviour:
   idleStateData: {fileID: 11400000, guid: 296a8d8b1bd948243bf22d5e2e700280, type: 2}
   moveStateData: {fileID: 11400000, guid: 41bed2fd1269bc74ca4041c6ad387411, type: 2}
   playerDetectedData: {fileID: 11400000, guid: 34354542a6d22664eb54cad9f81c375d, type: 2}
+--- !u!114 &8155409725484068715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4274267648434238274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 1101115745
+  serverOnly: 1
+  visibility: 0
+  hasSpawned: 0
 --- !u!1 &7247187355149650866
 GameObject:
   m_ObjectHideFlags: 0
