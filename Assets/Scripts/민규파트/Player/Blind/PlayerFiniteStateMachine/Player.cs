@@ -321,7 +321,7 @@ public class Player : NetworkBehaviour
 
         Debug.Log("플레이어가 Animation Trigger 를 통해서 걷는 소리 호출을 요청했습니다!");
 
-        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.Blindwalk, true, groundcheck.gameObject, 4f, 0.8f);
+        if(isServer) SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.Blindwalk, true, groundcheck.gameObject, 4f, 0.8f);
         return;
 
 
@@ -338,7 +338,7 @@ public class Player : NetworkBehaviour
     public void BlindclimbSound()
     {
 
-        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.Blindclimb, true, gameObject, 4f, 0.8f);
+        if(isServer) SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.Blindclimb, true, gameObject, 4f, 0.8f);
         return;
 
         if (isServer)
