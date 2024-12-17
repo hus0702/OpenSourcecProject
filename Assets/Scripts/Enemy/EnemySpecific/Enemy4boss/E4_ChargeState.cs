@@ -51,6 +51,7 @@ public class E4_ChargeState : State
         {
             blind = hit.GetComponent<Player>();
             Debug.Log("Player hit!");
+            entity.PlayAttackSound();
             /*player1 데미지 함수*/
             blind.TakingDamage(10);
             enemy.idleState.SetFlipAfterIdle(true);
@@ -63,6 +64,7 @@ public class E4_ChargeState : State
         {
             limb = hit.GetComponent<Limb>();
             Debug.Log("Player2 hit!");
+            entity.PlayAttackSound();
             /*player2 데미지 함수*/
             limb.TakingDamage(10);
             enemy.idleState.SetFlipAfterIdle(true);

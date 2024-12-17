@@ -96,7 +96,7 @@ public class CustomNetworkManager : NetworkManager
 
     public void SpawnPrefabs()
     {
-        GameScenePrefab = Instantiate(spawnPrefabs[3], new Vector3(42, 5.2f,0) ,spawnPrefabs[3].transform.rotation); //러너 생성
+        GameScenePrefab = Instantiate(spawnPrefabs[3], new Vector3(42, -0.2f ,0) ,spawnPrefabs[3].transform.rotation); //러너 생성
         NetworkServer.Spawn(GameScenePrefab);
         GameScenePrefab = Instantiate(spawnPrefabs[4], new Vector3(47, -18f, 0), spawnPrefabs[4].transform.rotation); // 크롤러 생성
         NetworkServer.Spawn(GameScenePrefab);
