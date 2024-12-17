@@ -50,7 +50,7 @@ public class Entity : NetworkBehaviour
         rb.linearVelocity = velocityWorkspace;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (isServer)
         {
