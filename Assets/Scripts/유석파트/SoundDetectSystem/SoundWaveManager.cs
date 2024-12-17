@@ -65,6 +65,7 @@ public class SoundWaveManager : MonoBehaviour
     private static SoundWaveManager instance;
     public static SoundWaveManager Instance
     {
+        
         get
         {
             if(instance == null)

@@ -409,6 +409,15 @@ public class Limb : NetworkBehaviour
     }
     public void Interact()
     {
+        if (isServer)
+        {
+            container.InteractInput = false;
+        }
+        else
+        {
+            CmdSetInteractInput(false);
+        }
+
         Debug.Log("플레이어가 상호작용을 시도 : E ");
         /*
             캐비닛의 경우 플레이어의 Collider 를 비활성화시킵니다. 이러면 더 이상 상호작용이 불가능해지므로
@@ -448,14 +457,7 @@ public class Limb : NetworkBehaviour
             }
         }
 
-        if (isServer)
-        {
-            container.InteractInput = false;
-        }
-        else
-        {
-            CmdSetInteractInput(false);
-        }
+
     }
     // ###############################################################################################
 
