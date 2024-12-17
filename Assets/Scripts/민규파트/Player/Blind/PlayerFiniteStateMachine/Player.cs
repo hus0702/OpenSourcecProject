@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Drawing;
 using Mirror;
 using Mirror.Examples.Common;
 using NUnit.Framework.Constraints;
@@ -241,6 +242,18 @@ public class Player : NetworkBehaviour
         }
     }
 
+    public void BlindchangeColor(UnityEngine.Color color)
+    { 
+        spriteRenderer.color = color;
+        if (isServer)
+        {
+            RpcBlindchangeColor(color);
+        }
+        else
+        {
+            CmdBlindchangeColor(color);
+        }
+    }
     IEnumerator BlinkCoroutine()
     {
         float elapsed = 0f;
@@ -480,6 +493,8 @@ public class Player : NetworkBehaviour
     public void BlindDie()
     {
         BlindDieSound();
+        StartCoroutine(ChangeColorOverTime(UnityEngine.Color.white, UnityEngine.Color.gray, 0.2f));
+
     }
 
     public void BlindCarryUp()
@@ -610,6 +625,7 @@ public class Player : NetworkBehaviour
 
     public void Respawn()
     {
+        StartCoroutine(ChangeColorOverTime(UnityEngine.Color.gray, UnityEngine.Color.white, 0.2f));
         if (isOwned)
         {
             if (isServer)
@@ -639,6 +655,19 @@ public class Player : NetworkBehaviour
         {
             SetLaddderPosition(other.gameObject);
         }
+    }
+
+    IEnumerator ChangeColorOverTime(UnityEngine.Color fromColor, UnityEngine.Color toColor, float duration)
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            spriteRenderer.color = UnityEngine.Color.Lerp(fromColor, toColor, elapsedTime / duration);
+            elapsedTime += Time.deltaTime; // 시간 누적
+            yield return null; // 다음 프레임까지 대기
+        }
+        spriteRenderer.color = toColor; // 최종 색상 적용
     }
     #endregion
 
@@ -779,6 +808,7 @@ public class Player : NetworkBehaviour
     public void CmdBlindRespawn()
     {
         this.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
+        StartCoroutine(ChangeColorOverTime(UnityEngine.Color.gray, UnityEngine.Color.white, 0.2f));
     }
 
     [Command]
@@ -786,6 +816,12 @@ public class Player : NetworkBehaviour
     {
         container.Respawncall = newvalue;
         GameManager.instance.Ldcontainer.Hp = 10000;
+    }
+    [Command]
+    public void CmdBlindchangeColor(UnityEngine.Color color)
+    {
+        BlindchangeColor(UnityEngine.Color.white);
+        spriteRenderer.color = color;
     }
 
     [ClientRpc]
@@ -798,6 +834,14 @@ public class Player : NetworkBehaviour
     public void RpcBlindRespawn()
     {
         this.transform.position = GameManager.instance.BlindSpawnPositionOnLoad;
+        StartCoroutine(ChangeColorOverTime(UnityEngine.Color.gray, UnityEngine.Color.white, 0.2f));
+    }
+
+    [ClientRpc]
+    public void RpcBlindchangeColor(UnityEngine.Color color)
+    { 
+        BlindchangeColor(UnityEngine.Color.white);
+        spriteRenderer.color = color;
     }
     #endregion
 }

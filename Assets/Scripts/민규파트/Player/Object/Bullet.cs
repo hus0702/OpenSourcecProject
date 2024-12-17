@@ -11,6 +11,17 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Destroy(gameObject);
+        if (collision.gameObject.tag == "Blind")
+        {
+            this.gameObject.GetComponent<Player>().TakingDamage(5);
+        }
+
+        if (collision.gameObject.tag == "Boss")
+        {
+            //Boss TakeDamage
+            
+        }
+        Destroy(gameObject);
+
     }
 }

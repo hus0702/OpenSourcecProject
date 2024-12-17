@@ -206,6 +206,19 @@ public class Limb : NetworkBehaviour
         }
     }
 
+    public void LimbchangeColor(UnityEngine.Color color)
+    {
+        spriteRenderer.color = color;
+        if (isServer)
+        {
+            RpcLimbchangeColor(color);
+        }
+        else
+        {
+            CmdLimbchangeColor(color);
+        }
+    }
+
     IEnumerator BlinkCoroutine()
     {
         float elapsed = 0f;
@@ -350,7 +363,8 @@ public class Limb : NetworkBehaviour
         bulletrotation = Quaternion.Euler(container.mousePosition - transform.position);
 
         if ((bulletrotation.x > 0 && GameManager.instance.Pdcontainer.facingdirection < 0) || (bulletrotation.x < 0 && GameManager.instance.Pdcontainer.facingdirection > 0))
-            return;
+            if (container.isRiding)
+                return;
 
         if (isServer)
         {
@@ -370,8 +384,7 @@ public class Limb : NetworkBehaviour
             else
             {
                 bulletspawnSpot = transform.position + new Vector3(container.FacingDirection, -0.4f, 0);
-                bulletDirection.y = 0;
-                bulletDirection.x = container.FacingDirection;
+                bulletDirection = new Vector2(container.FacingDirection, 0);
             }
             GameObject bullet = Instantiate(BulletPrefab, bulletspawnSpot, bulletrotation);
             // ���� ���� (Quaternion���� ���ͷ� ��ȯ)
@@ -389,6 +402,7 @@ public class Limb : NetworkBehaviour
     public void LimpDie()
     {
         LimpDieSound();
+        StartCoroutine(ChangeColorOverTime(Color.white,Color.gray,0.2f));
     }
 
     #endregion
@@ -498,6 +512,7 @@ public class Limb : NetworkBehaviour
 
     public void Respawn()
     {
+        StartCoroutine(ChangeColorOverTime(Color.gray, Color.white, 0.2f));
         if (isOwned)
         {
             if (isServer)
@@ -522,6 +537,20 @@ public class Limb : NetworkBehaviour
         }
         
     }
+
+    IEnumerator ChangeColorOverTime(Color fromColor, Color toColor, float duration)
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            spriteRenderer.color = Color.Lerp(fromColor, toColor, elapsedTime / duration);
+            elapsedTime += Time.deltaTime; // 시간 누적
+            yield return null; // 다음 프레임까지 대기
+        }
+        spriteRenderer.color = toColor; // 최종 색상 적용
+    }
+
     #endregion
 
     #region ContainerSetFunction
@@ -687,6 +716,7 @@ public class Limb : NetworkBehaviour
     [Command]
     void CmdLimbRespawn()
     {
+        StartCoroutine(ChangeColorOverTime(Color.gray, Color.white, 0.2f));
         this.transform.position = GameManager.instance.LimpSpawnPositionOnLoad;
     }
 
@@ -696,6 +726,13 @@ public class Limb : NetworkBehaviour
         container.Respawncall = newvalue;
         GameManager.instance.Pdcontainer.Hp = 10000;
     }
+
+    [Command]
+    public void CmdLimbchangeColor(UnityEngine.Color color)
+    {
+        spriteRenderer.color = color;
+    }
+
     [ClientRpc]
     public void RpcSetSpriteRenderer(bool newvalue)
     {
@@ -747,6 +784,13 @@ public class Limb : NetworkBehaviour
     public void RpcLimbRespawn()
     {
         this.transform.position = GameManager.instance.LimpSpawnPositionOnLoad;
+        StartCoroutine(ChangeColorOverTime(Color.gray, Color.white, 0.2f));
+    }
+
+    [ClientRpc]
+    public void RpcLimbchangeColor(UnityEngine.Color color)
+    {
+        spriteRenderer.color = color;
     }
     #endregion
 }
