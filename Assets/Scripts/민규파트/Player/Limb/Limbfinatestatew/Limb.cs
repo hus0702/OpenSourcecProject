@@ -401,8 +401,11 @@ public class Limb : NetworkBehaviour
     }
     public void LimpDie()
     {
-        LimpDieSound();
-        StartCoroutine(ChangeColorOverTime(Color.white,Color.gray,0.2f));
+        if (isServer)
+        {
+            LimpDieSound();
+        }
+        StartCoroutine(ChangeColorOverTime(Color.white, Color.gray, 0.2f));
     }
 
     #endregion

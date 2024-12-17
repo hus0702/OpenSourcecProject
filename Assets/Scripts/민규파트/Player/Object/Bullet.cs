@@ -11,8 +11,10 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Blind")
         {
+            Debug.Log("ÃÑ¿¡ ¸ÂÀ½");
             this.gameObject.GetComponent<Player>().TakingDamage(5);
         }
 

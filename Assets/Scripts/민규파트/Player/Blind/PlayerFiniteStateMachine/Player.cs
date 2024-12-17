@@ -348,8 +348,10 @@ public class Player : NetworkBehaviour
     }
     public void BlindclimbSound()
     {
-
-        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.Blindclimb, true, gameObject, 4f, 0.8f);
+        if (isServer)
+        {
+            SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.Blindclimb, true, gameObject, 4f, 0.8f);
+        }
         return;
 
         if (isServer)
@@ -464,7 +466,10 @@ public class Player : NetworkBehaviour
     }
     public void Blindwalk()
     {
-        BlindwalkSound();
+        if (isServer)
+        {
+            BlindwalkSound();
+        }
     }
     public void Blindclimb()
     {
@@ -499,13 +504,18 @@ public class Player : NetworkBehaviour
 
     public void BlindCarryUp()
     {
-        BlindCarryUpSound();
+        if(isServer)
+        {
+            BlindCarryUpSound();
+        }
     }
     public void Blindthrow()
     {
-        BlindthrowSound();
+        if (isServer)
+        {
+            BlindthrowSound();
+        }
     }
-
 
     #endregion
 
@@ -601,6 +611,7 @@ public class Player : NetworkBehaviour
 
     public void TakingDamage(int value)
     {
+        Debug.Log("아 씨 맞았네");
         if (isServer)
         {
             container.Hp -= value;
