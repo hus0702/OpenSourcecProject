@@ -5,10 +5,20 @@ using System.Collections;
 using UnityEditor;
 using System.Collections.Generic;
 using TMPro;
+using Mirror;
 
 public class DialogueSystem : MonoBehaviour
 {
     
+
+
+    public GameObject talker;
+    private Vector3 talkerPosition;
+    private bool isDisplayWave;
+    private float normalFontSize;
+
+
+
     private float talkSpeed = 0.07f;
 
     [Header("스크립트가 들어갈 텍스트 박스")]
@@ -35,8 +45,26 @@ public class DialogueSystem : MonoBehaviour
     bool isHandling = false;
     string command; // 파싱할 태그가 저장될 문자열 맴버
 
+    void Update()
+    {
+        talkerPosition = talker.transform.position;
+    }
+
     void Awake()
     {
+        PlayerObjectController localPlayer = NetworkClient.localPlayer.GetComponent<PlayerObjectController>();
+
+        if(localPlayer.Role == PlayerObjectController.Blind)
+        {
+            isDisplayWave = true;
+        }
+        else
+        {
+            isDisplayWave = false;
+        }
+
+        normalFontSize = textBox.fontSize;
+
         TalkBubbleGameObject.SetActive(false);
     }
 
@@ -80,6 +108,20 @@ public class DialogueSystem : MonoBehaviour
             else
             {
                 textBox.text += letter;
+
+
+                // 지금 말하고 있음!
+                if(textBox.text.Length % 3 == 0 && isDisplayWave) 
+                { 
+                    if(textBox.fontSize > normalFontSize)
+                    {
+                        SoundWaveManager.Instance.MakeSoundWave(-1, false, talkerPosition, 4f, 0.5f);
+                    }
+                    else
+                    {
+                        SoundWaveManager.Instance.MakeSoundWave(-1, false, talkerPosition, 2f, 0.5f);
+                    }
+                }
 
                 if(isSkip) continue;
                 yield return new WaitForSeconds(talkSpeed);

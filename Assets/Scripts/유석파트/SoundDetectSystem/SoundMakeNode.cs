@@ -13,7 +13,7 @@ public class SoundMakeNode : MonoBehaviour
     public void PlaySound()
     {
         Debug.Log("소리를 재생합니다!");
-
+        if(sfxToPlay == -1) return;
         AudioManager.instance.PlaySfx((AudioManager.Sfx)sfxToPlay); // 일단 이렇게 넣어봤음.
     }
 

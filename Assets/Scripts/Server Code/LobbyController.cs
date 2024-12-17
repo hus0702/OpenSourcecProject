@@ -313,5 +313,10 @@ public class LobbyController : MonoBehaviour
         LocalPlayerController.CanStartGame(SceneName);
     }
 
-
+    public void DebugStartGame(string SceneName)
+    {
+        GameManager.instance.BlindSpawnPositionOnLoad = new Vector3(0,1,0);
+        GameManager.instance.LimpSpawnPositionOnLoad = new Vector3(0,1,0);
+        LocalPlayerController.CanStartGame(SceneName);
+    }
 }
