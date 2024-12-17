@@ -254,6 +254,12 @@ public class Limb : NetworkBehaviour
     #region SoundMaking Function
     public void LimpLandSound()
     {
+
+        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.LimpLand, true, groundcheck.gameObject, 5f, 0.8f);
+        return;
+
+
+        
         if (isOwned)
         {
             if (isServer)
@@ -269,6 +275,12 @@ public class Limb : NetworkBehaviour
     }
     public void LimpShotSound()
     {
+
+
+        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.LimpShot, true, gameObject, 6f, 0.8f);
+        return;
+
+
         if (isOwned)
         {
             if (isServer)
@@ -285,6 +297,12 @@ public class Limb : NetworkBehaviour
 
     public void LimpDieSound()
     {
+
+
+        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.LimpDie, true, gameObject, 5f, 0.8f);
+        return;
+
+
         if (isServer)
         {
             AudioManager.instance.PlaySfx(AudioManager.Sfx.LimpDie);

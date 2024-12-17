@@ -301,6 +301,10 @@ public class Player : NetworkBehaviour
     #region SoundMaking Function
     public void BlindLandSound()
     {
+
+        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.BlindLand, true, groundcheck.gameObject, 6f, 0.8f);
+        return;
+
         if (isServer)
         {
             AudioManager.instance.PlaySfx(AudioManager.Sfx.BlindLand);
@@ -314,6 +318,11 @@ public class Player : NetworkBehaviour
 
     public void BlindwalkSound()
     {
+
+        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.Blindwalk, true, groundcheck.gameObject, 4f, 0.8f);
+        return;
+
+
         if (isServer)
         {
             AudioManager.instance.PlaySfx(AudioManager.Sfx.Blindwalk);
@@ -326,6 +335,10 @@ public class Player : NetworkBehaviour
     }
     public void BlindclimbSound()
     {
+
+        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.Blindclimb, true, gameObject, 4f, 0.8f);
+        return;
+
         if (isServer)
         {
             AudioManager.instance.PlaySfx(AudioManager.Sfx.Blindclimb);
@@ -338,6 +351,10 @@ public class Player : NetworkBehaviour
     }
     public void BlindDieSound()
     {
+
+        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.BlindDie, true, gameObject, 5f, 0.8f);
+        return;
+
         if (isServer)
         {
             AudioManager.instance.PlaySfx(AudioManager.Sfx.BlindDie);
@@ -351,6 +368,10 @@ public class Player : NetworkBehaviour
 
     public void BlindCarryUpSound()
     {
+
+        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.BlindCarryUp, true, gameObject, 4f, 0.8f);
+        return;
+
         if (isServer)
         {
             AudioManager.instance.PlaySfx(AudioManager.Sfx.BlindCarryUp);
@@ -364,6 +385,10 @@ public class Player : NetworkBehaviour
 
     public void BlindthrowSound()
     {
+
+        SWM.Instance.MakeSoundwave((int)AudioManager.Sfx.Blindthrow, true, gameObject, 4f, 0.8f);
+        return;
+
         if (isServer)
         {
             AudioManager.instance.PlaySfx(AudioManager.Sfx.Blindthrow);
