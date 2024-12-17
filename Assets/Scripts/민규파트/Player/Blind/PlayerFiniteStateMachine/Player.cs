@@ -56,6 +56,8 @@ public class Player : NetworkBehaviour
     [SerializeField]
     private Transform groundcheck;
     [SerializeField]
+    private SpriteRenderer ShotParticle;
+    [SerializeField]
     private BoxCollider2D myBoxCollider;
 
     #endregion
@@ -110,6 +112,7 @@ public class Player : NetworkBehaviour
         groundcheck = transform.GetChild(0);
         myBoxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        ShotParticle.enabled = false;
     }
 
     private void Update()
@@ -130,6 +133,14 @@ public class Player : NetworkBehaviour
         {
             CmdSetposition(transform.position);
         }
+
+        //샷
+        if (container.Shotparticle)
+            ShotParticle.enabled = true;
+        else
+            ShotParticle.enabled = false;
+
+
     }
 
     private void FixedUpdate()
