@@ -107,7 +107,6 @@ public class SoundWaveManager : MonoBehaviour
                 {
                     isBlind = false;
                 }
-                isChecking = false;
             }
         }
     }
