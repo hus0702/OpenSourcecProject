@@ -90,4 +90,25 @@ public class SoundWaveManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(this.gameObject);
     }
+
+
+    bool isChecking = true;
+    void Update()
+    {
+        if(isChecking)
+        {
+            if(NetworkClient.localPlayer)
+            {
+                if(NetworkClient.localPlayer.GetComponent<PlayerObjectController>().Role == PlayerObjectController.Blind)
+                {
+                    isBlind = true;
+                }
+                else
+                {
+                    isBlind = false;
+                }
+                isChecking = false;
+            }
+        }
+    }
 }
