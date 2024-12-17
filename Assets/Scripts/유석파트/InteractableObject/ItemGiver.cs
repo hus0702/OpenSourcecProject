@@ -58,11 +58,11 @@ public class ItemGiver : InteractableObject
                 {   
                     if(GameManager.instance.Pdcontainer.itemset[1])
                     {
+                        return;
                         GameManager.instance.Ldcontainer.itemset[2] = true;
                     }
                     else
                     {
-                        if(GameManager.instance.Pdcontainer.itemset[1]) return;
                         GameManager.instance.Pdcontainer.itemset[1] = true;
                     }
                 }
